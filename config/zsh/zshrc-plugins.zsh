@@ -21,6 +21,12 @@
             fd_app="fd-find"
             ;;
 
+        "alpine")
+            fzf_keybindings="/usr/share/fzf/key-bindings.zsh"
+            fzf_completion="/usr/share/zsh/site-functions/_fzf"
+            fd_app="fd"
+            ;;
+
         *)
             fzf_keybindings=""
             fzf_completion=""
