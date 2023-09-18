@@ -82,6 +82,8 @@ case ${ID} in
 
     "alpine")
         alias alpin="apk add"                                           # Install package
+        alias alpfix="apk fix"                                          # Fixes packages install
+        alias alpforcefix="apk fix --force-overwrite"                   # Forces the overwrite
         ;;
 
     *)
