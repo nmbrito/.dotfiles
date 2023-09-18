@@ -80,10 +80,10 @@ func_def_distro() #{{{1
             sw_fd="fd"
             sw_fdzshcompletion="fd-zsh-completion"
             sw_fzftmux="fzf-tmux"
-            sw_fzfzshcompletion="fzf-zsh-plugin"
+            sw_fzfzshcompletion="fzf-zsh-completion"
             sw_shellcheck=""
             sw_vifmcolors="vifm-colors"
-            sw_vimdata="vim-common"
+            sw_vimdata=""
             ;;
 
         *)
