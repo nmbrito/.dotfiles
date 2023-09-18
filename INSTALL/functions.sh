@@ -82,7 +82,7 @@ func_def_distro() #{{{1
             sw_fzftmux="fzf-tmux"
             sw_fzfzshcompletion="fzf-zsh-completion"
             sw_shellcheck=""
-            sw_vifmcolors="vifm-colors"
+            sw_vifmcolors=""
             sw_vimdata=""
             ;;
 
@@ -260,6 +260,7 @@ func_inst_software() #{{{1
         "iOS/iPadOS")
             # Alpine in iSH runs as ROOT!
             ${pkginst} ${list_terminal}
+            ${pkginst} ${list_ish}
             ;;
 
         # TODO: SSH Sessions
