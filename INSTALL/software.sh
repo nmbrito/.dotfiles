@@ -65,6 +65,17 @@ list_x230="\
     openfortivpn\
     plasma-nm5-fortisslvpn"
 
+list_ish="\
+    build-base\
+    gcc\
+    git-doc\
+    less-doc\
+    less\
+    man-pages\
+    man\
+    vifm-colors --force-overwrite\
+    zsh-vcs"
+
 list_fonts="\
     CascadiaCode.tar.xz\
     FiraCode.tar.xz\
