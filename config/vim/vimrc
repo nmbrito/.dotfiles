@@ -1,0 +1,160 @@
+" Function to source only if file exists
+function! SourceIfExists(file)
+  if filereadable(expand(a:file))
+    exe 'source' a:file
+  endif
+endfunction
+
+call SourceIfExists("$path_dotrepo/config/vim/vimrc-plugins.vim")
+
+" VIM
+    " Required
+        filetype on                             " Enable type file detection
+        filetype plugin on                      " Enable plugins and load plugin for the detected file type
+        filetype indent on                      " Load an indent file for detected file type
+        syntax on                               " Syntax highlighting
+
+        set omnifunc=syntaxcomplete#Complete    " It ain't intellisense, only omnicomplete
+        set nocompatible
+        set encoding=UTF-8
+        "set laststatus=2
+
+        set foldmethod=marker                   " Default method is {{{ }}}
+        "let g:markdown_folding=1
+
+        colorscheme slate                       " Specify a color scheme [molokai is cool too]
+        let mapleader="\<Space>"                " Leader, in this case, space
+
+    " Editor
+        set number                              " Show line numbers
+        set relativenumber                      " Show relative number from your cursor
+        set ruler                               " Show line and cursor number of the cursor
+        set wrap                                " Control line wrapping
+        set textwidth=185                       " Wraps around 185 colummn
+        set backspace=indent,eol,start          " Proper backspace behavior
+        set hidden                              " Possibility to have more than one unsaved buffers
+        set incsearch                           " Incremental search, hit <CR > to stop
+        set wildmenu                            " Great command-line completion, use <Tab > to move around and <CR > to validate
+        set wildmode=longest,list,full          " Autocompletion [TEST]
+        set showcmd                             " Display the incomplete commands in the bottom right-hand side of your screen
+        set showmatch                           " Show search matches
+        set noshowmode                          " Makes the text below the bar disappear
+
+        "set cursorline                         " Sets a cursor horizontal line
+        "set cursorcolumn                       " Sets a cursor vertical line
+
+        set autoindent                          " Minimal automatic indenting for any filetype
+        set smartindent                         " Enable smart autoindenting
+        set expandtab                           " Use spaces instead of tabs
+        set smarttab                            " Enable smart tabs
+        set shiftwidth=4                        " Make a tab equal to 4 spaces
+        set tabstop=4                           " Make a tab equal to 4 spaces
+
+        set splitbelow                          " Opens at bottom (instead of upper)
+        set splitright                          " Opens at right (instead of left)
+
+        set conceallevel=2                      " Conceal syntax (eg. markdown **bold** -> bold)
+
+        runtime macros /matchit.vim             " Hit '%' on 'if' to jump to 'else'
+
+" AutoCMD
+    " Python
+        autocmd FileType python nnoremap <buffer> <F9> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+
+    " Markdown
+        autocmd FileType markdown nnoremap <buffer> <F9> :w<CR>:!okular %<CR><CR>
+
+    " VIM
+        "augroup numbertoggle
+        "    autocmd!
+        "    autocmd BufEnter,FocusGained,InsertLeave,WinEnter  * if &nu && mode() != "i"   | set rnu   | endif
+        "    autocmd BufLeave,FocusLost,InsertEnter,WinLeave    * if &nu                    | set nornu | endif
+        "augroup END
+
+" Mappings
+    " Function keys
+        inoremap <F1>                   <C-X><Tab>
+        nnoremap <silent><F2>           :Files<CR>
+        nnoremap <silent><S-F2>         :Files %:p:h<CR>
+        nnoremap <silent><F3>           :Goyo<CR>
+        nnoremap <silent><F4>           :UndotreeToggle<CR>
+        nnoremap <F5>                   :w!<CR>
+        nnoremap <leader><F5>           :wq!<CR>
+        nnoremap <silent><F6>           :Buffers<CR>
+        nnoremap <F7>                   :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
+        nnoremap <S-F11>                :mksession! ${path_vimsessions}/current_session.vim<CR>
+        nnoremap <leader><S-F11>        :source ${path_vimsessions}/current_session.vim<CR>
+        nnoremap <silent><F12>          :sp ${path_dotrepo}/RTM.md<CR>
+
+        :command -nargs=1 Mksw          :mks! ${path_vimsessions}/<args>.vim
+        :command -nargs=1 Mksl          :source ${path_vimsessions}/<args>.vim
+
+    " Colorschemes quick change
+        nnoremap <silent><leader>cs     :colorscheme slate<CR>
+        nnoremap <silent><leader>cj     :colorscheme jellybeans<CR>
+        nnoremap <silent><leader>cm     :colorscheme molokai<CR>
+
+    " Buffers
+        nnoremap <leader><PageDown>     :bprevious<CR>
+        nnoremap <leader><PageUp>       :bnext<CR>
+        nnoremap <leader><Delete>       :bdelete<CR>
+        nnoremap <leader><C-Delete>     :bdelete<space>
+        nnoremap <leader><S-Delete>     :bwipeout<CR>
+
+    " Split buffers
+        nnoremap <leader>h              :sp<CR>
+        nnoremap <leader>v              :vsp<CR>
+        nnoremap <leader>H              :sb<space>
+        nnoremap <leader>V              :vert sb<space>
+
+    " Moving in windows/splits
+        nnoremap <C-h>                  <C-w>h
+        nnoremap <C-j>                  <C-w>j
+        nnoremap <C-k>                  <C-w>k
+        nnoremap <C-l>                  <C-w>l
+        nnoremap <C-M-H>                <C-w>H
+        nnoremap <C-M-J>                <C-w>J
+        nnoremap <C-M-K>                <C-w>K
+        nnoremap <C-M-L>                <C-w>L
+
+    " Increase/decrease windows/splits size
+        nnoremap L                      <C-w><
+        nnoremap J                      <C-w>+
+        nnoremap K                      <C-w>-
+        nnoremap H                      <C-w>>
+
+    " VIM Omnicomplete
+        inoremap <C-j>                  <C-N>
+        inoremap <C-k>                  <C-P>
+
+    " QoL
+        nnoremap <Leader>d              "_d
+        vnoremap <Leader>d              "_d
+        nnoremap <Leader>c              "_c
+        vnoremap <Leader>c              "_c
+        "nnoremap k                      kzz
+        "nnoremap j                      jzz
+        vnoremap J                      :m '>+1<CR>gv=gv
+        vnoremap K                      :m '>-2<CR>gv=gv
+
+    " Brackets
+        "inoremap "                     ""<left>
+        "inoremap '                     ''<left>
+        "inoremap (                     ()<left>
+        "inoremap [                     []<left>
+        "inoremap {                     {}<left>
+        "inoremap {<CR>                 {<CR>}<ESC>O
+        "inoremap {;<CR>                {<CR>};<ESC>O
+
+    " fzf-vim - Fuzzy Finder
+        nnoremap <silent>gf             :GFiles<CR>
+        nnoremap <silent>gc             :Commits<CR>
+        nnoremap <silent>//             :BLines<CR>
+        nnoremap <silent>f//            :BLines!<CR>
+        nnoremap <silent>a//            :Lines<CR>
+
+    " Toggles
+        nnoremap <leader>rp             :RainbowParentheses!!<CR>
+        nnoremap <leader>ws             :ToggleWhitespace<CR>
+        nnoremap <leader>wss            :ToggleStripWhitespaceOnSave<CR>
+
