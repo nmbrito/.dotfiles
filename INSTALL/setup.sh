@@ -48,7 +48,6 @@ printf '%s\n'   "" \
                 "Current distro: ${ID}"
 
 # Call function
-
 while :
 do
     printf '%s\n'   "" \
@@ -114,9 +113,6 @@ do
         10)
             func_inst_changeshell ;;
 
-        i)
-            func_get_info ;;
-
         r)
             func_inst_rebuild_gitsubmodules ;;
 
@@ -126,9 +122,5 @@ do
             exit 0
             ;;
     esac
-
-    printf '%s\n'   "#----------------------#" \
-                    "# Everything is ready! #" \
-                    "#----------------------#"
 done
 
