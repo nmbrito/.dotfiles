@@ -72,7 +72,6 @@ list_ish="\
     less-doc\
     less\
     man-pages\
-    man\
     vifm-colors --force-overwrite\
     zsh-vcs"
 
