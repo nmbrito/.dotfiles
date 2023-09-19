@@ -5,6 +5,7 @@
 
 func_def_distro() #{{{1
 {
+    # Distribuitions have different package names and software paths.
     case ${ID} in
         "opensuse-tumbleweed")
             pkgmgr="zypper"
@@ -97,22 +98,22 @@ func_def_distro() #{{{1
 
 func_def_host() #{{{1
 {
-    # The dmi directory indicates a physical machine.
+    # dmi directory indicates a physical machine.
     if [ -d "/sys/devices/virtual/dmi" ]
     then
         current_host="$(cat /sys/devices/virtual/dmi/id/board_vendor) $(cat /sys/devices/virtual/dmi/id/product_version) - $(cat /sys/devices/virtual/dmi/id/product_name)"
 
-    # The ish directory is only available on Apple devices because of the iSH.app application
+    # ish directory is only available on Apple devices running iSH.app
     elif [ -d "/proc/ish" ]
     then
         current_host="iOS/iPadOS"
 
-    # The environment variable WT_SESSION is only encountered when using WSL1 and WSL2
+    # WT_SESSION environment variable available in WSL1 and WSL2
     elif [ -n "${WT_SESSION}" ]
     then
         current_host="Windows Subsystem for Linux"
 
-    # If everything else fails, current host might as well be something
+    # Last resort to fill current_host instead of garbage
     else
         current_host="None"
     fi
@@ -172,7 +173,7 @@ func_inst_fixes() #{{{1
             ;;
 
         "iOS/iPadOS")
-                printf '%s\n' "Changing shell replacing ash with zsh in /etc/passwd"
+                printf '%s\n' "Replacing ash with zsh in /etc/passwd file, close and re-open iSH to apply."
                 sed -i 's/ash/zsh/g' /etc/passwd
             ;;
 
@@ -205,24 +206,8 @@ func_inst_repository() #{{{1
                 ")
             ;;
 
-        "debian")
-            printf '%s\n' "No repository to add."
-            ;;
-
-        "archlinux")
-            printf '%s\n' "No repository to add."
-            ;;
-
-        "almalinux")
-            printf '%s\n' "No repository to add."
-            ;;
-
-        "alpine")
-            printf '%s\n' "No repository to add."
-            ;;
-
         *)
-            printf '%s\n' "Distribuition not found"
+            printf '%s\n' "No repository to add."
             ;;
     esac
 
@@ -239,7 +224,8 @@ func_inst_software() #{{{1
 
     printf '%s\n'   "${message_longwarn}" "${message_execroot}" "${message_longwarn}" \
                     ""
-    # We'll do this by hosts, if none is detected then we'll verify what session desktop is running
+
+    # Install packages using current_host as a filter
     case ${current_host} in
         "LENOVO ThinkPad X230 - 23252FG")
             if [ "${XDG_SESSION_DESKTOP}" = "KDE" ]
@@ -268,10 +254,10 @@ func_inst_software() #{{{1
         # ;;
 
         *)
-            # Let's install generic stuff
-            # For now only KDE
+            # This section installs packages from generic lists since no host was defined
+            # KDE only
             # TODO: Gnome, XFCE, etc.
-            # TODO: Maybe even put in case if
+            # TODO: Replace "if" with "case switch"
             if [ "${XDG_SESSION_DESKTOP}" = "KDE" ]
             then
                 su -c ${pkginst} ${list_terminal} ${list_kde_basics}
@@ -304,7 +290,7 @@ func_inst_fonts() #{{{1
 
     # This checks if the nerdfonts url is down.
     # It'll use a nerdfont present in the font directory as a last resort.
-    # Otherwise grab it from the url.
+    # Otherwise it'll download from url.
     if [ "$(curl -is "${url_nerdfonts}" | head -n 1)" = "HTTP/2 404" ]
     then
         for dl_fonts in $(ls ${dir_dotroot}/fonts/*.tar.xz)
@@ -342,20 +328,21 @@ func_inst_symlinks() #{{{1
     [ -d "${HOME}"/.config/neofetch ]   && rm -rf "${HOME}"/.config/neofetch
     [ -d "${HOME}"/.config/tmux ]       && rm -rf "${HOME}"/.config/tmux
 
-    # Files
+    # Files.
     ln -vsf "${dir_dotroot}"/config/zsh/zshrc   "${HOME}"/.zshrc
     ln -vsf "${dir_dotroot}"/config/vim/vimrc   "${HOME}"/.vimrc
 
-    # Directories
+    # Directories.
     ln -vsf "${dir_dotroot}"/config/vim         "${HOME}"/.vim
     ln -vsf "${dir_dotroot}"/config/vifm        "${HOME}"/.config/vifm
     ln -vsf "${dir_dotroot}"/config/neofetch    "${HOME}"/.config/neofetch
     ln -vsf "${dir_dotroot}"/config/tmux        "${HOME}"/.config/tmux
 
-    # Only if KDE is detected as a current session
+    # If KDE is detected as current session.
     if [ "${XDG_SESSION_DESKTOP}" = "KDE" ]
     then
-        # KDE configuration files must be copied, with symlinks KDE can't save settings
+        # KDE configuration files must be copied.
+        # KDE is unable to save settings with symlinks.
         cp -v "${dir_dotroot}"/config/plasma/kglobalshortcutsrc                     	"${HOME}"/.config/
         cp -v "${dir_dotroot}"/config/plasma/kwinrc                                 	"${HOME}"/.config/
         cp -v "${dir_dotroot}"/config/plasma/plasma-localerc                            "${HOME}"/.config/
@@ -398,8 +385,7 @@ func_inst_gitsubmodules() #{{{1
                     "${message_longdash}" \
                     ""
 
-    # When cloning a repository with submodules already added, they aren't initiated. That's why --init and --recursive are there.
-    # git submodule add repository_url not only adds to the .gitmodules but also downloads all the content.
+    # A repository with submodules already added must be initiated.
     (cd "${dir_dotroot}" && git submodule update --init --recursive) && printf '%s\n' "" "Submodules updated" ""
 
     printf '%s\n' ""
@@ -441,23 +427,30 @@ func_inst_changeshell() #{{{1
 
     printf '%s\n' "Current shell: ${SHELL}"
 
-    # I couldn't remember why I wrote this.
-    # But then I did so I might as well write this in here.
-    #
-    # 1 - Verify if current shell running is ZSH, else just say you already have it running;
-    # 2 - Verify if ZSH is installed testing the zsh folder existence;
-    # 3 - If the folder exists, install or give error if something happens. Else just warn to install ZSH.
-    # TODO: Maybe ask to install it after showing error and re-call function to change shell? Hmmm...
+    # Check if running shell is ZSH.
     if [ "${SHELL}" != "/usr/bin/zsh" ]
     then
+        # Check if ZSH is installed.
         if [ ! -f "${zsh_inst_folder}" ]
         then
-            chsh -s "$(which zsh)" && printf '%s\n' "Shell changed to ZSH" || printf '%s\n' "ERROR: Shell not changed"
+            # iSH uses a different method for shell changing.
+            if [ "${current_host}" = "iOS/iPadOS" ]
+            then
+                sed -i 's/ash/zsh/g' /etc/passwd && printf '%s\n' "Replaced ash with zsh in /etc/passwd file, close and re-open iSH to apply."
+            fi
+            # Change shell
+            chsh -s "$(which zsh)" && printf '%s\n' "Shell changed to ZSH." || printf '%s\n' "ERROR: Shell not changed."
         else
-            printf '%s\n' "Error. Install ZSH to change shell."
+            printf '%s\n' "ZSH missing. Want to install? [y/n]: "
+            read  -r optionzshchange
+            if [ "${optionzshchange}" = "y" ]
+            then
+                ${pkginst} "zsh"
+                func_inst_changeshell
+            fi
         fi
     else
-        printf '%s\n' "Shell is already ZSH"
+        printf '%s\n' "ZSH already running."
     fi
 
     printf '%s\n' ""
@@ -472,6 +465,7 @@ func_inst_rebuild_gitsubmodules() #{{{1
                     ""
     previous_pwd="$(pwd)"
 
+    # NOTE: submodule path is relative to root repository.
     (cd ${dir_dotroot} &&
         git submodule add https://github.com/romkatv/powerlevel10k              config/zsh/plugins/powerlevel10k
         git submodule add https://github.com/zsh-users/zsh-syntax-highlighting  config/zsh/plugins/zsh-syntax-highlighting
