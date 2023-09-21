@@ -72,6 +72,7 @@ list_ish="\
     less-doc\
     less\
     man-pages\
+    openssh\
     vifm-colors --force-overwrite\
     zsh-vcs"
 
