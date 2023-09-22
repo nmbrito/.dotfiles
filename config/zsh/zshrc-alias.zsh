@@ -31,7 +31,15 @@ alias gituok="git status"                                                   # Gi
 alias gitusync="git remote show origin"                                     # Informs if local repository is up to date with remote
 alias gitadd2list="echo ${PWD} >> ${path_dotrepo}/config/git_repolist.conf" # Add a path to my repository list
 
-function gitunicom()    # Add and comment individual files
+function gitchost()         # Change default github.com host for one configured in ~/.ssh/config
+{
+    printf '%s' "GitHub user: "
+    read -r github_user
+    printf '%s' "Host defined in ~/.ssh/config: "
+    read -r defined_ssh_host
+    git@${defined_ssh_host}:${github_user}/$(git rev-parse --show-toplevel | cut -d '/' -f 6)
+}
+function gitunicom()        # Add and comment individual files
 {
     for file in $(git status --porcelain | cut -b 4-)
     do
@@ -42,7 +50,25 @@ function gitunicom()    # Add and comment individual files
         git commit -m "${comments}"
     done
 }
-function gitunipull()   # Pulls repository latest version from user list
+function gitquickcom()      # Add and comment individual files
+{
+    for file in $(git status --porcelain | cut -b 4-)
+    do
+        echo "${file}"
+        git add "$(git rev-parse --show-toplevel)/${file}"
+        git commit -m "Updated ${file}."
+    done
+}
+function gitquickcompt()    # Add and comment individual files
+{
+    for file in $(git status --porcelain | cut -b 4-)
+    do
+        echo "${file}"
+        git add "$(git rev-parse --show-toplevel)/${file}"
+        git commit -m "${file} atualizado."
+    done
+}
+function gitunipull()       # Pulls repository latest version from user list
 {
     while read gitfolder
     do
