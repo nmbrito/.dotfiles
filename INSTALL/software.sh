@@ -22,6 +22,8 @@ list_terminal="\
     ${sw_vimdata}\
     curl\
     fzf\
+    gcc\
+    gdb\
     htop\
     neofetch\
     ripgrep-zsh-completion\
@@ -68,6 +70,7 @@ list_x230="\
 list_ish="\
     build-base\
     gcc\
+    gdb\
     git-doc\
     less-doc\
     less\
