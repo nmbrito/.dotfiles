@@ -37,7 +37,7 @@ function gitchost()         # Change default github.com host for one configured 
     read -r github_user
     printf '%s' "Host defined in ~/.ssh/config: "
     read -r defined_ssh_host
-    git@${defined_ssh_host}:${github_user}/$(git rev-parse --show-toplevel | cut -d '/' -f 6)
+    git remote set-url origin git@${defined_ssh_host}:${github_user}/$(git rev-parse --show-toplevel | cut -d '/' -f 6).git
 }
 function gitunicom()        # Add and comment individual files
 {
