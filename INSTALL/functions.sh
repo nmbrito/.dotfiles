@@ -230,9 +230,9 @@ func_inst_software() #{{{1
         "LENOVO ThinkPad X230 - 23252FG")
             if [ "${XDG_SESSION_DESKTOP}" = "KDE" ]
             then
-                su -c ${pkginst} ${list_terminal} ${list_kde_basics} ${list_kde_personal} ${list_x230}
+                (su -c "${pkginst} ${list_terminal} ${list_kde_basics} ${list_kde_personal} ${list_x230}")
             else
-                su -c ${pkginst} ${list_terminal} ${list_kde_basics} ${list_kde_personal}
+                (su -c "${pkginst} ${list_terminal}")
             fi
             ;;
 
@@ -260,7 +260,7 @@ func_inst_software() #{{{1
             # TODO: Replace "if" with "case switch"
             if [ "${XDG_SESSION_DESKTOP}" = "KDE" ]
             then
-                su -c ${pkginst} ${list_terminal} ${list_kde_basics}
+                (su -c "${pkginst} ${list_terminal} ${list_kde_basics}")
             fi
             ;;
     esac
