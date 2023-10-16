@@ -239,7 +239,7 @@ func_inst_software() #{{{1
         "Windows Subsystem for Linux")
             (su -c "
                 ${pkginst} ${list_terminal} ;
-                ${pkgmgr} -y -t pattern ${list_wsl_pattern} ;
+                ${pkginst} -t pattern ${list_wsl_pattern} ;
                 ")
             ;;
 
