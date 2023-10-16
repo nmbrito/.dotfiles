@@ -49,6 +49,7 @@ function gitunicom()        # Add and comment individual files
         read -r comments
         git commit -m "${comments}"
     done
+    git push
 }
 function gitquickcom()      # Add and comment individual files
 {
@@ -58,6 +59,7 @@ function gitquickcom()      # Add and comment individual files
         git add "$(git rev-parse --show-toplevel)/${file}"
         git commit -m "Updated ${file}."
     done
+    git push
 }
 function gitquickcompt()    # Add and comment individual files
 {
@@ -67,6 +69,7 @@ function gitquickcompt()    # Add and comment individual files
         git add "$(git rev-parse --show-toplevel)/${file}"
         git commit -m "${file} atualizado."
     done
+    git push
 }
 function gitunipull()       # Pulls repository latest version from user list
 {
