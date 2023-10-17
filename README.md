@@ -2,8 +2,8 @@
 
 ## Running install script
    ```   
-    $ chmod u+x ~/.dotfiles/INSTALL/cli-install.sh
-    $ ~/.dotfiles/INSTALL/cli-install.sh
+    $ chmod u+x ~/.dotfiles/INSTALL/setup.sh
+    $ sh ~/.dotfiles/INSTALL/cli-install.sh
    ```   
 
 ## Configs:
