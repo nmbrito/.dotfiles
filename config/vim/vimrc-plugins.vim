@@ -60,7 +60,7 @@
     let g:undotree_SetFocusWhenToggle=1
 
     if has("persistent_undo")
-        let target_path = expand('~/.cache')
+        let target_path = expand('~/.cache/vim/undo')
         let &undodir=target_path
         set undofile
     endif
