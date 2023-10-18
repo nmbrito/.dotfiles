@@ -202,7 +202,6 @@ func_inst_repository() #{{{1
             (su -c "
                 rpm --import https://packages.microsoft.com/keys/microsoft.asc ;
                 zypper ar https://packages.microsoft.com/yumrepos/vscode vscode ;
-                zypper ar https://rpm.librewolf.net/librewolf-repo.repo ;
                 zypper refresh ;
                 ")
             ;;
