@@ -7,58 +7,62 @@ endfunction
 
 call SourceIfExists("$path_dotrepo/config/vim/vimrc-plugins.vim")
 
+silent !mkdir ~/.cache/vim/backup > /dev/null 2>&1  " Create backup folder
+silent !mkdir ~/.cache/vim/undo > /dev/null 2>&1    " Create undo folder
+silent !mkdir ~/.cache/vim/swp > /dev/null 2>&1     " Create swp folder
+
+set backupdir=~/.cache/vim/backup/,/tmp//           " Specify backup dir
+set directory=~/.cache/vim/swp/,/tmp//              " Specify directory dir
+
 " VIM
     " Required
-        filetype on                                 " Enable type file detection
-        filetype plugin on                          " Enable plugins and load plugin for the detected file type
-        filetype indent on                          " Load an indent file for detected file type
-        syntax on                                   " Syntax highlighting
+        filetype on                             " Enable type file detection
+        filetype plugin on                      " Enable plugins and load plugin for the detected file type
+        filetype indent on                      " Load an indent file for detected file type
+        syntax on                               " Syntax highlighting
 
-        set omnifunc=syntaxcomplete#Complete        " It ain't intellisense, only omnicomplete
+        set omnifunc=syntaxcomplete#Complete    " It ain't intellisense, only omnicomplete
         set nocompatible
         set encoding=UTF-8
         "set laststatus=2
 
-        set foldmethod=marker                       " Default method is {{{ }}}
+        set foldmethod=marker                   " Default method is {{{ }}}
         "let g:markdown_folding=1
 
-        colorscheme slate                           " Specify a color scheme [molokai is cool too]
-        let mapleader="\<Space>"                    " Leader, in this case, space
-
-        set backupdir=~/.cache/vim/backup/,/tmp//   " Specify backup dir
-        set directory=~/.cache/vim/swp/,/tmp//      " Specify directory dir
+        colorscheme slate                       " Specify a color scheme [molokai is cool too]
+        let mapleader="\<Space>"                " Leader, in this case, space
 
     " Editor
-        set number                                  " Show line numbers
-        set relativenumber                          " Show relative number from your cursor
-        set ruler                                   " Show line and cursor number of the cursor
-        set wrap                                    " Control line wrapping
-        set textwidth=185                           " Wraps around 185 colummn
-        set backspace=indent,eol,start              " Proper backspace behavior
-        set hidden                                  " Possibility to have more than one unsaved buffers
-        set incsearch                               " Incremental search, hit <CR > to stop
-        set wildmenu                                " Great command-line completion, use <Tab > to move around and <CR > to validate
-        set wildmode=longest,list,full              " Autocompletion [TEST]
-        set showcmd                                 " Display the incomplete commands in the bottom right-hand side of your screen
-        set showmatch                               " Show search matches
-        set noshowmode                              " Makes the text below the bar disappear
+        set number                              " Show line numbers
+        set relativenumber                      " Show relative number from your cursor
+        set ruler                               " Show line and cursor number of the cursor
+        set wrap                                " Control line wrapping
+        set textwidth=185                       " Wraps around 185 colummn
+        set backspace=indent,eol,start          " Proper backspace behavior
+        set hidden                              " Possibility to have more than one unsaved buffers
+        set incsearch                           " Incremental search, hit <CR > to stop
+        set wildmenu                            " Great command-line completion, use <Tab > to move around and <CR > to validate
+        set wildmode=longest,list,full          " Autocompletion [TEST]
+        set showcmd                             " Display the incomplete commands in the bottom right-hand side of your screen
+        set showmatch                           " Show search matches
+        set noshowmode                          " Makes the text below the bar disappear
 
-        "set cursorline                             " Sets a cursor horizontal line
-        "set cursorcolumn                           " Sets a cursor vertical line
+        "set cursorline                         " Sets a cursor horizontal line
+        "set cursorcolumn                       " Sets a cursor vertical line
 
-        set autoindent                              " Minimal automatic indenting for any filetype
-        set smartindent                             " Enable smart autoindenting
-        set expandtab                               " Use spaces instead of tabs
-        set smarttab                                " Enable smart tabs
-        set shiftwidth=4                            " Make a tab equal to 4 spaces
-        set tabstop=4                               " Make a tab equal to 4 spaces
+        set autoindent                          " Minimal automatic indenting for any filetype
+        set smartindent                         " Enable smart autoindenting
+        set expandtab                           " Use spaces instead of tabs
+        set smarttab                            " Enable smart tabs
+        set shiftwidth=4                        " Make a tab equal to 4 spaces
+        set tabstop=4                           " Make a tab equal to 4 spaces
 
-        set splitbelow                              " Opens at bottom (instead of upper)
-        set splitright                              " Opens at right (instead of left)
+        set splitbelow                          " Opens at bottom (instead of upper)
+        set splitright                          " Opens at right (instead of left)
 
-        set conceallevel=2                          " Conceal syntax (eg. markdown **bold** -> bold)
+        set conceallevel=2                      " Conceal syntax (eg. markdown **bold** -> bold)
 
-        runtime macros /matchit.vim                 " Hit '%' on 'if' to jump to 'else'
+        runtime macros /matchit.vim             " Hit '%' on 'if' to jump to 'else'
 
 " AutoCMD
     " Python
