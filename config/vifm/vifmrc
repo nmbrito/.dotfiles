@@ -117,10 +117,10 @@
 
 " :mark mark /full/directory/path [filename]
 
-    mark h ${HOME}
-    mark d $path_dotrepo
-    mark c $path_dotrepo/config
-    mark i $path_dotrepo/INSTALL
+    " mark h ${HOME}
+    " mark d $path_dotrepo
+    " mark c $path_dotrepo/config
+    " mark i $path_dotrepo/INSTALL
 
 " ------------------------------------------------------------------------------
 " Commands
