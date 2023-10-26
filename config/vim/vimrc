@@ -1,3 +1,8 @@
+" Create directories
+silent !mkdir ~/.cache/vim/backup > /dev/null 2>&1
+silent !mkdir ~/.cache/vim/undo > /dev/null 2>&1
+silent !mkdir ~/.cache/vim/swp > /dev/null 2>&1
+
 " Function to source only if file exists
 function! SourceIfExists(file)
   if filereadable(expand(a:file))
@@ -7,12 +12,9 @@ endfunction
 
 call SourceIfExists("$path_dotrepo/config/vim/vimrc-plugins.vim")
 
-silent !mkdir ~/.cache/vim/backup > /dev/null 2>&1  " Create backup folder
-silent !mkdir ~/.cache/vim/undo > /dev/null 2>&1    " Create undo folder
-silent !mkdir ~/.cache/vim/swp > /dev/null 2>&1     " Create swp folder
 
-set backupdir=~/.cache/vim/backup/,/tmp//           " Specify backup dir
-set directory=~/.cache/vim/swp/,/tmp//              " Specify directory dir
+set backupdir=~/.cache/vim_backup/,/tmp//           " Specify backup dir
+set directory=~/.cache/vim_swp/,/tmp//              " Specify directory dir
 
 " VIM
     " Required
