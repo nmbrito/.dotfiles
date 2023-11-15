@@ -197,7 +197,7 @@ immutability=1
 plugin=org.kde.kscreen
 
 [Containments][31][Applets][34][Configuration]
-PreloadWeight=90
+PreloadWeight=100
 
 [Containments][31][Applets][35]
 immutability=1
@@ -255,14 +255,14 @@ immutability=1
 plugin=org.kde.plasma.networkmanagement
 
 [Containments][31][Applets][44][Configuration]
-PreloadWeight=92
+PreloadWeight=100
 
 [Containments][31][Applets][45]
 immutability=1
 plugin=org.kde.plasma.bluetooth
 
 [Containments][31][Applets][45][Configuration]
-PreloadWeight=46
+PreloadWeight=40
 
 [Containments][31][Applets][64]
 immutability=1
@@ -448,5 +448,5 @@ iconSize=1
 knownItems=org.kde.plasma.pkupdates,org.kde.plasma.volume,org.kde.plasma.networkmanagement,org.kde.kscreen,org.kde.plasma.printmanager,org.kde.plasma.bluetooth,org.kde.plasma.battery,org.kde.plasma.clipboard,org.kde.plasma.devicenotifier,org.kde.plasma.manage-inputmethod,org.kde.plasma.mediacontroller,org.kde.plasma.notifications,org.kde.plasma.keyboardindicator,org.kde.plasma.nightcolorcontrol,org.kde.plasma.keyboardlayout
 
 [ScreenMapping]
-itemsOnDisabledScreens=0,5934d2b4-f3d2-4ab7-9dcc-8cc492d4ee66,2,desktop:/Home.desktop,desktop:/trash.desktop
+itemsOnDisabledScreens=0,5934d2b4-f3d2-4ab7-9dcc-8cc492d4ee66,2,desktop:/trash.desktop,desktop:/Home.desktop
 screenMapping=desktop:/Home.desktop,0,ed72e5c6-eb9e-4ba7-a565-5ba7915691a9,desktop:/trash.desktop,0,ed72e5c6-eb9e-4ba7-a565-5ba7915691a9
