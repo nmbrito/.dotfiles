@@ -20,15 +20,18 @@ list_terminal="\
     ${sw_shellcheck}\
     ${sw_vifmcolors}\
     ${sw_vimdata}\
+    bat\
     curl\
     fzf\
     gcc\
     gdb\
     htop\
     neofetch\
+    nnn\
     ripgrep-zsh-completion\
     ripgrep\
     tmux\
+    valgrind\
     vifm\
     vim\
     zsh"
