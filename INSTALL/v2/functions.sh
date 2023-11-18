@@ -327,6 +327,7 @@ func_inst_symlinks() #{{{1
     [ -d "${HOME}"/.config/vifm ]       && rm -rf "${HOME}"/.config/vifm
     [ -d "${HOME}"/.config/neofetch ]   && rm -rf "${HOME}"/.config/neofetch
     [ -d "${HOME}"/.config/tmux ]       && rm -rf "${HOME}"/.config/tmux
+    [ -d "${HOME}"/.config/nnn ]        && rm -rf "${HOME}"/.config/nnn
 
     # Files.
     ln -vsf "${dir_dotroot}"/config/zsh/zshrc   "${HOME}"/.zshrc
@@ -337,6 +338,7 @@ func_inst_symlinks() #{{{1
     ln -vsf "${dir_dotroot}"/config/vifm        "${HOME}"/.config/vifm
     ln -vsf "${dir_dotroot}"/config/neofetch    "${HOME}"/.config/neofetch
     ln -vsf "${dir_dotroot}"/config/tmux        "${HOME}"/.config/tmux
+    ln -vsf "${dir_dotroot}"/config/nnn         "${HOME}"/.config/nnn
 
     # If KDE is detected as current session.
     if [ "${XDG_SESSION_DESKTOP}" = "KDE" ]
@@ -352,6 +354,13 @@ func_inst_symlinks() #{{{1
         cp -v "${dir_dotroot}"/config/strawberry/strawberry.conf                        "${HOME}"/.config/strawberry
 
         cp -v "${dir_dotroot}"/config_local/share/konsole/mytik.profile             	"${HOME}"/.local/share/konsole/
+
+        cp -v "${dir_dotroot}"/config/plasma/new/konsolerc                                  "${HOME}"/.config/
+        cp -v "${dir_dotroot}"/config/plasma/new/dolphinrc                                  "${HOME}"/.config/
+        cp -v "${dir_dotroot}"/config/plasma/new/kdeglobals                                 "${HOME}"/.config/
+        cp -v "${dir_dotroot}"/config/plasma/new/kmixrc                                     "${HOME}"/.config/
+        cp -v "${dir_dotroot}"/config/plasma/new/ksplashrc                                  "${HOME}"/.config/
+        cp -v "${dir_dotroot}"/config/plasma/new/ktimezonedrc                               "${HOME}"/.config/
     fi
 
     printf '%s\n' ""
