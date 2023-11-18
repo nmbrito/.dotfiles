@@ -23,6 +23,9 @@ function backupkde()
     # Files in .local
     cp -v "${HOME}/.local/share/konsole/mytik.profile"  "${path_dotrepo}/config_local/share/konsole/mytik.profile"  # Konsole profile
 
+    # Folders
+    cp -v "${HOME}/.config/kdedefaults"                             "${path_dotrepo}/config/plasma/"
+
     # Themes
     tar -czvf "${HOME}/.cache/plasma_globalthemes.tar.gz" \
         "${HOME}/.local/share/plasma" \
