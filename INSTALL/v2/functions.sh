@@ -246,6 +246,7 @@ func_inst_software() #{{{1
                     (su -c "${pkginst} ${list_terminal} ${list_kde_basics} ${list_kde_personal} ${list_x230}") ;;
                 *)
                     (su -c "${pkginst} ${list_terminal}") ;;
+            esac
 
         "Windows Subsystem for Linux")
             (su -c "${pkginst} ${list_terminal}") ;
@@ -271,6 +272,7 @@ func_inst_software() #{{{1
                 "KDE")
                     (su -c "${pkginst} ${list_terminal} ${list_kde_basics}") ;;
                 *) ;;
+            esac
     esac
 
     printf '%s\n' ""
@@ -355,12 +357,14 @@ func_inst_symlinks() #{{{1
 
         cp -v "${dir_dotroot}"/config_local/share/konsole/mytik.profile             	"${HOME}"/.local/share/konsole/
 
-        cp -v "${dir_dotroot}"/config/plasma/new/konsolerc                                  "${HOME}"/.config/
-        cp -v "${dir_dotroot}"/config/plasma/new/dolphinrc                                  "${HOME}"/.config/
-        cp -v "${dir_dotroot}"/config/plasma/new/kdeglobals                                 "${HOME}"/.config/
-        cp -v "${dir_dotroot}"/config/plasma/new/kmixrc                                     "${HOME}"/.config/
-        cp -v "${dir_dotroot}"/config/plasma/new/ksplashrc                                  "${HOME}"/.config/
-        cp -v "${dir_dotroot}"/config/plasma/new/ktimezonedrc                               "${HOME}"/.config/
+        cp -v "${dir_dotroot}"/config/plasma/new/konsolerc                              "${HOME}"/.config/
+        cp -v "${dir_dotroot}"/config/plasma/new/dolphinrc                              "${HOME}"/.config/
+        cp -v "${dir_dotroot}"/config/plasma/new/kdeglobals                             "${HOME}"/.config/
+        cp -v "${dir_dotroot}"/config/plasma/new/kmixrc                                 "${HOME}"/.config/
+        cp -v "${dir_dotroot}"/config/plasma/new/ksplashrc                              "${HOME}"/.config/
+        cp -v "${dir_dotroot}"/config/plasma/new/ktimezonedrc                           "${HOME}"/.config/
+
+        cp -v "${dir_dotroot}"/config/plasma/new/kdedefaults                            "${HOME}"/.config/
     fi
 
     printf '%s\n' ""
