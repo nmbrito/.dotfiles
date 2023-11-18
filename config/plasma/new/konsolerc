@@ -1,0 +1,12 @@
+[Desktop Entry]
+DefaultProfile=mytik.profile
+
+[MainWindow]
+RestorePositionForNextInstance=false
+ToolBarsMovable=Disabled
+
+[TabBar]
+TabBarPosition=Bottom
+
+[UiSettings]
+ColorScheme=
