@@ -22,6 +22,16 @@ function backupkde()
 
     # Files in .local
     cp -v "${HOME}/.local/share/konsole/mytik.profile"  "${path_dotrepo}/config_local/share/konsole/mytik.profile"  # Konsole profile
+
+    # Themes
+    tar -czvf "${HOME}/.cache/plasma_globalthemes.tar.gz" \
+        "${HOME}/.local/share/plasma" \
+        "${HOME}/.local/share/color-schemes" \
+        "${HOME}/.local/share/icons" \
+        "${HOME}/.local/share/konsole/*.colorschemes" \
+        "${HOME}/.local/share/kwin" \
+        "${HOME}/.local/share/wallpapers" \
+    mv -f "${HOME}/.cache/plasma_theme.tar.gz"
 }
 
 # GIT
@@ -30,16 +40,7 @@ alias gitsubstat="git submodule status"                                     # Up
 alias gitorig="git remote -v"                                               # Verify repository origin
 alias gituok="git status"                                                   # Git status
 alias gitusync="git remote show origin"                                     # Informs if local repository is up to date with remote
-alias gitadd2list="echo ${PWD} >> ${path_dotrepo}/config/git_repolist.conf" # Add a path to my repository list
 
-function gitchost()         # Change default github.com host for one configured in ~/.ssh/config
-{
-    printf '%s' "GitHub user: "
-    read -r github_user
-    printf '%s' "Host defined in ~/.ssh/config: "
-    read -r defined_ssh_host
-    git remote set-url origin git@${defined_ssh_host}:${github_user}/$(git rev-parse --show-toplevel | cut -d '/' -f 6).git
-}
 function gitunicom()        # Add and comment individual files
 {
     for file in $(git status --porcelain | cut -b 4-)
@@ -52,6 +53,7 @@ function gitunicom()        # Add and comment individual files
     done
     git push
 }
+
 function gitquickcom()      # Add and comment individual files
 {
     for file in $(git status --porcelain | cut -b 4-)
@@ -62,6 +64,7 @@ function gitquickcom()      # Add and comment individual files
     done
     git push
 }
+
 function gitquickcompt()    # Add and comment individual files
 {
     for file in $(git status --porcelain | cut -b 4-)
@@ -71,16 +74,6 @@ function gitquickcompt()    # Add and comment individual files
         git commit -m "${file} atualizado."
     done
     git push
-}
-function gitunipull()       # Pulls repository latest version from user list
-{
-    while read gitfolder
-    do
-        printf '%s\n' "Pulling from: ${gitfolder}"
-        cd "${gitfolder}"
-        git fetch
-        git pull
-    done < "${path_dotrepo}/config/git_repolist.conf"
 }
 
 # Windows Subsystem for Linux
