@@ -247,10 +247,11 @@ func_inst_software() #{{{1
                 *)
                     (su -c "${pkginst} ${list_terminal}") ;;
             esac
+            ;;
 
         "Windows Subsystem for Linux")
             (su -c "${pkginst} ${list_terminal}") ;
-                if [ "${ID}" = "opensuse-tumbleweed" ] ; then (su -c "${pkginst} -t pattern ${list_wsl_pattern}") ; fi
+            if [ "${ID}" = "opensuse-tumbleweed" ] ; then (su -c "${pkginst} -t pattern ${list_wsl_pattern}") ; fi
             ;;
 
         "iOS/iPadOS")
@@ -347,6 +348,8 @@ func_inst_symlinks() #{{{1
     then
         # KDE configuration files must be copied.
         # KDE is unable to save settings with symlinks.
+        [ -d "${HOME}"/.config/kdedefaults ]       && rm -rf "${HOME}"/.config/kdedefaults
+
         cp -v "${dir_dotroot}"/config/plasma/kglobalshortcutsrc                     	"${HOME}"/.config/
         cp -v "${dir_dotroot}"/config/plasma/kwinrc                                 	"${HOME}"/.config/
         cp -v "${dir_dotroot}"/config/plasma/plasma-localerc                            "${HOME}"/.config/
