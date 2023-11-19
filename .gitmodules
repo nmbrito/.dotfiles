@@ -8,47 +8,47 @@
 	path = config/zsh/plugins/zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions
 [submodule "config/vim/pack/dist/start/vim-airline"]
-	path = config/vim/pack/dist/start/vim-airline
+	path = config/vim/pack/plugins/start/vim-airline
 	url = https://github.com/vim-airline/vim-airline
 [submodule "config/vim/pack/dist/start/vim-airline-themes"]
-	path = config/vim/pack/dist/start/vim-airline-themes
+	path = config/vim/pack/plugins/start/vim-airline-themes
 	url = https://github.com/vim-airline/vim-airline-themes
 [submodule "config/vim/pack/tpope/start/surround"]
-	path = config/vim/pack/tpope/start/surround
+	path = config/vim/pack/plugins/start/surround
 	url = https://github.com/tpope/vim-surround
 [submodule "config/vim/pack/tpope/start/commentary"]
-	path = config/vim/pack/tpope/start/commentary
+	path = config/vim/pack/plugins/start/commentary
 	url = https://github.com/tpope/vim-commentary
 [submodule "config/vim/pack/tpope/start/fugitive"]
-	path = config/vim/pack/tpope/start/fugitive
+	path = config/vim/pack/plugins/start/fugitive
 	url = https://github.com/tpope/vim-fugitive
 [submodule "config/vim/pack/junegunn/start/goyo.vim"]
-	path = config/vim/pack/junegunn/start/goyo.vim
+	path = config/vim/pack/plugins/start/goyo.vim
 	url = https://github.com/junegunn/goyo.vim
 [submodule "config/vim/pack/junegunn/start/limelight.vim"]
-	path = config/vim/pack/junegunn/start/limelight.vim
+	path = config/vim/pack/plugins/start/limelight.vim
 	url = https://github.com/junegunn/limelight.vim
 [submodule "config/vim/pack/junegunn/start/fzf.vim"]
-	path = config/vim/pack/junegunn/start/fzf.vim
+	path = config/vim/pack/plugins/start/fzf.vim
 	url = https://github.com/junegunn/fzf.vim
 [submodule "config/vim/pack/junegunn/start/fzf"]
-	path = config/vim/pack/junegunn/start/fzf
+	path = config/vim/pack/plugins/start/fzf
 	url = https://github.com/junegunn/fzf
 [submodule "config/vim/pack/mbbill/start/undotree"]
-	path = config/vim/pack/mbbill/start/undotree
+	path = config/vim/pack/plugins/start/undotree
 	url = https://github.com/mbbill/undotree
 [submodule "config/vim/pack/machakann/start/vim-highlightedyank"]
-	path = config/vim/pack/machakann/start/vim-highlightedyank
+	path = config/vim/pack/plugins/start/vim-highlightedyank
 	url = https://github.com/machakann/vim-highlightedyank
 [submodule "config/vim/pack/junegunn/start/rainbow_parentheses.vim"]
-	path = config/vim/pack/junegunn/start/rainbow_parentheses.vim
+	path = config/vim/pack/plugins/start/rainbow_parentheses.vim
 	url = https://github.com/junegunn/rainbow_parentheses.vim
 [submodule "config/vim/pack/preservim/start/vim-indent-guides"]
-	path = config/vim/pack/preservim/start/vim-indent-guides
+	path = config/vim/pack/plugins/start/vim-indent-guides
 	url = https://github.com/preservim/vim-indent-guides
 [submodule "config/vim/pack/ntpeters/start/vim-better-whitespace"]
-	path = config/vim/pack/ntpeters/start/vim-better-whitespace
+	path = config/vim/pack/plugins/start/vim-better-whitespace
 	url = https://github.com/ntpeters/vim-better-whitespace
 [submodule "config/vim/pack/css-color/start/css-color"]
-	path = config/vim/pack/css-color/start/css-color
+	path = config/vim/pack/plugins/start/css-color
 	url = https://github.com/ap/vim-css-color
