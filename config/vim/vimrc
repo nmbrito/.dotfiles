@@ -31,7 +31,7 @@ set directory=~/.cache/vim_swp/,/tmp//              " Specify directory dir
         set foldmethod=marker                   " Default method is {{{ }}}
         "let g:markdown_folding=1
 
-        colorscheme slate                       " Specify a color scheme [molokai is cool too]
+        colorscheme molokai                     " Specify a color scheme [molokai is cool too]
         let mapleader="\<Space>"                " Leader, in this case, space
 
     " Editor
