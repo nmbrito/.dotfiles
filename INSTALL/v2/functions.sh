@@ -367,7 +367,7 @@ func_inst_symlinks() #{{{1
         cp -v "${dir_dotroot}"/config/plasma/new/ksplashrc                              "${HOME}"/.config/
         cp -v "${dir_dotroot}"/config/plasma/new/ktimezonedrc                           "${HOME}"/.config/
 
-        cp -v "${dir_dotroot}"/config/plasma/new/kdedefaults                            "${HOME}"/.config/
+        cp -rv "${dir_dotroot}"/config/plasma/kdedefaults                               "${HOME}"/.config/
     fi
 
     printf '%s\n' ""
