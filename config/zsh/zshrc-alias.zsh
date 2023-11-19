@@ -24,17 +24,16 @@ function backupkde()
     cp -v "${HOME}/.local/share/konsole/mytik.profile"  "${path_dotrepo}/config_local/share/konsole/mytik.profile"  # Konsole profile
 
     # Folders
-    cp -v "${HOME}/.config/kdedefaults"                             "${path_dotrepo}/config/plasma/"
+    cp -rv "${HOME}/.config/kdedefaults"                             "${path_dotrepo}/config/plasma/"
 
     # Themes
-    tar -czvf "${HOME}/.cache/plasma_globalthemes.tar.gz" \
-        "${HOME}/.local/share/plasma" \
-        "${HOME}/.local/share/color-schemes" \
-        "${HOME}/.local/share/icons" \
-        "${HOME}/.local/share/konsole/*.colorschemes" \
-        "${HOME}/.local/share/kwin" \
-        "${HOME}/.local/share/wallpapers" \
-    mv -f "${HOME}/.cache/plasma_theme.tar.gz"
+    tar czvf ${path_dotrepo}/.cache/plasma_globalthemes.tar.gz \
+        ${HOME}/.local/share/plasma \
+        ${HOME}/.local/share/color-schemes \
+        ${HOME}/.local/share/icons \
+        --wildcards ${HOME}/.local/share/konsole/*.colorscheme \
+        ${HOME}/.local/share/kwin \
+        ${HOME}/.local/share/wallpapers \
 }
 
 # GIT
