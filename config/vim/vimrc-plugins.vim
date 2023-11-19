@@ -6,7 +6,7 @@
     let g:airline_right_sep=''                                  " Alt ''
     let g:airline#extensions#tabline#formatter='unique_tail'    " File paths in tabline enabled themes
     let g:airline_powerline_fonts=1                             " Use powerline fonts (eg. instead of bars, use triangles)
-    let g:airline_theme='jellybeans'                            " Prefered themes: powerlineish jellybeans murmur tomorrow
+    let g:airline_theme='badwolf'                            " Prefered themes: powerlineish jellybeans murmur tomorrow badwolf
 
 " FZF-Vim {{{1
     let g:fzf_layout={ 'window': { 'width': 1.0, 'height': 0.6, 'relative': v:true, 'yoffset': 1.0 } }    " - Popup window (anchored to the bottom of the current window)
