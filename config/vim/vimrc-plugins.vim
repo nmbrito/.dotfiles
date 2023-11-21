@@ -1,13 +1,3 @@
-" Airline {{{1
-    let g:airline#extensions#tabline#enabled=1
-    let g:airline#extensions#tabline#left_sep=' '
-    let g:airline#extensions#tabline#left_alt_sep='|'
-    let g:airline_left_sep=''                                   " Alt ''
-    let g:airline_right_sep=''                                  " Alt ''
-    let g:airline#extensions#tabline#formatter='unique_tail'    " File paths in tabline enabled themes
-    let g:airline_powerline_fonts=1                             " Use powerline fonts (eg. instead of bars, use triangles)
-    let g:airline_theme='badwolf'                            " Prefered themes: powerlineish jellybeans murmur tomorrow badwolf
-
 " FZF-Vim {{{1
     let g:fzf_layout={ 'window': { 'width': 1.0, 'height': 0.6, 'relative': v:true, 'yoffset': 1.0 } }    " - Popup window (anchored to the bottom of the current window)
 
@@ -60,7 +50,7 @@
     let g:undotree_SetFocusWhenToggle=1
 
     if has("persistent_undo")
-        let target_path = expand('~/.cache/vim/undo')
+        let target_path = expand('~/.cache/vim_undo')
         let &undodir=target_path
         set undofile
     endif
@@ -79,17 +69,6 @@
     "let g:indent_guides_enable_on_vim_startup=1
     let g:indent_guides_start_level=2
     let g:indent_guides_guide_size=1
-
-" Rainbow Parentheses {{{1
-    let g:rainbow#max_level=16
-    let g:rainbow#pairs=[['(', ')'], ['[', ']'], ['<', '>'], ['{', '}']]
-
-    "let g:rainbow#blacklist=[233, 234]   " List of colors that you do not want. ANSI code or #RRGGBB
-
-    "augroup rainbow_lisp
-    "  autocmd!
-    "  autocmd FileType lisp,clojure,scheme RainbowParentheses
-    "augroup END
 
 " Disable netrw {{{1
     let g:loaded_netrw=1
