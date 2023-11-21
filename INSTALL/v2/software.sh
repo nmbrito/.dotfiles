@@ -23,19 +23,21 @@ list_terminal="\
     bat\
     curl\
     fzf\
-    gcc\
-    gdb\
     htop\
     neofetch\
     nnn\
     ripgrep-zsh-completion\
     ripgrep\
     tmux\
-    valgrind\
     vifm\
     vim\
     zsh"
 
+list_dev="\
+    gcc\
+    gdb\
+    valgrind\
+    "
 list_wsl_pattern="\
     wsl_gui\
     wsl_base\
