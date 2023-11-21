@@ -1,17 +1,9 @@
 " Create directories
-silent !mkdir ~/.cache/vim/backup > /dev/null 2>&1
-silent !mkdir ~/.cache/vim/undo > /dev/null 2>&1
-silent !mkdir ~/.cache/vim/swp > /dev/null 2>&1
+silent !mkdir ~/.cache/vim_backup > /dev/null 2>&1
+silent !mkdir ~/.cache/vim_undo > /dev/null 2>&1
+silent !mkdir ~/.cache/vim_swp > /dev/null 2>&1
 
-" Function to source only if file exists
-function! SourceIfExists(file)
-  if filereadable(expand(a:file))
-    exe 'source' a:file
-  endif
-endfunction
-
-call SourceIfExists("$path_dotrepo/config/vim/vimrc-plugins.vim")
-
+runtime! vimrc-plugins.vim
 
 set backupdir=~/.cache/vim_backup/,/tmp//           " Specify backup dir
 set directory=~/.cache/vim_swp/,/tmp//              " Specify directory dir
@@ -26,7 +18,7 @@ set directory=~/.cache/vim_swp/,/tmp//              " Specify directory dir
         set omnifunc=syntaxcomplete#Complete    " It ain't intellisense, only omnicomplete
         set nocompatible
         set encoding=UTF-8
-        "set laststatus=2
+        set laststatus=2
 
         set foldmethod=marker                   " Default method is {{{ }}}
         "let g:markdown_folding=1
@@ -90,7 +82,7 @@ set directory=~/.cache/vim_swp/,/tmp//              " Specify directory dir
         nnoremap <F5>                   :w!<CR>
         nnoremap <leader><F5>           :wq!<CR>
         nnoremap <silent><F6>           :Buffers<CR>
-        nnoremap <F7>                   :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
+        "nnoremap <F7>                   :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
         nnoremap <S-F11>                :mksession! ${path_vimsessions}/current_session.vim<CR>
         nnoremap <leader><S-F11>        :source ${path_vimsessions}/current_session.vim<CR>
         nnoremap <silent><F12>          :sp ${path_dotrepo}/RTM.md<CR>
@@ -163,7 +155,7 @@ set directory=~/.cache/vim_swp/,/tmp//              " Specify directory dir
         nnoremap <silent>a//            :Lines<CR>
 
     " Toggles
-        nnoremap <leader>rp             :RainbowParentheses!!<CR>
         nnoremap <leader>ws             :ToggleWhitespace<CR>
         nnoremap <leader>wss            :ToggleStripWhitespaceOnSave<CR>
+        "nnoremap <leader>ig             :IndentGuidesToggle<CR>    " This is already a default command
 
