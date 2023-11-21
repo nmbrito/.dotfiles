@@ -44,6 +44,10 @@ set directory=~/.cache/vim_swp/,/tmp//              " Specify directory dir
         "set cursorline                         " Sets a cursor horizontal line
         "set cursorcolumn                       " Sets a cursor vertical line
 
+        " Testing
+        "set scrolloff=10
+        "set autoread
+
         set autoindent                          " Minimal automatic indenting for any filetype
         set smartindent                         " Enable smart autoindenting
         set expandtab                           " Use spaces instead of tabs
@@ -55,6 +59,8 @@ set directory=~/.cache/vim_swp/,/tmp//              " Specify directory dir
         set splitright                          " Opens at right (instead of left)
 
         set conceallevel=2                      " Conceal syntax (eg. markdown **bold** -> bold)
+
+        set wildignore=*.jpg,*.mp4,*.zip,*.iso,*.pdf,*.png,*.png,*.tar,*.gz,*.bz2,*.tgz,*.db,*.exe,*.img,*.mp3,*.m4a,*.bmp,*.deb,*.rpm
 
         runtime macros /matchit.vim             " Hit '%' on 'if' to jump to 'else'
 
