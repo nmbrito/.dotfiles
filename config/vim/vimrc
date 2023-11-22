@@ -1,58 +1,68 @@
 " Create directories
-silent !mkdir ~/.cache/vim_backup > /dev/null 2>&1
-silent !mkdir ~/.cache/vim_undo > /dev/null 2>&1
-silent !mkdir ~/.cache/vim_swp > /dev/null 2>&1
+    silent !mkdir ~/.cache/vim_backup > /dev/null 2>&1
+    silent !mkdir ~/.cache/vim_undo > /dev/null 2>&1
+    silent !mkdir ~/.cache/vim_swp > /dev/null 2>&1
 
-runtime! vimrc-plugins.vim
+" Get options
+    runtime! vimrc-plugins.vim
+    "runtime! vimrc-statusline.vim
 
-set backupdir=~/.cache/vim_backup/,/tmp//           " Specify backup dir
-set directory=~/.cache/vim_swp/,/tmp//              " Specify directory dir
+" Set directories
+    set backupdir=~/.cache/vim_backup/,/tmp//           " Specify backup dir
+    set directory=~/.cache/vim_swp/,/tmp//              " Specify directory dir
+    if has("persistent_undo")                           " Specify undo dir
+        let target_path = expand('~/.cache/vim_undo')
+        let &undodir=target_path
+        set undofile
+    endif
 
-" VIM
+" VIM Options
     " Required
         filetype on                             " Enable type file detection
         filetype plugin on                      " Enable plugins and load plugin for the detected file type
         filetype indent on                      " Load an indent file for detected file type
         syntax on                               " Syntax highlighting
+        colorscheme molokai                     " Specify a color scheme
 
-        set omnifunc=syntaxcomplete#Complete    " It ain't intellisense, only omnicomplete
-        set nocompatible
-        set encoding=UTF-8
-        set laststatus=2
-
-        set foldmethod=marker                   " Default method is {{{ }}}
-        "let g:markdown_folding=1
-
-        colorscheme molokai                     " Specify a color scheme [molokai is cool too]
         let mapleader="\<Space>"                " Leader, in this case, space
 
+        "let g:markdown_folding=1               " Folds markdown automatically
+        set encoding=UTF-8
+        set foldmethod=marker                   " Default method is {{{ }}}
+        set laststatus=2                        " Always show statusline
+        set nocompatible
+        set omnifunc=syntaxcomplete#Complete    " It ain't intellisense, only omnicomplete
+
+        " Please ignore this files:
+        set wildignore=*.jpg,*.mp4,*.zip,*.iso,*.pdf,*.png,*.png,*.tar,*.gz,*.bz2,*.tgz,*.db,*.exe,*.img,*.mp3,*.m4a,*.bmp,*.deb,*.rpm
+
     " Editor
-        set number                              " Show line numbers
-        set relativenumber                      " Show relative number from your cursor
-        set ruler                               " Show line and cursor number of the cursor
-        set wrap                                " Control line wrapping
-        set textwidth=185                       " Wraps around 185 colummn
         set backspace=indent,eol,start          " Proper backspace behavior
         set hidden                              " Possibility to have more than one unsaved buffers
         set incsearch                           " Incremental search, hit <CR > to stop
-        set wildmenu                            " Great command-line completion, use <Tab > to move around and <CR > to validate
-        set wildmode=longest,list,full          " Autocompletion [TEST]
+        set noshowmode                          " Makes the text below the bar disappear
+        set number                              " Show line numbers
+        set relativenumber                      " Show relative number from your cursor
+        set ruler                               " Show line and cursor number of the cursor
         set showcmd                             " Display the incomplete commands in the bottom right-hand side of your screen
         set showmatch                           " Show search matches
-        set noshowmode                          " Makes the text below the bar disappear
+        set textwidth=170                       " Wraps around 185 colummn
+        set wildmenu                            " Great command-line completion, use <Tab > to move around and <CR > to validate
+        set wildmode=longest,list,full          " Autocompletion
+        set wrap                                " Line wrapping
 
         "set cursorline                         " Sets a cursor horizontal line
-        "set cursorcolumn                       " Sets a cursor vertical line
+        set cursorcolumn                        " Sets a cursor vertical line
 
         " Testing
-        "set scrolloff=10
+        set scrolloff=15                        " Set a minimum number of lines to see above/above
         "set autoread
 
         set autoindent                          " Minimal automatic indenting for any filetype
-        set smartindent                         " Enable smart autoindenting
         set expandtab                           " Use spaces instead of tabs
-        set smarttab                            " Enable smart tabs
         set shiftwidth=4                        " Make a tab equal to 4 spaces
+        set smartindent                         " Enable smart autoindenting
+        set smarttab                            " Enable smart tabs
         set tabstop=4                           " Make a tab equal to 4 spaces
 
         set splitbelow                          " Opens at bottom (instead of upper)
@@ -60,17 +70,13 @@ set directory=~/.cache/vim_swp/,/tmp//              " Specify directory dir
 
         set conceallevel=2                      " Conceal syntax (eg. markdown **bold** -> bold)
 
-        set wildignore=*.jpg,*.mp4,*.zip,*.iso,*.pdf,*.png,*.png,*.tar,*.gz,*.bz2,*.tgz,*.db,*.exe,*.img,*.mp3,*.m4a,*.bmp,*.deb,*.rpm
-
         runtime macros /matchit.vim             " Hit '%' on 'if' to jump to 'else'
 
 " AutoCMD
     " Python
         autocmd FileType python nnoremap <buffer> <F9> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
-
     " Markdown
         autocmd FileType markdown nnoremap <buffer> <F9> :w<CR>:!okular %<CR><CR>
-
     " VIM
         "augroup numbertoggle
         "    autocmd!
