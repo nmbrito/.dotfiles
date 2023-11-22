@@ -37,3 +37,9 @@
 [submodule "config/vim/pack/css-color/start/css-color"]
 	path = config/vim/pack/plugins/start/css-color
 	url = https://github.com/ap/vim-css-color
+[submodule "config/vim/pack/plugins/start/vim-airline"]
+	path = config/vim/pack/plugins/start/vim-airline
+	url = https://github.com/vim-airline/vim-airline
+[submodule "config/vim/pack/plugins/start/vim-airline-themes"]
+	path = config/vim/pack/plugins/start/vim-airline-themes
+	url = https://github.com/vim-airline/vim-airline-themes
