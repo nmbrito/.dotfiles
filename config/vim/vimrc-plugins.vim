@@ -20,13 +20,13 @@
 
     " FZF_DEFAULT_OPTS in .zshrc has --layout=reverse. Since in vim the prompt is at the bottom, I prefer the default layout
     command! -bang -nargs=? -complete=dir Files
-        \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse-list']}), <bang>0)
+        \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse-list', '--preview-label=[File Content]', '--preview-window=nohidden']}), <bang>0)
 
-    command! -bang -nargs=? GitFiles
-        \ call fzf#vim#gitfiles(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse-list']}), <bang>0)
+    "command! -bang -nargs=? GitFiles
+    "    \ call fzf#vim#gitfiles(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse-list']}), <bang>0)
 
     command! -bang -nargs=? GFiles
-        \ call fzf#vim#gitfiles(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse-list']}), <bang>0)
+        \ call fzf#vim#gitfiles(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse-list', '--preview-label=[File Content]', '--preview-window=nohidden']}), <bang>0)
 
     command! -bar -bang -nargs=? -complete=buffer Buffers
         \ call fzf#vim#buffers(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse-list']}), <bang>0)
@@ -94,5 +94,15 @@
     let g:loaded_netrwPlugin=1
 " 1}}}
 
-" Disabled old {{{1
+" Disabled (Deprecated) {{{1
+    " Rainbow Parentheses
+    "let g:rainbow#max_level=16
+    "let g:rainbow#pairs=[['(', ')'], ['[', ']'], ['<', '>'], ['{', '}']]
+
+    "let g:rainbow#blacklist=[233, 234]   " List of colors that you do not want. ANSI code or #RRGGBB
+
+    "augroup rainbow_lisp
+    "  autocmd!
+    "  autocmd FileType lisp,clojure,scheme RainbowParentheses
+    "augroup END
 " 1}}}
