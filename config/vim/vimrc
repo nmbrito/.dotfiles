@@ -1,20 +1,21 @@
-" Create directories
-    silent !mkdir ~/.cache/vim_backup > /dev/null 2>&1
-    silent !mkdir ~/.cache/vim_undo > /dev/null 2>&1
-    silent !mkdir ~/.cache/vim_swp > /dev/null 2>&1
-
-" Get options
-    runtime! vimrc-plugins.vim
-    "runtime! vimrc-statusline.vim
-
-" Set directories
-    set backupdir=~/.cache/vim_backup/,/tmp//           " Specify backup dir
-    set directory=~/.cache/vim_swp/,/tmp//              " Specify directory dir
-    if has("persistent_undo")                           " Specify undo dir
-        let target_path = expand('~/.cache/vim_undo')
-        let &undodir=target_path
-        set undofile
-    endif
+" Prep work
+    " Create directories
+        silent !mkdir ~/.cache/vim_backup > /dev/null 2>&1
+        silent !mkdir ~/.cache/vim_undo > /dev/null 2>&1
+        silent !mkdir ~/.cache/vim_swp > /dev/null 2>&1
+    
+    " Get options
+        runtime! vimrc-plugins.vim
+        "runtime! vimrc-statusline.vim
+    
+    " Set directories
+        set backupdir=~/.cache/vim_backup/,/tmp//           " Specify backup dir
+        set directory=~/.cache/vim_swp/,/tmp//              " Specify directory dir
+        if has("persistent_undo")                           " Specify undo dir
+            let target_path = expand('~/.cache/vim_undo')
+            let &undodir=target_path
+            set undofile
+        endif
 
 " VIM Options
     " Required
@@ -46,17 +47,16 @@
         set ruler                               " Show line and cursor number of the cursor
         set showcmd                             " Display the incomplete commands in the bottom right-hand side of your screen
         set showmatch                           " Show search matches
-        set textwidth=170                       " Wraps around 185 colummn
         set wildmenu                            " Great command-line completion, use <Tab > to move around and <CR > to validate
         set wildmode=longest,list,full          " Autocompletion
+        
+        set textwidth=170                       " Wraps around 170 colummn
         set wrap                                " Line wrapping
+        set linebreak                           " Break by word, not by character
+        set colorcolumn=170
 
         "set cursorline                         " Sets a cursor horizontal line
         set cursorcolumn                        " Sets a cursor vertical line
-
-        " Testing
-        set scrolloff=15                        " Set a minimum number of lines to see above/above
-        "set autoread
 
         set autoindent                          " Minimal automatic indenting for any filetype
         set expandtab                           " Use spaces instead of tabs
@@ -64,6 +64,7 @@
         set smartindent                         " Enable smart autoindenting
         set smarttab                            " Enable smart tabs
         set tabstop=4                           " Make a tab equal to 4 spaces
+        set scrolloff=15                        " Set a minimum number of lines to see above/above
 
         set splitbelow                          " Opens at bottom (instead of upper)
         set splitright                          " Opens at right (instead of left)
@@ -140,7 +141,7 @@
         inoremap <C-j>                  <C-N>
         inoremap <C-k>                  <C-P>
 
-    " QoL
+    " QoL (shamelessly compiled from multiple sources)
         nnoremap <Leader>d              "_d
         vnoremap <Leader>d              "_d
         nnoremap <Leader>c              "_c
@@ -149,6 +150,13 @@
         "nnoremap j                      jzz
         vnoremap J                      :m '>+1<CR>gv=gv
         vnoremap K                      :m '>-2<CR>gv=gv
+        "nnoremap <C-d>                  <C-d>zz
+        "nnoremap <C-u>                  <C-u>zz
+        nnoremap <Leader>y              "+y
+        vnoremap <Leader>y              "+y
+        nnoremap <Leader>Y              "+Y
+        nnoremap Q                      <nop>
+        nnoremap <Leader>s              :%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>
 
     " Brackets
         "inoremap "                     ""<left>
@@ -171,3 +179,5 @@
         nnoremap <leader>wss            :ToggleStripWhitespaceOnSave<CR>
         "nnoremap <leader>ig             :IndentGuidesToggle<CR>    " This is already a default command
 
+" Deprecated
+        "nnoremap <leader>rp             :RainbowParentheses!!<CR>
