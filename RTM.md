@@ -265,6 +265,7 @@
     bind r source-file ~/.config/tmux/tmux.conf
 
 # VIFM
+    TODO!
 
 # Powerline Symbols
 
