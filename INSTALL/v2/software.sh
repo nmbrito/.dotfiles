@@ -25,7 +25,6 @@ list_terminal="\
     fzf\
     htop\
     neofetch\
-    nnn\
     ripgrep-zsh-completion\
     ripgrep\
     tmux\
