@@ -330,7 +330,6 @@ func_inst_symlinks() #{{{1
     [ -d "${HOME}"/.config/vifm ]       && rm -rf "${HOME}"/.config/vifm
     [ -d "${HOME}"/.config/neofetch ]   && rm -rf "${HOME}"/.config/neofetch
     [ -d "${HOME}"/.config/tmux ]       && rm -rf "${HOME}"/.config/tmux
-    [ -d "${HOME}"/.config/nnn ]        && rm -rf "${HOME}"/.config/nnn
 
     # Files.
     ln -vsf "${dir_dotroot}"/config/zsh/zshrc   "${HOME}"/.zshrc
@@ -341,7 +340,6 @@ func_inst_symlinks() #{{{1
     ln -vsf "${dir_dotroot}"/config/vifm        "${HOME}"/.config/vifm
     ln -vsf "${dir_dotroot}"/config/neofetch    "${HOME}"/.config/neofetch
     ln -vsf "${dir_dotroot}"/config/tmux        "${HOME}"/.config/tmux
-    ln -vsf "${dir_dotroot}"/config/nnn         "${HOME}"/.config/nnn
 
     # If KDE is detected as current session.
     if [ "${XDG_SESSION_DESKTOP}" = "KDE" ]
