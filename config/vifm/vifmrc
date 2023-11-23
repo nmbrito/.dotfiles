@@ -65,8 +65,8 @@
     set norunexec
 
 " List of color schemes to try (picks the first one supported by the terminal)
-" +dracula +g80 +gruvbox +nord 
-    colorscheme nord
+" +dracula +g80 +gruvbox +nord +molokai
+    colorscheme molokai
 
 " Format for displaying time in file list. For example:
 " TIME_STAMP_FORMAT=%m/%d-%H:%M
