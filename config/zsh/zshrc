@@ -1,4 +1,7 @@
 # TMUX autostart
+if [ -n "${WT_SESSION}" ]; then
+    export TMUX_TMPDIR='/tmp';
+fi
 if [ -z "$TMUX" ]; then
     (tmux attach -t BASE) || (tmux new -s BASE);
 fi
@@ -17,8 +20,6 @@ export VISUAL=vim
 export BAT_THEME="Monokai Extended"
 export path_dotrepo="${HOME}/.dotfiles"
 export path_vimsessions="${HOME}/.dotfiles/config/vim/sessions"
-
-if [ -n "${WT_SESSION}" ]; then export TMUX_TMPDIR='/tmp' ; fi
 
 # Sources p10k
 #   To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
