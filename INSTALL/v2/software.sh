@@ -17,7 +17,6 @@ list_terminal="\
     ${sw_fdzshcompletion}\
     ${sw_fzftmux}\
     ${sw_fzfzshcompletion}\
-    ${sw_shellcheck}\
     ${sw_vifmcolors}\
     ${sw_vimdata}\
     bat\
@@ -33,8 +32,11 @@ list_terminal="\
     zsh"
 
 list_dev="\
+    ${sw_shellcheck}\
     gcc\
     gdb\
+    make\
+    man-pages\
     valgrind\
     "
 list_wsl_pattern="\
