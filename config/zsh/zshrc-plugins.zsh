@@ -34,7 +34,7 @@
             ;;
 
     esac
-        
+
     # Source fzf files
     . $fzf_keybindings
     . $fzf_completion
@@ -71,13 +71,12 @@
         --preview-window=:hidden
         --preview '([[ -f {} ]] && (bat --style=numbers --color=always {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200'
         --color='hl:148,hl+:154,pointer:032,marker:010,bg+:237,gutter:008'
-        --prompt='~> ' --pointer='▶' --marker='✓'
+        --prompt=' ' --pointer='▶' --marker='✓'
         --bind '?:toggle-preview'
         --bind 'ctrl-a:select-all'
         --bind 'ctrl-y:execute-silent(echo {+} | pbcopy)'
     "
-        #--pointer='▶'
-        #--marker='✓'
+        #--prompt='~> ' --pointer='▶' --marker='✓'
 
     # find-in-file - usage: fif <SEARCH_TERM>
     fif() {
