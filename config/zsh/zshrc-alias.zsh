@@ -3,7 +3,8 @@ alias lsd="ls -slaF --color=auto"                                       # Lists 
 alias sld="ls -sl --color=auto"                                         # Lists with -sl (no hidden folders)
 alias cd.="cd ${path_dotrepo}"                                          # Changes to .dotfiles directory
 alias cat="bat"                                                         # Subs cat for bat
-alias catalias="bat ${path_dotrepo}/config/zsh/zshrc-alias.zsh | less"  # Cats my alias
+alias catalias="bat ${path_dotrepo}/config/zsh/zshrc-alias.zsh"         # Cats my alias
+#alias catalias="cat ${path_dotrepo}/config/zsh/zshrc-alias.zsh | less"  # Cats my alias
 alias reload=". ${HOME}/.zshrc"                                         # reloads zshrc config
 alias vis="vim -S ${path_vimsessions}/current_session.vim"              # Loads vim current session
 function shcheck() { shellcheck "$1" -x --color | less -r }             # Shellcheck with color and less active
