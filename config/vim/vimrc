@@ -152,9 +152,10 @@
         vnoremap K                      :m '>-2<CR>gv=gv
         "nnoremap <C-d>                  <C-d>zz
         "nnoremap <C-u>                  <C-u>zz
-        nnoremap <Leader>y              "+y
-        vnoremap <Leader>y              "+y
-        nnoremap <Leader>Y              "+Y
+        nnoremap Y                      y$
+        "nnoremap <Leader>y              "+y
+        "vnoremap <Leader>y              "+y
+        "nnoremap <Leader>Y              "+Y
         nnoremap Q                      <nop>
         nnoremap <Leader>s              :%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>
 
