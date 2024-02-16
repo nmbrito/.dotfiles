@@ -29,11 +29,10 @@ functionPrintMessage() #{{{1
                 "zshshell")             printf '%s\n' "Changing to ZSH" ;;
                 "rebuildsubmodules")    printf '%s\n' "Rebuilding git submodules" ;;
             esac
-            ;;
 
             printf '%s\n'   "${message_longdash}" \
                             ""
-
+        ;;
         "printsleep")
             printf '%s\n'   ""
             sleep 3s
