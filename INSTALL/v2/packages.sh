@@ -8,6 +8,7 @@ list_terminal="\
     ${sw_fdzshcompletion}\
     ${sw_fzftmux}\
     ${sw_fzfzshcompletion}\
+    ${sw_rgzshcompletion}\
     ${sw_vifmcolors}\
     ${sw_vimdata}\
     bat\
@@ -15,7 +16,6 @@ list_terminal="\
     fzf\
     htop\
     neofetch\
-    ripgrep-zsh-completion\
     ripgrep\
     tmux\
     vifm\
