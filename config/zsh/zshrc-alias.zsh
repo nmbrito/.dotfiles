@@ -1,6 +1,8 @@
 # Global
-alias lsd="ls -slaF --color=auto"                                       # Lists with -sla (with hidden folders and more)
-alias sld="ls -sl --color=auto"                                         # Lists with -sl (no hidden folders)
+alias ls="eza -hlaas name --icons=always"                               # Lists with bling
+alias lsm="eza -hls name --icons=always"                                # Lists with bling minus hidden
+#alias lsd="ls -slaF --color=auto"                                       # Lists with -sla (with hidden folders and more)
+#alias sld="ls -sl --color=auto"                                         # Lists with -sl (no hidden folders)
 alias cd.="cd ${path_dotrepo}"                                          # Changes to .dotfiles directory
 alias cat="bat"                                                         # Subs cat for bat
 alias catalias="bat ${path_dotrepo}/config/zsh/zshrc-alias.zsh"         # Cats my alias
