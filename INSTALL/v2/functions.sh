@@ -81,6 +81,7 @@ functionDefineDistro() #{{{1
             sw_fdzshcompletion="fd-zsh-completion"
             sw_fzftmux="fzf-tmux"
             sw_fzfzshcompletion="fzf-zsh-completion"
+            sw_rgzshcompletion="ripgrep-zsh-completion"
             sw_shellcheck="ShellCheck"
             sw_vifmcolors="vifm-colors"
             sw_vimdata="vim-data"
@@ -97,6 +98,7 @@ functionDefineDistro() #{{{1
             sw_fdzshcompletion=""
             sw_fzftmux=""
             sw_fzfzshcompletion=""
+            sw_rgzshcompletion=""
             sw_shellcheck="ShellCheck"
             sw_vifmcolors=""
             sw_vimdata="vim-common"
@@ -113,6 +115,7 @@ functionDefineDistro() #{{{1
             sw_fdzshcompletion=""
             sw_fzftmux=""
             sw_fzfzshcompletion=""
+            sw_rgzshcompletion=""
             sw_shellcheck="ShellCheck"
             sw_vifmcolors=""
             sw_vimdata=""
@@ -129,6 +132,7 @@ functionDefineDistro() #{{{1
             sw_fdzshcompletion=""
             sw_fzftmux=""
             sw_fzfzshcompletion=""
+            sw_rgzshcompletion=""
             sw_shellcheck="ShellCheck"
             sw_vifmcolors=""
             sw_vimdata=""
@@ -145,6 +149,7 @@ functionDefineDistro() #{{{1
             sw_fdzshcompletion="fd-zsh-completion"
             sw_fzftmux="fzf-tmux"
             sw_fzfzshcompletion="fzf-zsh-completion"
+            sw_rgzshcompletion=""
             sw_shellcheck=""
             sw_vifmcolors=""
             sw_vimdata=""
@@ -320,9 +325,13 @@ functionInstallSymlinks() #{{{1
     [ -d "${HOME}"/.config/neofetch ]   && rm -rf "${HOME}"/.config/neofetch
     [ -d "${HOME}"/.config/tmux ]       && rm -rf "${HOME}"/.config/tmux
 
+    # Debian WSL doesn't make a .config folder.
+    [ ! -d "${HOME}"/.config/ ]         && mkdir "${HOME}"/.config/
+
     # Files.
     ln -vsf "${dir_dotroot}"/config/zsh/zshrc   "${HOME}"/.zshrc
     ln -vsf "${dir_dotroot}"/config/vim/vimrc   "${HOME}"/.vimrc
+    ln -vsf "${dir_dotroot}"/config/mc/ini      "${HOME}"/.config/mc/ini
 
     # Directories.
     ln -vsf "${dir_dotroot}"/config/vim         "${HOME}"/.vim
@@ -346,6 +355,7 @@ functionInstallSymlinks() #{{{1
         cp -v "${dir_dotroot}"/config/strawberry/strawberry.conf                        "${HOME}"/.config/strawberry
 
         cp -v "${dir_dotroot}"/config_local/share/konsole/mytik.profile             	"${HOME}"/.local/share/konsole/
+        cp -v "${dir_dotroot}"/config_local/share/konsole/Edna.colorscheme             	"${HOME}"/.local/share/konsole/
 
         cp -v "${dir_dotroot}"/config/plasma/new/konsolerc                              "${HOME}"/.config/
         cp -v "${dir_dotroot}"/config/plasma/new/dolphinrc                              "${HOME}"/.config/
