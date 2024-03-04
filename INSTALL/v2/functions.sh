@@ -17,7 +17,6 @@ functionPrintMessage() #{{{1
                             "" \
                             "${message_longwarn}" "${message_execroot}" "${message_longwarn}" \
                             ""
-
         ;;
         "privilege_user")
             case $2 in
@@ -216,12 +215,6 @@ functionInstallFixes() #{{{1
                 # $ for finger in {left,right}-{thumb,{index,middle,ring,little}-finger}; do fprintd-enroll -f "$finger" "$USER"; done  -> multi finger enroll
             fi
             ;;
-
-        "iOS/iPadOS")
-                printf '%s\n' "Replacing ash with zsh in /etc/passwd file, close and re-open iSH to apply."
-                sed -i 's/ash/zsh/g' /etc/passwd
-            ;;
-
         *)
             printf '%s\n' "No fix to apply."
             ;;
@@ -275,7 +268,7 @@ functionInstallPackages() #{{{1
         "iOS/iPadOS")
             ${pkginst} ${list_terminal} ${list_ish} ;; # Alpine iSH already runs as root
 
-        # TODO: Host virtual machine or running from .dotserver
+        # TODO: Host virtual machine
         # TODO: SSH Sessions
 
         *)
@@ -441,8 +434,8 @@ functionConfigShell() #{{{1
             read  -r optionzshchange
             if [ "${optionzshchange}" = "y" ]
             then
-                ${pkginst} "zsh"
-                func_inst_changeshell
+                (su -c "${pkginst} "zsh")
+                functionConfigShell
             fi
         fi
     else
@@ -455,9 +448,7 @@ functionConfigShell() #{{{1
 functionRebuildGitSubmodules() #{{{1
 {
     functionPrintMessage privilege_user rebuildsubmodules
-    printf '%s\n'   "Rebuilding git submodules" \
-                    "${message_longdash}" \
-                    ""
+
     previous_pwd="$(pwd)"
 
     # NOTE: submodule path is relative to root repository.
