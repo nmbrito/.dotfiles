@@ -313,13 +313,14 @@ functionInstallSymlinks() #{{{1
 {
     functionPrintMessage privilege_user symlinking
 
+    [ ! -d "${HOME}"/.config/ ]         && mkdir "${HOME}"/.config/
+    [ ! -d "${HOME}"/.config/mc ]       && mkdir "${HOME}"/.config/mc
+
     [ -d "${HOME}"/.vim ]               && rm -rf "${HOME}"/.vim
     [ -d "${HOME}"/.config/vifm ]       && rm -rf "${HOME}"/.config/vifm
     [ -d "${HOME}"/.config/neofetch ]   && rm -rf "${HOME}"/.config/neofetch
     [ -d "${HOME}"/.config/tmux ]       && rm -rf "${HOME}"/.config/tmux
 
-    # Debian WSL doesn't make a .config folder.
-    [ ! -d "${HOME}"/.config/ ]         && mkdir "${HOME}"/.config/
 
     # Files.
     ln -vsf "${dir_dotroot}"/config/zsh/zshrc   "${HOME}"/.zshrc
