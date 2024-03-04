@@ -6,7 +6,7 @@ Deploys a full system configuration.
     $ cd ~/.dotfiles/INSTALL/v2/
     $ chmod u+x setup.sh
     $ sh setup.sh
-    ```   
+   ```   
 
 The setup runs a set of functions:
     1. run all: runs all commands below
