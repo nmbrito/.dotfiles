@@ -43,24 +43,24 @@ functionBuildMenu() #{{{1
 {
     printf '%s\n'   "                                                                " \
                     "|--------------------------------------------------------------|" \
-                    "| Select an option:                                            |" \
+                    "| select an option:                                            |" \
                     "|--------------------------------------------------------------|" \
-                    "|  ( 1) RUN ALL                 |  ( 6) Symlinks               |" \
-                    "|  ( 2) Host fixes              |  ( 7) Configure git globals  |" \
-                    "|  ( 3) Repositories            |  ( 8) Sync git submodules    |" \
-                    "|  ( 4) Software                |  ( 9) Link VIM helptags      |" \
-                    "|  ( 5) Fonts                   |  (10) ZSH shell change       |" \
+                    "|  ( 1) run all                 |  ( 6) symlinks               |" \
+                    "|  ( 2) host fixes              |  ( 7) configure git globals  |" \
+                    "|  ( 3) repositories            |  ( 8) sync git submodules    |" \
+                    "|  ( 4) packages                |  ( 9) link vim helptags      |" \
+                    "|  ( 5) fonts                   |  (10) change to zsh shell    |" \
                     "|--------------------------------------------------------------|" \
-                    "|  ( r) Rebuild git submodules                                 |" \
+                    "|  ( r) rebuild git submodules                                 |" \
                     "|--------------------------------------------------------------|" \
-                    "|  Host: ${current_host}                                        " \
-                    "|  Distribuition: ${ID}                                         " \
-                    "|  Package manager: ${pkgmgr}                                   " \
-                    "|  Current shell: ${SHELL}                                      " \
-                    "|  PWD: $(pwd)                                                  " \
-                    "|  Repository root: ${dir_dotroot}                              " \
+                    "|  host: ${current_host}                                        " \
+                    "|  distribuition: ${ID}                                         " \
+                    "|  package manager: ${pkgmgr}                                   " \
+                    "|  current shell: ${SHELL}                                      " \
+                    "|  pwd: $(pwd)                                                  " \
+                    "|  repository root: ${dir_dotroot}                              " \
                     "|--------------------------------------------------------------|" \
-                    "|  ( ) Exit / Cancel                                           |" \
+                    "|  ( ) exit / cancel                                           |" \
                     "|--------------------------------------------------------------|" \
                     "                                                                "
 }
