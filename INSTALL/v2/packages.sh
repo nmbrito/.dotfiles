@@ -12,6 +12,7 @@ list_terminal="\
     ${sw_vifmcolors}\
     ${sw_vimdata}\
     bat\
+    eza\
     curl\
     fzf\
     htop\
