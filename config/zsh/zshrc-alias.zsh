@@ -1,5 +1,5 @@
 # Global
-alias ls="eza -hlaas name --icons=always"                               # Lists with bling
+alias ls="eza -hlaas name --icons=always --git"                               # Lists with bling
 alias lsm="eza -hls name --icons=always"                                # Lists with bling minus hidden
 #alias lsd="ls -slaF --color=auto"                                       # Lists with -sla (with hidden folders and more)
 #alias sld="ls -sl --color=auto"                                         # Lists with -sl (no hidden folders)
