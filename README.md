@@ -1,50 +1,39 @@
-# Personal dotfiles
+# personal dotfiles
 
-## Running install script
+## install script
+Deploys a full system configuration.
    ```   
-    $ chmod u+x ~/.dotfiles/INSTALL/setup.sh
-    $ sh ~/.dotfiles/INSTALL/cli-install.sh
-   ```   
+    $ cd ~/.dotfiles/INSTALL/v2/
+    $ chmod u+x setup.sh
+    $ sh setup.sh
+    ```   
 
-## Configs:
-* neofetch config
-* vifm
-* tmux
-* .vimrc
-* .zshrc
-    * .aliasrc.zsh
-    * .pluginsrc.zsh
-    * FZF completions and keybindings configured for:
-        * Debian
-        * OpenSUSE Tumbleweed
+The setup runs a set of functions:
+    1. run all: runs all commands below
+    2. host fixes: if there's something to apply a fix
+    3. repositories: add's distros repos
+    4. packages: reads from package.sh and installs
+    5. fonts: downloads the fonts in package.sh from nerdfonts repo
+    6. symlinks: symlinks various configs and copies plasma configs
+    7. configure git globals: unecessary
+    8. sync git submodules: pulls repositories as submodules
+    9. link vim helptags: links helptags
+    10. change to zsh shell: changes to zsh
 
-## Plugins:
-* **vim**  
-    * .config/.vim/pack/dist/start/vim-airline (v0.11-583-ga532fed)
-    * .config/.vim/pack/dist/start/vim-airline-themes (heads/master)
-    * .config/.vim/pack/junegunn/start/fzf (0.38.0-19-gae745d9)
-    * .config/.vim/pack/junegunn/start/fzf.vim (heads/master)
-    * .config/.vim/pack/junegunn/start/goyo.vim (1.6.0-41-gfa0263d)
-    * .config/.vim/pack/junegunn/start/limelight.vim (heads/master)
-    * .config/.vim/pack/mbbill/start/undotree (rel_4.2-164-g485f01e)
-    * [removed].config/.vim/pack/tpope/start/commentary (v1.3-21-ge87cd90)
-    * [removed].config/.vim/pack/tpope/start/fugitive (v3.7-103-gef99f1d)
-    * .config/.vim/pack/tpope/start/surround (v2.2-6-g3d188ed)
-    * .config/zsh/plugins/zsh-autosuggestions (v0.7.0)
-    * .config/zsh/plugins/zsh-syntax-highlighting (0.8.0-alpha1-pre-redrawhook-73-g754cefe)
-    * .config/zsh/powerlevel10k (v1.17.0-13-gcb9788b)
+## info
+| configs       | vim plugins           | zsh plugins                   |
+| :------------ | :-------------------- | :---------------------------- |
+| mc            | css-color             | powerlevel10k                 |
+| neofetch      | fzf                   | zsh-autosuggestions           |
+| plasma        | fzf.vim               | zsh-syntax-highlighting       |
+| strawberry    | goyo.vim              | git.plugin.zsh                |
+| tmux          | limelight.vim         | colored-man-pages.plugin.zsh  |
+| vifm          | surround              |                               |
+| vim           | undotree              |                               |
+| vscode        | vim-airline           |                               |
+| zsh           | vim-airline-themes    |                               |
+|               | vim-better-whitespace |                               |
+|               | vim-highlighedyank    |                               |
+|               | vim-indent-guides     |                               |
+|               | vimspector            |                               |
 
-    * vim-better-whitespace
-    * vim-indent-guides
-    * rainbow_parentheses.vim
-    * vim-highlightedyank
-
-* **zsh**  
-    * /zsh/powerlevel10k (v1.17.0-13-gcb9788b)
-    * Some plugins from oh-my-zsh  
-        - zsh-autosuggestions.zsh  
-        - zsh-syntax-highlighting.zsh  
-        - git.plugin.zsh  
-        - colored-man-pages.plugin.zsh  
-    * .fonts
-    * Patched NERD Fonts
