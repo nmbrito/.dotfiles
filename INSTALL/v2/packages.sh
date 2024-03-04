@@ -16,6 +16,7 @@ list_terminal="\
     curl\
     fzf\
     htop\
+    mc\
     neofetch\
     ripgrep\
     tmux\
