@@ -3,7 +3,7 @@
 ## install script
 Deploys a full system configuration.
    ```   
-    $ cd ~/.dotfiles/INSTALL/v2/
+    $ cd ~/.dotfiles/INSTALL/
     $ chmod u+x setup.sh
     $ sh setup.sh
    ```   
