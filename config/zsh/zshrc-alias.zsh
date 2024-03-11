@@ -1,15 +1,19 @@
-# Global
-alias ls="eza -hlaas name --icons=always --git"                               # Lists with bling
+# Global Alias
+alias ls="eza -hlaas name --icons=always --git"                         # Lists with bling
 alias lsm="eza -hls name --icons=always"                                # Lists with bling minus hidden
-#alias lsd="ls -slaF --color=auto"                                       # Lists with -sla (with hidden folders and more)
-#alias sld="ls -sl --color=auto"                                         # Lists with -sl (no hidden folders)
 alias cd.="cd ${path_dotrepo}"                                          # Changes to .dotfiles directory
 alias cat="bat"                                                         # Subs cat for bat
 alias catalias="bat ${path_dotrepo}/config/zsh/zshrc-alias.zsh"         # Cats my alias
-#alias catalias="cat ${path_dotrepo}/config/zsh/zshrc-alias.zsh | less"  # Cats my alias
 alias reload=". ${HOME}/.zshrc"                                         # reloads zshrc config
 alias vis="vim -S ${path_vimsessions}/current_session.vim"              # Loads vim current session
+alias susebox="distrobox enter susebox"                                 # Enter susebox container
+alias debianbox="distrobox enter debianbox"                             # Enter debianbox container
 function shcheck() { shellcheck "$1" -x --color | less -r }             # Shellcheck with color and less active
+
+# Global Alias [OLD]
+#alias catalias="cat ${path_dotrepo}/config/zsh/zshrc-alias.zsh | less"  # Cats my alias
+#alias lsd="ls -slaF --color=auto"                                       # Lists with -sla (with hidden folders and more)
+#alias sld="ls -sl --color=auto"                                         # Lists with -sl (no hidden folders)
 
 # Backup KDE Plasma Settings
 function backupkde()
