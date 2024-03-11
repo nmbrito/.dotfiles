@@ -1,0 +1,14 @@
+[Unit]
+Description=qBittorrent Command Line Client
+After=network.target
+
+[Service]
+Type=forking
+User=qbittorrent-nox
+Group=qbittorrent-nox
+UMask=007
+ExecStart=/usr/vin/qbittorrent-nox -d --webui-port=8080
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
