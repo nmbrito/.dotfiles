@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# File: cli-install.sh
+# File: setup.sh
 # Description: semi-automatic personal installer
 
 # Init systems
@@ -9,7 +9,6 @@
     dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 
 #   Vars
-    #dir_dotrepo="${HOME}/.dotfiles"
     dir_dotroot="$(git rev-parse --show-toplevel)"
     dir_cache="${HOME}/.cache"
     url_nerdfonts="https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest"
@@ -21,7 +20,7 @@
 #   Source components
     . /etc/os-release
 
-    if [ ! -f "${dir}"/functions.sh ] && [ ! -f "${dir}"/software.sh ]; then
+    if [ ! -f "${dir}"/functions.sh ] && [ ! -f "${dir}"/packages.sh ]; then
         printf '%s\n' "Missing install components. Aborting."
         exit 0
     fi
@@ -30,14 +29,14 @@
     . "${dir}"/functions.sh
 
 #   Defines the package manager and software especific to the running distribution.
-    func_def_distro
+    functionDefineDistro 
 
 #   Define current host
-    func_def_host
+    functionDefineHost
 
 #   Source file containing software list.
 #   This needs to be here so it can load after the /func_def_distro/ function.
-    . "${dir}"/software.sh
+    . "${dir}"/packages.sh
 
 # Main
 # ----
@@ -50,24 +49,7 @@ printf '%s\n'   "" \
 # Call function
 while :
 do
-    printf '%s\n'   "" \
-                    "|--------------------------------------------------------------|" \
-                    "| Select an option:                                            |" \
-                    "|--------------------------------------------------------------|" \
-                    "|  ( 1) RUN ALL                 |  ( 6) Symlinks               |" \
-                    "|  ( 2) Host fixes              |  ( 7) Configure git globals  |" \
-                    "|  ( 3) Repositories            |  ( 8) Sync git submodules    |" \
-                    "|  ( 4) Software                |  ( 9) Link VIM helptags      |" \
-                    "|  ( 5) Fonts                   |  (10) ZSH shell change       |" \
-                    "|--------------------------------------------------------------|" \
-                    "|  ( r) Rebuild git submodules                                 |" \
-                    "|--------------------------------------------------------------|"
-    func_get_info
-    printf '%s\n'   "|--------------------------------------------------------------|" \
-                    "|  ( ) Exit / Cancel                                           |" \
-                    "|--------------------------------------------------------------|" \
-                    ""
-
+    functionBuildMenu
     printf '%s' "Option: "
     read -r option_picked
 
@@ -75,47 +57,36 @@ do
 
     case "${option_picked}" in
         1)
-            func_inst_fixes
-            func_inst_repository
-            func_inst_software
-            func_inst_fonts
-            func_inst_symlinks
-            #func_inst_gitglobals
-            func_inst_gitsubmodules
-            func_inst_vimhelptags
-            func_inst_changeshell
+            functionInstallFixes
+            functionInstallRepositories
+            functionInstallPackages
+            functionInstallFonts
+            functionInstallSymlinks
+            functionConfigGitGlobals
+            functionInstallGitSubmodules
+            functionConfigVimHelptags
+            functionConfigShell
             ;;
-
         2)
-            func_inst_fixes ;;
-
+            functionInstallFixes ;;
         3)
-            func_inst_repository ;;
-
+            functionInstallRepositories ;;
         4)
-            func_inst_software ;;
-
+            functionInstallPackages ;;
         5)
-            func_inst_fonts ;;
-
+            functionInstallFonts ;;
         6)
-            func_inst_symlinks ;;
-
+            functionInstallSymlinks ;;
         7)
-            func_inst_gitglobals ;;
-
+            functionConfigGitGlobals ;;
         8)
-            func_inst_gitsubmodules ;;
-
+            functionInstallGitSubmodules ;;
         9)
-            func_inst_vimhelptags ;;
-
+            functionConfigVimHelptags ;;
         10)
-            func_inst_changeshell ;;
-
+            functionConfigShell ;;
         r)
-            func_inst_rebuild_gitsubmodules ;;
-
+            functionRebuildGitSubmodules ;;
         *)
             printf '%s\n'   "Exiting..." \
                             ""
