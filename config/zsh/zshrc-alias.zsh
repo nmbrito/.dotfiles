@@ -1,4 +1,4 @@
-# Global Alias
+# Global                        {{{1
 alias ls="eza -hlaas name --icons=always --git"                         # Lists with bling
 alias lsm="eza -hls name --icons=always"                                # Lists with bling minus hidden
 alias cd.="cd ${path_dotrepo}"                                          # Changes to .dotfiles directory
@@ -15,7 +15,7 @@ function shcheck() { shellcheck "$1" -x --color | less -r }             # Shellc
 #alias lsd="ls -slaF --color=auto"                                       # Lists with -sla (with hidden folders and more)
 #alias sld="ls -sl --color=auto"                                         # Lists with -sl (no hidden folders)
 
-# Backup KDE Plasma Settings
+# Backup Plasma Settings        {{{1
 function backupkde()
 {
     # Files in .config
@@ -31,7 +31,7 @@ function backupkde()
     cp -v "${HOME}/.local/share/konsole/mytik.profile"  "${path_dotrepo}/config_local/share/konsole/mytik.profile"  # Konsole profile
 
     # Folders
-    cp -rv "${HOME}/.config/kdedefaults"                             "${path_dotrepo}/config/plasma/"
+    cp -rv "${HOME}/.config/kdedefaults"                "${path_dotrepo}/config/plasma/"
 
     # Themes
     tar czvf ${path_dotrepo}/.cache/plasma_globalthemes.tar.gz \
@@ -43,14 +43,13 @@ function backupkde()
         ${HOME}/.local/share/wallpapers \
 }
 
-# GIT
-alias gitsubup="git submodule update --remote"                              # Updates git submodules
-alias gitsubstat="git submodule status"                                     # Updates git submodules
-alias gitorig="git remote -v"                                               # Verify repository origin
-alias gituok="git status"                                                   # Git status
-alias gitusync="git remote show origin"                                     # Informs if local repository is up to date with remote
-
-function gitunicom()        # Add and comment individual files
+# GIT                           {{{1
+alias gitsubup="git submodule update --remote"  # Updates git submodules
+alias gitsubstat="git submodule status"         # Updates git submodules
+alias gitorig="git remote -v"                   # Verify repository origin
+alias gituok="git status"                       # Git status
+alias gitusync="git remote show origin"         # Informs if local repository is up to date with remote
+function gitunicom()    # Add and comment individual files  {{{2
 {
     for file in $(git status --porcelain | cut -b 4-)
     do
@@ -62,8 +61,7 @@ function gitunicom()        # Add and comment individual files
     done
     git push
 }
-
-function gitquickcom()      # Add and comment individual files
+function gitquickcom()  # Add and comment all files         {{{2
 {
     for file in $(git status --porcelain | cut -b 4-)
     do
@@ -73,52 +71,37 @@ function gitquickcom()      # Add and comment individual files
     done
     git push
 }
-
-function gitquickcompt()    # Add and comment individual files
-{
-    for file in $(git status --porcelain | cut -b 4-)
-    do
-        echo "${file}"
-        git add "$(git rev-parse --show-toplevel)/${file}"
-        git commit -m "${file} atualizado."
-    done
-    git push
-}
-
-# Windows Subsystem for Linux
+# Windows Subsystem for Linux   {{{1
 if [ -n "${WT_SESSION}" ] ; then
-    alias explore="explorer.exe ."                                      # Opens current directory in windows explorer
+    alias explore="explorer.exe ."      # Opens current directory in windows explorer
+    alias winusers="cd /mnt/c/Users/"
 fi
 
-# Distro dependent
+# Distros specifics             {{{1
 case ${ID} in
     "archlinux")
-        alias pacup="sudo pacman -Syu"                                  # Perform system update
-        alias pacin="sudo pacman -S"                                    # Installs package
-        alias pacquery="sudo pacman -Qqs"                               # Search local package with no description
-        alias pacdepless="sudo pacman -R $(pacman -Qdtq)"               # Remove unecessary dependencies
+        alias pacup="sudo pacman -Syu"                      # Perform system update
+        alias pacin="sudo pacman -S"                        # Installs package
+        alias pacquery="sudo pacman -Qqs"                   # Search local package with no description
+        alias pacdepless="sudo pacman -R $(pacman -Qdtq)"   # Remove unecessary dependencies
         ;;
-
     "opensuse-tumbleweed")
-        alias zypdup="sudo zypper dup"                                  # Perform distro upgrade
-        alias zypup="sudo zypper up"                                    # Update software
-        alias zypfind="sudo zypper search"                              # Search packages
-        alias zypfindv="sudo zypper search -s"                          # Search packages version
-        alias zypin="sudo zypper in --no-recommends"                    # Install packages
-        alias zypinrec="sudo zypper in"                                 # Install packages without recommendations
-        alias zyprem="sudo zypper rm"                                   # Remove packages
-        alias zypremu="sudo zypper rm --clean-deps"                     # Remove package and cleans unneeded dependencies
-        alias zypinfo="zypper info"                                     # Package information
-        alias zypfindupa="sudo zypper pa --unneeded"                    # Find unneed packages
+        alias zypdup="sudo zypper dup"                      # Perform distro upgrade
+        alias zypup="sudo zypper up"                        # Update software
+        alias zypfind="sudo zypper search"                  # Search packages
+        alias zypfindv="sudo zypper search -s"              # Search packages version
+        alias zypin="sudo zypper in --no-recommends"        # Install packages
+        alias zypinrec="sudo zypper in"                     # Install packages without recommendations
+        alias zyprem="sudo zypper rm"                       # Remove packages
+        alias zypremu="sudo zypper rm --clean-deps"         # Remove package and cleans unneeded dependencies
+        alias zypinfo="zypper info"                         # Package information
+        alias zypfindupa="sudo zypper pa --unneeded"        # Find unneed packages
         ;;
-
     "alpine")
-        alias alpin="apk add"                                           # Install package
-        alias alpfix="apk fix"                                          # Fixes packages install
-        alias alpforcefix="apk fix --force-overwrite"                   # Forces the overwrite
+        alias alpin="apk add"                               # Install package
+        alias alpfix="apk fix"                              # Fixes packages install
+        alias alpforcefix="apk fix --force-overwrite"       # Forces the overwrite
         ;;
-
-    *)
-        ;;
+    *)  ;;
 esac
 
