@@ -2,6 +2,10 @@
 
 # File: home_functions.sh
 # Description: functions for home_setup.sh
+#TODO: {{{1
+# kwin effects dir: /home/operador/.local/share/kwin/effects/
+# kwin scripts dir: /home/operador/.local/share/kwin/scripts/
+#
 
 functionPrintMessage() #{{{1
 {
@@ -478,3 +482,6 @@ functionRebuildGitSubmodules() #{{{1
 
     functionPrintMessage printsleep
 }
+
+
+    
