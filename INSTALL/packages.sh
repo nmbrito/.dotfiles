@@ -16,6 +16,7 @@ list_terminal="\
     curl\
     fzf\
     htop\
+    man-pages\
     mc\
     neofetch\
     ripgrep\
@@ -29,7 +30,6 @@ list_dev="\
     gcc\
     gdb\
     make\
-    man-pages\
     valgrind\
     "
 list_wsl_pattern="\
