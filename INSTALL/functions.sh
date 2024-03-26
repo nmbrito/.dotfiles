@@ -293,9 +293,9 @@ functionInstallFonts() #{{{1
     if [ ! -d "${dir_cache}" ] ; then mkdir -p "${dir_cache}" ; fi
 
     if [ "$(curl -is "${url_nerdfonts}" | head -n 1)" = "HTTP/2 404" ] ; then
-        for dl_fonts in $(ls ${dir_dotroot}/fonts/*.tar.xz)
+        for dl_fonts in $(ls ${dir_dotroot}/INSTALL/fonts/*.tar.xz)
         do
-            tar -xvf "${dir_dotroot}/fonts/${dl_fonts}" --directory "${HOME}/.fonts"
+            tar -xvf "${dir_dotroot}/INSTALL/fonts/${dl_fonts}" --directory "${HOME}/.fonts"
         done
     else
         for dl_fonts in ${list_fonts}
