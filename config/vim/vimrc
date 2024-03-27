@@ -19,6 +19,9 @@
 
 " VIM Options
     " Required
+        " Please ignore this files:
+        set wildignore=*.jpg,*.mp4,*.zip,*.iso,*.pdf,*.png,*.png,*.tar,*.gz,*.bz2,*.tgz,*.db,*.exe,*.img,*.mp3,*.m4a,*.bmp,*.deb,*.rpm
+
         filetype on                             " Enable type file detection
         filetype plugin on                      " Enable plugins and load plugin for the detected file type
         filetype indent on                      " Load an indent file for detected file type
@@ -34,8 +37,6 @@
         set nocompatible
         set omnifunc=syntaxcomplete#Complete    " It ain't intellisense, only omnicomplete
 
-        " Please ignore this files:
-        set wildignore=*.jpg,*.mp4,*.zip,*.iso,*.pdf,*.png,*.png,*.tar,*.gz,*.bz2,*.tgz,*.db,*.exe,*.img,*.mp3,*.m4a,*.bmp,*.deb,*.rpm
 
     " Editor
         set backspace=indent,eol,start          " Proper backspace behavior
@@ -95,7 +96,6 @@
         nnoremap <F5>                   :w!<CR>
         nnoremap <leader><F5>           :wq!<CR>
         nnoremap <silent><F6>           :Buffers<CR>
-        "nnoremap <F7>                   :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
         nnoremap <S-F11>                :mksession! ${path_vimsessions}/current_session.vim<CR>
         nnoremap <leader><S-F11>        :source ${path_vimsessions}/current_session.vim<CR>
         nnoremap <silent><F12>          :sp ${path_dotrepo}/RTM.md<CR>
@@ -130,6 +130,7 @@
         nnoremap <C-M-J>                <C-w>J
         nnoremap <C-M-K>                <C-w>K
         nnoremap <C-M-L>                <C-w>L
+        nnoremap <C-M-r>                <C-w>r
 
     " Increase/decrease windows/splits size
         nnoremap L                      <C-w><
@@ -146,27 +147,11 @@
         vnoremap <Leader>d              "_d
         nnoremap <Leader>c              "_c
         vnoremap <Leader>c              "_c
-        "nnoremap k                      kzz
-        "nnoremap j                      jzz
         vnoremap J                      :m '>+1<CR>gv=gv
         vnoremap K                      :m '<-2<CR>gv=gv
-        "nnoremap <C-d>                  <C-d>zz
-        "nnoremap <C-u>                  <C-u>zz
         nnoremap Y                      y$
-        "nnoremap <Leader>y              "+y
-        "vnoremap <Leader>y              "+y
-        "nnoremap <Leader>Y              "+Y
         nnoremap Q                      <nop>
         nnoremap <Leader>s              :%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>
-
-    " Brackets
-        "inoremap "                     ""<left>
-        "inoremap '                     ''<left>
-        "inoremap (                     ()<left>
-        "inoremap [                     []<left>
-        "inoremap {                     {}<left>
-        "inoremap {<CR>                 {<CR>}<ESC>O
-        "inoremap {;<CR>                {<CR>};<ESC>O
 
     " fzf-vim - Fuzzy Finder
         nnoremap <silent>gf             :GFiles<CR>
@@ -178,7 +163,3 @@
     " Toggles
         nnoremap <leader>ws             :ToggleWhitespace<CR>
         nnoremap <leader>wss            :ToggleStripWhitespaceOnSave<CR>
-        "nnoremap <leader>ig             :IndentGuidesToggle<CR>    " This is already a default command
-
-" Deprecated
-        "nnoremap <leader>rp             :RainbowParentheses!!<CR>
