@@ -2,21 +2,20 @@
 ## Mappings
 ### Function keys
    ```   
-    inoremap <F1>                   <C-X><Tab>                                              # F1  # Insert mode, opens vim omnicompletion
-    nnoremap <silent><F2>           :Files<CR>                                              # F2  # Normal mode, toggle fzf file search in the working directory
-    nnoremap <silent><S-F2>         :Files %:p:h<CR>                                        # F2  # Normal mode, toggle fzf file search in the same file directory
-    nnoremap <silent><F3>           :Goyo<CR>                                               # F3  # Normal mode, toggle Goyo
-    nnoremap <silent><F4>           :UndotreeToggle<CR>                                     # F4  # Normal mode, toggle Undotree
-    nnoremap <F5>                   :w!<CR>                                                 # F5  # Normal mode, quick save
-    nnoremap <leader><F5>           :wq!<CR>                                                # F5  # Normal mode, quick save and quit
-    nnoremap <silent><F6>           :Buffers<CR>                                            # F6  # Normal mode, normal mode, search buffers (! for fullscreen)
-    nnoremap <F7>                   :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>     # F7  # Normal mode, remove all trailing whitespace by pressing F5
-    nnoremap <S-F11>                :mksession! $VIMSESSIONS/current_session.vim<CR>        # F11 # Normal mode, save current session
-    nnoremap <leader><S-F11>        :source $VIMSESSIONS/current_session.vim<CR>            # F11 # Normal mode, load current session
-    nnoremap <silent><F12>          :sp $DOTDIR/vimrc_help.md<CR>                           # F12 # Normal mode, normal mode, opens this mappings file
+    inoremap <F1>                   <C-X><Tab>                                          # F1  # Insert mode, opens vim omnicompletion
+    nnoremap <silent><F2>           :Files<CR>                                          # F2  # Normal mode, toggle fzf file search in the working directory
+    nnoremap <silent><S-F2>         :Files %:p:h<CR>                                    # F2  # Normal mode, toggle fzf file search in the same file directory
+    nnoremap <silent><F3>           :Goyo<CR>                                           # F3  # Normal mode, toggle Goyo
+    nnoremap <silent><F4>           :UndotreeToggle<CR>                                 # F4  # Normal mode, toggle Undotree
+    nnoremap <F5>                   :w!<CR>                                             # F5  # Normal mode, quick save
+    nnoremap <leader><F5>           :wq!<CR>                                            # F5  # Normal mode, quick save and quit
+    nnoremap <silent><F6>           :Buffers<CR>                                        # F6  # Normal mode, normal mode, search buffers (! for fullscreen)
+    nnoremap <S-F11>                :mksession! $VIMSESSIONS/current_session.vim<CR>    # F11 # Normal mode, save current session
+    nnoremap <leader><S-F11>        :source $VIMSESSIONS/current_session.vim<CR>        # F11 # Normal mode, load current session
+    nnoremap <silent><F12>          :sp $DOTDIR/vimrc_help.md<CR>                       # F12 # Normal mode, normal mode, opens this mappings file
 
-    :command -nargs=1 Mksw          :mks! $VIMSESSIONS/<args>.vim                           # Command mode, saves session to a custom file name
-    :command -nargs=1 Mksl          :source $VIMSESSIONS/<args>.vim                         # Command mode, loads a session name with a custom file name
+    :command -nargs=1 Mksw          :mks! $VIMSESSIONS/<args>.vim                       # Command mode, saves session to a custom file name
+    :command -nargs=1 Mksl          :source $VIMSESSIONS/<args>.vim                     # Command mode, loads a session name with a custom file name
    ```   
 
 ### Colorschemes quick change
@@ -25,103 +24,94 @@
     nnoremap <silent><leader>cj     :colorscheme jellybeans<CR>
     nnoremap <silent><leader>cm     :colorscheme molokai<CR>
    ```   
-    
-### fzf-vim - Fuzzy Finder
-   ```   
-    nnoremap <silent>gf             :GFiles<CR>                         # Normal mode, search git tracked files through fzf
-    ------------------------------------------------------------------> # Pressing C-x opens the file in a horizontal split buffer
-    ------------------------------------------------------------------> # Pressing C-v opens the file in a vertical split buffer
-    ------------------------------------------------------------------> # Tab selects
-    ------------------------------------------------------------------> # S-Tab selects all
-    ------------------------------------------------------------------> # ? toggles preview
-    nnoremap <silent>gc             :Commits<CR>                        # Normal mode, search commited git through fzf
-    nnoremap <silent>//             :BLines<CR>                         # Normal mode, search current buffer file through fzf
-    nnoremap <silent>f//            :BLines!<CR>                        # Normal mode, search current buffer file through fzf in fullscreen
-    nnoremap <silent>a//            :Lines<CR>                          # Normal mode, search all buffers files through fzf
-    ------------------------------------------------------------------> # Pressing C-T pastes selected files or directories onto the command line (Tab selects)
-    ------------------------------------------------------------------> # Pressing C-R pastes the selected command from history onto the command line
-    ------------------------------------------------------------------> # Pressing A-C changes directory into the selected directory
-    ------------------------------------------------------------------> # :Commands :History :Maps :Filetypes :Commits :BCommits
-   ```   
-    
+
 ### Buffers
    ```   
-    nnoremap <leader><PageUp>       :bprevious<CR>                      # Normal mode, previous buffer
-    nnoremap <leader><PageDown>     :bnext<CR>                          # Normal mode, next buffer
-    nnoremap <leader><Delete>       :bdelete<CR>                        # Normal mode, close buffer and keep anything related to them
-    nnoremap <leader><C-Delete>     :bdelete<space>                     # Normal mode, close buffer(s) by number or filename and keep anything related to them
-    ------------------------------------------------------------------> # Extra: press home to input buffer range, e.g.: 2,5bdelete
-    nnoremap <leader><S-Delete>     :bwipeout<CR>                       # Normal mode, close buffer but wipe everything related
-    ------------------------------------------------------------------> # :buffers opens the default VIM buffer
+    nnoremap <leader><PageUp>       :bprevious<CR>      # Normal mode, previous buffer
+    nnoremap <leader><PageDown>     :bnext<CR>          # Normal mode, next buffer
+    nnoremap <leader><Delete>       :bdelete<CR>        # Normal mode, close buffer and keep anything related to them
+    nnoremap <leader><C-Delete>     :bdelete<space>     # Normal mode, close buffer(s) by number or filename and keep anything related to them
+                                                        # Extra: press home to input buffer range, e.g.: 2,5bdelete
+    nnoremap <leader><S-Delete>     :bwipeout<CR>       # Normal mode, close buffer but wipe everything related
+                                                        # :buffers opens the default VIM buffer
    ```   
 
 ### Split buffers
    ```   
-    nnoremap <leader>h              :sp<CR>                             # Normal mode, split horizontal
-    nnoremap <leader>v              :vsp<CR>                            # Normal mode, split vertical
-    nnoremap <leader>H              :sb                                 # Normal mode, split horizontal, enter buffer name or number and open
-    nnoremap <leader>V              :vert sb                            # Normal mode, split vertical, enter buffer name or number and open
+    nnoremap <leader>h              :sp<CR>             # Normal mode, split horizontal
+    nnoremap <leader>v              :vsp<CR>            # Normal mode, split vertical
+    nnoremap <leader>H              :sb                 # Normal mode, split horizontal, enter buffer name or number and open
+    nnoremap <leader>V              :vert sb            # Normal mode, split vertical, enter buffer name or number and open
    ```   
 
 ### Moving in windows/sanely
    ```   
-    nnoremap <C-h> <C-w>h                                               # Normal mode, left
-    nnoremap <C-j> <C-w>j                                               # Normal mode, down
-    nnoremap <C-k> <C-w>k                                               # Normal mode, up
-    nnoremap <C-l> <C-w>l                                               # Normal mode, right
-    nnoremap <C-H> <C-w>H                                               # Normal mode, switch split left
-    nnoremap <C-J> <C-w>J                                               # Normal mode, switch split down
-    nnoremap <C-K> <C-w>K                                               # Normal mode, switch split up
-    nnoremap <C-L> <C-w>L                                               # Normal mode, switch split right
-    nnoremap <C-r> <C-w>r                                               # Normal mode, rotate split
+    nnoremap <C-h>                  <C-w>h              # Normal mode, left
+    nnoremap <C-j>                  <C-w>j              # Normal mode, down
+    nnoremap <C-k>                  <C-w>k              # Normal mode, up
+    nnoremap <C-l>                  <C-w>l              # Normal mode, right
+    nnoremap <C-M-H>                <C-w>H              # Normal mode, switch split left
+    nnoremap <C-M-J>                <C-w>J              # Normal mode, switch split down
+    nnoremap <C-M-K>                <C-w>K              # Normal mode, switch split up
+    nnoremap <C-M-L>                <C-w>L              # Normal mode, switch split right
+    nnoremap <C-M-r>                <C-w>r              # Normal mode, rotate split
    ```   
-
+    
 ### Increase/decrease windows/splits size
    ```   
-    nnoremap L <C-w><                                                   # Normal mode, vertical increase
-    nnoremap J <C-w>+                                                   # Normal mode, horizontal increase
-    nnoremap K <C-w>-                                                   # Normal mode, horizontal decrease
-    nnoremap H <C-w>>                                                   # Normal mode, vertical decrease
+    nnoremap L                      <C-w><              # Normal mode, vertical increase
+    nnoremap J                      <C-w>+              # Normal mode, horizontal increase
+    nnoremap K                      <C-w>-              # Normal mode, horizontal decrease
+    nnoremap H                      <C-w>>              # Normal mode, vertical decrease
    ```   
     
 ### VIM Omnicompletion
    ```   
-    inoremap <C-j> <C-N>                                                # Insert mode, next in the list
-    inoremap <C-k> <C-P>                                                # Insert mode, previous in the list
-   ```   
-
-### Toggles
-   ```   
-    nnoremap <leader>rp     :RainbowParentheses!!                       # Normal mode, toggles rainbow parentheses
-    nnoremap <leader>ws     :ToggleWhitespace                           # Normal mode, toggles better whitespace
-    nnoremap <leader>wss    :ToggleStripWhitespaceOnSave                # Normal mode, toggles better whitespace strip on save
-    ------------------------------------------------------------------> # <leader>ig :IndentGuidesToggle # Toggles indent guides default mapping
+    inoremap <C-j>                  <C-N>               # Insert mode, next in the list
+    inoremap <C-k>                  <C-P>               # Insert mode, previous in the list
    ```   
 
 ### QoL
    ```
-    nnoremap <Leader>d "_d                                              # Normal mode, delete and don't store in reg
-    vnoremap <Leader>d "_d                                              # Visual mode, delete and don't store in reg
-    nnoremap <Leader>c "_c                                              # Normal mode, change and don't store in reg
-    vnoremap <Leader>c "_c                                              # Visual mode, change and don't store in reg
-    nnoremap <Up> kzz                                                   # Normal mode, go up and re-center screen
-    nnoremap <Down> jzz                                                 # Normal mode, go down and re-center screen
-    vnoremap <Alt-j> :m '>+1<CR>gv=gv                                   # Visual mode, move the selected block down
-    vnoremap <Alt-k> :m '>-2<CR>gv=gv                                   # Visual mode, move the selected block up
-
+    nnoremap <Leader>d              "_d                 # Normal mode, delete and don't store in reg
+    vnoremap <Leader>d              "_d                 # Visual mode, delete and don't store in reg
+    nnoremap <Leader>c              "_c                 # Normal mode, change and don't store in reg
+    vnoremap <Leader>c              "_c                 # Visual mode, change and don't store in reg
+    vnoremap J                      :m '>+1<CR>gv=gv    # Visual mode, move the selected block down
+    vnoremap K                      :m '<-2<CR>gv=gv    # Visual mode, move the selected block up
+    nnoremap Y                      y$
+    nnoremap Q                      <nop>
+    nnoremap <Leader>s              :%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>
 
    ```
 
-### Brackets [disabled]
+### fzf-vim - Fuzzy Finder
    ```   
-    inoremap "          ""<left>                                        # Insert mode, inserts "" pressing only "
-    inoremap '          ''<left>                                        # Insert mode, inserts '' pressing only '
-    inoremap (          ()<left>                                        # Insert mode, inserts () pressing only (
-    inoremap [          []<left>                                        # Insert mode, inserts [] pressing only [
-    inoremap {          {}<left>                                        # Insert mode, inserts {} pressing only {
-    inoremap {<CR>      {<CR>}<ESC>O                                    # Insert mode, inserts {} block pressing only {
-    inoremap {;<CR>     {<CR>};<ESC>O                                   # Insert mode, inserts {}; block pressing only {;
+    nnoremap <silent>gf             :GFiles<CR>     # Normal mode, search git tracked files through fzf
+                                                    # Pressing C-x opens the file in a horizontal split buffer
+                                                    # Pressing C-v opens the file in a vertical split buffer
+                                                    # Tab selects
+                                                    # S-Tab selects all
+                                                    # ? toggles preview
+    nnoremap <silent>gc             :Commits<CR>    # Normal mode, search commited git through fzf
+    nnoremap <silent>//             :BLines<CR>     # Normal mode, search current buffer file through fzf
+    nnoremap <silent>f//            :BLines!<CR>    # Normal mode, search current buffer file through fzf in fullscreen
+    nnoremap <silent>a//            :Lines<CR>      # Normal mode, search all buffers files through fzf
+                                                    # Pressing C-T pastes selected files or directories onto the command line (Tab selects)
+                                                    # Pressing C-R pastes the selected command from history onto the command line
+                                                    # Pressing A-C changes directory into the selected directory
+                                                    # :Commands :History :Maps :Filetypes :Commits :BCommits
    ```   
+
+### Toggles
+   ```   
+    nnoremap <leader>rp             :RainbowParentheses!!           # Normal mode, toggles rainbow parentheses
+    nnoremap <leader>ws             :ToggleWhitespace               # Normal mode, toggles better whitespace
+    nnoremap <leader>wss            :ToggleStripWhitespaceOnSave    # Normal mode, toggles better whitespace strip on save
+                                                                    # <leader>ig :IndentGuidesToggle # Toggles indent guides default mapping
+   ```   
+
+
 
 ## Default useful motions / commands
    ```   
@@ -169,6 +159,30 @@
 
     :bufdo command | update         # Run a command across all buffers. Update saves each buffer (optional).
    ```   
+
+## Disabled or removed
+   ```
+    nnoremap <F7>           :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>     # F7  # Normal mode, remove all trailing whitespace by pressing F5
+
+    inoremap "              ""<left>                    # Insert mode, inserts "" pressing only "
+    inoremap '              ''<left>                    # Insert mode, inserts '' pressing only '
+    inoremap (              ()<left>                    # Insert mode, inserts () pressing only (
+    inoremap [              []<left>                    # Insert mode, inserts [] pressing only [
+    inoremap {              {}<left>                    # Insert mode, inserts {} pressing only {
+    inoremap {<CR>          {<CR>}<ESC>O                # Insert mode, inserts {} block pressing only {
+    inoremap {;<CR>         {<CR>};<ESC>O               # Insert mode, inserts {}; block pressing only {;
+
+    nnoremap <leader>ig     :IndentGuidesToggle<CR>     " This is already a default command
+    nnoremap <C-d>          <C-d>zz
+    nnoremap <C-u>          <C-u>zz
+    nnoremap <Leader>y      "+y
+    vnoremap <Leader>y      "+y
+    nnoremap <Leader>Y      "+Y
+    nnoremap k              kzz                         # Normal mode, go up and re-center screen
+    nnoremap j              jzz                         # Normal mode, go down and re-center screen
+
+    nnoremap <leader>rp     :RainbowParentheses!!<CR>
+   ```
 
 # TMUX
 ## Quick manual:
