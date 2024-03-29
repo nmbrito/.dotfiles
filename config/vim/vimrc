@@ -22,9 +22,10 @@
         " Please ignore this files:
         set wildignore=*.jpg,*.mp4,*.zip,*.iso,*.pdf,*.png,*.png,*.tar,*.gz,*.bz2,*.tgz,*.db,*.exe,*.img,*.mp3,*.m4a,*.bmp,*.deb,*.rpm
 
-        filetype on                             " Enable type file detection
+        filetype on                             " Enable type file detection (ftplugin directory)
         filetype plugin on                      " Enable plugins and load plugin for the detected file type
         filetype indent on                      " Load an indent file for detected file type
+
         syntax on                               " Syntax highlighting
         colorscheme molokai                     " Specify a color scheme
 
@@ -85,6 +86,11 @@
         "    autocmd BufEnter,FocusGained,InsertLeave,WinEnter  * if &nu && mode() != "i"   | set rnu   | endif
         "    autocmd BufLeave,FocusLost,InsertEnter,WinLeave    * if &nu                    | set nornu | endif
         "augroup END
+    "augroup name
+    "   autocmd!
+    "   autocmd FileType c setlocal foldmethod=marker
+    "   autocmd FileType markdown setlocal foldmethod=marker
+    "augroup END
 
 " Mappings
     " Function keys
