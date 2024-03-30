@@ -86,7 +86,7 @@ case ${ID} in
         alias pacdepless="sudo pacman -R $(pacman -Qdtq)"   # Remove unecessary dependencies
         ;;
     "opensuse-tumbleweed")
-        alias zypdup="sudo zypper dup"                      # Perform distro upgrade
+        alias zypdup="sudo zypper ref && sudo zypper dup"   # Perform distro upgrade
         alias zypup="sudo zypper up"                        # Update software
         alias zypfind="sudo zypper search"                  # Search packages
         alias zypfindv="sudo zypper search -s"              # Search packages version
