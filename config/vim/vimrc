@@ -52,10 +52,10 @@
         set wildmenu                            " Great command-line completion, use <Tab > to move around and <CR > to validate
         set wildmode=longest,list,full          " Autocompletion
         
-        set textwidth=170                       " Wraps around 170 colummn
-        set wrap                                " Line wrapping
-        set linebreak                           " Break by word, not by character
         set colorcolumn=170
+        set wrap                                " Soft wrap: Line wrapping
+        set linebreak                           " Soft wrap: Break by word, not by character
+        "set textwidth=170                       " Hard wrap Wraps around 170 colummn
 
         "set cursorline                         " Sets a cursor horizontal line
         set cursorcolumn                        " Sets a cursor vertical line
