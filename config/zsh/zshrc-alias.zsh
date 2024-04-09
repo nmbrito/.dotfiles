@@ -103,6 +103,19 @@ case ${ID} in
         alias alpforcefix="apk fix --force-overwrite"       # Forces the overwrite
         ;;
     "macOS")
+        #alias ="brew bundle dump"                   # Backup installed apps list
+        #alias ="brew install"                       # Install
+        #alias ="brew install --cask"                # Install cask
+        #alias ="brew search"                        # Search
+        #alias ="brew upgrade"                       # Upgrade all packages
+        #alias ="brew update"                        # Update homebrew
+        #alias ="brew cleanup"                       # Force cleanup
+        #alias ="brew cleanup --prune=all "          # Force recent cleanup
+        #alias ="brew cleanup --prune=all --dry-run" # Test a force recent cleanup
+        #alias ="brew autoremove"                    # Remove dependencies
+        #alias ="brew remove"                        # Remove package
+        #alias ="brew uninstall"                     # Uninstall package
+        #alias ="brew uninstall --cask"              # Uninstall gui package
         ;;
     *)  ;;
 esac
