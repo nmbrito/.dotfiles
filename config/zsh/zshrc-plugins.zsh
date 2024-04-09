@@ -7,37 +7,12 @@
 # [ -f ~/.fzf.zsh ] && . ~/.fzf.zsh
 
 # FZF
-    case ${ID} in
-        "opensuse-tumbleweed")
-            fzf_keybindings="/etc/zsh_completion.d/fzf-key-bindings"
-            fzf_completion="/usr/share/zsh/site-functions/_fzf"
-            fd_app="fd"
-            ;;
-
-        "debian")
-            # /usr/share/doc/fzf/README.debian
-            fzf_keybindings="/usr/share/doc/fzf/examples/key-bindings.zsh"
-            fzf_completion="/usr/share/doc/fzf/examples/completion.zsh"
-            fd_app="fd-find"
-            ;;
-
-        "alpine")
-            fzf_keybindings="/usr/share/fzf/key-bindings.zsh"
-            fzf_completion="/usr/share/zsh/site-functions/_fzf"
-            fd_app="fd"
-            ;;
-
-        *)
-            fzf_keybindings=""
-            fzf_completion=""
-            fd_app=""
-            ;;
-
-    esac
-
-    # Source fzf files
-    . $fzf_keybindings
-    . $fzf_completion
+    eval "$(fzf --zsh)"
+    if [ ${ID} = "debian" ] ; then
+        fd_app="fd-find"
+    else
+        fd_app="fd"
+    fi
     
     # for more info see fzf/shell/completion.zsh
     _fzf_compgen_path() { $fd_app . "$1" }
