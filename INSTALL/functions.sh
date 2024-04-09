@@ -158,6 +158,13 @@ functionDefineDistro() #{{{1
             sw_vimdata=""
             ;;
 
+        "macOS")
+            pkgmgr="brew"
+            pkginst="brew install"
+            repo_flag="macOS"
+            zsh_inst_folder="/usr/share/zsh"
+            ;;
+
         *)
             printf '%s\n'   "This script doesn't support distribuition: ${ID}" \
                             "Exiting."
@@ -175,6 +182,10 @@ functionDefineHost() #{{{1
 
     # ish directory is only available on Apple devices running iSH.app
     elif [ -d "/proc/ish" ] ; then current_host="iOS/iPadOS" ;
+
+    # sw_vers gives macos os name and version, ergo we can get the hostname from sysctl
+    elif [ -d "/usr/bin/sw_vers" ] ; then 
+        current_host="$(sysctl hw.model)"
 
     # WT_SESSION environment variable available in WSL1 and WSL2
     elif [ -n "${WT_SESSION}" ] ; then current_host="Windows Subsystem for Linux" ;
@@ -272,6 +283,8 @@ functionInstallPackages() #{{{1
         "iOS/iPadOS")
             ${pkginst} ${list_terminal} ${list_ish} ;; # Alpine iSH already runs as root
 
+        "macOS")
+            ;;
         # TODO: Host virtual machine
         # TODO: SSH Sessions
 
@@ -424,7 +437,7 @@ functionConfigShell() #{{{1
     printf '%s\n' "Current shell: ${SHELL}"
 
     # Check if running shell is ZSH.
-    if [ "${SHELL}" != "/usr/bin/zsh" ] ; then
+    if [ "${SHELL}" != "/usr/share/zsh" ] ; then
         # Check if ZSH is installed.
         if [ ! -f "${zsh_inst_folder}" ] ; then
             # iSH uses a different method for shell changing.
@@ -482,6 +495,3 @@ functionRebuildGitSubmodules() #{{{1
 
     functionPrintMessage printsleep
 }
-
-
-    
