@@ -26,8 +26,13 @@ export path_vimsessions="${HOME}/.dotfiles/config/vim/sessions"
 [ ! -f "${path_dotrepo}/config/zsh/.p10k.zsh" ] || . "${path_dotrepo}/config/zsh/.p10k.zsh"
 [ ! -f "${path_dotrepo}/config/zsh/plugins/powerlevel10k/powerlevel10k.zsh-theme" ] || . "${path_dotrepo}/config/zsh/plugins/powerlevel10k/powerlevel10k.zsh-theme"
 
-# Sources
-. /etc/os-release
+# Sources linux
+if [ -d "/etc/os-release/" ] ; then
+    . /etc/os-release
+# Sources  macOS
+elif [ -n "$(sw_vers)" ] ; then
+    ID="$(sw_vers -productName)"
+fi
 . "${path_dotrepo}/config/zsh/zshrc-plugins.zsh"
 . "${path_dotrepo}/config/zsh/zshrc-alias.zsh"
 
