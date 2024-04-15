@@ -1,14 +1,15 @@
 # Global                        {{{1
-alias ls="eza -hlaas name --icons=always --git"                         # Lists with bling
-alias lsm="eza -hls name --icons=always"                                # Lists with bling minus hidden
-alias cd.="cd ${path_dotrepo}"                                          # Changes to .dotfiles directory
-alias cat="bat"                                                         # Subs cat for bat
-alias catalias="bat ${path_dotrepo}/config/zsh/zshrc-alias.zsh"         # Cats my alias
-alias reload=". ${HOME}/.zshrc"                                         # reloads zshrc config
-alias vis="vim -S ${path_vimsessions}/current_session.vim"              # Loads vim current session
-alias susebox="distrobox enter susebox"                                 # Enter susebox container
-alias debianbox="distrobox enter debianbox"                             # Enter debianbox container
-function shcheck() { shellcheck "$1" -x --color | less -r }             # Shellcheck with color and less active
+alias ls="eza -hlaas name --icons=always --git"                                         # Lists with bling
+alias lsm="eza -hls name --icons=always"                                                # Lists with bling minus hidden
+alias cd.="cd ${path_dotrepo}"                                                          # Changes to .dotfiles directory
+alias cat="bat"                                                                         # Subs cat for bat
+alias catalias="bat ${path_dotrepo}/config/zsh/zshrc-alias.zsh"                         # Cats my alias
+alias reload=". ${HOME}/.zshrc"                                                         # reloads zshrc config
+alias vis="vim -S ${path_vimsessions}/current_session.vim"                              # Loads vim current session
+alias susebox="distrobox enter susebox"                                                 # Enter susebox container
+alias debianbox="distrobox enter debianbox"                                             # Enter debianbox container
+alias rmapplestore="find . -name .DS_Store -print0 | xargs -0 git rm -f --ignore-match" # Removes .DS_Store in git repository
+function shcheck() { shellcheck "$1" -x --color | less -r }                             # Shellcheck with color and less active
 
 # Global Alias [OLD]
 #alias catalias="cat ${path_dotrepo}/config/zsh/zshrc-alias.zsh | less"  # Cats my alias
