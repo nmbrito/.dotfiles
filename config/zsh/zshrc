@@ -30,7 +30,7 @@ export path_vimsessions="${HOME}/.dotfiles/config/vim/sessions"
 if [ -d "/etc/os-release/" ] ; then
     . /etc/os-release
 # Sources  macOS
-elif [ -n "$(sw_vers)" ] ; then
+elif [ command -v sw_vers > /dev/null 2>&1 ] ; then
     ID="$(sw_vers -productName)"
 fi
 . "${path_dotrepo}/config/zsh/zshrc-plugins.zsh"
