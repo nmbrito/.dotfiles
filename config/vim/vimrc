@@ -38,7 +38,6 @@
         set nocompatible
         set omnifunc=syntaxcomplete#Complete    " It ain't intellisense, only omnicomplete
 
-
     " Editor
         set backspace=indent,eol,start          " Proper backspace behavior
         set hidden                              " Possibility to have more than one unsaved buffers
@@ -58,7 +57,7 @@
         "set textwidth=170                       " Hard wrap Wraps around 170 colummn
 
         "set cursorline                         " Sets a cursor horizontal line
-        set cursorcolumn                        " Sets a cursor vertical line
+        "set cursorcolumn                        " Sets a cursor vertical line
 
         set autoindent                          " Minimal automatic indenting for any filetype
         set expandtab                           " Use spaces instead of tabs
