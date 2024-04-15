@@ -17,7 +17,7 @@
     "Alpha Component" : 1,
     "Green Component" : 0.10051288455724716
   },
-  "Normal Font" : "FiraCodeNFP-Reg 11",
+  "Normal Font" : "FiraCodeNFP-SemBd 11",
   "Bold Color" : {
     "Red Component" : 0.92150187492370605,
     "Color Space" : "Calibrated",
@@ -39,7 +39,13 @@
     "Alpha Component" : 1,
     "Green Component" : 0.87921047210693359
   },
-  "Custom Directory" : "No",
+  "Ansi 3 Color" : {
+    "Red Component" : 0.99215686321258545,
+    "Color Space" : "Calibrated",
+    "Blue Component" : 0.12156862765550613,
+    "Alpha Component" : 1,
+    "Green Component" : 0.59215688705444336
+  },
   "Rows" : 25,
   "Default Bookmark" : "No",
   "Cursor Guide Color" : {
@@ -113,7 +119,7 @@
   "Non Ascii Font" : "Monaco 12",
   "Vertical Spacing" : 1,
   "Use Bold Font" : true,
-  "Option Key Sends" : 2,
+  "Option Key Sends" : 0,
   "Selected Text Color" : {
     "Red Component" : 1,
     "Color Space" : "Calibrated",
@@ -145,10 +151,10 @@
       "Text" : "[1;2S",
       "Label" : ""
     },
-    "0xf70d-0x20000-0x0" : {
+    "0x37-0x40000-0x0" : {
       "Version" : 0,
-      "Action" : 10,
-      "Text" : "[21;2~",
+      "Action" : 11,
+      "Text" : "0x1f",
       "Label" : ""
     },
     "0xf700-0x240000-0x0" : {
@@ -373,15 +379,16 @@
       "Text" : "0x1b 0x1b 0x5b 0x44",
       "Label" : ""
     },
-    "0x37-0x40000-0x0" : {
+    "0xf70d-0x20000-0x0" : {
       "Version" : 0,
-      "Action" : 11,
-      "Text" : "0x1f",
+      "Action" : 10,
+      "Text" : "[21;2~",
       "Label" : ""
     }
   },
   "Window Type" : 0,
   "Blur Radius" : 9.9053618086145221,
+  "Cursor Type" : 2,
   "Background Image Location" : "",
   "Blur" : true,
   "Badge Color" : {
@@ -405,6 +412,7 @@
     "Alpha Component" : 1,
     "Green Component" : 0.81977206468582153
   },
+  "Unicode Version" : 9,
   "ASCII Ligatures" : true,
   "Name" : "operador",
   "Cursor Text Color" : {
@@ -424,14 +432,7 @@
   },
   "Transparency" : 0.063757583051437403,
   "Guid" : "59A567E7-B747-4190-AC3B-EB86B99B4F31",
-  "Horizontal Spacing" : 1,
-  "Ansi 3 Color" : {
-    "Red Component" : 0.99215686321258545,
-    "Color Space" : "Calibrated",
-    "Blue Component" : 0.12156862765550613,
-    "Alpha Component" : 1,
-    "Green Component" : 0.59215688705444336
-  },
+  "Custom Directory" : "No",
   "Link Color" : {
     "Red Component" : 0.023000000044703484,
     "Color Space" : "Calibrated",
@@ -439,7 +440,8 @@
     "Alpha Component" : 1,
     "Green Component" : 0.27000001072883606
   },
-  "Right Option Key Sends" : 0,
+  "Horizontal Spacing" : 1,
+  "Right Option Key Sends" : 2,
   "Ansi 6 Color" : {
     "Red Component" : 0.34416967630386353,
     "Color Space" : "Calibrated",
