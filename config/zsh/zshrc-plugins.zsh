@@ -8,7 +8,7 @@
 
 # FZF
     eval "$(fzf --zsh)"
-    if [ ${ID} = "debian" ] ; then
+    if [ "${ID}" = "debian" ] ; then
         fd_app="fd-find"
     else
         fd_app="fd"
