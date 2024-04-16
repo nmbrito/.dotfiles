@@ -19,7 +19,7 @@
 
 #   Source components
 #   Linux
-    if [ -d "/etc/os-release/" ] ; then
+    if [ -L "/etc/os-release/" ] ; then
         . /etc/os-release
 #   macOS
     elif [ -n "$(sw_vers)" ] ; then
