@@ -27,7 +27,7 @@ export path_vimsessions="${HOME}/.dotfiles/config/vim/sessions"
 [ ! -f "${path_dotrepo}/config/zsh/plugins/powerlevel10k/powerlevel10k.zsh-theme" ] || . "${path_dotrepo}/config/zsh/plugins/powerlevel10k/powerlevel10k.zsh-theme"
 
 # Sources linux
-if [ -d "/etc/os-release/" ] ; then
+if [ -L /etc/os-release ] ; then
     . /etc/os-release
 # Sources  macOS
 elif [ command -v sw_vers > /dev/null 2>&1 ] ; then
