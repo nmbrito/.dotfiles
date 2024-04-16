@@ -181,17 +181,20 @@ functionDefineHost() #{{{1
         current_host="$(cat /sys/devices/virtual/dmi/id/board_vendor) $(cat /sys/devices/virtual/dmi/id/product_version) - $(cat /sys/devices/virtual/dmi/id/product_name)"
 
     # ish directory is only available on Apple devices running iSH.app
-    elif [ -d "/proc/ish" ] ; then current_host="iOS/iPadOS" ;
+    elif [ -d "/proc/ish" ] ; then
+        current_host="iOS/iPadOS"
 
     # sw_vers gives macos os name and version, ergo we can get the hostname from sysctl
-    elif [ -d "/usr/bin/sw_vers" ] ; then 
+    elif [ -d "/usr/bin/sw_vers" ] ; then
         current_host="$(sysctl hw.model)"
 
     # WT_SESSION environment variable available in WSL1 and WSL2
-    elif [ -n "${WT_SESSION}" ] ; then current_host="Windows Subsystem for Linux" ;
+    elif [ -n "${WT_SESSION}" ] ; then
+        current_host="Windows Subsystem for Linux"
 
     # Last resort to fill current_host instead of garbage
-    else current_host="None" ;
+    else
+        current_host="None"
     fi
 }
 
@@ -229,6 +232,9 @@ functionInstallFixes() #{{{1
                 # $ fprintd-delete "$USER"                                                                                              -> multi finger enroll
                 # $ for finger in {left,right}-{thumb,{index,middle,ring,little}-finger}; do fprintd-enroll -f "$finger" "$USER"; done  -> multi finger enroll
             fi
+            ;;
+        "MacBookPro9,2")
+                /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" 
             ;;
         *)
             printf '%s\n' "No fix to apply."
@@ -283,7 +289,9 @@ functionInstallPackages() #{{{1
         "iOS/iPadOS")
             ${pkginst} ${list_terminal} ${list_ish} ;; # Alpine iSH already runs as root
 
-        "macOS")
+        "MacBook9,2")
+            ${pkginst} ${list_macos}
+            ${pkginst} --cask ${list_macos_cask}
             ;;
         # TODO: Host virtual machine
         # TODO: SSH Sessions
