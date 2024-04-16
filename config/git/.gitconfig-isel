@@ -1,0 +1,5 @@
+[user]
+	email = <place@here.com>
+    name = <FirstNameLastName>
+[core]
+    sshCommand = "ssh -i ~/.ssh/<file>"

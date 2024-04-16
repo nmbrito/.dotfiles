@@ -1,0 +1,9 @@
+[includeIf "gitdir:~/Documents/gitrepositories/"]
+    path = ~/Documents/gitrepositories/.gitconfig-personal
+
+[includeIf "gitdir:~/Documents/gitisel/"]
+    path = ~/Documents/gitisel/.gitconfig-isel
+
+[user]
+	email = <place@here.com>
+    name = <FirstNameLastName>
