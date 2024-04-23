@@ -16,8 +16,12 @@ Rows=2
 BlurStrength=8
 NoiseStrength=0
 
+[Effect-kwin4_effect_glitch]
+Color=invalid
+
 [Effect-kwin4_effect_tv]
 Color=invalid
+Duration=500
 
 [Effect-kwin4_effect_tv_glitch]
 Color=invalid
@@ -26,11 +30,14 @@ Color=invalid
 AnimationDuration=400
 
 [Effect-windowview]
-BorderActivateAll=9
+BorderActivateAll=1
+
+[ElectricBorders]
+BottomRight=ShowDesktop
 
 [Plugins]
 blurEnabled=true
-contrastEnabled=true
+contrastEnabled=false
 forceblurEnabled=true
 kwin4_effect_eyeonscreenEnabled=true
 kwin4_effect_scaleEnabled=false
@@ -39,9 +46,8 @@ kwin4_effect_translucencyEnabled=true
 kwin4_effect_tvEnabled=true
 kwin4_effect_windowapertureEnabled=false
 magiclampEnabled=true
-
-[TabBox]
-LayoutName=informative
+scaleEnabled=false
+squashEnabled=false
 
 [TabBoxAlternative]
 LayoutName=thumbnails
@@ -49,7 +55,13 @@ LayoutName=thumbnails
 [Tiling]
 padding=4
 
+[Tiling][58ca410b-ce44-58d6-82b9-fefe44aba0e3]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
 [Tiling][5b7a5ba4-43cc-5910-8e98-f358f9d54b43]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][76d5d9ff-ba60-57b5-a4db-008df382222c]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Tiling][8e53daea-a68e-5af7-8552-cf91eab1dce6]
@@ -61,11 +73,17 @@ tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"wi
 [Tiling][aa314c1b-640d-5265-982e-0840e7fdda31]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
+[Tiling][be0a5627-e2a2-5f2f-b925-32a6ef0347e8]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
 [Tiling][ccd244ca-5575-569f-a8c9-ce17c79b0288]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Windows]
 RollOverDesktops=true
+
+[Xwayland]
+Scale=1
 
 [org.kde.kdecoration2]
 ButtonsOnLeft=M
