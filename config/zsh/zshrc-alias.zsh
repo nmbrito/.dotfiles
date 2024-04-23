@@ -35,7 +35,7 @@ function backupkde()
     cp -rv "${HOME}/.config/kdedefaults"                "${path_dotrepo}/config/plasma/"
 
     # Themes
-    tar czvf ${path_dotrepo}/.cache/plasma_globalthemes.tar.gz \
+    tar czvf ${path_dotrepo}/plasma_globalthemes.tar.gz \
         ${HOME}/.local/share/plasma \
         ${HOME}/.local/share/color-schemes \
         ${HOME}/.local/share/icons \
