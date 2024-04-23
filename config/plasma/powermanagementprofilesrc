@@ -25,6 +25,11 @@ idleTime=900000
 suspendThenHibernate=false
 suspendType=1
 
+[AC][WirelessPowerSaving]
+btOption=0
+wifiOption=2
+wwanOption=0
+
 [Battery]
 icon=battery-060
 
@@ -32,11 +37,11 @@ icon=battery-060
 value=25
 
 [Battery][DPMSControl]
-idleTime=300
+idleTime=180
 lockBeforeTurnOff=0
 
 [Battery][DimDisplay]
-idleTime=120000
+idleTime=60000
 
 [Battery][HandleButtonEvents]
 lidAction=1
@@ -83,3 +88,6 @@ suspendType=1
 btOption=1
 wifiOption=1
 wwanOption=1
+
+[Migration]
+MigratedProfilesToPlasma6=powerdevilrc
