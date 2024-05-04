@@ -33,7 +33,7 @@
 
         "let g:markdown_folding=1               " Folds markdown automatically
         set encoding=UTF-8
-        set foldmethod=marker                   " Default method is {{{ }}}
+        "set foldmethod=marker                   " Default method is {{{ }}}
         set laststatus=2                        " Always show statusline
         set nocompatible
         set omnifunc=syntaxcomplete#Complete    " It ain't intellisense, only omnicomplete
@@ -70,7 +70,7 @@
         set splitbelow                          " Opens at bottom (instead of upper)
         set splitright                          " Opens at right (instead of left)
 
-        set conceallevel=2                      " Conceal syntax (eg. markdown **bold** -> bold)
+        "set conceallevel=2                      " Conceal syntax (eg. markdown **bold** -> bold)
 
         runtime macros /matchit.vim             " Hit '%' on 'if' to jump to 'else'
 
@@ -96,6 +96,7 @@
         nnoremap <F5>                   :w!<CR>
         nnoremap <leader><F5>           :wq!<CR>
         nnoremap <silent><F6>           :Buffers<CR>
+        nnoremap <silent><F7>           :set wrap!<CR>
         nnoremap <S-F11>                :mksession! ${path_vimsessions}/current_session.vim<CR>
         nnoremap <leader><S-F11>        :source ${path_vimsessions}/current_session.vim<CR>
         nnoremap <silent><F12>          :sp ${path_dotrepo}/RTM.md<CR>
