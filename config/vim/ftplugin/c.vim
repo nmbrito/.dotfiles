@@ -1,4 +1,4 @@
-"if &filetype == 'c'
-"    setlocal foldmethod=marker
-"    setlocal foldmarker=
-"end
+if &filetype == 'c'
+    setlocal foldmethod=syntax
+    "setlocal foldmarker=
+end
