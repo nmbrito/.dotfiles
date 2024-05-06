@@ -494,6 +494,8 @@ functionRebuildGitSubmodules() #{{{1
         git submodule add https://github.com/tpope/vim-surround                 config/vim/pack/plugins/start/surround
         git submodule add https://github.com/vim-airline/vim-airline            config/vim/pack/plugins/start/vim-airline
         git submodule add https://github.com/vim-airline/vim-airline-themes     config/vim/pack/plugins/start/vim-airline-themes
+        git submodule add https://github.com/lervag/vimtex                      config/vim/pack/plugins/start/vimtex
+        git submodule add https://github.com/yegappan/lsp                       config/vim/pack/plugins/start/lsp
     )
 
     cd ${previous_pwd}
