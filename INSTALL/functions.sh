@@ -482,21 +482,18 @@ functionRebuildGitSubmodules() #{{{1
         git submodule add https://github.com/romkatv/powerlevel10k              config/zsh/plugins/powerlevel10k
         git submodule add https://github.com/zsh-users/zsh-syntax-highlighting  config/zsh/plugins/zsh-syntax-highlighting
         git submodule add https://github.com/zsh-users/zsh-autosuggestions      config/zsh/plugins/zsh-autosuggestions
-        git submodule add https://github.com/vim-airline/vim-airline            config/vim/pack/dist/start/vim-airline
-        git submodule add https://github.com/vim-airline/vim-airline-themes     config/vim/pack/dist/start/vim-airline-themes
-        git submodule add https://github.com/tpope/vim-surround                 config/vim/pack/tpope/start/surround
-        git submodule add https://github.com/tpope/vim-commentary               config/vim/pack/tpope/start/commentary
-        git submodule add https://github.com/tpope/vim-fugitive                 config/vim/pack/tpope/start/fugitive
-        git submodule add https://github.com/junegunn/goyo.vim                  config/vim/pack/junegunn/start/goyo.vim
-        git submodule add https://github.com/junegunn/limelight.vim             config/vim/pack/junegunn/start/limelight.vim
-        git submodule add https://github.com/junegunn/fzf.vim                   config/vim/pack/junegunn/start/fzf.vim
-        git submodule add https://github.com/junegunn/fzf                       config/vim/pack/junegunn/start/fzf
-        git submodule add https://github.com/mbbill/undotree                    config/vim/pack/mbbill/start/undotree
-        git submodule add https://github.com/machakann/vim-highlightedyank      config/vim/pack/machakann/start/vim-highlightedyank
-        git submodule add https://github.com/junegunn/rainbow_parentheses.vim   config/vim/pack/junegunn/start/rainbow_parentheses.vim
-        git submodule add https://github.com/preservim/vim-indent-guides        config/vim/pack/preservim/start/vim-indent-guides
-        git submodule add https://github.com/ntpeters/vim-better-whitespace     config/vim/pack/ntpeters/start/vim-better-whitespace
-        git submodule add https://github.com/ap/vim-css-color                   config/vim/pack/css-color/start/css-color
+        git submodule add https://github.com/ap/vim-css-color                   config/vim/pack/plugins/start/css-color
+        git submodule add https://github.com/junegunn/fzf                       config/vim/pack/plugins/start/fzf
+        git submodule add https://github.com/junegunn/fzf.vim                   config/vim/pack/plugins/start/fzf.vim
+        git submodule add https://github.com/junegunn/goyo.vim                  config/vim/pack/plugins/start/goyo.vim
+        git submodule add https://github.com/junegunn/limelight.vim             config/vim/pack/plugins/start/limelight.vim
+        git submodule add https://github.com/machakann/vim-highlightedyank      config/vim/pack/plugins/start/vim-highlightedyank
+        git submodule add https://github.com/mbbill/undotree                    config/vim/pack/plugins/start/undotree
+        git submodule add https://github.com/ntpeters/vim-better-whitespace     config/vim/pack/plugins/start/vim-better-whitespace
+        git submodule add https://github.com/preservim/vim-indent-guides        config/vim/pack/plugins/start/vim-indent-guides
+        git submodule add https://github.com/tpope/vim-surround                 config/vim/pack/plugins/start/surround
+        git submodule add https://github.com/vim-airline/vim-airline            config/vim/pack/plugins/start/vim-airline
+        git submodule add https://github.com/vim-airline/vim-airline-themes     config/vim/pack/plugins/start/vim-airline-themes
     )
 
     cd ${previous_pwd}
