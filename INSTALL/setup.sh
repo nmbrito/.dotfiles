@@ -18,12 +18,11 @@
     message_execroot="# The following commands will run as ROOT #"
 
 #   Source components
-#   Linux
     if [ -L "/etc/os-release/" ] ; then
         . /etc/os-release
-#   macOS
     elif [ -n "$(sw_vers)" ] ; then
         ID="$(sw_vers -productName)"
+    fi
 
     if [ ! -f "${dir}"/functions.sh ] && [ ! -f "${dir}"/packages.sh ] ; then
         printf '%s\n' "Missing install components. Aborting."
