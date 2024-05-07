@@ -20,7 +20,8 @@
 #   Source components
     if [ -L "/etc/os-release/" ] ; then
         . /etc/os-release
-    elif [ -n "$(sw_vers)" ] ; then
+    #elif [ -n "$(sw_vers)" ] ; then
+    elif [ command -v sw_vers >/dev/null 2>&1 ] ; then
         ID="$(sw_vers -productName)"
     fi
 
