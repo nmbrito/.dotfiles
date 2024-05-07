@@ -24,10 +24,6 @@
 #   macOS
     elif [ -n "$(sw_vers)" ] ; then
         ID="$(sw_vers -productName)"
-#   NULL
-    else
-        ID=0
-    fi
 
     if [ ! -f "${dir}"/functions.sh ] && [ ! -f "${dir}"/packages.sh ] ; then
         printf '%s\n' "Missing install components. Aborting."
