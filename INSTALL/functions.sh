@@ -458,9 +458,8 @@ functionConfigShell() #{{{1
         else
             printf '%s\n' "ZSH missing. Want to install? [y/n]: "
             read  -r optionzshchange
-            if [ "${optionzshchange}" = "y" ]
-            then
-                (su -c "${pkginst} "zsh")
+            if [ "${optionzshchange}" = "y" ] ; then
+                (su -c "${pkginst}" "zsh")
                 functionConfigShell
             fi
         fi
