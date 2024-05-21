@@ -357,6 +357,7 @@ functionInstallSymlinks() #{{{1
     ln -vsf "${dir_dotroot}"/config/vifm        "${HOME}"/.config/vifm
     ln -vsf "${dir_dotroot}"/config/neofetch    "${HOME}"/.config/neofetch
     ln -vsf "${dir_dotroot}"/config/tmux        "${HOME}"/.config/tmux
+    ln -vsf "${dir_dotroot}"/config/fd          "${HOME}"/.config/fd
 
     # If KDE is detected as current session.
     if [ "${XDG_SESSION_DESKTOP}" = "KDE" ]
