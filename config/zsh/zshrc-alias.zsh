@@ -1,6 +1,6 @@
 # Global                        {{{1
-alias ls="eza -hlaas name --icons=always --git"                                             # Lists with bling
-alias lsm="eza -hls name --icons=always"                                                    # Lists with bling minus hidden
+alias ls="eza -hlaas type --icons=always --git"                                             # Lists with bling
+alias lsm="eza -hls type --icons=always"                                                    # Lists with bling minus hidden
 alias cd.="cd ${path_dotrepo}"                                                              # Changes to .dotfiles directory
 alias cat="bat"                                                                             # Subs cat for bat
 alias catalias="bat ${path_dotrepo}/config/zsh/zshrc-alias.zsh"                             # Cats my alias
