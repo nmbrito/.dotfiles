@@ -1,6 +1,8 @@
 #!/bin/sh
 
 # Quickly sort lists with vim :'<,'>sort
+# Removed:
+#   neofetch
 
 list_terminal="\
     ${sw_btop}\
@@ -18,7 +20,6 @@ list_terminal="\
     htop\
     man-pages\
     mc\
-    neofetch\
     ripgrep\
     tmux\
     vifm\
