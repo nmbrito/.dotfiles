@@ -153,6 +153,8 @@
         nnoremap Y                      y$
         nnoremap <Leader>Y              "*yy
         nnoremap <Leader>P              "*p
+        vnoremap <Leader>Y              "*yy
+        vnoremap <Leader>P              "*p
         nnoremap Q                      <nop>
         nnoremap <Leader>s              :%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>
 
