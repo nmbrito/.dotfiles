@@ -4,7 +4,7 @@
 # Removed:
 #   neofetch
 
-list_terminal="\
+packages_terminal="\
     ${sw_btop}\
     ${sw_fd}\
     ${sw_fdzshcompletion}\
@@ -26,23 +26,23 @@ list_terminal="\
     vim\
     zsh"
 
-list_dev="\
+packages_dev="\
     ${sw_shellcheck}\
     gcc\
     gdb\
     make\
-    valgrind\
-    "
-list_wsl_pattern="\
+    valgrind"
+
+packages_wsl_pattern="\
     wsl_gui\
     wsl_base\
     wsl_systemd"
 
-list_kde_basics="\
+packages_kde_basics="\
     keepassxc\
     myspell-pt_PT"
 
-list_kde_personal="\
+packages_kde_personal="\
     blender\
     code\
     discord\
@@ -61,13 +61,13 @@ list_kde_personal="\
     virt-manager\
     vlc"
 
-list_x230="\
+packages_x230="\
     ifuse\
     NetworkManager-fortisslvpn\
     openfortivpn\
     plasma-nm5-fortisslvpn"
 
-list_ish="\
+packages_ish="\
     build-base\
     gcc\
     gdb\
@@ -79,10 +79,65 @@ list_ish="\
     vifm-colors --force-overwrite\
     zsh-vcs"
 
-list_fonts="\
+packages_fonts="\
     CascadiaCode.tar.xz\
     FiraCode.tar.xz\
     Hasklig.tar.xz\
     Lilex.tar.xz\
     Monoid.tar.xz"
 
+config_kde="\
+    "
+
+#    [ ! -d "${HOME}"/.config/ ]         && mkdir "${HOME}"/.config/
+#    [ ! -d "${HOME}"/.config/mc ]       && mkdir "${HOME}"/.config/mc
+#
+#    [ -d "${HOME}"/.vim ]               && rm -rf "${HOME}"/.vim
+#    [ -d "${HOME}"/.config/vifm ]       && rm -rf "${HOME}"/.config/vifm
+#    [ -d "${HOME}"/.config/neofetch ]   && rm -rf "${HOME}"/.config/neofetch
+#    [ -d "${HOME}"/.config/tmux ]       && rm -rf "${HOME}"/.config/tmux
+#
+#
+#    # Files.
+#    ln -vsf "${dir_dotroot}"/config/zsh/zshrc   "${HOME}"/.zshrc
+#    ln -vsf "${dir_dotroot}"/config/vim/vimrc   "${HOME}"/.vimrc
+#    ln -vsf "${dir_dotroot}"/config/mc/ini      "${HOME}"/.config/mc/ini
+#
+#    # Directories.
+#    ln -vsf "${dir_dotroot}"/config/vim         "${HOME}"/.vim
+#    ln -vsf "${dir_dotroot}"/config/vifm        "${HOME}"/.config/vifm
+#    ln -vsf "${dir_dotroot}"/config/neofetch    "${HOME}"/.config/neofetch
+#    ln -vsf "${dir_dotroot}"/config/tmux        "${HOME}"/.config/tmux
+#    ln -vsf "${dir_dotroot}"/config/fd          "${HOME}"/.config/fd
+#
+#    # If KDE is detected as current session.
+#    if [ "${XDG_SESSION_DESKTOP}" = "KDE" ]
+#    then
+#        for kde_configs in $kde_config_list
+#        do
+#            cp -v "${dir_dotroot}"/config/${kde_configs}    "${HOME}"/.config/
+#        done
+#        # KDE configuration files must be copied.
+#        # KDE is unable to save settings with symlinks.
+#        [ -d "${HOME}"/.config/kdedefaults ] && rm -rf "${HOME}"/.config/kdedefaults
+#
+#        cp -v "${dir_dotroot}"/config/plasma/kglobalshortcutsrc                     	"${HOME}"/.config/
+#        cp -v "${dir_dotroot}"/config/plasma/kwinrc                                 	"${HOME}"/.config/
+#        cp -v "${dir_dotroot}"/config/plasma/plasma-localerc                            "${HOME}"/.config/
+#        cp -v "${dir_dotroot}"/config/plasma/plasma-org.kde.plasma.desktop-appletsrc	"${HOME}"/.config/
+#        cp -v "${dir_dotroot}"/config/plasma/plasmashellrc                          	"${HOME}"/.config/
+#        cp -v "${dir_dotroot}"/config/plasma/powermanagementprofilesrc                  "${HOME}"/.config/
+#        cp -v "${dir_dotroot}"/config/strawberry/strawberry.conf                        "${HOME}"/.config/strawberry
+#
+#        cp -v "${dir_dotroot}"/config_local/share/konsole/mytik.profile             	"${HOME}"/.local/share/konsole/
+#        cp -v "${dir_dotroot}"/config_local/share/konsole/Edna.colorscheme             	"${HOME}"/.local/share/konsole/
+#
+#        cp -v "${dir_dotroot}"/config/plasma/new/konsolerc                              "${HOME}"/.config/
+#        cp -v "${dir_dotroot}"/config/plasma/new/dolphinrc                              "${HOME}"/.config/
+#        cp -v "${dir_dotroot}"/config/plasma/new/kdeglobals                             "${HOME}"/.config/
+#        cp -v "${dir_dotroot}"/config/plasma/new/kmixrc                                 "${HOME}"/.config/
+#        cp -v "${dir_dotroot}"/config/plasma/new/ksplashrc                              "${HOME}"/.config/
+#        cp -v "${dir_dotroot}"/config/plasma/new/ktimezonedrc                           "${HOME}"/.config/
+#
+#        cp -rv "${dir_dotroot}"/config/plasma/kdedefaults                               "${HOME}"/.config/
+#    fi
