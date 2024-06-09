@@ -2,12 +2,11 @@
 
 # File: home_functions.sh
 # Description: functions for home_setup.sh
-#TODO: {{{1
 # kwin effects dir: /home/operador/.local/share/kwin/effects/
 # kwin scripts dir: /home/operador/.local/share/kwin/scripts/
 #
 
-functionPrintMessage() #{{{1
+functionPrintMessage() 
 {
     case $1 in
         "privilege_root")
@@ -43,7 +42,7 @@ functionPrintMessage() #{{{1
     esac
 }
 
-functionBuildMenu() #{{{1
+functionBuildMenu() 
 {
     printf '%s\n'   "                                                                " \
                     "|--------------------------------------------------------------|" \
@@ -69,7 +68,7 @@ functionBuildMenu() #{{{1
                     "                                                                "
 }
 
-functionDefineDistro() #{{{1
+functionDefineDistro() 
 {
     # Distribuitions have different package names and software paths.
     case ${ID} in
@@ -174,7 +173,7 @@ functionDefineDistro() #{{{1
     esac
 }
 
-functionDefineHost() #{{{1
+functionDefineHost() 
 {
     # dmi directory indicates a physical machine.
     if [ -d "/sys/devices/virtual/dmi" ] ; then
@@ -198,7 +197,7 @@ functionDefineHost() #{{{1
     fi
 }
 
-functionInstallFixes() #{{{1
+functionInstallFixes() 
 {
     functionPrintMessage privilege_root fixes
 
@@ -221,16 +220,6 @@ functionInstallFixes() #{{{1
 
                     pam-auth-update ;
                     ")
-
-                # TODO: For some abnormal reason I can't get this crap to work, everytime the SDDM pam.d file is written I get locked out of the system
-                #       till I remove it via TTY0...
-                #
-                # fprintd-enroll        -> enroll via terminal
-                # fprintd-enroll user   -> enroll a user via terminal without authentication
-                # fprintd-verify        -> verify newly created fingerprint
-                #
-                # $ fprintd-delete "$USER"                                                                                              -> multi finger enroll
-                # $ for finger in {left,right}-{thumb,{index,middle,ring,little}-finger}; do fprintd-enroll -f "$finger" "$USER"; done  -> multi finger enroll
             fi
             ;;
         "MacBookPro9,2")
@@ -245,7 +234,7 @@ functionInstallFixes() #{{{1
     functionPrintMessage printsleep
 }
 
-functionInstallRepositories() #{{{1
+functionInstallRepositories() 
 {
     functionPrintMessage privilege_root repositories
 
@@ -268,7 +257,7 @@ functionInstallRepositories() #{{{1
     functionPrintMessage printsleep
 }
 
-functionInstallPackages() #{{{1
+functionInstallPackages() 
 {
     functionPrintMessage privilege_root packages
 
@@ -276,29 +265,29 @@ functionInstallPackages() #{{{1
     case ${current_host} in
         "LENOVO ThinkPad X230 - 23252FG")
             case ${XDG_SESSION_DESKTOP} in
-                "KDE")  (su -c "${pkginst} ${list_terminal} ${list_kde_basics} ${list_kde_personal} ${list_x230}") ;;
-                *)      (su -c "${pkginst} ${list_terminal}") ;;
+                "KDE")  (su -c "${pkginst} ${packages_terminal} ${packages_kde_basics} ${packages_kde_personal} ${packages_x230}") ;;
+                *)      (su -c "${pkginst} ${packages_terminal}") ;;
             esac
             ;;
 
         "Windows Subsystem for Linux")
-            (su -c "${pkginst} ${list_terminal}") ;
-            if [ "${ID}" = "opensuse-tumbleweed" ] ; then (su -c "${pkginst} -t pattern ${list_wsl_pattern}") ; fi
+            (su -c "${pkginst} ${packages_terminal}") ;
+            if [ "${ID}" = "opensuse-tumbleweed" ] ; then (su -c "${pkginst} -t pattern ${packages_wsl_pattern}") ; fi
             ;;
 
         "iOS/iPadOS")
-            ${pkginst} ${list_terminal} ${list_ish} ;; # Alpine iSH already runs as root
+            ${pkginst} ${packages_terminal} ${packages_ish} ;; # Alpine iSH already runs as root
 
         "MacBook9,2")
-            ${pkginst} ${list_macos}
-            ${pkginst} --cask ${list_macos_cask}
+            ${pkginst} ${packages_macos}
+            ${pkginst} --cask ${packages_macos_cask}
             ;;
         # TODO: Host virtual machine
         # TODO: SSH Sessions
 
         *)
             case ${XDG_SESSION_DESKTOP} in
-                "KDE")  (su -c "${pkginst} ${list_terminal} ${list_kde_basics}") ;;
+                "KDE")  (su -c "${pkginst} ${packages_terminal} ${packages_kde_basics}") ;;
                 *) ;;
             esac
     esac
@@ -306,7 +295,7 @@ functionInstallPackages() #{{{1
     functionPrintMessage printsleep
 }
 
-functionInstallFonts() #{{{1
+functionInstallFonts() 
 {
     functionPrintMessage privilege_user fonts
 
@@ -319,7 +308,7 @@ functionInstallFonts() #{{{1
             tar -xvf "${dir_dotroot}/INSTALL/fonts/${dl_fonts}" --directory "${HOME}/.fonts"
         done
     else
-        for dl_fonts in ${list_fonts}
+        for dl_fonts in ${packages_fonts}
         do
             curl -L $(curl -s "${url_nerdfonts}" | grep browser_download_url | cut -d '"' -f 4 | grep "${dl_fonts}") --output "${dir_cache}/${dl_fonts}"
             tar -xvf "${dir_cache}/${dl_fonts}" --directory "${HOME}/.fonts"
@@ -334,23 +323,23 @@ functionInstallFonts() #{{{1
     functionPrintMessage printsleep
 }
 
-functionInstallSymlinks() #{{{1
+functionInstallSymlinks() 
 {
     functionPrintMessage privilege_user symlinking
 
     [ ! -d "${HOME}"/.config/ ]         && mkdir "${HOME}"/.config/
-    [ ! -d "${HOME}"/.config/mc ]       && mkdir "${HOME}"/.config/mc
 
     [ -d "${HOME}"/.vim ]               && rm -rf "${HOME}"/.vim
     [ -d "${HOME}"/.config/vifm ]       && rm -rf "${HOME}"/.config/vifm
     [ -d "${HOME}"/.config/neofetch ]   && rm -rf "${HOME}"/.config/neofetch
     [ -d "${HOME}"/.config/tmux ]       && rm -rf "${HOME}"/.config/tmux
+    [ -d "${HOME}"/.config/mc ]         && rm -rf "${HOME}"/.config/mc
+    [ -d "${HOME}"/.config/fd ]         && rm -rf "${HOME}"/.config/fd
 
 
     # Files.
     ln -vsf "${dir_dotroot}"/config/zsh/zshrc   "${HOME}"/.zshrc
     ln -vsf "${dir_dotroot}"/config/vim/vimrc   "${HOME}"/.vimrc
-    ln -vsf "${dir_dotroot}"/config/mc/ini      "${HOME}"/.config/mc/ini
 
     # Directories.
     ln -vsf "${dir_dotroot}"/config/vim         "${HOME}"/.vim
@@ -358,39 +347,12 @@ functionInstallSymlinks() #{{{1
     ln -vsf "${dir_dotroot}"/config/neofetch    "${HOME}"/.config/neofetch
     ln -vsf "${dir_dotroot}"/config/tmux        "${HOME}"/.config/tmux
     ln -vsf "${dir_dotroot}"/config/fd          "${HOME}"/.config/fd
-
-    # If KDE is detected as current session.
-    if [ "${XDG_SESSION_DESKTOP}" = "KDE" ]
-    then
-        # KDE configuration files must be copied.
-        # KDE is unable to save settings with symlinks.
-        [ -d "${HOME}"/.config/kdedefaults ] && rm -rf "${HOME}"/.config/kdedefaults
-
-        cp -v "${dir_dotroot}"/config/plasma/kglobalshortcutsrc                     	"${HOME}"/.config/
-        cp -v "${dir_dotroot}"/config/plasma/kwinrc                                 	"${HOME}"/.config/
-        cp -v "${dir_dotroot}"/config/plasma/plasma-localerc                            "${HOME}"/.config/
-        cp -v "${dir_dotroot}"/config/plasma/plasma-org.kde.plasma.desktop-appletsrc	"${HOME}"/.config/
-        cp -v "${dir_dotroot}"/config/plasma/plasmashellrc                          	"${HOME}"/.config/
-        cp -v "${dir_dotroot}"/config/plasma/powermanagementprofilesrc                  "${HOME}"/.config/
-        cp -v "${dir_dotroot}"/config/strawberry/strawberry.conf                        "${HOME}"/.config/strawberry
-
-        cp -v "${dir_dotroot}"/config_local/share/konsole/mytik.profile             	"${HOME}"/.local/share/konsole/
-        cp -v "${dir_dotroot}"/config_local/share/konsole/Edna.colorscheme             	"${HOME}"/.local/share/konsole/
-
-        cp -v "${dir_dotroot}"/config/plasma/new/konsolerc                              "${HOME}"/.config/
-        cp -v "${dir_dotroot}"/config/plasma/new/dolphinrc                              "${HOME}"/.config/
-        cp -v "${dir_dotroot}"/config/plasma/new/kdeglobals                             "${HOME}"/.config/
-        cp -v "${dir_dotroot}"/config/plasma/new/kmixrc                                 "${HOME}"/.config/
-        cp -v "${dir_dotroot}"/config/plasma/new/ksplashrc                              "${HOME}"/.config/
-        cp -v "${dir_dotroot}"/config/plasma/new/ktimezonedrc                           "${HOME}"/.config/
-
-        cp -rv "${dir_dotroot}"/config/plasma/kdedefaults                               "${HOME}"/.config/
-    fi
+    ln -vsf "${dir_dotroot}"/config/mc          "${HOME}"/.config/mc
 
     functionPrintMessage printsleep
 }
 
-functionConfigGitGlobals() #{{{1
+functionConfigGitGlobals() 
 {
     functionPrintMessage privilege_user gitconfig
 
@@ -409,7 +371,7 @@ functionConfigGitGlobals() #{{{1
     functionPrintMessage printsleep
 }
 
-functionInstallGitSubmodules() #{{{1
+functionInstallGitSubmodules() 
 {
     functionPrintMessage privilege_user syncgitsubmodule
 
@@ -419,7 +381,7 @@ functionInstallGitSubmodules() #{{{1
     functionPrintMessage printsleep
 }
 
-functionConfigVimHelptags() #{{{1
+functionConfigVimHelptags() 
 {
     functionPrintMessage privilege_user vimhelptags
 
@@ -439,7 +401,7 @@ functionConfigVimHelptags() #{{{1
     functionPrintMessage printsleep
 }
 
-functionConfigShell() #{{{1
+functionConfigShell() 
 {
     functionPrintMessage privilege_user zshshell
 
@@ -471,7 +433,7 @@ functionConfigShell() #{{{1
     functionPrintMessage printsleep
 }
 
-functionRebuildGitSubmodules() #{{{1
+functionRebuildGitSubmodules() 
 {
     functionPrintMessage privilege_user rebuildsubmodules
 
