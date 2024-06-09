@@ -17,6 +17,9 @@
             set undofile
         endif
 
+    " Call FZF
+        "set rtp+=/usr/local/opt/fzf
+
 " VIM Options
     " Required
         " Please ignore this files:
