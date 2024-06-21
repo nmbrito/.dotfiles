@@ -1,0 +1,30 @@
+# Homebrew
+eval "$(/usr/local/bin/brew shellenv)"
+
+# Get OS ID
+if   [ -L /etc/os-release                  ]; then . /etc/os-release;
+elif [ command -v sw_vers > /dev/null 2>&1 ]; then ID="$(sw_vers -productName)"; fi
+
+if [ -n "${WT_SESSION}" ]; then wslsession=1; else wslsession=0; fi
+
+# TMUX
+if [ $wslsession ]; then export TMUX_TMPDIR='/tmp'; fi
+if [ -z "$TMUX"         ]; then (tmux attach -t BASE) || (tmux new -s BASE); fi
+
+# Terminal 256 color mode
+export TERM="xterm-256color"
+
+# Editor
+export EDITOR="vim"
+export VISUAL="vim"
+
+# BAT theme
+export BAT_THEME="Dracula"
+#export BAT_THEME="Monokai Extended"
+
+# My custom directories
+export nmb_dotrepo="${HOME}/.dotfiles"
+export nmb_vimconf="${HOME}/.dotfiles/config/vim"
+export nmb_zshconf="${HOME}/.dotfiles/config/zsh"
+export nmb_vimsessions="${HOME}/.dotfiles/config/vim/sessions"
+
