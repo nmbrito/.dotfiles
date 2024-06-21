@@ -2,15 +2,17 @@
 
 # File: home_functions.sh
 # Description: functions for home_setup.sh
-# kwin effects dir: /home/operador/.local/share/kwin/effects/
-# kwin scripts dir: /home/operador/.local/share/kwin/scripts/
-#
+
+# TODO:
+#   functionInstallPackages:
+#       Add host virtual machine
+#       Add SSH sessions
 
 functionPrintMessage() 
 {
-    case $1 in
+    case "${1}" in
         "privilege_root")
-            case $2 in
+            case "${2}" in
                 "fixes")        printf '%s\n' "Computer Fixes" ;;
                 "repositories") printf '%s\n' "Repositories" ;;
                 "packages")     printf '%s\n' "Packages" ;;
@@ -22,7 +24,7 @@ functionPrintMessage()
                             ""
         ;;
         "privilege_user")
-            case $2 in
+            case "${2}" in
                 "fonts")                printf '%s\n' "Fonts" ;;
                 "symlinking")           printf '%s\n' "Symlinking" ;;
                 "gitconfig")            printf '%s\n' "Git globals configuration." ;;
@@ -49,19 +51,20 @@ functionBuildMenu()
                     "| select an option:                                            |" \
                     "|--------------------------------------------------------------|" \
                     "|  ( 1) run all                 |  ( 6) symlinks               |" \
-                    "|  ( 2) host fixes              |  ( 7) configure git globals  |" \
-                    "|  ( 3) repositories            |  ( 8) sync git submodules    |" \
-                    "|  ( 4) packages                |  ( 9) link vim helptags      |" \
+                    "|  ( 2) repositories            |  ( 7) configure git globals  |" \
+                    "|  ( 3) packages                |  ( 8) sync git submodules    |" \
+                    "|  ( 4) fixes                   |  ( 9) link vim helptags      |" \
                     "|  ( 5) fonts                   |  (10) change to zsh shell    |" \
                     "|--------------------------------------------------------------|" \
                     "|  ( r) rebuild git submodules                                 |" \
                     "|--------------------------------------------------------------|" \
-                    "|  host: ${current_host}                                        " \
-                    "|  distribuition: ${ID}                                         " \
-                    "|  package manager: ${pkgmgr}                                   " \
-                    "|  current shell: ${SHELL}                                      " \
-                    "|  pwd: $(pwd)                                                  " \
-                    "|  repository root: ${dir_dotroot}                              " \
+                    "|  host: "${current_host}"                                      " \
+                    "|  distribuition: "${ID}"                                       " \
+                    "|  package manager: "${pkgmgr}"                                 " \
+                    "|  current shell: "${SHELL}"                                    " \
+                    "|  pwd: "$(pwd)"                                                " \
+                    "|  repository root: "${dir_dotroot}"                            " \
+                    "|  cache directory: "${dir_cache}"                              " \
                     "|--------------------------------------------------------------|" \
                     "|  ( ) exit / cancel                                           |" \
                     "|--------------------------------------------------------------|" \
@@ -70,8 +73,8 @@ functionBuildMenu()
 
 functionDefineDistro() 
 {
-    # Distribuitions have different package names and software paths.
-    case ${ID} in
+    # Some distribuitions have different package names and software paths.
+    case "${ID}" in
         "opensuse-tumbleweed")
             pkgmgr="zypper"
             pkginst="zypper install -y"
@@ -88,7 +91,6 @@ functionDefineDistro()
             sw_vifmcolors="vifm-colors"
             sw_vimdata="vim-data"
             ;;
-
         "debian")
             pkgmgr="apt"
             pkginst="apt install -y"
@@ -105,7 +107,6 @@ functionDefineDistro()
             sw_vifmcolors=""
             sw_vimdata="vim-common"
             ;;
-
         "archlinux")
             pkgmgr="pacman"
             pkginst="pacman -Sy"
@@ -122,7 +123,6 @@ functionDefineDistro()
             sw_vifmcolors=""
             sw_vimdata=""
             ;;
-
         "almalinux")
             pkgmgr="dnf"
             pkginst="dnf install -y"
@@ -139,7 +139,6 @@ functionDefineDistro()
             sw_vifmcolors=""
             sw_vimdata=""
             ;;
-
         "alpine")
             pkgmgr="apk"
             pkginst="apk add"
@@ -156,82 +155,42 @@ functionDefineDistro()
             sw_vifmcolors=""
             sw_vimdata=""
             ;;
-
         "macOS")
             pkgmgr="brew"
-            pkginst="brew install"
+            pkginst="brew bundle install"
             repo_flag="macOS"
             zsh_inst_folder="/usr/share/zsh"
             ;;
-
         *)
-            printf '%s\n'   "This script doesn't support distribuition: ${ID}" \
+            printf '%s\n'   "This script doesn't support distribuition: "${ID}"" \
                             "Exiting."
             exit 0
             ;;
-
     esac
 }
 
 functionDefineHost() 
 {
-    # dmi directory indicates a physical machine.
-    if [ -d "/sys/devices/virtual/dmi" ] ; then
+    # dmi directory indicates a physical machine
+    if [ -d "/sys/devices/virtual/dmi" ]; then
         current_host="$(cat /sys/devices/virtual/dmi/id/board_vendor) $(cat /sys/devices/virtual/dmi/id/product_version) - $(cat /sys/devices/virtual/dmi/id/product_name)"
 
     # ish directory is only available on Apple devices running iSH.app
-    elif [ -d "/proc/ish" ] ; then
+    elif [ -d "/proc/ish" ]; then
         current_host="iOS/iPadOS"
 
     # sw_vers gives macos os name and version, ergo we can get the hostname from sysctl
-    elif [ -d "/usr/bin/sw_vers" ] ; then
+    elif [ -d "/usr/bin/sw_vers" ]; then
         current_host="$(sysctl hw.model)"
 
     # WT_SESSION environment variable available in WSL1 and WSL2
-    elif [ -n "${WT_SESSION}" ] ; then
+    elif [ "${wslsession}" ]; then 
         current_host="Windows Subsystem for Linux"
 
-    # Last resort to fill current_host instead of garbage
+    # If none of the above
     else
         current_host="None"
     fi
-}
-
-functionInstallFixes() 
-{
-    functionPrintMessage privilege_root fixes
-
-    case "${current_host}" in
-        "LENOVO ThinkPad X230 - 23252FG")
-            printf '%s\n' "Installing Fingerprint"
-
-            su -c "${pkginst} fprintd fprintd-pam libfprint"
-
-            if [ "${XDG_SESSION_DESKTOP}" = "KDE" ] ; then
-                (su -c "
-                    touch /etc/pam.d/sddm ;
-                    echo '#%PAM-1.0' >> /etc/pam.d/sddm ;
-                    echo 'auth    [success=1 new_authtok_reqd=1 default=ignore]   pam_unix.so try_first_pass likeauth nullok' >> /etc/pam.d/sddm ;
-                    echo 'auth    sufficient      pam_fprintd.so' >> /etc/pam.d/sddm ;
-
-                    touch /etc/pam.d/kde ;
-                    echo 'auth 			sufficient  	pam_unix.so try_first_pass likeauth nullok' >> /etc/pam.d/kde ;
-                    echo 'auth 			sufficient  	pam_fprintd.so' >> /etc/pam.d/kde ;
-
-                    pam-auth-update ;
-                    ")
-            fi
-            ;;
-        "MacBookPro9,2")
-                /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" 
-            ;;
-        *)
-            printf '%s\n' "No fix to apply."
-            ;;
-
-    esac
-
-    functionPrintMessage printsleep
 }
 
 functionInstallRepositories() 
@@ -261,35 +220,74 @@ functionInstallPackages()
 {
     functionPrintMessage privilege_root packages
 
-    # Install packages using current_host as a filter
-    case ${current_host} in
+    case "${current_host}" in
         "LENOVO ThinkPad X230 - 23252FG")
-            case ${XDG_SESSION_DESKTOP} in
-                "KDE")  (su -c "${pkginst} ${packages_terminal} ${packages_kde_basics} ${packages_kde_personal} ${packages_x230}") ;;
-                *)      (su -c "${pkginst} ${packages_terminal}") ;;
+            case "${XDG_SESSION_DESKTOP}" in
+                "KDE")
+                    (su -c ""${pkginst}"
+                            "${packages_terminal}"
+                            "${packages_kde_basics}"
+                            "${packages_kde_personal}"
+                            "${packages_x230}"
+                            ");
+                    ;;
+                *)
+                    (su -c ""${pkginst}"
+                            "${packages_terminal}"
+                            ");
+                    ;;
             esac
             ;;
-
         "Windows Subsystem for Linux")
-            (su -c "${pkginst} ${packages_terminal}") ;
-            if [ "${ID}" = "opensuse-tumbleweed" ] ; then (su -c "${pkginst} -t pattern ${packages_wsl_pattern}") ; fi
-            ;;
+            (su -c ""${pkginst}" "${packages_terminal}"");
 
+            if [ "${ID}" = "opensuse-tumbleweed" ]; then (su -c ""${pkginst}" -t pattern "${packages_wsl_pattern}""); fi
+            ;;
         "iOS/iPadOS")
-            ${pkginst} ${packages_terminal} ${packages_ish} ;; # Alpine iSH already runs as root
-
-        "MacBook9,2")
-            ${pkginst} ${packages_macos}
-            ${pkginst} --cask ${packages_macos_cask}
+            ""${pkginst}" "${packages_terminal}" "${packages_ish}""
             ;;
-        # TODO: Host virtual machine
-        # TODO: SSH Sessions
-
+        "MacBook9,2")
+            ""${pkginst}" --file=${dir_dotroot}/INSTALL/Brewfile"
+            ;;
         *)
-            case ${XDG_SESSION_DESKTOP} in
-                "KDE")  (su -c "${pkginst} ${packages_terminal} ${packages_kde_basics}") ;;
+            case "${XDG_SESSION_DESKTOP}" in
+                "KDE")
+                    (su -c ""${pkginst}"
+                            "${packages_terminal}"
+                            "${packages_kde_basics}"
+                            ")
+                    ;;
                 *) ;;
             esac
+    esac
+
+    functionPrintMessage printsleep
+}
+
+functionInstallFixes() 
+{
+    functionPrintMessage privilege_root fixes
+
+    # Hardware layer
+    case "${current_host}" in
+        "MacBookPro9,2")
+            /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" 
+            ;;
+        *)
+            printf '%s\n' "Hardware running smoothly"
+            ;;
+    esac
+
+    # Operting system layer
+    case "${ID}" in
+        "debian")
+            printf '%s\n' "Symlinking fd-find"
+
+            ln -s $(which fdfind) ""${HOME}"/.local/bin/fd"
+            ;;
+        *)
+            printf '%s\n' "Operating system running smoothly"
+            ;;
     esac
 
     functionPrintMessage printsleep
@@ -299,26 +297,26 @@ functionInstallFonts()
 {
     functionPrintMessage privilege_user fonts
 
-    if [ ! -d "${HOME}/.fonts" ] ; then mkdir -p "${HOME}/.fonts" ; fi
+    if [ ! -d ""${HOME}"/.fonts" ] ; then mkdir -p ""${HOME}"/.fonts" ; fi
     if [ ! -d "${dir_cache}" ] ; then mkdir -p "${dir_cache}" ; fi
 
     if [ "$(curl -is "${url_nerdfonts}" | head -n 1)" = "HTTP/2 404" ] ; then
-        for dl_fonts in $(ls ${dir_dotroot}/INSTALL/fonts/*.tar.xz)
+        for dl_fonts in $(ls "${dir_dotroot}"/INSTALL/fonts/*.tar.xz)
         do
-            tar -xvf "${dir_dotroot}/INSTALL/fonts/${dl_fonts}" --directory "${HOME}/.fonts"
+            tar -xvf ""${dir_dotroot}"/INSTALL/fonts/"${dl_fonts}"" --directory ""${HOME}"/.fonts"
         done
     else
         for dl_fonts in ${packages_fonts}
         do
-            curl -L $(curl -s "${url_nerdfonts}" | grep browser_download_url | cut -d '"' -f 4 | grep "${dl_fonts}") --output "${dir_cache}/${dl_fonts}"
-            tar -xvf "${dir_cache}/${dl_fonts}" --directory "${HOME}/.fonts"
-            rm "${dir_cache}/${dl_fonts}"
+            curl -L $(curl -s "${url_nerdfonts}" | grep browser_download_url | cut -d '"' -f 4 | grep "${dl_fonts}") --output ""${dir_cache}"/"${dl_fonts}""
+            tar -xvf ""${dir_cache}"/"${dl_fonts}"" --directory ""${HOME}"/.fonts"
+            rm ""${dir_cache}"/"${dl_fonts}""
         done
     fi
 
-    rm "${HOME}"/.fonts/LICENSE*
-    rm "${HOME}"/.fonts/readme*
-    rm "${HOME}"/.fonts/README*
+    rm ""${HOME}"/.fonts/LICENSE*"
+    rm ""${HOME}"/.fonts/readme*"
+    rm ""${HOME}"/.fonts/README*"
 
     functionPrintMessage printsleep
 }
@@ -331,20 +329,19 @@ functionInstallSymlinks()
 
     [ -d "${HOME}"/.vim ]               && rm -rf "${HOME}"/.vim
     [ -d "${HOME}"/.config/vifm ]       && rm -rf "${HOME}"/.config/vifm
-    [ -d "${HOME}"/.config/neofetch ]   && rm -rf "${HOME}"/.config/neofetch
+    [ -d "${HOME}"/.config/fastfetch ]  && rm -rf "${HOME}"/.config/fastfetch
     [ -d "${HOME}"/.config/tmux ]       && rm -rf "${HOME}"/.config/tmux
     [ -d "${HOME}"/.config/mc ]         && rm -rf "${HOME}"/.config/mc
     [ -d "${HOME}"/.config/fd ]         && rm -rf "${HOME}"/.config/fd
 
-
-    # Files.
+    # Files
     ln -vsf "${dir_dotroot}"/config/zsh/zshrc   "${HOME}"/.zshrc
     ln -vsf "${dir_dotroot}"/config/vim/vimrc   "${HOME}"/.vimrc
 
-    # Directories.
+    # Directories
     ln -vsf "${dir_dotroot}"/config/vim         "${HOME}"/.vim
     ln -vsf "${dir_dotroot}"/config/vifm        "${HOME}"/.config/vifm
-    ln -vsf "${dir_dotroot}"/config/neofetch    "${HOME}"/.config/neofetch
+    ln -vsf "${dir_dotroot}"/config/fasffetch   "${HOME}"/.config/fastfetch
     ln -vsf "${dir_dotroot}"/config/tmux        "${HOME}"/.config/tmux
     ln -vsf "${dir_dotroot}"/config/fd          "${HOME}"/.config/fd
     ln -vsf "${dir_dotroot}"/config/mc          "${HOME}"/.config/mc
@@ -385,18 +382,18 @@ functionConfigVimHelptags()
 {
     functionPrintMessage privilege_user vimhelptags
 
-    vim -u NONE -c "helptags ${dir_dotroot}/config/vim/pack/plugins/start/vim-airline/doc" -c q
-    vim -u NONE -c "helptags ${dir_dotroot}/config/vim/pack/plugins/start/vim-airline-themes/doc" -c q
-    vim -u NONE -c "helptags ${dir_dotroot}/config/vim/pack/plugins/start/surround/doc" -c q
-    vim -u NONE -c "helptags ${dir_dotroot}/config/vim/pack/plugins/start/commentary/doc" -c q
-    vim -u NONE -c "helptags ${dir_dotroot}/config/vim/pack/plugins/start/fugitive/doc" -c q
-    vim -u NONE -c "helptags ${dir_dotroot}/config/vim/pack/plugins/start/undotree/doc" -c q
-    vim -u NONE -c "helptags ${dir_dotroot}/config/vim/pack/plugins/start/fzf/doc" -c q
-    vim -u NONE -c "helptags ${dir_dotroot}/config/vim/pack/plugins/start/fzf-vim/doc" -c q
-    vim -u NONE -c "helptags ${dir_dotroot}/config/vim/pack/plugins/start/goyo.vim/doc" -c q
-    vim -u NONE -c "helptags ${dir_dotroot}/config/vim/pack/plugins/start/vim-highlightedyank/doc" -c q
-    vim -u NONE -c "helptags ${dir_dotroot}/config/vim/pack/plugins/start/vim-better-whitespace/doc" -c q
-    vim -u NONE -c "helptags ${dir_dotroot}/config/vim/pack/plugins/start/vim-indent-guides/doc" -c q
+    vim -u NONE -c helptags "${dir_dotroot}"/config/vim/pack/plugins/start/vim-airline/doc -c q
+    vim -u NONE -c helptags "${dir_dotroot}"/config/vim/pack/plugins/start/vim-airline-themes/doc -c q
+    vim -u NONE -c helptags "${dir_dotroot}"/config/vim/pack/plugins/start/surround/doc -c q
+    vim -u NONE -c helptags "${dir_dotroot}"/config/vim/pack/plugins/start/commentary/doc -c q
+    vim -u NONE -c helptags "${dir_dotroot}"/config/vim/pack/plugins/start/fugitive/doc -c q
+    vim -u NONE -c helptags "${dir_dotroot}"/config/vim/pack/plugins/start/undotree/doc -c q
+    vim -u NONE -c helptags "${dir_dotroot}"/config/vim/pack/plugins/start/fzf/doc -c q
+    vim -u NONE -c helptags "${dir_dotroot}"/config/vim/pack/plugins/start/fzf-vim/doc -c q
+    vim -u NONE -c helptags "${dir_dotroot}"/config/vim/pack/plugins/start/goyo.vim/doc -c q
+    vim -u NONE -c helptags "${dir_dotroot}"/config/vim/pack/plugins/start/vim-highlightedyank/doc -c q
+    vim -u NONE -c helptags "${dir_dotroot}"/config/vim/pack/plugins/start/vim-better-whitespace/doc -c q
+    vim -u NONE -c helptags "${dir_dotroot}"/config/vim/pack/plugins/start/vim-indent-guides/doc -c q
 
     functionPrintMessage printsleep
 }
@@ -405,7 +402,7 @@ functionConfigShell()
 {
     functionPrintMessage privilege_user zshshell
 
-    printf '%s\n' "Current shell: ${SHELL}"
+    printf '%s\n' "Current shell: "${SHELL}""
 
     # Check if running shell is ZSH.
     if [ "${SHELL}" != "/usr/share/zsh" ] ; then
@@ -440,7 +437,7 @@ functionRebuildGitSubmodules()
     previous_pwd="$(pwd)"
 
     # NOTE: submodule path is relative to root repository.
-    (cd ${dir_dotroot} &&
+    (cd "${dir_dotroot}" &&
         git submodule add https://github.com/romkatv/powerlevel10k              config/zsh/plugins/powerlevel10k
         git submodule add https://github.com/zsh-users/zsh-syntax-highlighting  config/zsh/plugins/zsh-syntax-highlighting
         git submodule add https://github.com/zsh-users/zsh-autosuggestions      config/zsh/plugins/zsh-autosuggestions
@@ -460,7 +457,7 @@ functionRebuildGitSubmodules()
         git submodule add https://github.com/yegappan/lsp                       config/vim/pack/plugins/start/lsp
     )
 
-    cd ${previous_pwd}
+    cd "${previous_pwd}"
 
     functionPrintMessage printsleep
 }
