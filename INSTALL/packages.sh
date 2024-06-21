@@ -62,6 +62,9 @@ packages_kde_personal="\
     vlc"
 
 packages_x230="\
+    fprintd\
+    fprintd-pam\
+    libfprint\
     ifuse\
     NetworkManager-fortisslvpn\
     openfortivpn\
@@ -84,6 +87,7 @@ packages_fonts="\
     FiraCode.tar.xz\
     Hasklig.tar.xz\
     Lilex.tar.xz\
+    JetBrainsMono.tar.xz\
     Monoid.tar.xz"
 
 config_kde="\
