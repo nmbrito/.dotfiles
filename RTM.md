@@ -299,5 +299,7 @@
     Recovering SSH key:
         chmod 700 ~/.ssh
         chmod 600 ~/.ssh/rsa*
+
+    :help ft-<something>-syntax
    ```   
 
