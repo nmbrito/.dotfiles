@@ -25,7 +25,7 @@ if   [ -n "${WT_SESSION}"                  ]; then wslsession=1; else wslsession
 if [ ! -f "${dir}"/functions.sh ] && [ ! -f "${dir}"/packages.sh ] ; then
     printf '%s\n' "Missing install components. Aborting."
     exit 0
-elif
+else
     . "${dir}"/functions.sh # Source file containing functions.
     functionDefineDistro    # Defines the package manager and software especific to the running distribution.
     functionDefineHost      # Define current host
