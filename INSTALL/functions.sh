@@ -224,17 +224,10 @@ functionInstallPackages()
         "LENOVO ThinkPad X230 - 23252FG")
             case "${XDG_SESSION_DESKTOP}" in
                 "KDE")
-                    (su -c "${pkginst}
-                            ${packages_terminal}
-                            ${packages_kde_basics}
-                            ${packages_kde_personal}
-                            ${packages_x230}
-                            ");
+                    (su -c "${pkginst} ${packages_terminal} ${packages_kde_basics} ${packages_kde_personal} ${packages_x230}");
                     ;;
                 *)
-                    (su -c "${pkginst}
-                            ${packages_terminal}
-                            ");
+                    (su -c "${pkginst} ${packages_terminal}");
                     ;;
             esac
             ;;
@@ -312,8 +305,8 @@ functionInstallFonts()
     fi
 
     rm "${HOME}/.fonts/LICENSE"
-    rm "${HOME}/.fonts/readme"
-    rm "${HOME}/.fonts/README"
+    rm "${HOME}/.fonts/readme.md"
+    rm "${HOME}/.fonts/README.md"
 
     functionPrintMessage printsleep
 }
