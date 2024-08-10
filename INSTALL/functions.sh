@@ -252,9 +252,9 @@ functionInstallPackages()
         *)
             case "${XDG_SESSION_DESKTOP}" in
                 "KDE")
-                    (su -c "${pkginst}
-                            ${packages_terminal}
-                            ${packages_kde_basics}
+                    (su -c "${pkginst} \
+                            ${packages_terminal} \ 
+                            ${packages_kde_basics} \ 
                             ")
                     ;;
                 *) ;;
