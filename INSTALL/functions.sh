@@ -58,11 +58,11 @@ functionBuildMenu()
                     "|--------------------------------------------------------------|" \
                     "|  ( r) rebuild git submodules                                 |" \
                     "|--------------------------------------------------------------|" \
-                    "|  host: "${current_host}"                                      " \
+                    "|  host: ${current_host}                                        " \
                     "|  distribuition: "${ID}"                                       " \
                     "|  package manager: "${pkgmgr}"                                 " \
                     "|  current shell: "${SHELL}"                                    " \
-                    "|  pwd: "$(pwd)"                                                " \
+                    "|  pwd: $(pwd)                                                  " \
                     "|  repository root: "${dir_dotroot}"                            " \
                     "|  cache directory: "${dir_cache}"                              " \
                     "|--------------------------------------------------------------|" \
@@ -224,37 +224,37 @@ functionInstallPackages()
         "LENOVO ThinkPad X230 - 23252FG")
             case "${XDG_SESSION_DESKTOP}" in
                 "KDE")
-                    (su -c ""${pkginst}"
-                            "${packages_terminal}"
-                            "${packages_kde_basics}"
-                            "${packages_kde_personal}"
-                            "${packages_x230}"
+                    (su -c "${pkginst}
+                            ${packages_terminal}
+                            ${packages_kde_basics}
+                            ${packages_kde_personal}
+                            ${packages_x230}
                             ");
                     ;;
                 *)
-                    (su -c ""${pkginst}"
-                            "${packages_terminal}"
+                    (su -c "${pkginst}
+                            ${packages_terminal}
                             ");
                     ;;
             esac
             ;;
         "Windows Subsystem for Linux")
-            (su -c ""${pkginst}" "${packages_terminal}"");
+            (su -c "${pkginst} ${packages_terminal}");
 
-            if [ "${ID}" = "opensuse-tumbleweed" ]; then (su -c ""${pkginst}" -t pattern "${packages_wsl_pattern}""); fi
+            if [ "${ID}" = "opensuse-tumbleweed" ]; then (su -c "${pkginst} -t pattern ${packages_wsl_pattern}"); fi
             ;;
         "iOS/iPadOS")
-            ""${pkginst}" "${packages_terminal}" "${packages_ish}""
+            "${pkginst} ${packages_terminal} ${packages_ish}"
             ;;
         "MacBook9,2")
-            ""${pkginst}" --file=${dir_dotroot}/INSTALL/Brewfile"
+            "${pkginst} --file=${dir_dotroot}/INSTALL/Brewfile"
             ;;
         *)
             case "${XDG_SESSION_DESKTOP}" in
                 "KDE")
-                    (su -c ""${pkginst}"
-                            "${packages_terminal}"
-                            "${packages_kde_basics}"
+                    (su -c "${pkginst}
+                            ${packages_terminal}
+                            ${packages_kde_basics}
                             ")
                     ;;
                 *) ;;
@@ -283,7 +283,7 @@ functionInstallFixes()
         "debian")
             printf '%s\n' "Symlinking fd-find"
 
-            ln -s $(which fdfind) ""${HOME}"/.local/bin/fd"
+            ln -s $(which fdfind) "${HOME}/.local/bin/fd"
             ;;
         *)
             printf '%s\n' "Operating system running smoothly"
@@ -297,26 +297,26 @@ functionInstallFonts()
 {
     functionPrintMessage privilege_user fonts
 
-    if [ ! -d ""${HOME}"/.fonts" ] ; then mkdir -p ""${HOME}"/.fonts" ; fi
+    if [ ! -d "${HOME}/.fonts" ] ; then mkdir -p "${HOME}/.fonts" ; fi
     if [ ! -d "${dir_cache}" ] ; then mkdir -p "${dir_cache}" ; fi
 
     if [ "$(curl -is "${url_nerdfonts}" | head -n 1)" = "HTTP/2 404" ] ; then
-        for dl_fonts in $(ls "${dir_dotroot}"/INSTALL/fonts/*.tar.xz)
+        for dl_fonts in $(ls "${dir_dotroot}/INSTALL/fonts/*.tar.xz")
         do
-            tar -xvf ""${dir_dotroot}"/INSTALL/fonts/"${dl_fonts}"" --directory ""${HOME}"/.fonts"
+            tar -xvf "${dir_dotroot}/INSTALL/fonts/${dl_fonts}" --directory "${HOME}/.fonts"
         done
     else
         for dl_fonts in ${packages_fonts}
         do
-            curl -L $(curl -s "${url_nerdfonts}" | grep browser_download_url | cut -d '"' -f 4 | grep "${dl_fonts}") --output ""${dir_cache}"/"${dl_fonts}""
-            tar -xvf ""${dir_cache}"/"${dl_fonts}"" --directory ""${HOME}"/.fonts"
-            rm ""${dir_cache}"/"${dl_fonts}""
+            curl -L $(curl -s "${url_nerdfonts}" | grep browser_download_url | cut -d '"' -f 4 | grep "${dl_fonts}") --output "${dir_cache}/${dl_fonts}"
+            tar -xvf "${dir_cache}/${dl_fonts}" --directory "${HOME}/.fonts"
+            rm "${dir_cache}/${dl_fonts}"
         done
     fi
 
-    rm ""${HOME}"/.fonts/LICENSE*"
-    rm ""${HOME}"/.fonts/readme*"
-    rm ""${HOME}"/.fonts/README*"
+    rm "${HOME}/.fonts/LICENSE"
+    rm "${HOME}/.fonts/readme"
+    rm "${HOME}/.fonts/README"
 
     functionPrintMessage printsleep
 }
@@ -325,26 +325,26 @@ functionInstallSymlinks()
 {
     functionPrintMessage privilege_user symlinking
 
-    [ ! -d "${HOME}"/.config/ ]         && mkdir "${HOME}"/.config/
+    [ ! -d "${HOME}/.config/" ]         && mkdir "${HOME}/.config/"
 
-    [ -d "${HOME}"/.vim ]               && rm -rf "${HOME}"/.vim
-    [ -d "${HOME}"/.config/vifm ]       && rm -rf "${HOME}"/.config/vifm
-    [ -d "${HOME}"/.config/fastfetch ]  && rm -rf "${HOME}"/.config/fastfetch
-    [ -d "${HOME}"/.config/tmux ]       && rm -rf "${HOME}"/.config/tmux
-    [ -d "${HOME}"/.config/mc ]         && rm -rf "${HOME}"/.config/mc
-    [ -d "${HOME}"/.config/fd ]         && rm -rf "${HOME}"/.config/fd
+    [ -d "${HOME}/.vim" ]               && rm -rf "${HOME}/.vim"
+    [ -d "${HOME}/.config/vifm" ]       && rm -rf "${HOME}/.config/vifm"
+    [ -d "${HOME}/.config/fastfetch" ]  && rm -rf "${HOME}/.config/fastfetch"
+    [ -d "${HOME}/.config/tmux" ]       && rm -rf "${HOME}/.config/tmux"
+    [ -d "${HOME}/.config/mc" ]         && rm -rf "${HOME}/.config/mc"
+    [ -d "${HOME}/.config/fd" ]         && rm -rf "${HOME}/.config/fd"
 
     # Files
-    ln -vsf "${dir_dotroot}"/config/zsh/zshrc   "${HOME}"/.zshrc
-    ln -vsf "${dir_dotroot}"/config/vim/vimrc   "${HOME}"/.vimrc
+    ln -vsf "${dir_dotroot}/config/zsh/zshrc"   "${HOME}/.zshrc"
+    ln -vsf "${dir_dotroot}/config/vim/vimrc"   "${HOME}/.vimrc"
 
     # Directories
-    ln -vsf "${dir_dotroot}"/config/vim         "${HOME}"/.vim
-    ln -vsf "${dir_dotroot}"/config/vifm        "${HOME}"/.config/vifm
-    ln -vsf "${dir_dotroot}"/config/fasffetch   "${HOME}"/.config/fastfetch
-    ln -vsf "${dir_dotroot}"/config/tmux        "${HOME}"/.config/tmux
-    ln -vsf "${dir_dotroot}"/config/fd          "${HOME}"/.config/fd
-    ln -vsf "${dir_dotroot}"/config/mc          "${HOME}"/.config/mc
+    ln -vsf "${dir_dotroot}/config/vim"         "${HOME}/.vim"
+    ln -vsf "${dir_dotroot}/config/vifm"        "${HOME}/.config/vifm"
+    ln -vsf "${dir_dotroot}/config/fastfetch"   "${HOME}/.config/fastfetch"
+    ln -vsf "${dir_dotroot}/config/tmux"        "${HOME}/.config/tmux"
+    ln -vsf "${dir_dotroot}/config/fd"          "${HOME}/.config/fd"
+    ln -vsf "${dir_dotroot}/config/mc"          "${HOME}/.config/mc"
 
     functionPrintMessage printsleep
 }
@@ -382,18 +382,18 @@ functionConfigVimHelptags()
 {
     functionPrintMessage privilege_user vimhelptags
 
-    vim -u NONE -c helptags "${dir_dotroot}"/config/vim/pack/plugins/start/vim-airline/doc -c q
-    vim -u NONE -c helptags "${dir_dotroot}"/config/vim/pack/plugins/start/vim-airline-themes/doc -c q
-    vim -u NONE -c helptags "${dir_dotroot}"/config/vim/pack/plugins/start/surround/doc -c q
-    vim -u NONE -c helptags "${dir_dotroot}"/config/vim/pack/plugins/start/commentary/doc -c q
-    vim -u NONE -c helptags "${dir_dotroot}"/config/vim/pack/plugins/start/fugitive/doc -c q
-    vim -u NONE -c helptags "${dir_dotroot}"/config/vim/pack/plugins/start/undotree/doc -c q
-    vim -u NONE -c helptags "${dir_dotroot}"/config/vim/pack/plugins/start/fzf/doc -c q
-    vim -u NONE -c helptags "${dir_dotroot}"/config/vim/pack/plugins/start/fzf-vim/doc -c q
-    vim -u NONE -c helptags "${dir_dotroot}"/config/vim/pack/plugins/start/goyo.vim/doc -c q
-    vim -u NONE -c helptags "${dir_dotroot}"/config/vim/pack/plugins/start/vim-highlightedyank/doc -c q
-    vim -u NONE -c helptags "${dir_dotroot}"/config/vim/pack/plugins/start/vim-better-whitespace/doc -c q
-    vim -u NONE -c helptags "${dir_dotroot}"/config/vim/pack/plugins/start/vim-indent-guides/doc -c q
+    vim -u NONE -c helptags "${dir_dotroot}/config/vim/pack/plugins/start/vim-airline/doc" -c q
+    vim -u NONE -c helptags "${dir_dotroot}/config/vim/pack/plugins/start/vim-airline-themes/doc" -c q
+    vim -u NONE -c helptags "${dir_dotroot}/config/vim/pack/plugins/start/surround/doc" -c q
+    vim -u NONE -c helptags "${dir_dotroot}/config/vim/pack/plugins/start/commentary/doc" -c q
+    vim -u NONE -c helptags "${dir_dotroot}/config/vim/pack/plugins/start/fugitive/doc" -c q
+    vim -u NONE -c helptags "${dir_dotroot}/config/vim/pack/plugins/start/undotree/doc" -c q
+    vim -u NONE -c helptags "${dir_dotroot}/config/vim/pack/plugins/start/fzf/doc" -c q
+    vim -u NONE -c helptags "${dir_dotroot}/config/vim/pack/plugins/start/fzf-vim/doc" -c q
+    vim -u NONE -c helptags "${dir_dotroot}/config/vim/pack/plugins/start/goyo.vim/doc" -c q
+    vim -u NONE -c helptags "${dir_dotroot}/config/vim/pack/plugins/start/vim-highlightedyank/doc" -c q
+    vim -u NONE -c helptags "${dir_dotroot}/config/vim/pack/plugins/start/vim-better-whitespace/doc" -c q
+    vim -u NONE -c helptags "${dir_dotroot}/config/vim/pack/plugins/start/vim-indent-guides/doc" -c q
 
     functionPrintMessage printsleep
 }
@@ -402,10 +402,10 @@ functionConfigShell()
 {
     functionPrintMessage privilege_user zshshell
 
-    printf '%s\n' "Current shell: "${SHELL}""
+    printf '%s\n' "Current shell: ${SHELL}"
 
     # Check if running shell is ZSH.
-    if [ "${SHELL}" != "/usr/share/zsh" ] ; then
+    if [ "${SHELL}" != "/usr/bin/zsh" ] ; then
         # Check if ZSH is installed.
         if [ ! -f "${zsh_inst_folder}" ] ; then
             # iSH uses a different method for shell changing.
