@@ -304,9 +304,15 @@ functionInstallFonts()
         done
     fi
 
-    rm "${HOME}/.fonts/LICENSE"
-    rm "${HOME}/.fonts/readme.md"
+    rm "${HOME}/.fonts/LICENSE.txt"
+    rm "${HOME}/.fonts/LICENSE.md"
+    rm "${HOME}/.fonts/license.txt"
+    rm "${HOME}/.fonts/license.md"
+    rm "${HOME}/.fonts/README.txt"
     rm "${HOME}/.fonts/README.md"
+    rm "${HOME}/.fonts/readme.txt"
+    rm "${HOME}/.fonts/readme.md"
+    rm "${HOME}/.fonts/OFL.txt"
 
     functionPrintMessage printsleep
 }
