@@ -91,6 +91,13 @@ packages_fonts="\
     Monoid.tar.xz"
 
 config_kde="\
+    [ -d "${HOME}/.local/share/aurorae" ]               && cp -rv "${nmb_dotrepo}/kde_backup/"\
+    [ -d "${HOME}/.local/share/color-schemes" ]         && cp -rv "${nmb_dotrepo}/kde_backup/"\
+    [ -d "${HOME}/.local/share/icons" ]                 && cp -rv "${nmb_dotrepo}/kde_backup/"\
+    [ -d "${HOME}/.local/share/plasma/desktoptheme" ]   && cp -rv "${nmb_dotrepo}/kde_backup/"\
+    [ -d "${HOME}/.local/share/plasma/look-and-feel" ]  && cp -rv "${nmb_dotrepo}/kde_backup/"\
+    [ -d "${HOME}/.local/share/wallpapers" ]            && cp -rv "${nmb_dotrepo}/kde_backup/"\
+    [ -d "${HOME}/.icons" ]                             && cp -rv "${nmb_dotrepo}/kde_backup/"\
     "
 
 #    [ ! -d "${HOME}"/.config/ ]         && mkdir "${HOME}"/.config/
