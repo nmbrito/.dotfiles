@@ -84,11 +84,6 @@
     let g:loaded_netrw=1
     let g:loaded_netrwPlugin=1
 
-" VimTeX
-    let g:vimtex_view_method = 'zathura'
-    "let g:vimtex_fold_enabled
-    "let g:vimtex_format_enabled
-
 " lsp
 "   call LspAddServer([#{
 "       \    name: 'clangd',
