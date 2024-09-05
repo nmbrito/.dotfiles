@@ -43,9 +43,3 @@
 [submodule "config/vim/pack/plugins/start/vim-airline-themes"]
 	path = config/vim/pack/plugins/start/vim-airline-themes
 	url = https://github.com/vim-airline/vim-airline-themes
-[submodule "config/vim/pack/plugins/start/lsp"]
-	path = config/vim/pack/plugins/start/lsp
-	url = https://github.com/yegappan/lsp.git
-[submodule "config/vim/pack/plugins/start/vimtex"]
-	path = config/vim/pack/plugins/start/vimtex
-	url = https://github.com/lervag/vimtex.git
