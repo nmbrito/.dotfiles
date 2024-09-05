@@ -1,0 +1,4 @@
+# This file lives at ~/.config/latexmk/latexmkrc
+# and contains the single line...
+$pdflatex = "pdflatex -file-line-error -halt-on-error -interaction=nonstopmode -synctex=1";
+
