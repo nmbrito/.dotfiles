@@ -457,3 +457,8 @@ functionRebuildGitSubmodules()
 
     functionPrintMessage printsleep
 }
+
+functionClearSSH()
+{
+    (su -c rm /etc/ssh/ssh_host_*)
+}
