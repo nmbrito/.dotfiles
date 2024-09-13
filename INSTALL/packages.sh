@@ -1,8 +1,105 @@
 #!/bin/sh
 
 # Quickly sort lists with vim :'<,'>sort
-# Removed:
-#   neofetch
+packages_shinyserver="\
+    apache2\
+    build-essential\
+    gdal-data\
+    gdal-plugins\
+    gdebi-core\
+    libapache2-mod-proxy-html\
+    libfontconfig1-dev\
+    libfribidi-dev\
+    libharfbuzz-dev\
+    libjq-dev\
+    libmagick++-dev\
+    libprotobuf-dev\
+    librsvg2-dev\
+    libsecret-1-dev\
+    libsodium-dev\
+    libudunits2-dev\
+    libv8-dev\
+    libxml2-dev\
+    protobuf-compiler\
+    r-base\
+    r-base-core\
+    r-base-dev\
+    r-base-html\
+    r-cran-boot\
+    r-cran-class\
+    r-cran-mass\
+    r-cran-nlme\
+    r-cran-sp\
+    r-cran-spatial"\
+
+packages_rmodules="\
+    'DBI'\
+    'DT'\
+    'apexcharter'\
+    'arrow'\
+    'bslib'\
+    'data.table'\
+    'datamods'\
+    'dbplyr'\
+    'devtools'\
+    'dm'\
+    'dplyr'\
+    'duckdb'\
+    'fontawesome'\
+    'formattable'\
+    'geojsonio'\
+    'glue'\
+    'gt'\
+    'htmltools'\
+    'httr'\
+    'janitor'\
+    'jsonlite'\
+    'keyring'\
+    'leaflet'\
+    'leaflet.extras'\
+    'leaflet.extras2'\
+    'odbc'\
+    'openxlsx'\
+    'openxlsx'\
+    'pipeR'\
+    'pivottabler'\
+    'purrr'\
+    'quarto'\
+    'raster'\
+    'reactable'\
+    'readr'\
+    'readxl'\
+    'remotes'\
+    'rlang'\
+    'rlist'\
+    'rmarkdown'\
+    'robservable'\
+    'rpivotTable'\
+    'sass'\
+    'scales'\
+    'sever'\
+    'sf'\
+    'sfarrow'\
+    'shiny'\
+    'shiny'\
+    'shiny.blueprint'\
+    'shiny.emptystate'\
+    'shiny.fluent'\
+    'shiny.i18n'\
+    'shiny.react'\
+    'shiny.router'\
+    'shinyWidgets'\
+    'shinybusy'\
+    'shinycssloaders'\
+    'shinyjs'\
+    'stringr'\
+    'terra'\
+    'tibble'\
+    'tidyselect'\
+    'tidyverse'\
+    'toastui'\
+    'waiter'"
+
 list_server_gui="\
     xorgxrdp\
     xrdp"
@@ -110,7 +207,7 @@ packages_fonts="\
     JetBrainsMono.tar.xz\
     Monoid.tar.xz"
 
-config_kde="\
+backup_kde="\
     [ -d "${HOME}/.local/share/aurorae" ]               && cp -rv "${nmb_dotrepo}/kde_backup/"\
     [ -d "${HOME}/.local/share/color-schemes" ]         && cp -rv "${nmb_dotrepo}/kde_backup/"\
     [ -d "${HOME}/.local/share/icons" ]                 && cp -rv "${nmb_dotrepo}/kde_backup/"\
@@ -119,28 +216,28 @@ config_kde="\
     [ -d "${HOME}/.local/share/wallpapers" ]            && cp -rv "${nmb_dotrepo}/kde_backup/"\
     [ -d "${HOME}/.icons" ]                             && cp -rv "${nmb_dotrepo}/kde_backup/"\
     "
+symlinks_base="\
+    [ ! -d "${HOME}"/.config/mc ]       && mkdir "${HOME}"/.config/mc\
 
-#    [ ! -d "${HOME}"/.config/ ]         && mkdir "${HOME}"/.config/
-#    [ ! -d "${HOME}"/.config/mc ]       && mkdir "${HOME}"/.config/mc
-#
-#    [ -d "${HOME}"/.vim ]               && rm -rf "${HOME}"/.vim
-#    [ -d "${HOME}"/.config/vifm ]       && rm -rf "${HOME}"/.config/vifm
-#    [ -d "${HOME}"/.config/neofetch ]   && rm -rf "${HOME}"/.config/neofetch
-#    [ -d "${HOME}"/.config/tmux ]       && rm -rf "${HOME}"/.config/tmux
-#
-#
-#    # Files.
-#    ln -vsf "${dir_dotroot}"/config/zsh/zshrc   "${HOME}"/.zshrc
-#    ln -vsf "${dir_dotroot}"/config/vim/vimrc   "${HOME}"/.vimrc
-#    ln -vsf "${dir_dotroot}"/config/mc/ini      "${HOME}"/.config/mc/ini
-#
-#    # Directories.
-#    ln -vsf "${dir_dotroot}"/config/vim         "${HOME}"/.vim
-#    ln -vsf "${dir_dotroot}"/config/vifm        "${HOME}"/.config/vifm
-#    ln -vsf "${dir_dotroot}"/config/neofetch    "${HOME}"/.config/neofetch
-#    ln -vsf "${dir_dotroot}"/config/tmux        "${HOME}"/.config/tmux
-#    ln -vsf "${dir_dotroot}"/config/fd          "${HOME}"/.config/fd
-#
+    [ -d "${HOME}"/.vim ]               && rm -rf "${HOME}"/.vim\
+    [ -d "${HOME}"/.config/vifm ]       && rm -rf "${HOME}"/.config/vifm\
+    [ -d "${HOME}"/.config/neofetch ]   && rm -rf "${HOME}"/.config/neofetch\
+    [ -d "${HOME}"/.config/tmux ]       && rm -rf "${HOME}"/.config/tmux\
+
+    ln -vsf "${dir_dotroot}"/config/zsh/zshrc   "${HOME}"/.zshrc\
+    ln -vsf "${dir_dotroot}"/config/vim/vimrc   "${HOME}"/.vimrc\
+
+    ln -vsf "${dir_dotroot}"/config/mc          "${HOME}"/.config/mc\
+    ln -vsf "${dir_dotroot}"/config/vim         "${HOME}"/.vim\
+    ln -vsf "${dir_dotroot}"/config/vifm        "${HOME}"/.config/vifm\
+    ln -vsf "${dir_dotroot}"/config/neofetch    "${HOME}"/.config/neofetch\
+    ln -vsf "${dir_dotroot}"/config/tmux        "${HOME}"/.config/tmux\
+    ln -vsf "${dir_dotroot}"/config/fd          "${HOME}"/.config/fd"
+
+restore_kde="\
+
+
+    "
 #    # If KDE is detected as current session.
 #    if [ "${XDG_SESSION_DESKTOP}" = "KDE" ]
 #    then
