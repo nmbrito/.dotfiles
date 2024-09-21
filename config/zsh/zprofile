@@ -2,8 +2,8 @@
 eval "$(/usr/local/bin/brew shellenv 2>/dev/null)" 
 
 # Get OS ID
-if   [ -L /etc/os-release                  ]; then . /etc/os-release;
-elif [ command -v sw_vers > /dev/null 2>&1 ]; then ID="$(sw_vers -productName)"; fi
+if   [ -L /etc/os-release             ]; then . /etc/os-release;
+elif [ command -v sw_vers 2>/dev/null ]; then ID="$(sw_vers -productName)"; fi
 
 if [ -n "${WT_SESSION}" ]; then wslsession=1; else wslsession=0; fi
 
