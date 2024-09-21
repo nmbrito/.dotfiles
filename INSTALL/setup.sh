@@ -22,11 +22,11 @@ if   [ -L /etc/os-release                  ]; then . /etc/os-release;           
 elif [ command -v sw_vers > /dev/null 2>&1 ]; then ID="$(sw_vers -productName)"; fi     # macOS
 if   [ -n "${WT_SESSION}"                  ]; then wslsession=1; else wslsession=0; fi  # WSL session
 
-if [ ! -f "${dir}"/initfunctions.sh ] && [ ! -f "${dir}"/packages.sh ] ; then
+if [ ! -f "${dir}"/functions.sh ] && [ ! -f "${dir}"/packages.sh ] ; then
     printf '%s\n' "Missing install components. Aborting."
     exit 0
 else
-    . "${dir}"/initfunctions.sh # Source file containing functions.
+    . "${dir}"/functions.sh # Source file containing functions.
     functionDefineDistro    # Defines the package manager and software especific to the running distribution.
     functionDefineHost      # Define current host
     . "${dir}"/packages.sh  # Sourced after functions.sh
