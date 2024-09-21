@@ -23,7 +23,7 @@ dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
     . /etc/os-release
 
 #   Source file containing functions.
-    . "${dir}"/functions.sh
+    . "${dir}"/initfunctions.sh
 
 #   Defines the package manager and software especific to the running distribution.
     functionDefineDistro
