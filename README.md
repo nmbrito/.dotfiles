@@ -37,3 +37,7 @@ The setup runs a set of functions:
 |               | vim-indent-guides     |                               |
 |               | vimspector            |                               |
 
+## TODO:
+- Reorganize ZSH
+- Reorganize TMUX
+- Reorganize VIM
