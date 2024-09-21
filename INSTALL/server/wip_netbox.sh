@@ -2,8 +2,10 @@
 
 # Prerequisites
 ## Init functions
+dir_dotroot="$(git rev-parse --show-toplevel)"      # Define .dotfiles directory
+
 . /etc/os-release
-. initfunctions.sh
+. ${dir_dotroot}/INSTALL/initfunctions.sh
 func_def_distro
 func_def_host
 
