@@ -147,6 +147,7 @@ packages_terminal="\
     bat\
     eza\
     curl\
+    fastfetch\
     fzf\
     lazygit\
     htop\
