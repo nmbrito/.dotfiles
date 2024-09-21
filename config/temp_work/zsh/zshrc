@@ -1,3 +1,6 @@
+# Oh My Posh
+eval "$(oh-my-posh init ${SHELL} --config ${nmb_dotrepo}/config/ohmyposh/nmbrito_omp.toml)"
+
 # ZSH history
     HISTFILE="${HOME}/.cache/.histfile"
     HISTSIZE=10000
@@ -35,7 +38,7 @@
         *)  ;;
     esac
 
-    if [ ${is_wsl} ]; then . "${nmb_zshconf}/alias/zshrc_alias_wsl.zsh" ; fi
+    if [ ${wslsession} ]; then . "${nmb_zshconf}/alias/zshrc_alias_wsl.zsh" ; fi
 
 # Source plugins
     . "${nmb_zshconf}/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh"
