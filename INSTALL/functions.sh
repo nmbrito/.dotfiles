@@ -335,8 +335,9 @@ functionInstallSymlinks()
     [ -d "${HOME}/.config/fd" ]         && rm -rf "${HOME}/.config/fd"
 
     # Files
-    ln -vsf "${dir_dotroot}/config/zsh/zshrc"   "${HOME}/.zshrc"
-    ln -vsf "${dir_dotroot}/config/vim/vimrc"   "${HOME}/.vimrc"
+    ln -vsf "${dir_dotroot}/config/zsh/zprofile"    "${HOME}/.zprofile"
+    ln -vsf "${dir_dotroot}/config/zsh/zshrc"       "${HOME}/.zshrc"
+    ln -vsf "${dir_dotroot}/config/vim/vimrc"       "${HOME}/.vimrc"
 
     # Directories
     ln -vsf "${dir_dotroot}/config/vim"         "${HOME}/.vim"
