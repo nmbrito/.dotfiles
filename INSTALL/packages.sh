@@ -134,6 +134,7 @@ packages_terminal="\
     eza\
     curl\
     fzf\
+    lazygit\
     htop\
     man-pages\
     mc\
