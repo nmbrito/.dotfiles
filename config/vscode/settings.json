@@ -1,0 +1,25 @@
+{
+    // Geral
+    "editor.fontFamily": "FiraCode Nerd Font Mono, monospace, Consolas",
+    "editor.fontLigatures": true,
+    "editor.fontSize": 14,
+    "editor.minimap.enabled": false,
+    "editor.rulers": [
+        80
+    ],
+    
+    "breadcrumbs.enabled": false,
+
+    "workbench.sideBar.location": "right",
+
+    "terminal.integrated.fontFamily": "FiraCode Nerd Font Mono",
+    "terminal.integrated.fontSize": 12,
+    
+
+    // Code Spell Extension
+    "cSpell.language": "en,pt",
+    
+    // Vim Extension
+    "vim.vimrc.enable": true,
+    "vim.useSystemClipboard": true,
+}
