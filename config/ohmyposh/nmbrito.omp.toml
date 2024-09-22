@@ -2,6 +2,45 @@ version = 2
 final_space = true
 console_title_template = "{{ .Shell }} in {{ .Folder }}"
 
+[palette]
+    black="#272822"
+    gray="#75715e"
+    red="#f92672"
+    green="#87ff00"
+    green2="#5fd700"
+    orange="#ff5f00"
+    yellow="#ffd866"
+    blue="#66d9ef"
+    cyan="#a1efe4"
+    purple="#ae81ff"
+    white="#f8f8f2"
+
+#[palette] Old
+#    black="#272822"
+#    gray="#75715e"
+#    red="#f92672"
+#    green="#a6e22e"
+#    orange="#fd971f"
+#    yellow="#ffd866"
+#    blue="#66d9ef"
+#    cyan="#a1efe4"
+#    purple="#ae81ff"
+#    white="#f8f8f2"
+
+#[palette] New
+#    gray="#585858"
+#    red="#ff0000"          # Also PromptError
+#    yellow="#d7af00"
+#    blue="#00afff"         # Also DirectoryAnchor
+#    orange="#ff5f00"
+#    green="#5fd700"        # Also PromptOk
+#    green2="#87ff00"       # Also OS
+
+#    black="#272822"
+#    cyan="#a1efe4"
+#    purple="#ae81ff"
+#    white="#f8f8f2"
+
 [[blocks]]
     type = "prompt"
     alignment = "left"
@@ -12,33 +51,45 @@ console_title_template = "{{ .Shell }} in {{ .Folder }}"
         style = "plain"
         background = "transparent"
         foreground = "p:gray"
-        template = " with "
+        template = "╭─ "
+
+    [[blocks.segments]]
+        type = "os"
+        style = "plain"
+        foreground = "p:green"
+        background = "transparent"
+        template = "{{ if .WSL }}WSL at {{ end }}{{ .Icon }} "
 
     [[blocks.segments]]
         type = "text"
         style = "plain"
         background = "transparent"
         foreground = "p:gray"
-        template = " in "
+        template = "with "
+
+    [[blocks.segments]]
+        type = "session"
+        style = "plain"
+        background = "transparent"
+        foreground = "p:orange"
+        template = "{{ if .SSHSession }} {{ end }}{{ .UserName }}{{ .UserName }}@{{ .HostName }} "
+
+    [[blocks.segments]]
+        type = "text"
+        style = "plain"
+        background = "transparent"
+        foreground = "p:gray"
+        template = "in "
 
     [[blocks.segments]]
         type = "path"
         style = "plain"
-        template = "  {{ path .Path .Location }}"
+        template = " {{ path .Path .Location }} "
         background = "transparent"
         foreground = "p:blue"
 
         [blocks.segments.properties]
             style = "full"
-
-    #[[blocks.segments]]
-    #    type = "git"
-    #    style = "plain"
-    #    background = "transparent"
-    #    foreground = "{{ .HEAD }}{{ if or (.Working.Changed) (.Staging.Changed) }}*{{ end }}"
-
-    #    [blocks.segments.properties]
-    #        fetch_status = true
 
     [[blocks.segments]]
         type = "git"
@@ -46,16 +97,19 @@ console_title_template = "{{ .Shell }} in {{ .Folder }}"
         background = "transparent"
         foreground = "p:green"
         foreground_templates = [
-            "{{if gt .Ahead 0 }}p:green{{ end }}",
-            "{{if gt .Behind 0 }}p:red{{ end }}",
+            "{{ if or (.Working.Changed) (.Staging.Changed) }}p:orange{{ end }}",
+            "{{ if and (gt .Ahead 0) (gt .Behind 0) }}p:purple{{ end }}",
+            "{{ if gt .Ahead 0 }}p:green{{ end }}",
+            "{{ if gt .Behind 0 }}p:red{{ end }}"
         ]
-        #template = " {{if .UpstreamURL}}{{url .UpstreamIcon .UpstreamURL}}{{end}}{{.HEAD}} {{if .BranchStatus}}{{.BranchStatus}}{{end}}{{if .Working.Changed}}  {{ .Working.String }}{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }}{{ if gt .Ahead 0 }}⇡{{ end }}{{if gt .Behind 0 }}⇣{{ end }}"
-        template = " {{if .UpstreamURL}}{{url .UpstreamIcon .UpstreamURL}}{{end}}{{.HEAD}} {{if .BranchStatus}}{{.BranchStatus}}{{end}}{{if .Working.Changed}}  {{ .Working.String }}{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }}{{ if gt .Ahead 0 }} ⇡ {{ .Ahead}} {{ end }}{{if gt .Behind 0 }} ⇣ {{ .Behind }} {{ end }}"
+        template = "{{ if .UpstreamURL }}{{ url .UpstreamIcon .UpstreamURL }}{{ end }}{{ .HEAD }} {{ if .BranchStatus }}{{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }}"
 
     [blocks.segments.properties]
         branch_max_length = 25
         fetch_status = true
         fetch_upstream_icon = true
+        branch_ahead_icon = "⇡"
+        branch_behind_icon = "⇣" 
 
 [[blocks]]
     type = "prompt"
@@ -66,9 +120,16 @@ console_title_template = "{{ .Shell }} in {{ .Folder }}"
         type = "text"
         style = "plain"
         background = "transparent"
+        foreground = "p:gray"
+        template = "╰─"
+
+    [[blocks.segments]]
+        type = "text"
+        style = "plain"
+        background = "transparent"
         foreground_templates = [
-            "{{if gt .Code 0}}p:red{{end}}",
-            "{{if eq .Code 0}}p:green{{end}}",
+            "{{ if gt .Code 0 }}p:red{{ end }}",
+            "{{ if eq .Code 0 }}p:green2{{ end }}"
         ]
         template = "❯"
 
@@ -80,7 +141,7 @@ console_title_template = "{{ .Shell }} in {{ .Folder }}"
         type = "executiontime"
         style = "plain"
         background = "transparent"
-        foreground= "p:yellow"
+        foreground = "p:yellow"
         template = "{{ div .Ms 1000 }}s"
 
     [blocks.segments.properties]
@@ -89,19 +150,9 @@ console_title_template = "{{ .Shell }} in {{ .Folder }}"
 [transient_prompt]
     background = "transparent"
     foreground_templates = [
-        "{{if gt .Code 0}}p:red{{end}}",
-        "{{if eq .Code 0}}p:green{{end}}",
+        " {{if gt .Code 0}} p:red{{ end }}",
+        " {{if eq .Code 0}} p:green2{{ end }}"
     ]
     template = "❯ "
 
-[palette]
-    black="#272822"
-    gray="#75715e"
-    red="#f92672"
-    green="#a6e22e"
-    orange="#fd971f"
-    yellow="#ffd866"
-    blue="#66d9ef"
-    cyan="#a1efe4"
-    purple="#ae81ff"
-    white="#f8f8f2"
+
