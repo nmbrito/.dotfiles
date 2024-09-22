@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Backup themes and configurations ----------------
-tar czvf ${nmb_dotrepo}/kde_themes.tar.gz \
+tar czvf ${nmb_dotrepo}/kde_config.tar.gz \
     # Folders in root
     -C ${HOME}/ .icons \
     # Folders in .local
@@ -36,57 +36,27 @@ tar czvf ${nmb_dotrepo}/kde_themes.tar.gz \
     -C ${HOME}/.config/ powermanagementprofilesrc \
 
 # Restore -----------------------------------------
+tar -xzvf "${nmb_dotrepo}/kde_config.tar.gz" -C "${HOME}/.cache/kde_backup_temp"
 
-[ -d "${HOME}/.icons" ]                               && rm -rf "${HOME}/.icons"
-[ -d "${HOME}/.local/share/aurorae" ]                 && rm -rf "${HOME}/.local/share/aurorae"
-[ -d "${HOME}/.local/share/color-schemes" ]           && rm -rf "${HOME}/.local/share/color-schemes"
-[ -d "${HOME}/.local/share/icons" ]                   && rm -rf "${HOME}/.local/share/icons"
-[ -d "${HOME}/.local/share/konsole" ]                 && rm -rf "${HOME}/.local/share/konsole"
-[ -d "${HOME}/.local/share/kwin" ]                    && rm -rf "${HOME}/.local/share/kwin"
-[ -d "${HOME}/.local/share/plasma" ]                  && rm -rf "${HOME}/.local/share/plasma"
-[ -d "${HOME}/.local/share/wallpapers" ]              && rm -rf "${HOME}/.local/share/wallpapers"
+[ -d "${HOME}/.icons" ]                            && rm -rf "${HOME}/.icons"
+[ -d "${HOME}/.local/share/aurorae" ]              && rm -rf "${HOME}/.local/share/aurorae"
+[ -d "${HOME}/.local/share/color-schemes" ]        && rm -rf "${HOME}/.local/share/color-schemes"
+[ -d "${HOME}/.local/share/icons" ]                && rm -rf "${HOME}/.local/share/icons"
+[ -d "${HOME}/.local/share/konsole" ]              && rm -rf "${HOME}/.local/share/konsole"
+[ -d "${HOME}/.local/share/kwin" ]                 && rm -rf "${HOME}/.local/share/kwin"
+[ -d "${HOME}/.local/share/plasma" ]               && rm -rf "${HOME}/.local/share/plasma"
+[ -d "${HOME}/.local/share/wallpapers" ]           && rm -rf "${HOME}/.local/share/wallpapers"
 
-cp -rv "${nmb_dotrepo}/kde_backup/share/aurorae"                "${HOME}/.local/share/aurorae"
-cp -rv "${nmb_dotrepo}/kde_backup/share/color-schemes"          "${HOME}/.local/share/color-schemes"
-cp -rv "${nmb_dotrepo}/kde_backup/share/icons"                  "${HOME}/.local/share/icons"
-cp -rv "${nmb_dotrepo}/kde_backup/share/plasma/desktoptheme"    "${HOME}/.local/share/plasma/desktoptheme"
-cp -rv "${nmb_dotrepo}/kde_backup/share/plasma/look-and-feel"   "${HOME}/.local/share/plasma/look-and-feel"
-cp -rv "${nmb_dotrepo}/kde_backup/share/wallpapers"             "${HOME}/.local/share/wallpapers"
-cp -rv "${nmb_dotrepo}/kde_backup/.icons"                       "${HOME}/.icons"
+cp -rv ".cache/kde_backup_temp/share/aurorae"                "${HOME}/.local/share/aurorae"
+cp -rv ".cache/kde_backup_temp/share/color-schemes"          "${HOME}/.local/share/color-schemes"
+cp -rv ".cache/kde_backup_temp/share/icons"                  "${HOME}/.local/share/icons"
+cp -rv ".cache/kde_backup_temp/share/plasma/desktoptheme"    "${HOME}/.local/share/plasma/desktoptheme"
+cp -rv ".cache/kde_backup_temp/share/plasma/look-and-feel"   "${HOME}/.local/share/plasma/look-and-feel"
+cp -rv ".cache/kde_backup_temp/share/wallpapers"             "${HOME}/.local/share/wallpapers"
+cp -rv ".cache/kde_backup_temp/.icons"                       "${HOME}/.icons"
+cp -rv ".cache/kde_backup_temp/.config"                      "${HOME}/.config"
 
-# Folders in root
-tar -xzfv ${nmb_dotrepo}/kde_themes.tar.gz -C ${HOME}/.icons
-
-# Folders in .local
-tar -xzfv ${nmb_dotrepo}/kde_themes.tar.gz -C ${HOME}/.local/share
-
-# Folders in .config
-tar -xzfv ${nmb_dotrepo}/kde_themes.tar.gz -C ${HOME}/.config/kdedefaults
-
-# Files in .config
-tar -xzfv ${nmb_dotrepo}/kde_themes.tar.gz -C ${HOME}/.config \
-    .config/gtkrc \
-    .config/kdeglobals \
-    .config/kglobalshortcutsrc \
-    .config/kiorc \
-    .config/konsolerc \
-    .config/krunnerrc \
-    .config/kservicemenurc \
-    .config/ksmserverrc \
-    .config/ksplashrc \
-    .config/ktimezonedrc \
-    .config/kwinrc \
-    .config/plasma_calendar_holiday_regions \
-    .config/plasma-localerc \
-    .config/plasma-org.kde.plasma.desktop-appletsrc \
-    .config/plasmashellrc \
-
-
-# Misc files in .config
-#tar -xzfv ${nmb_dotrepo}/kde_themes.tar.gz \
-#    .config/Trolltech.conf \
-#    .config/powermanagementprofilesrc \
-#    -C ${HOME}/.config
+rm -rf "${HOME}/.cache"
 
 #----------------------------------------------------------------
 # Tricks
