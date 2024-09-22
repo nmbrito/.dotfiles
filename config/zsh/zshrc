@@ -1,5 +1,15 @@
 # Oh My Posh
-eval "$(oh-my-posh init zsh --config ${nmb_dotrepo}/config/ohmyposh/nmbrito_omp.toml)"
+eval "$(oh-my-posh init zsh --config ${nmb_dotrepo}/config/ohmyposh/nmbrito.omp.toml)"
+# Other OMP themes:
+#   SimpleMonokai.omp.json
+#   amro.omp.json
+#   bubblesextra.omp.json
+#   craver.omp.json
+#   default_omp.toml
+#   microverse-power.omp.json
+#   nmbrito.omp.toml
+#   powerlevel10k_classic.omp.json
+#   powerlevel10k_lean.omp.json
 
 # ZSH history
     HISTFILE="${HOME}/.cache/.histfile"

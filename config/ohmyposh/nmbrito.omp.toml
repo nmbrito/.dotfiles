@@ -1,0 +1,107 @@
+version = 2
+final_space = true
+console_title_template = "{{ .Shell }} in {{ .Folder }}"
+
+[[blocks]]
+    type = "prompt"
+    alignment = "left"
+    newline = true
+
+    [[blocks.segments]]
+        type = "text"
+        style = "plain"
+        background = "transparent"
+        foreground = "p:gray"
+        template = " with "
+
+    [[blocks.segments]]
+        type = "text"
+        style = "plain"
+        background = "transparent"
+        foreground = "p:gray"
+        template = " in "
+
+    [[blocks.segments]]
+        type = "path"
+        style = "plain"
+        template = "  {{ path .Path .Location }}"
+        background = "transparent"
+        foreground = "p:blue"
+
+        [blocks.segments.properties]
+            style = "full"
+
+    #[[blocks.segments]]
+    #    type = "git"
+    #    style = "plain"
+    #    background = "transparent"
+    #    foreground = "{{ .HEAD }}{{ if or (.Working.Changed) (.Staging.Changed) }}*{{ end }}"
+
+    #    [blocks.segments.properties]
+    #        fetch_status = true
+
+    [[blocks.segments]]
+        type = "git"
+        style = "plain"
+        background = "transparent"
+        foreground = "p:green"
+        foreground_templates = [
+            "{{if gt .Ahead 0 }}p:green{{ end }}",
+            "{{if gt .Behind 0 }}p:red{{ end }}",
+        ]
+        #template = " {{if .UpstreamURL}}{{url .UpstreamIcon .UpstreamURL}}{{end}}{{.HEAD}} {{if .BranchStatus}}{{.BranchStatus}}{{end}}{{if .Working.Changed}}  {{ .Working.String }}{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }}{{ if gt .Ahead 0 }}⇡{{ end }}{{if gt .Behind 0 }}⇣{{ end }}"
+        template = " {{if .UpstreamURL}}{{url .UpstreamIcon .UpstreamURL}}{{end}}{{.HEAD}} {{if .BranchStatus}}{{.BranchStatus}}{{end}}{{if .Working.Changed}}  {{ .Working.String }}{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }}{{ if gt .Ahead 0 }} ⇡ {{ .Ahead}} {{ end }}{{if gt .Behind 0 }} ⇣ {{ .Behind }} {{ end }}"
+
+    [blocks.segments.properties]
+        branch_max_length = 25
+        fetch_status = true
+        fetch_upstream_icon = true
+
+[[blocks]]
+    type = "prompt"
+    alignment = "left"
+    newline = true
+
+    [[blocks.segments]]
+        type = "text"
+        style = "plain"
+        background = "transparent"
+        foreground_templates = [
+            "{{if gt .Code 0}}p:red{{end}}",
+            "{{if eq .Code 0}}p:green{{end}}",
+        ]
+        template = "❯"
+
+[[blocks]]
+    type = "rprompt"
+    overflow = "hidden"
+
+    [[blocks.segments]]
+        type = "executiontime"
+        style = "plain"
+        background = "transparent"
+        foreground= "p:yellow"
+        template = "{{ div .Ms 1000 }}s"
+
+    [blocks.segments.properties]
+        threshold = 5000
+
+[transient_prompt]
+    background = "transparent"
+    foreground_templates = [
+        "{{if gt .Code 0}}p:red{{end}}",
+        "{{if eq .Code 0}}p:green{{end}}",
+    ]
+    template = "❯ "
+
+[palette]
+    black="#272822"
+    gray="#75715e"
+    red="#f92672"
+    green="#a6e22e"
+    orange="#fd971f"
+    yellow="#ffd866"
+    blue="#66d9ef"
+    cyan="#a1efe4"
+    purple="#ae81ff"
+    white="#f8f8f2"

@@ -18,6 +18,8 @@ alias .....="cd ../../../.."    # Changes down four directories
 alias susebox="distrobox enter susebox"     # Enter susebox container
 alias debianbox="distrobox enter debianbox" # Enter debianbox container
 
+alias ompup="oh-my-posh upgrade"    # Upgrade ohmyposh
+
 alias gitsubup="git submodule update --remote"              # Updates submodules
 alias gitsubinit="git submodule update --init --recursive"  # Initiates all submodules
 alias gitk="git status"                                     # Informs the status of the repository
