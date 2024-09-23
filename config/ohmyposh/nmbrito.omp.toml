@@ -5,8 +5,9 @@ console_title_template = "{{ .Shell }} in {{ .Folder }}"
 [palette]
     black="#272822"
     brown="#87875f"
-    gray="#75715e"
+    gray="#C0C0C0"
     gray2="#585858"
+    gray3="#75715e"
     red="#ff0000"
     green="#87ff00"
     green2="#5fd700"
@@ -39,7 +40,7 @@ console_title_template = "{{ .Shell }} in {{ .Folder }}"
         type = "text"
         style = "plain"
         background = "transparent"
-        foreground = "p:gray"
+        foreground = "p:gray3"
         template = "╭─ "
 
     [[blocks.segments]]
@@ -110,7 +111,7 @@ console_title_template = "{{ .Shell }} in {{ .Folder }}"
         type = "text"
         style = "plain"
         background = "transparent"
-        foreground = "p:gray"
+        foreground = "p:gray3"
         template = "╰─"
 
     [[blocks.segments]]
