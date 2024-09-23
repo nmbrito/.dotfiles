@@ -39,26 +39,28 @@ eval "$(oh-my-posh init zsh --config ${nmb_dotrepo}/config/ohmyposh/nmbrito.omp.
     autoload -U compinit && compinit
 
 # Source alias
-    . "${nmb_zshconf}/alias/zsh_alias.zsh"
+    [ -f "${nmb_zshconf}/alias/zsh_alias.zsh" ] && . "${nmb_zshconf}/alias/zsh_alias.zsh"
 
     case ${ID} in
         "opensuse-tumbleweed")
-            . "${nmb_zshconf}/alias/zsh_alias_opensuse.zsh"
+            [ -f "${nmb_zshconf}/alias/zsh_alias_opensuse.zsh" ] && . "${nmb_zshconf}/alias/zsh_alias_opensuse.zsh"
             ;;
         "macOS")
-            . "${nmb_zshconf}/alias/zsh_alias_macos.zsh"
+            [ -f "${nmb_zshconf}/alias/zsh_alias_macos.zsh" ] && . "${nmb_zshconf}/alias/zsh_alias_macos.zsh"
             ;;
         *) ;;
     esac
 
-    if [ ${wslsession} ]; then . "${nmb_zshconf}/alias/zsh_alias_wsl.zsh" ; fi
+    if [ ${wslsession} ]; then
+        [ -f "${nmb_zshconf}/alias/zsh_alias_wsl.zsh" ] && . "${nmb_zshconf}/alias/zsh_alias_wsl.zsh" ;
+    fi
 
 # Source plugins
-    . "${nmb_zshconf}/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh"
-    . "${nmb_zshconf}/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh"
-    . "${nmb_zshconf}/plugins/colored-man-pages/colored-man-pages.plugin.zsh"
+    [ -f "${nmb_zshconf}/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh" ] && . "${nmb_zshconf}/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh"
+    [ -f "${nmb_zshconf}/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh" ] && . "${nmb_zshconf}/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh"
+    [ -f "${nmb_zshconf}/plugins/colored-man-pages/colored-man-pages.plugin.zsh" ] && . "${nmb_zshconf}/plugins/colored-man-pages/colored-man-pages.plugin.zsh"
 
 # Source configs
-    . "${nmb_zshconf}/config/zsh_config_fzf.zsh"
+    [ -f "${nmb_zshconf}/config/zsh_config_fzf.zsh" ] && . "${nmb_zshconf}/config/zsh_config_fzf.zsh"
 
 #/usr/local/share/zsh/site-functions
