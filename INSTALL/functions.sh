@@ -221,6 +221,9 @@ functionInstallPackages()
 {
     functionPrintMessage privilege_root packages
 
+    # Install Oh-My-Posh
+    curl -s https://ohmyposh.dev/install.sh | bash -s
+
     case "${current_host}" in
         "LENOVO ThinkPad X230 - 23252FG")
             case "${XDG_SESSION_DESKTOP}" in
