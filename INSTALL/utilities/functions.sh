@@ -228,45 +228,45 @@ functionInstallPackages()
         "LENOVO ThinkPad X230 - 23252FG")
             case "${XDG_SESSION_DESKTOP}" in
                 "KDE")
-                    su -c "${pkg_installcommand}
-                        ${packages_terminal}
-                        ${packages_dev}
-                        ${packages_kde_basics}
-                        ${packages_kde_personal}
-                        ${packages_x230}
+                    su -c "$pkg_installcommand
+                        $packages_terminal
+                        $packages_dev
+                        $packages_kde_basics
+                        $packages_kde_personal
+                        $packages_x230
                         ";
                     ;;
                 #"hyprland")
                     #(su -c "${pkg_installcommand} ${packages_terminal} ${packages_dev} ${packages_hyprland} ${packages_kde_personal}");
                     #;;
                 *)
-                    su -c "${pkg_installcommand}
-                        ${packages_terminal}
-                        ${packages_dev}
+                    su -c "$pkg_installcommand
+                        $packages_terminal
+                        $packages_dev
                         ";
                     ;;
             esac
             ;;
         "Windows Subsystem for Linux")
-            su -c "${pkg_installcommand}
-                ${packages_terminal}
-                ${packages_dev}
+            su -c "$pkg_installcommand
+                $packages_terminal
+                $packages_dev
                 ";
 
-            if [ "${distro_name}" = "opensuse-tumbleweed" ]; then su -c "${pkg_installcommand} -t pattern ${packages_wsl_pattern}"; fi
+            if [ "${distro_name}" = "opensuse-tumbleweed" ]; then su -c "$pkg_installcommand -t pattern $packages_wsl_pattern"; fi
             ;;
         "iOS/iPadOS")
-            "${pkg_installcommand} ${packages_terminal} ${packages_ish}"
+            "$pkg_installcommand $packages_terminal $packages_ish"
             ;;
         "MacBook9,2")
-            "${pkg_installcommand} --file=${dir_dotroot}/INSTALL/Brewfile"
+            "$pkg_installcommand --file=${dir_dotroot}/INSTALL/Brewfile"
             ;;
         *)
             case "${XDG_SESSION_DESKTOP}" in
                 "KDE")
-                    su -c "${pkg_installcommand}
-                        ${packages_terminal}
-                        ${packages_kde_basics}
+                    su -c "$pkg_installcommand
+                        $packages_terminal
+                        $packages_kde_basics
                         ";
                     ;;
                 *) ;;
