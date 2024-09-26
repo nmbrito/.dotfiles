@@ -13,7 +13,8 @@ path_shinyserver_log="/var/log/shiny-server"        # ug+rwx,o+rx
 path_shinyserver_bin="/var/bin/shiny-server"
 path_shinyserver_srv="/srv/shiny-server"            # root:root ug+rwx o +rx
 urldownload_shinyserver="https://posit.co/download/shiny-server/" #https://www.rstudio.com/products/shiny/download-server/
-urlpkg_shinyserver="curl -L $(curl ${urldownload_shinyserver} | grep -Eo "wget .+?shiny-server-[0-9\.]+-amd64.deb" | grep -o '/\w*"$' | cut -d'/' -f2- | cut -d'"' -f1)"
+urlpkg_regex="curl -L $(curl ${urldownload_shinyserver} | grep -Eo "wget .+?shiny-server-[0-9\.]+-amd64.deb" | grep -o '/\w*"$' | cut -d'/' -f2- | cut -d'"' -f1)"
+urlpkg_name="echo ${urlpkg_shinyserver}"
 
 path_apache_sites="/etc/apache2/sites-available"
 user_shiny="shiny"
@@ -62,7 +63,7 @@ printf '%s\n'   "                                                               
                 "|  Shiny server /bin path: "${path_shinyserver_bin}"            " \
                 "|  Shiny server /srv path: "${path_shinyserver_srv}"            " \
                 "|  Shiny server URL download: "${urldownload_shinyserver}"      " \
-                "|  Shiny server package downloaded name: "${urlpkg_shinyserver}"" \
+                "|  Shiny server package downloaded name: "${urlpkg_name}"" \
                 "|  Apache2 site-available path: "${path_apache_sites}"          " \
                 "|  Shiny user: "${user_shiny}"                                  " \
                 "|  Shiny group: "${group_shiny}"                                " \
@@ -91,7 +92,7 @@ printf '%s\n'   "                                                               
     su -c "
         printf '%s\n' "Downloading and installing ShinyServer" ;
         curl -L $(curl -s "${urldownload_shinyserver}" | grep -Eo "wget .+?shiny-server-[0-9\.]+-amd64.deb" ) --output "${path_cache}" ;
-        gdebi ${path_cache}/${urlpkg_shinyserver} ;
+        gdebi ${path_cache}/${urlpkg_name} ;
 
         printf '%s\n' "Enabling Apache2 modules" ;
         a2dissite 000-default.conf ;
