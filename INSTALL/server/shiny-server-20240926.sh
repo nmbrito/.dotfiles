@@ -72,19 +72,19 @@ printf '%s\n'   "                                                               
                 "|--------------------------------------------------------------|" \
                 "                                                                "
 
-    printf '%s\n' "The next commands will run as ROOT"
-    su -c "{
-        printf '%s\n' "Adding R repository." ;
+    printf '%s\n' 'The next commands will run as ROOT'
+    su -c "
+        printf '%s\n' 'Adding R repository.' ;
         gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-key '95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7' ;
         gpg --armor --export '95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7' | sudo tee /etc/apt/trusted.gpg.d/cran_debian_key.asc ;
         add-apt-repository 'deb http://cloud.r-project.org/bin/linux/debian bookworm-cran40/ bookworm main' ;
 
-        printf '%s\n' "Performing update on repository sources list." ;
+        printf '%s\n' 'Performing update on repository sources list.' ;
         apt update ;
 
-        printf '%s\n' "Installing shiny server dependencies." ;
+        printf '%s\n' 'Installing shiny server dependencies.' ;
         ${pkg_installcommmand} ${packages_shinyserver} ;
-    }"
+    "
 
         printf '%s\n' "Installing R modules."
         su - -c "R -e \"install.packages(c(${packages_rmodules}), repos='https://cran.rstudio.com/')\""
