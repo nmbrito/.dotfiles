@@ -84,13 +84,14 @@ printf '%s\n'   "                                                               
 
         printf '%s\n' 'Installing shiny server dependencies.' ;
         ${pkg_installcommmand} ${packages_shinyserver} ;
+
+        printf '%s\n' 'Installing R modules.' ;
+        R -e \"install.packages(c(${packages_rmodules}), repos='https://cran.rstudio.com/')\" ;
     "
 
-        printf '%s\n' "Installing R modules."
-        su - -c "R -e \"install.packages(c(${packages_rmodules}), repos='https://cran.rstudio.com/')\""
 
     su -c "
-        printf '%s\n' "Downloading and installing ShinyServer" ;
+        printf '%s\n' 'Downloading and installing ShinyServer' ;
         curl -L $(curl -s "${urldownload_shinyserver}" | grep -Eo "wget .+?shiny-server-[0-9\.]+-amd64.deb" ) --output "${path_cache}" ;
         gdebi ${path_cache}/${urlpkg_name} ;
 
