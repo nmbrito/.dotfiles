@@ -7,10 +7,10 @@
 # ------------
 
 #   Variables
-dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)    # Run script from any directory
-
-dir_dotroot="$(git rev-parse --show-toplevel)"      # Define .dotfiles directory
-dir_cache=""${HOME}"/.cache"                        # Define .cache directory
+path_script=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)                    # Run script from any directory
+path_utilities=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd && cd utilities) # Directory containing all utilities
+path_dotroot="$(git rev-parse --show-toplevel)"                             # Define .dotfiles directory
+path_cache=""${HOME}"/.cache"                                               # Define .cache directory
 
 url_nerdfonts="https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest"
 
@@ -22,14 +22,14 @@ if   [ -L /etc/os-release                  ]; then . /etc/os-release;           
 elif [ command -v sw_vers > /dev/null 2>&1 ]; then ID="$(sw_vers -productName)"; fi     # macOS
 if   [ -n "${WT_SESSION}"                  ]; then wslsession=1; else wslsession=0; fi  # WSL session
 
-if [ ! -f "${dir}"/functions.sh ] && [ ! -f "${dir}"/packages.sh ] ; then
-    printf '%s\n' "Missing install components. Aborting."
+if [ ! -f "${path_utilities}"/functions.sh ] && [ ! -f "${path_utilities}"/packages.sh ] ; then
+    printf '%s\n' "Missing components. Aborting."
     exit 0
 else
-    . "${dir}"/functions.sh # Source file containing functions.
-    functionDefineDistro    # Defines the package manager and software especific to the running distribution.
-    functionDefineHost      # Define current host
-    . "${dir}"/packages.sh  # Sourced after functions.sh
+    . "${path_utilities}"/functions.sh  # Source file containing functions.
+    functionDefineDistro                # Defines the package manager and software especific to the running distribution.
+    functionDefineHost                  # Define current host
+    . "${path_utilities}"/packages.sh   # Sourced after functions.sh
 fi
 
 # Main
