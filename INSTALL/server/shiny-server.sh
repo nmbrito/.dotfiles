@@ -3,7 +3,8 @@
 # Prerequisites
 ## Init functions
     . /etc/os-release
-    . initfunctions.sh
+    . ${HOME}/.dotfiles/INSTALL/packages.sh
+    . ${HOME}/.dotfiles/INSTALL/functions.sh
 
     functionDefineDistro
 
@@ -16,10 +17,10 @@ path_apache_sites="/etc/apache2/sites-available"
 user_shiny="shiny"
 group_shiny="shiny"
 
-file_shinyserver_conf="shiny-server.conf"
+file_shinyserver_conf="./config_files/shiny-server.conf"
 
 file_apachelist="\
-    shiny-server-conf-app-dashboard.conf"
+    ./config_files/shiny-server-conf-app-dashboard.conf"
 
 # R install:
 ## R Repository
@@ -29,7 +30,7 @@ file_apachelist="\
         add-apt-repository 'deb http://cloud.r-project.org/bin/linux/debian bookworm-cran40/ bookworm main'
         apt update
 
-        "${pkginst} ${packages_shinyserver}"
+        ${pkginst} ${packages_shinyserver}
         ")
 
 ## R modules
