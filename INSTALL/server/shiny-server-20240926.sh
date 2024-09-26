@@ -3,8 +3,8 @@
 # Prerequisites
 ## Variables
 path_script=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
-path_config_files=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd && cd config_files)
-path_utilities=$(CDPATH= cd -- "$(dirname -- "$0")" && cd .. && pwd && cd utilities)
+path_config_files=$(CDPATH= cd -- "$(dirname -- "$0")" && cd config_files && pwd) 
+path_utilities=$(CDPATH= cd -- "$(dirname -- "$0")" && cd .. && cd utilities && pwd)
 
 path_cache="${HOME}/.cache"
 
