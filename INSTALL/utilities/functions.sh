@@ -65,8 +65,8 @@ functionBuildMenu()
                     "|  package manager: "${pkg_manager}"                            " \
                     "|  current shell: "${SHELL}"                                    " \
                     "|  pwd: $(pwd)                                                  " \
-                    "|  repository root: "${dir_dotroot}"                            " \
-                    "|  cache directory: "${dir_cache}"                              " \
+                    "|  repository root: "${path_dotroot}"                           " \
+                    "|  cache directory: "${path_cache}"                             " \
                     "|--------------------------------------------------------------|" \
                     "|  ( ) exit / cancel                                           |" \
                     "|--------------------------------------------------------------|" \
@@ -201,12 +201,12 @@ functionInstallRepositories()
 
     case "${distro_name}" in
         "opensuse-tumbleweed")
-            (su -c "
+            su -c "
                 rpm --import https://packages.microsoft.com/keys/microsoft.asc ;
                 zypper ar https://packages.microsoft.com/yumrepos/vscode vscode ;
                 zypper ar https://rpm.librewolf.net/librewolf-repo.repo ;
-                zypper --gpg-auto-import-keys ref
-                ")
+                zypper --gpg-auto-import-keys ref ;
+                "
                 # Last command is the same as "zypper refresh" but also accepts automatically keys
             ;;
         *)
@@ -228,20 +228,32 @@ functionInstallPackages()
         "LENOVO ThinkPad X230 - 23252FG")
             case "${XDG_SESSION_DESKTOP}" in
                 "KDE")
-                    (su -c "${pkg_installcommand} ${packages_terminal} ${packages_dev} ${packages_kde_basics} ${packages_kde_personal} ${packages_x230}");
+                    su -c "${pkg_installcommand}
+                        ${packages_terminal}
+                        ${packages_dev}
+                        ${packages_kde_basics}
+                        ${packages_kde_personal}
+                        ${packages_x230}
+                        ";
                     ;;
                 #"hyprland")
                     #(su -c "${pkg_installcommand} ${packages_terminal} ${packages_dev} ${packages_hyprland} ${packages_kde_personal}");
                     #;;
                 *)
-                    (su -c "${pkg_installcommand} ${packages_terminal} ${packages_dev}");
+                    su -c "${pkg_installcommand}
+                        ${packages_terminal}
+                        ${packages_dev}
+                        ";
                     ;;
             esac
             ;;
         "Windows Subsystem for Linux")
-            (su -c "${pkg_installcommand} ${packages_terminal} ${packages_dev}");
+            su -c "${pkg_installcommand}
+                ${packages_terminal}
+                ${packages_dev}
+                ";
 
-            if [ "${distro_name}" = "opensuse-tumbleweed" ]; then (su -c "${pkg_installcommand} -t pattern ${packages_wsl_pattern}"); fi
+            if [ "${distro_name}" = "opensuse-tumbleweed" ]; then su -c "${pkg_installcommand} -t pattern ${packages_wsl_pattern}"; fi
             ;;
         "iOS/iPadOS")
             "${pkg_installcommand} ${packages_terminal} ${packages_ish}"
@@ -252,7 +264,10 @@ functionInstallPackages()
         *)
             case "${XDG_SESSION_DESKTOP}" in
                 "KDE")
-                    (su -c "${pkg_installcommand} ${packages_terminal} ${packages_kde_basics}");
+                    su -c "${pkg_installcommand}
+                        ${packages_terminal}
+                        ${packages_kde_basics}
+                        ";
                     ;;
                 *) ;;
             esac
@@ -295,19 +310,19 @@ functionInstallFonts()
     functionPrintMessage privilege_user fonts
 
     if [ ! -d "${HOME}/.fonts" ] ; then mkdir -p "${HOME}/.fonts" ; fi
-    if [ ! -d "${dir_cache}" ] ; then mkdir -p "${dir_cache}" ; fi
+    if [ ! -d "${path_cache}" ] ; then mkdir -p "${path_cache}" ; fi
 
     if [ "$(curl -is "${url_nerdfonts}" | head -n 1)" = "HTTP/2 404" ] ; then
-        for dl_fonts in $(ls "${dir_dotroot}/INSTALL/fonts/*.tar.xz")
+        for dl_fonts in $(ls "${path_dotroot}/INSTALL/fonts/*.tar.xz")
         do
-            tar -xvf "${dir_dotroot}/INSTALL/fonts/${dl_fonts}" --directory "${HOME}/.fonts"
+            tar -xvf "${path_dotroot}/INSTALL/fonts/${dl_fonts}" --directory "${HOME}/.fonts"
         done
     else
         for dl_fonts in ${packages_fonts}
         do
-            curl -L $(curl -s "${url_nerdfonts}" | grep browser_download_url | cut -d '"' -f 4 | grep "${dl_fonts}") --output "${dir_cache}/${dl_fonts}"
-            tar -xvf "${dir_cache}/${dl_fonts}" --directory "${HOME}/.fonts"
-            rm "${dir_cache}/${dl_fonts}"
+            curl -L $(curl -s "${url_nerdfonts}" | grep browser_download_url | cut -d '"' -f 4 | grep "${dl_fonts}") --output "${path_cache}/${dl_fonts}"
+            tar -xvf "${path_cache}/${dl_fonts}" --directory "${HOME}/.fonts"
+            rm "${path_cache}/${dl_fonts}"
         done
     fi
 
@@ -338,17 +353,17 @@ functionInstallSymlinks()
     [ -d "${HOME}/.config/fd" ]         && rm -rf "${HOME}/.config/fd"
 
     # Files
-    ln -vsf "${dir_dotroot}/config/zsh/zprofile"    "${HOME}/.zprofile"
-    ln -vsf "${dir_dotroot}/config/zsh/zshrc"       "${HOME}/.zshrc"
-    ln -vsf "${dir_dotroot}/config/vim/vimrc"       "${HOME}/.vimrc"
+    ln -vsf "${path_dotroot}/config/zsh/zprofile"    "${HOME}/.zprofile"
+    ln -vsf "${path_dotroot}/config/zsh/zshrc"       "${HOME}/.zshrc"
+    ln -vsf "${path_dotroot}/config/vim/vimrc"       "${HOME}/.vimrc"
 
     # Directories
-    ln -vsf "${dir_dotroot}/config/vim"         "${HOME}/.vim"
-    ln -vsf "${dir_dotroot}/config/vifm"        "${HOME}/.config/vifm"
-    ln -vsf "${dir_dotroot}/config/fastfetch"   "${HOME}/.config/fastfetch"
-    ln -vsf "${dir_dotroot}/config/tmux"        "${HOME}/.config/tmux"
-    ln -vsf "${dir_dotroot}/config/fd"          "${HOME}/.config/fd"
-    ln -vsf "${dir_dotroot}/config/mc"          "${HOME}/.config/mc"
+    ln -vsf "${path_dotroot}/config/vim"         "${HOME}/.vim"
+    ln -vsf "${path_dotroot}/config/vifm"        "${HOME}/.config/vifm"
+    ln -vsf "${path_dotroot}/config/fastfetch"   "${HOME}/.config/fastfetch"
+    ln -vsf "${path_dotroot}/config/tmux"        "${HOME}/.config/tmux"
+    ln -vsf "${path_dotroot}/config/fd"          "${HOME}/.config/fd"
+    ln -vsf "${path_dotroot}/config/mc"          "${HOME}/.config/mc"
 
     functionPrintMessage printsleep
 }
@@ -365,13 +380,13 @@ functionRestoreKDE()
     [ -d "${HOME}/.local/share/wallpapers" ]              && rm -rf "${HOME}/.local/share/wallpapers"
     [ -d "${HOME}/.icons" ]                               && rm -rf "${HOME}/.icons"
 
-    cp -rv "${dir_dotroot}/kde_backup/share/aurorae"                "${HOME}/.local/share/aurorae"
-    cp -rv "${dir_dotroot}/kde_backup/share/color-schemes"          "${HOME}/.local/share/color-schemes"
-    cp -rv "${dir_dotroot}/kde_backup/share/icons"                  "${HOME}/.local/share/icons"
-    cp -rv "${dir_dotroot}/kde_backup/share/plasma/desktoptheme"    "${HOME}/.local/share/plasma/desktoptheme"
-    cp -rv "${dir_dotroot}/kde_backup/share/plasma/look-and-feel"   "${HOME}/.local/share/plasma/look-and-feel"
-    cp -rv "${dir_dotroot}/kde_backup/share/wallpapers"             "${HOME}/.local/share/wallpapers"
-    cp -rv "${dir_dotroot}/kde_backup/.icons"                       "${HOME}/.icons"
+    cp -rv "${path_dotroot}/kde_backup/share/aurorae"                "${HOME}/.local/share/aurorae"
+    cp -rv "${path_dotroot}/kde_backup/share/color-schemes"          "${HOME}/.local/share/color-schemes"
+    cp -rv "${path_dotroot}/kde_backup/share/icons"                  "${HOME}/.local/share/icons"
+    cp -rv "${path_dotroot}/kde_backup/share/plasma/desktoptheme"    "${HOME}/.local/share/plasma/desktoptheme"
+    cp -rv "${path_dotroot}/kde_backup/share/plasma/look-and-feel"   "${HOME}/.local/share/plasma/look-and-feel"
+    cp -rv "${path_dotroot}/kde_backup/share/wallpapers"             "${HOME}/.local/share/wallpapers"
+    cp -rv "${path_dotroot}/kde_backup/.icons"                       "${HOME}/.icons"
 
     functionPrintMessage printsleep
 }
@@ -400,7 +415,7 @@ functionInstallGitSubmodules()
     functionPrintMessage privilege_user syncgitsubmodule
 
     # A repository with submodules already added must be initiated.
-    (cd "${dir_dotroot}" && git submodule update --init --recursive) && printf '%s\n' "" "Submodules updated" ""
+    (cd "${path_dotroot}" && git submodule update --init --recursive) && printf '%s\n' "" "Submodules updated" ""
 
     functionPrintMessage printsleep
 }
@@ -409,18 +424,18 @@ functionConfigVimHelptags()
 {
     functionPrintMessage privilege_user vimhelptags
 
-    vim -u NONE -c helptags "${dir_dotroot}/config/vim/pack/plugins/start/vim-airline/doc" -c q
-    vim -u NONE -c helptags "${dir_dotroot}/config/vim/pack/plugins/start/vim-airline-themes/doc" -c q
-    vim -u NONE -c helptags "${dir_dotroot}/config/vim/pack/plugins/start/surround/doc" -c q
-    vim -u NONE -c helptags "${dir_dotroot}/config/vim/pack/plugins/start/commentary/doc" -c q
-    vim -u NONE -c helptags "${dir_dotroot}/config/vim/pack/plugins/start/fugitive/doc" -c q
-    vim -u NONE -c helptags "${dir_dotroot}/config/vim/pack/plugins/start/undotree/doc" -c q
-    vim -u NONE -c helptags "${dir_dotroot}/config/vim/pack/plugins/start/fzf/doc" -c q
-    vim -u NONE -c helptags "${dir_dotroot}/config/vim/pack/plugins/start/fzf-vim/doc" -c q
-    vim -u NONE -c helptags "${dir_dotroot}/config/vim/pack/plugins/start/goyo.vim/doc" -c q
-    vim -u NONE -c helptags "${dir_dotroot}/config/vim/pack/plugins/start/vim-highlightedyank/doc" -c q
-    vim -u NONE -c helptags "${dir_dotroot}/config/vim/pack/plugins/start/vim-better-whitespace/doc" -c q
-    vim -u NONE -c helptags "${dir_dotroot}/config/vim/pack/plugins/start/vim-indent-guides/doc" -c q
+    vim -u NONE -c helptags "${path_dotroot}/config/vim/pack/plugins/start/vim-airline/doc" -c q
+    vim -u NONE -c helptags "${path_dotroot}/config/vim/pack/plugins/start/vim-airline-themes/doc" -c q
+    vim -u NONE -c helptags "${path_dotroot}/config/vim/pack/plugins/start/surround/doc" -c q
+    vim -u NONE -c helptags "${path_dotroot}/config/vim/pack/plugins/start/commentary/doc" -c q
+    vim -u NONE -c helptags "${path_dotroot}/config/vim/pack/plugins/start/fugitive/doc" -c q
+    vim -u NONE -c helptags "${path_dotroot}/config/vim/pack/plugins/start/undotree/doc" -c q
+    vim -u NONE -c helptags "${path_dotroot}/config/vim/pack/plugins/start/fzf/doc" -c q
+    vim -u NONE -c helptags "${path_dotroot}/config/vim/pack/plugins/start/fzf-vim/doc" -c q
+    vim -u NONE -c helptags "${path_dotroot}/config/vim/pack/plugins/start/goyo.vim/doc" -c q
+    vim -u NONE -c helptags "${path_dotroot}/config/vim/pack/plugins/start/vim-highlightedyank/doc" -c q
+    vim -u NONE -c helptags "${path_dotroot}/config/vim/pack/plugins/start/vim-better-whitespace/doc" -c q
+    vim -u NONE -c helptags "${path_dotroot}/config/vim/pack/plugins/start/vim-indent-guides/doc" -c q
 
     functionPrintMessage printsleep
 }
@@ -464,7 +479,7 @@ functionRebuildGitSubmodules()
     previous_pwd="$(pwd)"
 
     # NOTE: submodule path is relative to root repository.
-    (cd "${dir_dotroot}" &&
+    (cd "${path_dotroot}" &&
         git submodule add https://github.com/romkatv/powerlevel10k              config/zsh/plugins/powerlevel10k
         git submodule add https://github.com/zsh-users/zsh-syntax-highlighting  config/zsh/plugins/zsh-syntax-highlighting
         git submodule add https://github.com/zsh-users/zsh-autosuggestions      config/zsh/plugins/zsh-autosuggestions
