@@ -23,6 +23,7 @@ file_shinyserver_conf="${path_config_files}/shiny-server.conf"
 file_apachelist="\
     ${path_config_files}/shiny-server-conf-app-dashboard.conf"
 
+echo $path_utilities
 ## Functions
 if [ ! -f "${path_utilities}"/functions.sh ] && [ ! -f "${path_utilities}"/packages.sh ] ; then
     printf '%s\n' "Missing components. Aborting."
