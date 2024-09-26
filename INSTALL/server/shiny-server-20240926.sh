@@ -14,7 +14,7 @@ path_shinyserver_bin="/var/bin/shiny-server"
 path_shinyserver_srv="/srv/shiny-server"            # root:root ug+rwx o +rx
 urldownload_shinyserver="https://posit.co/download/shiny-server/" #https://www.rstudio.com/products/shiny/download-server/
 urlpkg_regex="curl -L $(curl ${urldownload_shinyserver} | grep -Eo "wget .+?shiny-server-[0-9\.]+-amd64.deb" | grep -o '/\w*"$' | cut -d'/' -f2- | cut -d'"' -f1)"
-urlpkg_name="echo ${urlpkg_shinyserver}"
+urlpkg_name="echo ${urlpkg_regex}"
 
 path_apache_sites="/etc/apache2/sites-available"
 user_shiny="shiny"
@@ -73,7 +73,7 @@ printf '%s\n'   "                                                               
                 "                                                                "
 
     printf '%s\n' "The next commands will run as ROOT"
-    su -c "
+    su -c "{
         printf '%s\n' "Adding R repository." ;
         gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-key '95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7' ;
         gpg --armor --export '95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7' | sudo tee /etc/apt/trusted.gpg.d/cran_debian_key.asc ;
@@ -84,7 +84,7 @@ printf '%s\n'   "                                                               
 
         printf '%s\n' "Installing shiny server dependencies." ;
         ${pkg_installcommmand} ${packages_shinyserver} ;
-        "
+    }"
 
         printf '%s\n' "Installing R modules."
         su - -c "R -e \"install.packages(c(${packages_rmodules}), repos='https://cran.rstudio.com/')\""
