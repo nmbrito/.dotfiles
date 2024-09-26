@@ -23,8 +23,12 @@ file_shinyserver_conf="${path_config_files}/shiny-server.conf"
 file_apachelist="\
     ${path_config_files}/shiny-server-conf-app-dashboard.conf"
 
-echo $path_utilities
+
 ## Functions
+if   [ -L /etc/os-release                  ]; then . /etc/os-release;                   # Linux distribuition
+elif [ command -v sw_vers > /dev/null 2>&1 ]; then ID="$(sw_vers -productName)"; fi     # macOS
+if   [ -n "${WT_SESSION}"                  ]; then wslsession=1; else wslsession=0; fi  # WSL session
+
 if [ ! -f "${path_utilities}"/functions.sh ] && [ ! -f "${path_utilities}"/packages.sh ] ; then
     printf '%s\n' "Missing components. Aborting."
     exit 0
