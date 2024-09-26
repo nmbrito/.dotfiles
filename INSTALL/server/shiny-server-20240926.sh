@@ -12,7 +12,7 @@ path_shinyserver_etc="/etc/shiny-server"            # root:root u+rwx go+rx
 path_shinyserver_log="/var/log/shiny-server"        # ug+rwx,o+rx
 path_shinyserver_bin="/var/bin/shiny-server"
 path_shinyserver_srv="/srv/shiny-server"            # root:root ug+rwx o +rx
-urldownload_shinyserver="https://www.rstudio.com/products/shiny/download-server/"
+urldownload_shinyserver="https://posit.co/download/shiny-server/" #https://www.rstudio.com/products/shiny/download-server/
 urlpkg_shinyserver="curl -L $(curl ${urldownload_shinyserver} | grep -Eo "wget .+?shiny-server-[0-9\.]+-amd64.deb" | grep -o '/\w*"$' | cut -d'/' -f2- | cut -d'"' -f1)"
 
 path_apache_sites="/etc/apache2/sites-available"
@@ -85,7 +85,7 @@ printf '%s\n'   "                                                               
         ${pkg_installcommmand} ${packages_shinyserver} ;
 
         printf '%s\n' "Installing R modules." ;
-        R -e \"install.packages(c(${packages_rmodules}), repos='https://cran.rstudio.com/')\" ;
+        "R -e \"install.packages(c(${packages_rmodules}), repos='https://cran.rstudio.com/')\"" ;
 
         printf '%s\n' "Downloading and installing ShinyServer" ;
         curl -L $(curl -s "${urldownload_shinyserver}" | grep -Eo "wget .+?shiny-server-[0-9\.]+-amd64.deb" ) --output "${path_cache}" ;
@@ -109,7 +109,7 @@ printf '%s\n'   "                                                               
         "
 
     printf '%s\n' "The next commands will run as ROOT, for each file"
-    for $apache_item in $file_apachelist
+    for apache_item in $file_apachelist
     do
         su -c "
             printf '%s\n' "Copying ${apache_item} to ${path_apache_sites}" ;
