@@ -75,7 +75,7 @@ printf '%s\n'   "                                                               
     printf '%s\n' 'The next commands will run as ROOT'
     su -c "
         printf '%s\n' 'Updating and upgrading.' ;
-        apt update && apt upgrade ;
+        apt update && apt -y upgrade ;
 
         printf '%s\n' 'Adding R repository.' ;
         gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-key '95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7' ;
