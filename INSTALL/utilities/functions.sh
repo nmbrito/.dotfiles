@@ -122,8 +122,8 @@ functionDefineDistro()
             ;;
         "debian")
             pkg_manager="apt"
-            pkg_update="zypper up"
-            pkg_upgrade="zypper dup"
+            pkg_update="apt update"
+            pkg_upgrade="apt -y upgrade"
             pkg_installcommand="apt -y install"
             distro_name="debian"
             zsh_install_path="/usr/share/zsh"
@@ -140,9 +140,9 @@ functionDefineDistro()
             ;;
         "archlinux")
             pkg_manager="pacman"
-            pkg_update="pacman -S up"
+            pkg_update="pacman -Sy"
             pkg_upgrade="pacman -Syu"
-            pkg_installcommand="pacman -Sy"
+            pkg_installcommand="pacman -S"
             distro_name="arch"
             zsh_install_path="/usr/share/zsh"
 
