@@ -22,7 +22,7 @@ group_shiny="shiny"
 
 file_shinyserver_conf="${path_config_files}/shiny-server.conf"
 file_apachelist="\
-    ${path_config_files}/shiny-server-conf-app-dashboard.conf"
+${path_config_files}/shiny-server-conf-app-dashboard.conf"
 
 
 ## Functions
@@ -42,35 +42,7 @@ fi
 
 [ ! -d "${path_cache}" ] && mkdir "${path_cache}"
 
-printf '%s\n'   "                                                                " \
-                "|--------------------------------------------------------------|" \
-                "| Information:                                                 |" \
-                "|--------------------------------------------------------------|" \
-                "|  host: ${current_host}                                        " \
-                "|  distribuition: "${ID}"                                       " \
-                "|  package manager: "${pkg_manager}"                            " \
-                "|  current shell: "${SHELL}"                                    " \
-                "|  pwd: $(pwd)                                                  " \
-                "|  repository root: "${path_dotroot}"                           " \
-                "|  cache directory: "${path_cache}"                             " \
-                "|                                                               " \
-                "|  Script path: "${path_script}"                                " \
-                "|  Configurations path: "${path_config_files}"                  " \
-                "|  Utilities path: "${path_utilities}"                          " \
-                "|  Cache path: "${path_cache}"                                  " \
-                "|  Shiny server /etc path: "${path_shinyserver_etc}"            " \
-                "|  Shiny server /log path: "${path_shinyserver_log}"            " \
-                "|  Shiny server /bin path: "${path_shinyserver_bin}"            " \
-                "|  Shiny server /srv path: "${path_shinyserver_srv}"            " \
-                "|  Shiny server URL download: "${urldownload_shinyserver}"      " \
-                "|  Shiny server package downloaded name: "${urlpkg_name}"" \
-                "|  Apache2 site-available path: "${path_apache_sites}"          " \
-                "|  Shiny user: "${user_shiny}"                                  " \
-                "|  Shiny group: "${group_shiny}"                                " \
-                "|--------------------------------------------------------------|" \
-                "| Shiny Server Installer                                       |" \
-                "|--------------------------------------------------------------|" \
-                "                                                                "
+    functionInfoMenu
 
     printf '%s\n' 'The next commands will run as ROOT'
     su -c "
