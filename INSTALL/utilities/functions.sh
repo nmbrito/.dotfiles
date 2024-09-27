@@ -50,13 +50,13 @@ functionBuildMenu()
 {
     printf '%s\n'   "                                                                " \
                     "|--------------------------------------------------------------|" \
-                    "| select an option:                                            |" \
+                    "| Select an option:                                            |" \
                     "|--------------------------------------------------------------|" \
-                    "|  ( 1) run all                 |  ( 6) symlinks               |" \
-                    "|  ( 2) repositories            |  ( 7) configure git globals  |" \
-                    "|  ( 3) packages                |  ( 8) sync git submodules    |" \
-                    "|  ( 4) fixes                   |  ( 9) link vim helptags      |" \
-                    "|  ( 5) fonts                   |  (10) change to zsh shell    |" \
+                    "|  ( 1) Run all                 |  ( 6) Symlinks               |" \
+                    "|  ( 2) Repositories            |  ( 7) Configure git globals  |" \
+                    "|  ( 3) Packages                |  ( 8) Sync git submodules    |" \
+                    "|  ( 4) Fixes                   |  ( 9) Link vim helptags      |" \
+                    "|  ( 5) Fonts                   |  (10) Change to zsh shell    |" \
                     "|--------------------------------------------------------------|" \
                     "|  ( r) rebuild git submodules                                 |" \
                     "|--------------------------------------------------------------|" \
@@ -73,12 +73,39 @@ functionBuildMenu()
                     "                                                                "
 }
 
+functionInfoMenu() 
+{
+    printf '%s\n'   "                                                                " \
+                    "|--------------------------------------------------------------|" \
+                    "| Select an option:                                            |" \
+                    "|--------------------------------------------------------------|" \
+                    "|  Host: ${current_host}                                        " \
+                    "|  Distribuition: "${ID}"                                       " \
+                    "|                                                               " \
+                    "|  Package manager: "${pkg_manager}"                            " \
+                    "|  Package install command: "${pkg_installcommand}"             " \
+                    "|                                                               " \
+                    "|  Current shell: "${SHELL}"                                    " \
+                    "|  Pwd: $(pwd)                                                  " \
+                    "|--------------------------------------------------------------|" \
+                    "|  Repository root: "${path_dotroot}"                           " \
+                    "|  Cache directory: "${path_cache}"                             " \
+                    "|  Script path: "${path_script}"                                " \
+                    "|  Utilities path: "${path_utilities}"                          " \
+                    "|--------------------------------------------------------------|" \
+                    "|  $0                                                          |" \
+                    "|--------------------------------------------------------------|" \
+                    "                                                                "
+}
+
 functionDefineDistro() 
 {
     # Some distribuitions have different package names and software paths.
     case "${ID}" in
         "opensuse-tumbleweed")
             pkg_manager="zypper"
+            pkg_update="zypper up"
+            pkg_upgrade="zypper dup"
             pkg_installcommand="zypper install -y"
             distro_name="opensuse-tumbleweed"
             zsh_install_path="/usr/share/zsh"
@@ -95,7 +122,9 @@ functionDefineDistro()
             ;;
         "debian")
             pkg_manager="apt"
-            pkg_installcommand="apt install -y"
+            pkg_update="zypper up"
+            pkg_upgrade="zypper dup"
+            pkg_installcommand="apt -y install"
             distro_name="debian"
             zsh_install_path="/usr/share/zsh"
 
@@ -111,6 +140,8 @@ functionDefineDistro()
             ;;
         "archlinux")
             pkg_manager="pacman"
+            pkg_update="pacman -S up"
+            pkg_upgrade="pacman -Syu"
             pkg_installcommand="pacman -Sy"
             distro_name="arch"
             zsh_install_path="/usr/share/zsh"
@@ -127,6 +158,8 @@ functionDefineDistro()
             ;;
         "almalinux")
             pkg_manager="dnf"
+            pkg_update="dnf update"
+            pkg_upgrade="dnf upgrade -y"
             pkg_installcommand="dnf install -y"
             distro_name="almalinux"
             zsh_install_path="/usr/share/zsh"
@@ -143,6 +176,8 @@ functionDefineDistro()
             ;;
         "alpine")
             pkg_manager="apk"
+            pkg_update=""
+            pkg_upgrade=""
             pkg_installcommand="apk add"
             distro_name="alpine"
             zsh_install_path="/usr/share/zsh"
@@ -159,6 +194,8 @@ functionDefineDistro()
             ;;
         "macOS")
             pkg_manager="brew"
+            pkg_update="brew update"
+            pkg_upgrade="brew upgrade"
             pkg_installcommand="brew bundle install"
             distro_name="macOS"
             zsh_install_path="/usr/share/zsh"
@@ -228,29 +265,29 @@ functionInstallPackages()
         "LENOVO ThinkPad X230 - 23252FG")
             case "${XDG_SESSION_DESKTOP}" in
                 "KDE")
-                    su -c "$pkg_installcommand
-                        $packages_terminal
-                        $packages_dev
-                        $packages_kde_basics
-                        $packages_kde_personal
-                        $packages_x230
+                    su -c "$pkg_installcommand \
+                        $packages_terminal \
+                        $packages_dev \
+                        $packages_kde_basics \
+                        $packages_kde_personal \
+                        $packages_x230 \
                         ";
                     ;;
                 #"hyprland")
                     #(su -c "${pkg_installcommand} ${packages_terminal} ${packages_dev} ${packages_hyprland} ${packages_kde_personal}");
                     #;;
                 *)
-                    su -c "$pkg_installcommand
-                        $packages_terminal
-                        $packages_dev
+                    su -c "$pkg_installcommand \
+                        $packages_terminal \
+                        $packages_dev \
                         ";
                     ;;
             esac
             ;;
         "Windows Subsystem for Linux")
-            su -c "$pkg_installcommand
-                $packages_terminal
-                $packages_dev
+            su -c "$pkg_installcommand \
+                $packages_terminal \
+                $packages_dev \
                 ";
 
             if [ "${distro_name}" = "opensuse-tumbleweed" ]; then su -c "$pkg_installcommand -t pattern $packages_wsl_pattern"; fi
@@ -264,9 +301,9 @@ functionInstallPackages()
         *)
             case "${XDG_SESSION_DESKTOP}" in
                 "KDE")
-                    su -c "$pkg_installcommand
-                        $packages_terminal
-                        $packages_kde_basics
+                    su -c "$pkg_installcommand \
+                        $packages_terminal \
+                        $packages_kde_basics \
                         ";
                     ;;
                 *) ;;
