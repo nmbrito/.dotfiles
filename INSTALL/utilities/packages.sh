@@ -11,7 +11,6 @@ packages_shinyserver="\
     gdal-data\
     gdal-plugins\
     gdebi-core\
-    libapache2-mod-proxy-html\
     libfontconfig1-dev\
     libfribidi-dev\
     libharfbuzz-dev\
@@ -36,6 +35,8 @@ packages_shinyserver="\
     r-cran-sp\
     r-cran-spatial"
 # 2}}}
+
+    #libapache2-mod-proxy-html\
 
 # R Modules {{{2
 packages_rmodules="\
