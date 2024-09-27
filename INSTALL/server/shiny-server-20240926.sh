@@ -58,7 +58,7 @@ fi
         apt update ;
 
         printf '%s\n' 'Installing shiny server dependencies.' ;
-        $pkg_installcommmand $packages_shinyserver ;
+        $pkg_installcommand $packages_shinyserver ;
 
         printf '%s\n' 'Installing R modules.' ;
         R -e \"install.packages(c($packages_rmodules), repos='https://cran.rstudio.com/')\" ;
