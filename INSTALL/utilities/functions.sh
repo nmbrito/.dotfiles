@@ -80,20 +80,20 @@ functionInfoMenu()
                     "| Select an option:                                            |" \
                     "|--------------------------------------------------------------|" \
                     "|  Host: ${current_host}                                        " \
-                    "|  Distribuition: "${ID}"                                       " \
+                    "|  Distribuition: ${ID}                                         " \
                     "|                                                               " \
-                    "|  Package manager: "${pkg_manager}"                            " \
-                    "|  Package install command: "${pkg_installcommand}"             " \
+                    "|  Package manager: ${pkg_manager}                              " \
+                    "|  Package install command: ${pkg_installcommand}               " \
                     "|                                                               " \
-                    "|  Current shell: "${SHELL}"                                    " \
+                    "|  Current shell: ${SHELL}                                      " \
                     "|  Pwd: $(pwd)                                                  " \
                     "|--------------------------------------------------------------|" \
-                    "|  Repository root: "${path_dotroot}"                           " \
-                    "|  Cache directory: "${path_cache}"                             " \
-                    "|  Script path: "${path_script}"                                " \
-                    "|  Utilities path: "${path_utilities}"                          " \
+                    "|  Repository root: ${path_dotroot}                             " \
+                    "|  Cache directory: ${path_cache}                               " \
+                    "|  Script path: ${path_script}                                  " \
+                    "|  Utilities path: ${path_utilities}                            " \
                     "|--------------------------------------------------------------|" \
-                    "|  $0                                                          |" \
+                    "|  $0                                                           " \
                     "|--------------------------------------------------------------|" \
                     "                                                                "
 }
