@@ -409,13 +409,13 @@ functionRestoreKDE()
 {
     functionPrintMessage privilege_user restorekde
 
-    [ -d "${HOME}/.local/share/aurorae" ]                 && rm -rf "${HOME}/.local/share/aurorae"
-    [ -d "${HOME}/.local/share/color-schemes" ]           && rm -rf "${HOME}/.local/share/color-schemes"
-    [ -d "${HOME}/.local/share/icons" ]                   && rm -rf "${HOME}/.local/share/icons"
-    [ -d "${HOME}/.local/share/plasma/desktoptheme" ]     && rm -rf "${HOME}/.local/share/plasma/desktoptheme"
-    [ -d "${HOME}/.local/share/plasma/look-and-feel" ]    && rm -rf "${HOME}/.local/share/plasma/look-and-feel"
-    [ -d "${HOME}/.local/share/wallpapers" ]              && rm -rf "${HOME}/.local/share/wallpapers"
-    [ -d "${HOME}/.icons" ]                               && rm -rf "${HOME}/.icons"
+    [ -d "${HOME}/.local/share/aurorae" ]                  && rm -rf "${HOME}/.local/share/aurorae"
+    [ -d "${HOME}/.local/share/color-schemes" ]            && rm -rf "${HOME}/.local/share/color-schemes"
+    [ -d "${HOME}/.local/share/icons" ]                    && rm -rf "${HOME}/.local/share/icons"
+    [ -d "${HOME}/.local/share/plasma/desktoptheme" ]      && rm -rf "${HOME}/.local/share/plasma/desktoptheme"
+    [ -d "${HOME}/.local/share/plasma/look-and-feel" ]     && rm -rf "${HOME}/.local/share/plasma/look-and-feel"
+    [ -d "${HOME}/.local/share/wallpapers" ]               && rm -rf "${HOME}/.local/share/wallpapers"
+    [ -d "${HOME}/.icons" ]                                && rm -rf "${HOME}/.icons"
 
     cp -rv "${path_dotroot}/kde_backup/share/aurorae"                "${HOME}/.local/share/aurorae"
     cp -rv "${path_dotroot}/kde_backup/share/color-schemes"          "${HOME}/.local/share/color-schemes"
