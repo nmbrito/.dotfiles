@@ -8,7 +8,7 @@
 
 #   Variables
 path_script=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)                    # Run script from any directory
-path_utilities=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd && cd utilities) # Directory containing all utilities
+path_utilities=$(CDPATH= cd -- "$(dirname -- "$0")" && cd utilities && pwd) # Directory containing all utilities
 path_dotroot="$(git rev-parse --show-toplevel)"                             # Define .dotfiles directory
 path_cache=""${HOME}"/.cache"                                               # Define .cache directory
 
@@ -18,9 +18,9 @@ message_longwarn="###########################################"
 message_longdash="----------------------"
 message_execroot="# The following commands will run as ROOT #"
 
-if   [ -L /etc/os-release                  ]; then . /etc/os-release;                   # Linux distribuition
-elif [ command -v sw_vers > /dev/null 2>&1 ]; then ID="$(sw_vers -productName)"; fi     # macOS
-if   [ -n "${WT_SESSION}"                  ]; then wslsession=1; else wslsession=0; fi  # WSL session
+if   [ -L /etc/os-release                ]; then . /etc/os-release;                   # Linux distribuition
+elif [ $(command -v sw_vers) 2>/dev/null ]; then ID="$(sw_vers -productName)"; fi     # macOS
+if   [ -n "${WT_SESSION}"                ]; then wslsession=1; else wslsession=0; fi  # WSL session
 
 if [ ! -f "${path_utilities}"/functions.sh ] && [ ! -f "${path_utilities}"/packages.sh ] ; then
     printf '%s\n' "Missing components. Aborting."
