@@ -4,6 +4,7 @@
 #alias b="brew search"                                                  # Search
 #alias b="brew upgrade"                                                 # Upgrade all packages
 #alias b="brew update"                                                  # Update homebrew
+alias brewup="brew update && brew upgrade"                             # Updates homebrew and upgrades packages
 #alias b="brew cleanup"                                                 # Force cleanup
 #alias b="brew cleanup --prune=all "                                    # Force recent cleanup
 #alias b="brew cleanup --prune=all --dry-run"                           # Test a force recent cleanup
