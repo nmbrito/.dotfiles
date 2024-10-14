@@ -1,5 +1,5 @@
 # Single line alias
-alias ls="eza -hlaas type --icons=always --git" # List directory with bling
+alias ls="eza -hlaags type --icons=always --git" # List directory with bling
 alias lsh="eza -hls type --icons=always"        # List directory with bling minus hidden
 alias sl="'ls' -slaF --color=auto"              # Use LS to list directory
 alias slh="'ls' -sl --color=auto"               # Use LS to list directory minus hidden
