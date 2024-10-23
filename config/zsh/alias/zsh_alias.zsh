@@ -1,8 +1,9 @@
 # Single line alias
-alias ls="eza -hlaags type --icons=always --git" # List directory with bling
-alias lsh="eza -hls type --icons=always"        # List directory with bling minus hidden
-alias sl="'ls' -slaF --color=auto"              # Use LS to list directory
-alias slh="'ls' -sl --color=auto"               # Use LS to list directory minus hidden
+alias ls="eza --header --long --all --group --sort=type --icons=always --git"                   # List directory with bling
+alias lsh="eza --header --long --sort=type --icons=always"                                      # List directory with bling minus hidden
+alias lst="eza --header --long --tree --level=2 --all --group --sort=type --icons=always --git" # List directory with bling in a tree with 2 levels
+alias sl="'ls' -slaF --color=auto"                                                              # Use LS to list directory
+alias slh="'ls' -sl --color=auto"                                                               # Use LS to list directory minus hidden
 
 alias cat="bat"                                                                     # Subs cat for bat
 alias reload=". ${HOME}/.zshrc"                                                     # reloads zshrc config
