@@ -547,34 +547,39 @@ functionVMTemplateCleanUp()
 {
     functionPrintMessage privilege_root vmtemplatecleanup
 
-    # Should I separate in multiple functions?
-    # Clear SSH // Remove persistent rules // Clean history
     case "${distro_name}" in
         "debian")
-            printf '%s\n' "Clearing SSH Keys"
+            printf '%s\n' "Reconfiguring SSH Keys"
             (su -c "
                 rm -fv /etc/ssh/ssh_host_*
                 dpkg-reconfigure openssh-server
-                ")
+                systemctl restart ssh
+            ")
 
-            printf '%s\n' "Removing Persistent Naming udev Rules"
-            (su -c "rm /etc/udev/rules.d/70-persistent-*.rules")
-
-            printf '%s\n' "Clean up bash history"
-            (su -c "cat /etc/passwd | cut -d: -f6 | sed 's@$@/.bash_history@' | xargs -d '\n' rm -fv")
-            ;;
-        "opensuse-tumbleweed")
+            printf '%s\n' "Cleaning packages"
             (su -c "
-                /sbin/service sshd stop
-                /bin/rm -f /etc/ssh/ssh_host_*
-                /usr/bin/ssh-keygen -f /etc/ssh/ssh_host_key -b 2048 -N ‘’ -t rsa1
-                /usr/bin/ssh-keygen -f /etc/ssh/ssh_host_rsa_key -b 2048 -N ‘’ -t rsa
-                /usr/bin/ssh-keygen -f /etc/ssh/ssh_host_dsa_key -b 1024 -N ‘’ -t dsa
-                /sbin/service sshd start
-                ")
+                ${pkg_manager} autoclean
+                ${pkg_manager} clean
+                ${pkg_manager} autoremove
+            ")
+
+            printf '%s\n' "Configuring Journalctl"
+            (su -c "
+                sed -i 's@#SystemMaxUse=@SystemMaxUse=1G@g' /etc/systemd/journald.conf
+                sed -i 's@#SystemMaxFileSize=@SystemMaxFileSize=50M@g' /etc/systemd/journald.conf
+
+                journalctl --vacuum-time=2d
+                journalctl --vacuum-size=100M
+                systemctl restart systemd-journald
+            ")
+
+            printf '%s\n' "Clearing temporary folder"
+            (su -c "
+                rm -rf /tmp/.
+            ")
             ;;
         *)
-            printf '%s\n' "Distro not configured"
+            printf '%s\n' "Distro not implemented yet"
             ;;
     esac
 
