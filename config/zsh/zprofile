@@ -9,8 +9,8 @@ if [ -n "${WT_SESSION}" ]; then wslsession=1; else wslsession=0; fi
 
 # TMUX
 if [ $wslsession ]; then export TMUX_TMPDIR='/tmp'; fi
-if [ -z "$TMUX"  ]; then (tmux new -s BASE); fi
-    #if [ -z "$TMUX"  ]; then (tmux attach -t BASE) || (tmux new -s BASE); fi
+#if [ -z "$TMUX"  ]; then (tmux new -s BASE); fi
+if [ -z "$TMUX"  ]; then (tmux attach -t BASE) || (tmux new -s BASE); fi
 
 # Terminal 256 color mode
 export TERM="xterm-256color"
