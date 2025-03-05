@@ -232,7 +232,7 @@ functionDefineHost()
     fi
 }
 
-functionInstallRepositories() 
+functionRepositories() 
 {
     functionPrintMessage privilege_root repositories
 
@@ -254,15 +254,15 @@ functionInstallRepositories()
     functionPrintMessage printsleep
 }
 
-functionInstallPackages() 
+functionPackages() 
 {
     functionPrintMessage privilege_root packages
 
     # Install Oh-My-Posh
-    curl -s https://ohmyposh.dev/install.sh | bash -s -- -d ${HOME}/.local/bin
 
     case "${current_host}" in
         "LENOVO ThinkPad X230 - 23252FG")
+            curl -s https://ohmyposh.dev/install.sh | bash -s -- -d ${HOME}/.local/bin
             case "${XDG_SESSION_DESKTOP}" in
                 "KDE")
                     su -c "$pkg_installcommand \
@@ -285,6 +285,7 @@ functionInstallPackages()
             esac
             ;;
         "Windows Subsystem for Linux")
+            curl -s https://ohmyposh.dev/install.sh | bash -s -- -d ${HOME}/.local/bin
             su -c "$pkg_installcommand \
                 $packages_terminal \
                 $packages_dev \
@@ -301,6 +302,7 @@ functionInstallPackages()
         *)
             case "${XDG_SESSION_DESKTOP}" in
                 "KDE")
+                    curl -s https://ohmyposh.dev/install.sh | bash -s -- -d ${HOME}/.local/bin
                     su -c "$pkg_installcommand \
                         $packages_terminal \
                         $packages_kde_basics \
@@ -313,7 +315,7 @@ functionInstallPackages()
     functionPrintMessage printsleep
 }
 
-functionInstallFixes() 
+functionFixes() 
 {
     functionPrintMessage privilege_root fixes
 
@@ -342,7 +344,7 @@ functionInstallFixes()
     functionPrintMessage printsleep
 }
 
-functionInstallFonts() 
+functionFonts() 
 {
     functionPrintMessage privilege_user fonts
 
@@ -376,7 +378,7 @@ functionInstallFonts()
     functionPrintMessage printsleep
 }
 
-functionInstallSymlinks() 
+functionSymlinks() 
 {
     functionPrintMessage privilege_user symlinking
 
@@ -428,6 +430,16 @@ functionRestoreKDE()
     functionPrintMessage printsleep
 }
 
+functionRestoreMacOS()
+{
+    [ -d "${HOME}/Library/Application Support/TG Pro" ]                           && rm -rf "${HOME}/Library/Application Support/TG Pro"
+    
+    cp -rv "${path_dotroot}/.config/tgpro/Application Support/TG Pro"                       "${HOME}/Library/Application Support/TG Pro"
+    cp -rv "${path_dotroot}/.config/tgpro/Preferences/com.tunabellysoftware.tgpro.plist"    "${HOME}/Library/Preferences/com.tunabellysoftware.tgpro.plist"
+
+    #TODO: iterm2 config
+}
+
 functionConfigGitGlobals() 
 {
     functionPrintMessage privilege_user gitconfig
@@ -447,7 +459,7 @@ functionConfigGitGlobals()
     functionPrintMessage printsleep
 }
 
-functionInstallGitSubmodules() 
+functionGitSubmodules() 
 {
     functionPrintMessage privilege_user syncgitsubmodule
 
