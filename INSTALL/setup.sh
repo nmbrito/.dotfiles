@@ -50,23 +50,23 @@ do
 
     case "${option_picked}" in
         1)
-            functionInstallRepositories
-            functionInstallPackages
-            functionInstallFixes
-            functionInstallFonts
-            functionInstallSymlinks
+            functionRepositories
+            functionPackages
+            functionFixes
+            functionFonts
+            functionSymlinks
             functionConfigGitGlobals
-            functionInstallGitSubmodules
+            functionGitSubmodules
             functionConfigVimHelptags
             functionConfigShell
             ;;
-        2)  functionInstallRepositories     ;;
-        3)  functionInstallPackages         ;;
-        4)  functionInstallFixes            ;;
-        5)  functionInstallFonts            ;;
-        6)  functionInstallSymlinks         ;;
+        2)  functionRepositories     ;;
+        3)  functionPackages         ;;
+        4)  functionFixes            ;;
+        5)  functionFonts            ;;
+        6)  functionSymlinks         ;;
         7)  functionConfigGitGlobals        ;;
-        8)  functionInstallGitSubmodules    ;;
+        8)  functionGitSubmodules    ;;
         9)  functionConfigVimHelptags       ;;
         10) functionConfigShell             ;;
         r)  functionRebuildGitSubmodules    ;;
