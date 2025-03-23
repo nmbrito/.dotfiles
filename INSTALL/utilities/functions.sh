@@ -8,35 +8,35 @@
 #       Add host virtual machine
 #       Add SSH sessions
 
-functionPrintMessage() 
+functionSystemPrintMessage() 
 {
     case "${1}" in
-        "privilege_root")
+        "privilegeRoot")
             case "${2}" in
                 "fixes")                printf '%s\n' "Computer Fixes" ;;
                 "repositories")         printf '%s\n' "Repositories" ;;
                 "packages")             printf '%s\n' "Packages" ;;
-                "vmtemplatecleanup")    printf '%s\n' "Preparing Template" ;;
+                "vmTemplateCleanUp")    printf '%s\n' "Preparing Template" ;;
             esac
 
-            printf '%s\n'   "${message_longdash}" \
+            printf '%s\n'   "${messageLongDash}" \
                             "" \
-                            "${message_longwarn}" "${message_execroot}" "${message_longwarn}" \
+                            "${messageLongWarn}" "${messageExecRoot}" "${messageLongWarn}" \
                             ""
         ;;
-        "privilege_user")
+        "privilegeUser")
             case "${2}" in
                 "fonts")                printf '%s\n' "Fonts" ;;
                 "symlinking")           printf '%s\n' "Symlinking" ;;
-                "gitconfig")            printf '%s\n' "Git globals configuration." ;;
-                "syncgitsubmodule")     printf '%s\n' "Syncing git submodules" ;;
-                "vimhelptags")          printf '%s\n' "Linking VIM Helptags" ;;
-                "zshshell")             printf '%s\n' "Changing to ZSH" ;;
-                "rebuildsubmodules")    printf '%s\n' "Rebuilding git submodules" ;;
-                "restorekde")           printf '%s\n' "Restoring KDE settings" ;;
+                "gitConfig")            printf '%s\n' "Git globals configuration." ;;
+                "syncGitSubmodule")     printf '%s\n' "Syncing git submodules" ;;
+                "vimHelptags")          printf '%s\n' "Linking VIM Helptags" ;;
+                "zshShell")             printf '%s\n' "Changing to ZSH" ;;
+                "rebuildSubmodules")    printf '%s\n' "Rebuilding git submodules" ;;
+                "restoreKDE")           printf '%s\n' "Restoring KDE settings" ;;
             esac
 
-            printf '%s\n'   "${message_longdash}" \
+            printf '%s\n'   "${messageLongDash}" \
                             ""
         ;;
         "printsleep")
@@ -46,7 +46,7 @@ functionPrintMessage()
     esac
 }
 
-functionBuildMenu() 
+functionSystemBuildMenu() 
 {
     printf '%s\n'   "                                                                " \
                     "|--------------------------------------------------------------|" \
@@ -60,145 +60,575 @@ functionBuildMenu()
                     "|--------------------------------------------------------------|" \
                     "|  ( r) rebuild git submodules                                 |" \
                     "|--------------------------------------------------------------|" \
-                    "|  host: ${current_host}                                        " \
+                    "|  host: ${currentHost}                                         " \
                     "|  distribuition: "${ID}"                                       " \
-                    "|  package manager: "${pkg_manager}"                            " \
+                    "|  package manager: "${packageManager}"                         " \
                     "|  current shell: "${SHELL}"                                    " \
                     "|  pwd: $(pwd)                                                  " \
-                    "|  repository root: "${path_dotroot}"                           " \
-                    "|  cache directory: "${path_cache}"                             " \
+                    "|  repository root: "${pathDotRoot}"                            " \
+                    "|  cache directory: "${pathCache}"                              " \
                     "|--------------------------------------------------------------|" \
                     "|  ( ) exit / cancel                                           |" \
                     "|--------------------------------------------------------------|" \
                     "                                                                "
 }
 
-functionInfoMenu() 
+functionSystemInfoMenu() 
 {
     printf '%s\n'   "                                                                " \
                     "|--------------------------------------------------------------|" \
                     "| Select an option:                                            |" \
                     "|--------------------------------------------------------------|" \
-                    "|  Host: ${current_host}                                        " \
+                    "|  Host: ${currentHost}                                         " \
                     "|  Distribuition: ${ID}                                         " \
                     "|                                                               " \
-                    "|  Package manager: ${pkg_manager}                              " \
-                    "|  Package install command: ${pkg_installcommand}               " \
+                    "|  Package manager: ${packageManager}                           " \
+                    "|  Package install command: ${packageInstallCommand}            " \
                     "|                                                               " \
                     "|  Current shell: ${SHELL}                                      " \
                     "|  Pwd: $(pwd)                                                  " \
                     "|--------------------------------------------------------------|" \
-                    "|  Repository root: ${path_dotroot}                             " \
-                    "|  Cache directory: ${path_cache}                               " \
-                    "|  Script path: ${path_script}                                  " \
-                    "|  Utilities path: ${path_utilities}                            " \
+                    "|  Repository root: ${pathDotRoot}                              " \
+                    "|  Cache directory: ${pathCache}                                " \
+                    "|  Script path: ${pathScript}                                   " \
+                    "|  Utilities path: ${pathUtilities}                             " \
                     "|--------------------------------------------------------------|" \
                     "|  $0                                                           " \
                     "|--------------------------------------------------------------|" \
                     "                                                                "
 }
 
-functionDefineDistro() 
+functionSystemDefineDistro() 
 {
     # Some distribuitions have different package names and software paths.
     case "${ID}" in
         "opensuse-tumbleweed")
-            pkg_manager="zypper"
-            pkg_update="zypper up"
-            pkg_upgrade="zypper dup"
-            pkg_installcommand="zypper install -y"
-            distro_name="opensuse-tumbleweed"
-            zsh_install_path="/usr/share/zsh"
+            packageManager="zypper"
+            packageUpdate="zypper up"
+            packageUpgrade="zypper dup"
+            packageInstallCommand="zypper install -y"
+            distroName="opensuse-tumbleweed"
+            zshInstallPath="/usr/share/zsh"
 
-            software_btop="btop"
-            software_fd="fd"
-            software_fdzshcompletion="fd-zsh-completion"
-            software_fzftmux="fzf-tmux"
-            software_fzfzshcompletion="fzf-zsh-completion"
-            software_rgzshcompletion="ripgrep-zsh-completion"
-            software_shellcheck="ShellCheck"
-            software_vifmcolors="vifm-colors"
-            software_vimdata="vim-data"
+            binary_apache2="apache2"
+            binary_bat="bat"
+            binary_blender="blender"
+            binary_btop="btop"
+            binary_build_base=""
+            binary_build_essential=""
+            binary_code="code"
+            binary_curl="curl"
+            binary_discord="discord"
+            binary_eza="eza"
+            binary_fastfetch="fastfetch"
+            binary_fd="fd"
+            binary_fd_zsh_completion="fd-zsh-completion"
+            binary_ffmpeg_6="ffmpeg-6"
+            binary_fprintd="fprintd"
+            binary_fprintd_pam="fprintd-pam"
+            binary_fzf="fzf"
+            binary_fzf_tmux="fzf-tmux"
+            binary_fzf_zsh_completion="fzf-zsh-completion"
+            binary_gcc="gcc"
+            binary_gdal_data=""
+            binary_gdal_plugins=""
+            binary_gdb="gdb"
+            binary_gdebi_core=""
+            binary_gimp="gimp"
+            binary_git_doc=""
+            binary_godot="godot"
+            binary_htop="htop"
+            binary_hyprland="hyprland"
+            binary_hyprland_devel="hyprland-devel"
+            binary_ifuse="ifuse"
+            binary_inkscape="inkscape"
+            binary_kdenlive="kdenlive"
+            binary_keepassxc="keepassxc"
+            binary_kicad="kicad"
+            binary_kid3="kid3"
+            binary_kitty="kitty"
+            binary_krita="krita"
+            binary_kvantum_manager="kvantum-manager"
+            binary_lazygit="lazygit"
+            binary_less=""
+            binary_less_doc=""
+            binary_libfontconfig1_dev=""
+            binary_libfprint="libfprint"
+            binary_libfribidi_dev=""
+            binary_libharfbuzz_dev=""
+            binary_libjq_dev=""
+            binary_libmagickplusplus_dev=""
+            binary_libprotobuf_dev=""
+            binary_librsvg2_dev=""
+            binary_libsecret_1_dev=""
+            binary_libsodium_dev=""
+            binary_libudunits2_dev=""
+            binary_libv8_dev=""
+            binary_libxml2_dev=""
+            binary_make="make"
+            binary_man_pages="man-pages"
+            binary_mc="mc"
+            binary_myspell_pt_PT="myspell-pt_PT"
+            binary_NetworkManager_fortisslvpn="NetworkManager-fortisslvpn"
+            binary_openfortivpn="openfortivpn"
+            binary_openssh=""
+            binary_plasma_nm6_fortisslvpn="plasma-nm6-fortisslvpn"
+            binary_protobuf_compiler=""
+            binary_qbittorrent="qbittorrent"
+            binary_r_base=""
+            binary_r_base_core=""
+            binary_r_base_dev=""
+            binary_r_base_html=""
+            binary_r_cran_boot=""
+            binary_r_cran_class=""
+            binary_r_cran_mass=""
+            binary_r_cran_nlme=""
+            binary_r_cran_sp=""
+            binary_r_cran_spatial=""
+            binary_ripgrep="ripgrep"
+            binary_ripgrep_zsh_completion="ripgrep-zsh-completion"
+            binary_shellsheck="ShellCheck"
+            binary_strawberry="strawberry"
+            binary_telegram_desktop="telegram-desktop"
+            binary_tmux="tmux"
+            binary_valgrind="valgrind"
+            binary_vifm="vifm"
+            binary_vifm_colors="vifm-colors"
+            binary_vim="vim"
+            binary_vim_data="vim-data"
+            binary_vim_fzf="vim-fzf"
+            binary_virt_manager="virt-manager"
+            binary_vlc="vlc"
+            binary_wsl_base="wsl_base"
+            binary_wsl_gui="wsl_gui"
+            binary_wsl_systemd="wsl_systemd"
+            binary_xorgxrdp="xorgxrdp"
+            binary_xrdp="xrdp"
+            binary_zsh="zsh"
             ;;
         "debian")
-            pkg_manager="apt"
-            pkg_update="apt update"
-            pkg_upgrade="apt -y upgrade"
-            pkg_installcommand="apt -y install"
-            distro_name="debian"
-            zsh_install_path="/usr/share/zsh"
+            packageManager="apt"
+            packageUpdate="apt update"
+            packageUpgrade="apt -y upgrade"
+            packageInstallCommand="apt -y install"
+            distroName="debian"
+            zshInstallPath="/usr/share/zsh"
 
-            software_btop="btop"
-            software_fd="fd-find"
-            software_fdzshcompletion=""
-            software_fzftmux=""
-            software_fzfzshcompletion=""
-            software_rgzshcompletion=""
-            software_shellcheck="ShellCheck"
-            software_vifmcolors=""
-            software_vimdata="vim-common"
+            binary_apache2="apache2"
+            binary_bat=""
+            binary_blender=""
+            binary_btop=""
+            binary_build_base=""
+            binary_build_essential="build-essential"
+            binary_code=""
+            binary_curl=""
+            binary_discord=""
+            binary_eza=""
+            binary_fastfetch=""
+            binary_fd="fd-find"
+            binary_fd_zsh_completion=""
+            binary_ffmpeg_6=""
+            binary_fprintd=""
+            binary_fprintd_pam=""
+            binary_fzf=""
+            binary_fzf_tmux=""
+            binary_fzf_zsh_completion=""
+            binary_gcc=""
+            binary_gdal_data="gdal-data"
+            binary_gdal_plugins="gdal-plugins"
+            binary_gdb=""
+            binary_gdebi_core="gdebi-core"
+            binary_gimp=""
+            binary_git_doc=""
+            binary_godot=""
+            binary_htop=""
+            binary_hyprland=""
+            binary_hyprland_devel=""
+            binary_ifuse=""
+            binary_inkscape=""
+            binary_kdenlive=""
+            binary_keepassxc=""
+            binary_kicad=""
+            binary_kid3=""
+            binary_kitty=""
+            binary_krita=""
+            binary_kvantum_manager=""
+            binary_lazygit=""
+            binary_less=""
+            binary_less_doc=""
+            binary_libfontconfig1_dev="libfontconfig1-dev"
+            binary_libfprint=""
+            binary_libfribidi_dev="libfribidi-dev"
+            binary_libharfbuzz_dev="libharfbuzz-dev"
+            binary_libjq_dev="libjq-dev"
+            binary_libmagickplusplus_dev="libmagick++-dev"
+            binary_libprotobuf_dev="libprotobuf-dev"
+            binary_librsvg2_dev="librsvg2-dev"
+            binary_libsecret_1_dev="libsecret-1-dev"
+            binary_libsodium_dev="libsodium-dev"
+            binary_libudunits2_dev="libudunits2-dev"
+            binary_libv8_dev="libv8-dev"
+            binary_libxml2_dev="libxml2-dev"
+            binary_make=""
+            binary_man_pages=""
+            binary_mc=""
+            binary_myspell_pt_PT=""
+            binary_NetworkManager_fortisslvpn=""
+            binary_openfortivpn=""
+            binary_openssh=""
+            binary_plasma_nm6_fortisslvpn=""
+            binary_protobuf_compiler="protobuf-compiler"
+            binary_qbittorrent=""
+            binary_r_base="r-base"
+            binary_r_base_core="r-base-core"
+            binary_r_base_dev="r-base-dev"
+            binary_r_base_html="r-base-html"
+            binary_r_cran_boot="r-cran-boot"
+            binary_r_cran_class="r-cran-class"
+            binary_r_cran_mass="r-cran-mass"
+            binary_r_cran_nlme="r-cran-nlme"
+            binary_r_cran_sp="r-cran-sp"
+            binary_r_cran_spatial="r-cran-spatial"
+            binary_ripgrep=""
+            binary_ripgrep_zsh_completion=""
+            binary_shellsheck=""
+            binary_strawberry=""
+            binary_telegram_desktop=""
+            binary_tmux=""
+            binary_valgrind=""
+            binary_vifm=""
+            binary_vifm_colors=""
+            binary_vim=""
+            binary_vim_data="vim-common"
+            binary_vim_fzf=""
+            binary_virt_manager=""
+            binary_vlc=""
+            binary_wsl_base=""
+            binary_wsl_gui=""
+            binary_wsl_systemd=""
+            binary_xorgxrdp=""
+            binary_xrdp=""
+            binary_zsh=""
             ;;
         "archlinux")
-            pkg_manager="pacman"
-            pkg_update="pacman -Sy"
-            pkg_upgrade="pacman -Syu"
-            pkg_installcommand="pacman -S"
-            distro_name="arch"
-            zsh_install_path="/usr/share/zsh"
+            packageManager="pacman"
+            packageUpdate="pacman -Sy"
+            packageUpgrade="pacman -Syu"
+            packageInstallCommand="pacman -S"
+            distroName="arch"
+            zshInstallPath="/usr/share/zsh"
 
-            software_btop="btop"
-            software_fd=""
-            software_fdzshcompletion=""
-            software_fzftmux=""
-            software_fzfzshcompletion=""
-            software_rgzshcompletion=""
-            software_shellcheck="ShellCheck"
-            software_vifmcolors=""
-            software_vimdata=""
+            binary_apache2="apache"
+            binary_bat=""
+            binary_blender=""
+            binary_btop=""
+            binary_build_base=""
+            binary_build_essential=""
+            binary_code=""
+            binary_curl=""
+            binary_discord=""
+            binary_eza=""
+            binary_fastfetch=""
+            binary_fd=""
+            binary_fd_zsh_completion=""
+            binary_ffmpeg_6=""
+            binary_fprintd=""
+            binary_fprintd_pam=""
+            binary_fzf=""
+            binary_fzf_tmux=""
+            binary_fzf_zsh_completion=""
+            binary_gcc=""
+            binary_gdal_data=""
+            binary_gdal_plugins=""
+            binary_gdb=""
+            binary_gdebi_core=""
+            binary_gimp=""
+            binary_git_doc=""
+            binary_godot=""
+            binary_htop=""
+            binary_hyprland=""
+            binary_hyprland_devel=""
+            binary_ifuse=""
+            binary_inkscape=""
+            binary_kdenlive=""
+            binary_keepassxc=""
+            binary_kicad=""
+            binary_kid3=""
+            binary_kitty=""
+            binary_krita=""
+            binary_kvantum_manager=""
+            binary_lazygit=""
+            binary_less=""
+            binary_less_doc=""
+            binary_libfontconfig1_dev=""
+            binary_libfprint=""
+            binary_libfribidi_dev=""
+            binary_libharfbuzz_dev=""
+            binary_libjq_dev=""
+            binary_libmagickplusplus_dev=""
+            binary_libprotobuf_dev=""
+            binary_librsvg2_dev=""
+            binary_libsecret_1_dev=""
+            binary_libsodium_dev=""
+            binary_libudunits2_dev=""
+            binary_libv8_dev=""
+            binary_libxml2_dev=""
+            binary_make=""
+            binary_man_pages=""
+            binary_mc=""
+            binary_myspell_pt_PT=""
+            binary_NetworkManager_fortisslvpn=""
+            binary_openfortivpn=""
+            binary_openssh=""
+            binary_plasma_nm6_fortisslvpn=""
+            binary_protobuf_compiler=""
+            binary_qbittorrent=""
+            binary_r_base=""
+            binary_r_base_core=""
+            binary_r_base_dev=""
+            binary_r_base_html=""
+            binary_r_cran_boot=""
+            binary_r_cran_class=""
+            binary_r_cran_mass=""
+            binary_r_cran_nlme=""
+            binary_r_cran_sp=""
+            binary_r_cran_spatial=""
+            binary_ripgrep=""
+            binary_ripgrep_zsh_completion=""
+            binary_shellsheck=""
+            binary_strawberry=""
+            binary_telegram_desktop=""
+            binary_tmux=""
+            binary_valgrind=""
+            binary_vifm=""
+            binary_vifm_colors=""
+            binary_vim=""
+            binary_vim_data=""
+            binary_vim_fzf=""
+            binary_virt_manager=""
+            binary_vlc=""
+            binary_wsl_base=""
+            binary_wsl_gui=""
+            binary_wsl_systemd=""
+            binary_xorgxrdp=""
+            binary_xrdp=""
+            binary_zsh=""
             ;;
         "almalinux")
-            pkg_manager="dnf"
-            pkg_update="dnf update"
-            pkg_upgrade="dnf upgrade -y"
-            pkg_installcommand="dnf install -y"
-            distro_name="almalinux"
-            zsh_install_path="/usr/share/zsh"
+            packageManager="dnf"
+            packageUpdate="dnf update"
+            packageUpgrade="dnf upgrade -y"
+            packageInstallCommand="dnf install -y"
+            distroName="almalinux"
+            zshInstallPath="/usr/share/zsh"
 
-            software_btop="btop"
-            software_fd="fd"
-            software_fdzshcompletion=""
-            software_fzftmux=""
-            software_fzfzshcompletion=""
-            software_rgzshcompletion=""
-            software_shellcheck="ShellCheck"
-            software_vifmcolors=""
-            software_vimdata=""
+            binary_apache2=""
+            binary_bat=""
+            binary_blender=""
+            binary_btop=""
+            binary_build_base=""
+            binary_build_essential=""
+            binary_code=""
+            binary_curl=""
+            binary_discord=""
+            binary_eza=""
+            binary_fastfetch=""
+            binary_fd=""
+            binary_fd_zsh_completion=""
+            binary_ffmpeg_6=""
+            binary_fprintd=""
+            binary_fprintd_pam=""
+            binary_fzf=""
+            binary_fzf_tmux=""
+            binary_fzf_zsh_completion=""
+            binary_gcc=""
+            binary_gdal_data=""
+            binary_gdal_plugins=""
+            binary_gdb=""
+            binary_gdebi_core=""
+            binary_gimp=""
+            binary_git_doc=""
+            binary_godot=""
+            binary_htop=""
+            binary_hyprland=""
+            binary_hyprland_devel=""
+            binary_ifuse=""
+            binary_inkscape=""
+            binary_kdenlive=""
+            binary_keepassxc=""
+            binary_kicad=""
+            binary_kid3=""
+            binary_kitty=""
+            binary_krita=""
+            binary_kvantum_manager=""
+            binary_lazygit=""
+            binary_less=""
+            binary_less_doc=""
+            binary_libfontconfig1_dev=""
+            binary_libfprint=""
+            binary_libfribidi_dev=""
+            binary_libharfbuzz_dev=""
+            binary_libjq_dev=""
+            binary_libmagickplusplus_dev=""
+            binary_libprotobuf_dev=""
+            binary_librsvg2_dev=""
+            binary_libsecret_1_dev=""
+            binary_libsodium_dev=""
+            binary_libudunits2_dev=""
+            binary_libv8_dev=""
+            binary_libxml2_dev=""
+            binary_make=""
+            binary_man_pages=""
+            binary_mc=""
+            binary_myspell_pt_PT=""
+            binary_NetworkManager_fortisslvpn=""
+            binary_openfortivpn=""
+            binary_openssh=""
+            binary_plasma_nm6_fortisslvpn=""
+            binary_protobuf_compiler=""
+            binary_qbittorrent=""
+            binary_r_base=""
+            binary_r_base_core=""
+            binary_r_base_dev=""
+            binary_r_base_html=""
+            binary_r_cran_boot=""
+            binary_r_cran_class=""
+            binary_r_cran_mass=""
+            binary_r_cran_nlme=""
+            binary_r_cran_sp=""
+            binary_r_cran_spatial=""
+            binary_ripgrep=""
+            binary_ripgrep_zsh_completion=""
+            binary_shellsheck=""
+            binary_strawberry=""
+            binary_telegram_desktop=""
+            binary_tmux=""
+            binary_valgrind=""
+            binary_vifm=""
+            binary_vifm_colors=""
+            binary_vim=""
+            binary_vim_data=""
+            binary_vim_fzf=""
+            binary_virt_manager=""
+            binary_vlc=""
+            binary_wsl_base=""
+            binary_wsl_gui=""
+            binary_wsl_systemd=""
+            binary_xorgxrdp=""
+            binary_xrdp=""
+            binary_zsh=""
             ;;
         "alpine")
-            pkg_manager="apk"
-            pkg_update=""
-            pkg_upgrade=""
-            pkg_installcommand="apk add"
-            distro_name="alpine"
-            zsh_install_path="/usr/share/zsh"
+            packageManager="apk"
+            packageUpdate=""
+            packageUpgrade=""
+            packageInstallCommand="apk add"
+            distroName="alpine"
+            zshInstallPath="/usr/share/zsh"
 
-            software_btop=""
-            software_fd="fd"
-            software_fdzshcompletion="fd-zsh-completion"
-            software_fzftmux="fzf-tmux"
-            software_fzfzshcompletion="fzf-zsh-completion"
-            software_rgzshcompletion=""
-            software_shellcheck=""
-            software_vifmcolors=""
-            software_vimdata=""
+            binary_apache2=""
+            binary_bat=""
+            binary_blender=""
+            binary_btop=""
+            binary_build_base="build-base"
+            binary_build_essential=""
+            binary_code=""
+            binary_curl=""
+            binary_discord=""
+            binary_eza=""
+            binary_fastfetch=""
+            binary_fd=""
+            binary_fd_zsh_completion=""
+            binary_ffmpeg_6=""
+            binary_fprintd=""
+            binary_fprintd_pam=""
+            binary_fzf=""
+            binary_fzf_tmux=""
+            binary_fzf_zsh_completion=""
+            binary_gcc=""
+            binary_gdal_data=""
+            binary_gdal_plugins=""
+            binary_gdb=""
+            binary_gdebi_core=""
+            binary_gimp=""
+            binary_git_doc="git-doc"
+            binary_godot=""
+            binary_htop=""
+            binary_hyprland=""
+            binary_hyprland_devel=""
+            binary_ifuse=""
+            binary_inkscape=""
+            binary_kdenlive=""
+            binary_keepassxc=""
+            binary_kicad=""
+            binary_kid3=""
+            binary_kitty=""
+            binary_krita=""
+            binary_kvantum_manager=""
+            binary_lazygit=""
+            binary_less="less"
+            binary_less_doc="less-doc"
+            binary_libfontconfig1_dev=""
+            binary_libfprint=""
+            binary_libfribidi_dev=""
+            binary_libharfbuzz_dev=""
+            binary_libjq_dev=""
+            binary_libmagickplusplus_dev=""
+            binary_libprotobuf_dev=""
+            binary_librsvg2_dev=""
+            binary_libsecret_1_dev=""
+            binary_libsodium_dev=""
+            binary_libudunits2_dev=""
+            binary_libv8_dev=""
+            binary_libxml2_dev=""
+            binary_make=""
+            binary_man_pages=""
+            binary_mc=""
+            binary_myspell_pt_PT=""
+            binary_NetworkManager_fortisslvpn=""
+            binary_openfortivpn=""
+            binary_openssh="openssh"
+            binary_plasma_nm6_fortisslvpn=""
+            binary_protobuf_compiler=""
+            binary_qbittorrent=""
+            binary_r_base=""
+            binary_r_base_core=""
+            binary_r_base_dev=""
+            binary_r_base_html=""
+            binary_r_cran_boot=""
+            binary_r_cran_class=""
+            binary_r_cran_mass=""
+            binary_r_cran_nlme=""
+            binary_r_cran_sp=""
+            binary_r_cran_spatial=""
+            binary_ripgrep=""
+            binary_ripgrep_zsh_completion=""
+            binary_shellsheck=""
+            binary_strawberry=""
+            binary_telegram_desktop=""
+            binary_tmux=""
+            binary_valgrind=""
+            binary_vifm=""
+            binary_vifm_colors="vifm-colors --force-overwrite"
+            binary_vim=""
+            binary_vim_data=""
+            binary_vim_fzf=""
+            binary_virt_manager=""
+            binary_vlc=""
+            binary_wsl_base=""
+            binary_wsl_gui=""
+            binary_wsl_systemd=""
+            binary_xorgxrdp=""
+            binary_xrdp=""
+            binary_zsh=""
             ;;
         "macOS")
-            pkg_manager="brew"
-            pkg_update="brew update"
-            pkg_upgrade="brew upgrade"
-            pkg_installcommand="brew bundle install"
-            distro_name="macOS"
-            zsh_install_path="/usr/share/zsh"
+            packageManager="brew"
+            packageUpdate="brew update"
+            packageUpgrade="brew upgrade"
+            packageInstallCommand="brew bundle install"
+            distroName="macOS"
+            zshInstallPath="/usr/share/zsh"
             ;;
         *)
             printf '%s\n'   "This script doesn't support distribuition: "${ID}"" \
@@ -208,35 +638,35 @@ functionDefineDistro()
     esac
 }
 
-functionDefineHost() 
+functionSystemDefineHost() 
 {
     # dmi directory indicates a physical machine
     if [ -d "/sys/devices/virtual/dmi" ]; then
-        current_host="$(cat /sys/devices/virtual/dmi/id/board_vendor) $(cat /sys/devices/virtual/dmi/id/product_version) - $(cat /sys/devices/virtual/dmi/id/product_name)"
+        currentHost="$(cat /sys/devices/virtual/dmi/id/board_vendor) $(cat /sys/devices/virtual/dmi/id/product_version) - $(cat /sys/devices/virtual/dmi/id/product_name)"
 
     # ish directory is only available on Apple devices running iSH.app
     elif [ -d "/proc/ish" ]; then
-        current_host="iOS/iPadOS"
+        currentHost="iOS/iPadOS"
 
     # software_vers gives macos os name and version, ergo we can get the hostname from sysctl
     elif [ -d "/usr/bin/software_vers" ]; then
-        current_host="$(sysctl hw.model)"
+        currentHost="$(sysctl hw.model)"
 
     # WT_SESSION environment variable available in WSL1 and WSL2
     elif [ "${wslsession}" ]; then 
-        current_host="Windows Subsystem for Linux"
+        currentHost="Windows Subsystem for Linux"
 
     # If none of the above
     else
-        current_host="None"
+        currentHost="None"
     fi
 }
 
-functionRepositories() 
+functionInstallRepositories() 
 {
-    functionPrintMessage privilege_root repositories
+    functionSystemPrintMessage privilegeRoot repositories
 
-    case "${distro_name}" in
+    case "${distroName}" in
         "opensuse-tumbleweed")
             su -c "
                 rpm --import https://packages.microsoft.com/keys/microsoft.asc ;
@@ -251,76 +681,76 @@ functionRepositories()
             ;;
     esac
 
-    functionPrintMessage printsleep
+    functionSystemPrintMessage printsleep
 }
 
-functionPackages() 
+functionInstallPackages() 
 {
-    functionPrintMessage privilege_root packages
+    functionSystemPrintMessage privilegeRoot packages
 
     # Install Oh-My-Posh
 
-    case "${current_host}" in
+    case "${currentHost}" in
         "LENOVO ThinkPad X230 - 23252FG")
             curl -s https://ohmyposh.dev/install.sh | bash -s -- -d ${HOME}/.local/bin
             case "${XDG_SESSION_DESKTOP}" in
                 "KDE")
-                    su -c "$pkg_installcommand \
-                        $packages_terminal \
-                        $packages_dev \
-                        $packages_kde_basics \
-                        $packages_kde_personal \
+                    su -c "$packageInstallCommand \
+                        $packages_Terminal \
+                        $packages_Dev \
+                        $packages_KDEBasics \
+                        $packages_KDEPersonal \
                         $packages_x230 \
                         ";
                     ;;
                 #"hyprland")
-                    #(su -c "${pkg_installcommand} ${packages_terminal} ${packages_dev} ${packages_hyprland} ${packages_kde_personal}");
+                    #(su -c "${packageInstallCommand} ${packages_terminal} ${packages_dev} ${packages_hyprland} ${packages_kde_personal}");
                     #;;
                 *)
-                    su -c "$pkg_installcommand \
-                        $packages_terminal \
-                        $packages_dev \
+                    su -c "$packageInstallCommand \
+                        $packages_Terminal \
+                        $packages_Dev \
                         ";
                     ;;
             esac
             ;;
         "Windows Subsystem for Linux")
             curl -s https://ohmyposh.dev/install.sh | bash -s -- -d ${HOME}/.local/bin
-            su -c "$pkg_installcommand \
-                $packages_terminal \
-                $packages_dev \
+            su -c "$packageInstallCommand \
+                $packages_Terminal \
+                $packages_Dev \
                 ";
 
-            if [ "${distro_name}" = "opensuse-tumbleweed" ]; then su -c "$pkg_installcommand -t pattern $packages_wsl_pattern"; fi
+            if [ "${distroName}" = "opensuse-tumbleweed" ]; then su -c "$packageInstallCommand -t pattern $packages_WSLPattern"; fi
             ;;
         "iOS/iPadOS")
-            "$pkg_installcommand $packages_terminal $packages_ish"
+            "$packageInstallCommand $packages_Terminal $packages_iSH"
             ;;
         "MacBook9,2")
-            "$pkg_installcommand --file=${dir_dotroot}/INSTALL/Brewfile"
+            "$packageInstallCommand --file=${dir_dotroot}/INSTALL/Brewfile"
             ;;
         *)
             case "${XDG_SESSION_DESKTOP}" in
                 "KDE")
                     curl -s https://ohmyposh.dev/install.sh | bash -s -- -d ${HOME}/.local/bin
-                    su -c "$pkg_installcommand \
-                        $packages_terminal \
-                        $packages_kde_basics \
+                    su -c "$packageInstallCommand \
+                        $packages_Terminal \
+                        $packages_KDEBasics \
                         ";
                     ;;
                 *) ;;
             esac
     esac
 
-    functionPrintMessage printsleep
+    functionSystemPrintMessage printsleep
 }
 
-functionFixes() 
+functionInstallFixes() 
 {
-    functionPrintMessage privilege_root fixes
+    functionSystemPrintMessage privilegeRoot fixes
 
     # Hardware layer
-    case "${current_host}" in
+    case "${currentHost}" in
         "MacBookPro9,2")
             /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" 
             ;;
@@ -330,7 +760,7 @@ functionFixes()
     esac
 
     # Operting system layer
-    case "${distro_name}" in
+    case "${distroName}" in
         "debian")
             printf '%s\n' "Symlinking fd-find"
 
@@ -341,27 +771,27 @@ functionFixes()
             ;;
     esac
 
-    functionPrintMessage printsleep
+    functionSystemPrintMessage printsleep
 }
 
-functionFonts() 
+functionInstallFonts() 
 {
-    functionPrintMessage privilege_user fonts
+    functionSystemPrintMessage privilegeUser fonts
 
     if [ ! -d "${HOME}/.fonts" ] ; then mkdir -p "${HOME}/.fonts" ; fi
-    if [ ! -d "${path_cache}" ] ; then mkdir -p "${path_cache}" ; fi
+    if [ ! -d "${pathCache}" ] ; then mkdir -p "${pathCache}" ; fi
 
-    if [ "$(curl -is "${url_nerdfonts}" | head -n 1)" = "HTTP/2 404" ] ; then
-        for dl_fonts in $(ls "${path_dotroot}/INSTALL/fonts/*.tar.xz")
+    if [ "$(curl -is "${urlNerdFonts}" | head -n 1)" = "HTTP/2 404" ] ; then
+        for dl_fonts in $(ls "${pathDotRoot}/INSTALL/fonts/*.tar.xz")
         do
-            tar -xvf "${path_dotroot}/INSTALL/fonts/${dl_fonts}" --directory "${HOME}/.fonts"
+            tar -xvf "${pathDotRoot}/INSTALL/fonts/${downloadedFonts}" --directory "${HOME}/.fonts"
         done
     else
-        for dl_fonts in ${packages_fonts}
+        for downloadedFonts in ${packages_fonts}
         do
-            curl -L $(curl -s "${url_nerdfonts}" | grep browser_download_url | cut -d '"' -f 4 | grep "${dl_fonts}") --output "${path_cache}/${dl_fonts}"
-            tar -xvf "${path_cache}/${dl_fonts}" --directory "${HOME}/.fonts"
-            rm "${path_cache}/${dl_fonts}"
+            curl -L $(curl -s "${urlNerdFonts}" | grep browser_download_url | cut -d '"' -f 4 | grep "${downloadedFonts}") --output "${pathCache}/${downloadedFonts}"
+            tar -xvf "${pathCache}/${downloadedFonts}" --directory "${HOME}/.fonts"
+            rm "${pathCache}/${downloadedFonts}"
         done
     fi
 
@@ -375,12 +805,12 @@ functionFonts()
     rm "${HOME}/.fonts/readme.md"
     rm "${HOME}/.fonts/OFL.txt"
 
-    functionPrintMessage printsleep
+    functionSystemPrintMessage printsleep
 }
 
-functionSymlinks() 
+functionInstallSymlinks() 
 {
-    functionPrintMessage privilege_user symlinking
+    functionSystemPrintMessage privilegeUser symlinking
 
     [ ! -d "${HOME}/.config/" ]         && mkdir "${HOME}/.config/"
 
@@ -392,24 +822,24 @@ functionSymlinks()
     [ -d "${HOME}/.config/fd" ]         && rm -rf "${HOME}/.config/fd"
 
     # Files
-    ln -vsf "${path_dotroot}/config/zsh/zprofile"    "${HOME}/.zprofile"
-    ln -vsf "${path_dotroot}/config/zsh/zshrc"       "${HOME}/.zshrc"
-    ln -vsf "${path_dotroot}/config/vim/vimrc"       "${HOME}/.vimrc"
+    ln -vsf "${pathDotRoot}/config/zsh/zprofile"    "${HOME}/.zprofile"
+    ln -vsf "${pathDotRoot}/config/zsh/zshrc"       "${HOME}/.zshrc"
+    ln -vsf "${pathDotRoot}/config/vim/vimrc"       "${HOME}/.vimrc"
 
     # Directories
-    ln -vsf "${path_dotroot}/config/vim"         "${HOME}/.vim"
-    ln -vsf "${path_dotroot}/config/vifm"        "${HOME}/.config/vifm"
-    ln -vsf "${path_dotroot}/config/fastfetch"   "${HOME}/.config/fastfetch"
-    ln -vsf "${path_dotroot}/config/tmux"        "${HOME}/.config/tmux"
-    ln -vsf "${path_dotroot}/config/fd"          "${HOME}/.config/fd"
-    ln -vsf "${path_dotroot}/config/mc"          "${HOME}/.config/mc"
+    ln -vsf "${pathDotRoot}/config/vim"         "${HOME}/.vim"
+    ln -vsf "${pathDotRoot}/config/vifm"        "${HOME}/.config/vifm"
+    ln -vsf "${pathDotRoot}/config/fastfetch"   "${HOME}/.config/fastfetch"
+    ln -vsf "${pathDotRoot}/config/tmux"        "${HOME}/.config/tmux"
+    ln -vsf "${pathDotRoot}/config/fd"          "${HOME}/.config/fd"
+    ln -vsf "${pathDotRoot}/config/mc"          "${HOME}/.config/mc"
 
-    functionPrintMessage printsleep
+    functionSystemPrintMessage printsleep
 }
 
 functionRestoreKDE()
 {
-    functionPrintMessage privilege_user restorekde
+    functionSystemPrintMessage privilegeUser restoreKDE
 
     [ -d "${HOME}/.local/share/aurorae" ]                  && rm -rf "${HOME}/.local/share/aurorae"
     [ -d "${HOME}/.local/share/color-schemes" ]            && rm -rf "${HOME}/.local/share/color-schemes"
@@ -419,30 +849,30 @@ functionRestoreKDE()
     [ -d "${HOME}/.local/share/wallpapers" ]               && rm -rf "${HOME}/.local/share/wallpapers"
     [ -d "${HOME}/.icons" ]                                && rm -rf "${HOME}/.icons"
 
-    cp -rv "${path_dotroot}/kde_backup/share/aurorae"                "${HOME}/.local/share/aurorae"
-    cp -rv "${path_dotroot}/kde_backup/share/color-schemes"          "${HOME}/.local/share/color-schemes"
-    cp -rv "${path_dotroot}/kde_backup/share/icons"                  "${HOME}/.local/share/icons"
-    cp -rv "${path_dotroot}/kde_backup/share/plasma/desktoptheme"    "${HOME}/.local/share/plasma/desktoptheme"
-    cp -rv "${path_dotroot}/kde_backup/share/plasma/look-and-feel"   "${HOME}/.local/share/plasma/look-and-feel"
-    cp -rv "${path_dotroot}/kde_backup/share/wallpapers"             "${HOME}/.local/share/wallpapers"
-    cp -rv "${path_dotroot}/kde_backup/.icons"                       "${HOME}/.icons"
+    cp -rv "${pathDotRoot}/kde_backup/share/aurorae"                "${HOME}/.local/share/aurorae"
+    cp -rv "${pathDotRoot}/kde_backup/share/color-schemes"          "${HOME}/.local/share/color-schemes"
+    cp -rv "${pathDotRoot}/kde_backup/share/icons"                  "${HOME}/.local/share/icons"
+    cp -rv "${pathDotRoot}/kde_backup/share/plasma/desktoptheme"    "${HOME}/.local/share/plasma/desktoptheme"
+    cp -rv "${pathDotRoot}/kde_backup/share/plasma/look-and-feel"   "${HOME}/.local/share/plasma/look-and-feel"
+    cp -rv "${pathDotRoot}/kde_backup/share/wallpapers"             "${HOME}/.local/share/wallpapers"
+    cp -rv "${pathDotRoot}/kde_backup/.icons"                       "${HOME}/.icons"
 
-    functionPrintMessage printsleep
+    functionSystemPrintMessage printsleep
 }
 
 functionRestoreMacOS()
 {
     [ -d "${HOME}/Library/Application Support/TG Pro" ]                           && rm -rf "${HOME}/Library/Application Support/TG Pro"
     
-    cp -rv "${path_dotroot}/.config/tgpro/Application Support/TG Pro"                       "${HOME}/Library/Application Support/TG Pro"
-    cp -rv "${path_dotroot}/.config/tgpro/Preferences/com.tunabellysoftware.tgpro.plist"    "${HOME}/Library/Preferences/com.tunabellysoftware.tgpro.plist"
+    cp -rv "${pathDotRoot}/.config/tgpro/Application Support/TG Pro"                       "${HOME}/Library/Application Support/TG Pro"
+    cp -rv "${pathDotRoot}/.config/tgpro/Preferences/com.tunabellysoftware.tgpro.plist"    "${HOME}/Library/Preferences/com.tunabellysoftware.tgpro.plist"
 
     #TODO: iterm2 config
 }
 
 functionConfigGitGlobals() 
 {
-    functionPrintMessage privilege_user gitconfig
+    functionSystemPrintMessage privilegeUser gitConfig
 
     printf '%s'     "user.email: "
     read -r git_user_email
@@ -456,51 +886,51 @@ functionConfigGitGlobals()
     printf '%s\n'   ""
     git config --global user.name "${git_user_name}"
 
-    functionPrintMessage printsleep
+    functionSystemPrintMessage printsleep
 }
 
-functionGitSubmodules() 
+functionConfigGitSubmodules() 
 {
-    functionPrintMessage privilege_user syncgitsubmodule
+    functionSystemPrintMessage privilegeUser syncGitSubmodule
 
     # A repository with submodules already added must be initiated.
-    (cd "${path_dotroot}" && git submodule update --init --recursive) && printf '%s\n' "" "Submodules updated" ""
+    (cd "${pathDotRoot}" && git submodule update --init --recursive) && printf '%s\n' "" "Submodules updated" ""
 
-    functionPrintMessage printsleep
+    functionSystemPrintMessage printsleep
 }
 
 functionConfigVimHelptags() 
 {
-    functionPrintMessage privilege_user vimhelptags
+    functionSystemPrintMessage privilegeUser vimHelptags
 
-    vim -u NONE -c helptags "${path_dotroot}/config/vim/pack/plugins/start/vim-airline/doc" -c q
-    vim -u NONE -c helptags "${path_dotroot}/config/vim/pack/plugins/start/vim-airline-themes/doc" -c q
-    vim -u NONE -c helptags "${path_dotroot}/config/vim/pack/plugins/start/surround/doc" -c q
-    vim -u NONE -c helptags "${path_dotroot}/config/vim/pack/plugins/start/commentary/doc" -c q
-    vim -u NONE -c helptags "${path_dotroot}/config/vim/pack/plugins/start/fugitive/doc" -c q
-    vim -u NONE -c helptags "${path_dotroot}/config/vim/pack/plugins/start/undotree/doc" -c q
-    vim -u NONE -c helptags "${path_dotroot}/config/vim/pack/plugins/start/fzf/doc" -c q
-    vim -u NONE -c helptags "${path_dotroot}/config/vim/pack/plugins/start/fzf-vim/doc" -c q
-    vim -u NONE -c helptags "${path_dotroot}/config/vim/pack/plugins/start/goyo.vim/doc" -c q
-    vim -u NONE -c helptags "${path_dotroot}/config/vim/pack/plugins/start/vim-highlightedyank/doc" -c q
-    vim -u NONE -c helptags "${path_dotroot}/config/vim/pack/plugins/start/vim-better-whitespace/doc" -c q
-    vim -u NONE -c helptags "${path_dotroot}/config/vim/pack/plugins/start/vim-indent-guides/doc" -c q
+    vim -u NONE -c helptags "${pathDotRoot}/config/vim/pack/plugins/start/vim-airline/doc" -c q
+    vim -u NONE -c helptags "${pathDotRoot}/config/vim/pack/plugins/start/vim-airline-themes/doc" -c q
+    vim -u NONE -c helptags "${pathDotRoot}/config/vim/pack/plugins/start/surround/doc" -c q
+    vim -u NONE -c helptags "${pathDotRoot}/config/vim/pack/plugins/start/commentary/doc" -c q
+    vim -u NONE -c helptags "${pathDotRoot}/config/vim/pack/plugins/start/fugitive/doc" -c q
+    vim -u NONE -c helptags "${pathDotRoot}/config/vim/pack/plugins/start/undotree/doc" -c q
+    vim -u NONE -c helptags "${pathDotRoot}/config/vim/pack/plugins/start/fzf/doc" -c q
+    vim -u NONE -c helptags "${pathDotRoot}/config/vim/pack/plugins/start/fzf-vim/doc" -c q
+    vim -u NONE -c helptags "${pathDotRoot}/config/vim/pack/plugins/start/goyo.vim/doc" -c q
+    vim -u NONE -c helptags "${pathDotRoot}/config/vim/pack/plugins/start/vim-highlightedyank/doc" -c q
+    vim -u NONE -c helptags "${pathDotRoot}/config/vim/pack/plugins/start/vim-better-whitespace/doc" -c q
+    vim -u NONE -c helptags "${pathDotRoot}/config/vim/pack/plugins/start/vim-indent-guides/doc" -c q
 
-    functionPrintMessage printsleep
+    functionSystemPrintMessage printsleep
 }
 
 functionConfigShell() 
 {
-    functionPrintMessage privilege_user zshshell
+    functionSystemPrintMessage privilegeUser zshShell
 
     printf '%s\n' "Current shell: ${SHELL}"
 
     # Check if running shell is ZSH.
     if [ "${SHELL}" != "/usr/bin/zsh" ] ; then
         # Check if ZSH is installed.
-        if [ ! -f "${zsh_install_path}" ] ; then
+        if [ ! -f "${zshInstallPath}" ] ; then
             # iSH uses a different method for shell changing.
-            if [ "${current_host}" = "iOS/iPadOS" ] ; then
+            if [ "${currentHost}" = "iOS/iPadOS" ] ; then
                 sed -i 's/ash/zsh/g' /etc/passwd && printf '%s\n' "Replaced ash with zsh in /etc/passwd file, close and re-open iSH to apply."
             else
                 # Change the shell
@@ -508,9 +938,9 @@ functionConfigShell()
             fi
         else
             printf '%s\n' "ZSH missing. Want to install? [y/n]: "
-            read  -r optionzshchange
-            if [ "${optionzshchange}" = "y" ] ; then
-                (su -c "${pkg_installcommand}" "zsh")
+            read  -r optionZSHChange
+            if [ "${optionZSHChange}" = "y" ] ; then
+                (su -c "${packageInstallCommand}" "zsh")
                 functionConfigShell
             fi
         fi
@@ -518,17 +948,17 @@ functionConfigShell()
         printf '%s\n' "ZSH already running."
     fi
 
-    functionPrintMessage printsleep
+    functionSystemPrintMessage printsleep
 }
 
 functionRebuildGitSubmodules() 
 {
-    functionPrintMessage privilege_user rebuildsubmodules
+    functionSystemPrintMessage privilegeUser rebuildSubmodules
 
     previous_pwd="$(pwd)"
 
     # NOTE: submodule path is relative to root repository.
-    (cd "${path_dotroot}" &&
+    (cd "${pathDotRoot}" &&
         git submodule add https://github.com/romkatv/powerlevel10k              config/zsh/plugins/powerlevel10k
         git submodule add https://github.com/zsh-users/zsh-syntax-highlighting  config/zsh/plugins/zsh-syntax-highlighting
         git submodule add https://github.com/zsh-users/zsh-autosuggestions      config/zsh/plugins/zsh-autosuggestions
@@ -552,14 +982,14 @@ functionRebuildGitSubmodules()
 
     cd "${previous_pwd}"
 
-    functionPrintMessage printsleep
+    functionSystemPrintMessage printsleep
 }
 
 functionVMTemplateCleanUp()
 {
-    functionPrintMessage privilege_root vmtemplatecleanup
+    functionSystemPrintMessage privilegeRoot vmTemplateCleanUp
 
-    case "${distro_name}" in
+    case "${distroName}" in
         "debian")
             printf '%s\n' "Reconfiguring SSH Keys"
             (su -c "
@@ -570,9 +1000,9 @@ functionVMTemplateCleanUp()
 
             printf '%s\n' "Cleaning packages"
             (su -c "
-                ${pkg_manager} autoclean
-                ${pkg_manager} clean
-                ${pkg_manager} autoremove
+                ${packageManager} autoclean
+                ${packageManager} clean
+                ${packageManager} autoremove
             ")
 
             printf '%s\n' "Configuring Journalctl"
@@ -595,7 +1025,5 @@ functionVMTemplateCleanUp()
             ;;
     esac
 
-
-
-    functionPrintMessage printsleep
+    functionSystemPrintMessage printsleep
 }
