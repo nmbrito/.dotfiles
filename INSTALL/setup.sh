@@ -7,36 +7,36 @@
 # ------------
 
 #   Variables
-path_script=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)                    # Run script from any directory
-path_utilities=$(CDPATH= cd -- "$(dirname -- "$0")" && cd utilities && pwd) # Directory containing all utilities
-path_dotroot="$(git rev-parse --show-toplevel)"                             # Define .dotfiles directory
-path_cache=""${HOME}"/.cache"                                               # Define .cache directory
+pathScript=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)                    # Run script from any directory
+pathUtilities=$(CDPATH= cd -- "$(dirname -- "$0")" && cd utilities && pwd) # Directory containing all utilities
+pathDotRoot="$(git rev-parse --show-toplevel)"                             # Define .dotfiles directory
+pathCache=""${HOME}"/.cache"                                               # Define .cache directory
 
-url_nerdfonts="https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest"
+urlNerdFonts="https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest"
 
-message_longwarn="###########################################"
-message_longdash="----------------------"
-message_execroot="# The following commands will run as ROOT #"
+messageLongWarn="###########################################"
+messageLongDash="----------------------"
+messageExecRoot="# The following commands will run as ROOT #"
 
 if   [ -L /etc/os-release                ]; then . /etc/os-release;                   # Linux distribuition
 elif [ $(command -v sw_vers) 2>/dev/null ]; then ID="$(sw_vers -productName)"; fi     # macOS
 if   [ -n "${WT_SESSION}"                ]; then wslsession=1; else wslsession=0; fi  # WSL session
 
-if [ ! -f "${path_utilities}"/functions.sh ] && [ ! -f "${path_utilities}"/packages.sh ] ; then
+if [ ! -f "${pathUtilities}"/functions.sh ] && [ ! -f "${pathUtilities}"/packages.sh ] ; then
     printf '%s\n' "Missing components. Aborting."
     exit 0
 else
-    . "${path_utilities}"/functions.sh  # Source file containing functions.
-    functionDefineDistro                # Defines the package manager and software especific to the running distribution.
-    functionDefineHost                  # Define current host
-    . "${path_utilities}"/packages.sh   # Sourced after functions.sh
+    . "${pathUtilities}"/functions.sh  # Source file containing functions.
+    functionDefineDistro               # Defines the package manager and software especific to the running distribution.
+    functionDefineHost                 # Define current host
+    . "${pathUtilities}"/packages.sh   # Sourced after functions.sh
 fi
 
 # Main
 # ----
 printf '%s\n'   "" \
                 "Starting process" \
-                "${message_longdash}" \
+                "${messageLongDash}" \
                 "" \
                 "Current distro: "${ID}""
 
@@ -48,28 +48,28 @@ do
 
     printf '%s\n' ""
 
-    case "${option_picked}" in
-        1)
-            functionRepositories
-            functionPackages
-            functionFixes
-            functionFonts
-            functionSymlinks
+    case "${optionPicked}" in
+        1)                                      # Run All
+            functionInstallRepositories
+            functionInstallPackages
+            functionInstallFixes
+            functionInstallFonts
+            functionInstallSymlinks
             functionConfigGitGlobals
-            functionGitSubmodules
+            functionConfigGitSubmodules
             functionConfigVimHelptags
             functionConfigShell
             ;;
-        2)  functionRepositories     ;;
-        3)  functionPackages         ;;
-        4)  functionFixes            ;;
-        5)  functionFonts            ;;
-        6)  functionSymlinks         ;;
-        7)  functionConfigGitGlobals        ;;
-        8)  functionGitSubmodules    ;;
-        9)  functionConfigVimHelptags       ;;
-        10) functionConfigShell             ;;
-        r)  functionRebuildGitSubmodules    ;;
+        2)  functionInstallRepositories     ;;  # Repositories
+        3)  functionInstallPackages         ;;  # Packages
+        4)  functionInstallFixes            ;;  # Fixes
+        5)  functionInstallFonts            ;;  # Fonts
+        6)  functionInstallSymlinks         ;;  # Symlinks
+        7)  functionConfigGitGlobals        ;;  # Git Globals
+        8)  functionConfigGitSubmodules     ;;  # Git Submodules
+        9)  functionConfigVimHelptags       ;;  # Vim Helptags
+        10) functionConfigShell             ;;  # ZSH Shell
+        r)  functionRebuildGitSubmodules    ;;  # Rebuild Git Submodules
         *)
             printf '%s\n'   "Exiting..." \
                             ""
