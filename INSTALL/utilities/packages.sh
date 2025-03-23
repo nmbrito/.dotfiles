@@ -1,43 +1,15 @@
 #!/bin/sh
 
-# Quickly sort lists with vim :'<,'>sort
-
 # Packages
-# Servers {{{1
-# Shiny Server {{{2
-packages_shinyserver="apache2 \
-build-essential \
-gdal-data \
-gdal-plugins \
-gdebi-core \
-libfontconfig1-dev \
-libfribidi-dev \
-libharfbuzz-dev \
-libjq-dev \
-libmagick++-dev \
-libprotobuf-dev \
-librsvg2-dev \
-libsecret-1-dev \
-libsodium-dev \
-libudunits2-dev \
-libv8-dev \
-libxml2-dev \
-protobuf-compiler \
-r-base \
-r-base-core \
-r-base-dev \
-r-base-html \
-r-cran-boot \
-r-cran-class \
-r-cran-mass \
-r-cran-nlme \
-r-cran-sp \
-r-cran-spatial"
-# 2}}}
+packages_fonts="\
+CascadiaCode.tar.xz \
+FiraCode.tar.xz \
+Hasklig.tar.xz \
+Lilex.tar.xz \
+JetBrainsMono.tar.xz \
+Monoid.tar.xz
+"
 
-    #libapache2-mod-proxy-html \
-
-# R Modules {{{2
 packages_rmodules="'DBI',\
 'DT',\
 'apexcharter',\
@@ -64,7 +36,6 @@ packages_rmodules="'DBI',\
 'leaflet.extras',\
 'leaflet.extras2',\
 'odbc',\
-'openxlsx',\
 'openxlsx',\
 'pipeR',\
 'pivottabler',\
@@ -104,132 +75,150 @@ packages_rmodules="'DBI',\
 'tidyverse',\
 'toastui',\
 'waiter'"
-#,2}}}
 
-# Server GUI X11 {{{2
-list_server_gui="xorgxrdp \
-xrdp"
-# 2}}}
+list_ShinyServer="\
+${binary_apache2} \
+${binary_build_essential} \
+${binary_gdal_data} \
+${binary_gdal_plugins} \
+${binary_gdebi_core} \
+${binary_libfontconfig1_dev} \
+${binary_libfribidi_dev} \
+${binary_libharfbuzz_dev} \
+${binary_libjq_dev} \
+${binary_libmagickplusplus_dev} \
+${binary_libprotobuf_dev} \
+${binary_librsvg2_dev} \
+${binary_libsecret_1_dev} \
+${binary_libsodium_dev} \
+${binary_libudunits2_dev} \
+${binary_libv8_dev} \
+${binary_libxml2_dev} \
+${binary_protobuf_compiler} \
+${binary_r_base} \
+${binary_r_base_core} \
+${binary_r_base_dev} \
+${binary_r_base_html} \
+${binary_r_cran_boot} \
+${binary_r_cran_class} \
+${binary_r_cran_mass} \
+${binary_r_cran_nlme} \
+${binary_r_cran_sp} \
+${binary_r_cran_spatial} \
+"
 
-# Server CLI {{{2
-list_server_cli="${software_fd} \
-${software_fdzshcompletion} \
-${software_fzftmux} \
-${software_fzfzshcompletion} \
-${software_vimdata} \
-curl \
-fzf \
-htop \
-ripgrep-zsh-completion \
-ripgrep \
-tmux \
-vifm \
-vim-fzf \
-vim \
-zsh"
-# 2}}}
-# 1}}}
+list_ServerGUI="\
+${binary_xorgxrdp} \
+${binary_xrdp} \
+"
 
-# Personal {{{1
-# Terminal {{{2
-packages_terminal="${software_btop} \
-${software_fd} \
-${software_fdzshcompletion} \
-${software_fzftmux} \
-${software_fzfzshcompletion} \
-${software_rgzshcompletion} \
-${software_vifmcolors} \
-${software_vimdata} \
-bat \
-eza \
-curl \
-fastfetch \
-fzf \
-lazygit \
-htop \
-man-pages \
-mc \
-ripgrep \
-tmux \
-vifm \
-vim \
-zsh"
-# 2}}}
+list_ServerCLI="\
+${binary_curl} \
+${binary_fd} \
+${binary_fd_zsh_completion} \
+${binary_fzf} \
+${binary_fzf_tmux} \
+${binary_fzf_zsh_completion} \
+${binary_htop} \
+${binary_ripgrep} \
+${binary_ripgrep_zsh_completion} \
+${binary_tmux} \
+${binary_vifm} \
+${binary_vim} \
+${binary_vim_data} \
+${binary_vim_fzf} \
+${binary_zsh} \
+"
 
-# Development {{{2
-packages_dev="${software_shellcheck} \
-gcc \
-gdb \
-make \
-valgrind"
-# 2}}}
+list_Terminal="\
+${binary_btop} \
+${binary_fd} \
+${binary_fd_zsh_completion} \
+${binary_fzf_tmux} \
+${binary_fzf_zsh_completion} \
+${binary_ripgrep_zsh_completion} \
+${binary_vifm_colors} \
+${binary_vim_data} \
+${binary_bat} \
+${binary_eza} \
+${binary_curl} \
+${binary_fastfetch} \
+${binary_fzf} \
+${binary_lazygit} \
+${binary_htop} \
+${binary_man_pages} \
+${binary_mc} \
+${binary_ripgrep} \
+${binary_tmux} \
+${binary_vifm} \
+${binary_vim} \
+${binary_zsh} \
+"
 
-# WSL Pattern for openSUSE {{{2
-packages_wsl_pattern="wsl_gui \
-wsl_base \
-wsl_systemd"
-# 2}}}
+list_Dev="\
+${binary_shellsheck} \
+${binary_gcc} \
+${binary_gdb} \
+${binary_make} \
+${binary_valgrind} \
+"
 
-# KDE Basics {{{2
-packages_kde_basics="keepassxc \
-myspell-pt_PT"
-# 2}}}
+list_WSLPattern="\
+${binary_wsl_base} \
+${binary_wsl_gui} \
+${binary_wsl_systemd} \
+"
 
-# KDE Personal {{{2
-packages_kde_personal="blender \
-code \
-discord \
-ffmpeg-6 \
-gimp \
-godot \
-inkscape \
-kdenlive \
-kicad \
-kid3 \
-krita \
-kvantum-manager \
-qbittorrent \
-strawberry \
-telegram-desktop \
-virt-manager \
-vlc"
-# 2}}}
+list_KDEBasics="\
+${binary_keepassxc} \
+${binary_myspell_pt_PT} \
+"
 
-# Hyprland {{{2
-packages_hyprland="hyprland \
-hyprland-devel \
-kitty"
-# 2}}}
+list_KDEPersonal="\
+${binary_blender} \
+${binary_code} \
+${binary_discord} \
+${binary_ffmpeg_6} \
+${binary_gimp} \
+${binary_godot} \
+${binary_inkscape} \
+${binary_kdenlive} \
+${binary_kicad} \
+${binary_kid3} \
+${binary_krita} \
+${binary_kvantum_manager} \
+${binary_qbittorrent} \
+${binary_strawberry} \
+${binary_telegram_desktop} \
+${binary_virt_manager} \
+${binary_vlc} \
+"
 
-# ThinkPad x230 {{{2
-packages_x230="fprintd \
-fprintd-pam \
-libfprint \
-ifuse \
-NetworkManager-fortisslvpn \
-openfortivpn \
-plasma-nm5-fortisslvpn"
-# 2}}}
+list_Hyprland="\
+${binary_hyprland} \
+${binary_hyprland_devel} \
+${binary_kitty} \
+"
 
-# iPadOS and iOS iSH Terminal {{{2
-packages_ish="build-base \
-gcc \
-gdb \
-git-doc \
-less-doc \
-less \
-man-pages \
-openssh \
-vifm-colors --force-overwrite \
-zsh-vcs"
-# 2}}}
-# 1}}}
+list_x230="\
+${binary_fprintd} \
+${binary_fprintd_pam} \
+${binary_libfprint} \
+${binary_ifuse} \
+${binary_NetworkManager_fortisslvpn} \
+${binary_openfortivpn} \
+${binary_plasma_nm6_fortisslvpn} \
+"
 
-# Fonts {{{1
-packages_fonts="CascadiaCode.tar.xz \
-FiraCode.tar.xz \
-Hasklig.tar.xz \
-Lilex.tar.xz \
-JetBrainsMono.tar.xz \
-Monoid.tar.xz"
-# 1}}}
+list_iSH="\
+${binary_build_base} \
+${binary_gcc} \
+${binary_gdb} \
+${binary_git_doc} \
+${binary_less} \
+${binary_less_doc} \
+${binary_man_pages} \
+${binary_openssh} \
+${binary_vifm_colors} \
+${binary_zsh} \
+"
