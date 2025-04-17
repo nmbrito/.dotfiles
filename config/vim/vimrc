@@ -100,12 +100,12 @@
         nnoremap <leader><F5>           :wq!<CR>
         nnoremap <silent><F6>           :Buffers<CR>
         nnoremap <silent><F7>           :set wrap!<CR>
-        nnoremap <S-F11>                :mksession! ${path_vimsessions}/current_session.vim<CR>
-        nnoremap <leader><S-F11>        :source ${path_vimsessions}/current_session.vim<CR>
-        nnoremap <silent><F12>          :sp ${path_dotrepo}/RTM.md<CR>
+        nnoremap <S-F11>                :mksession! ${nmb_vimsessions}/current_session.vim<CR>
+        nnoremap <leader><S-F11>        :source ${nmb_vimsessions}/current_session.vim<CR>
+        nnoremap <silent><F12>          :sp ${nmb_dotrepo}/RTM.md<CR>
 
-        :command -nargs=1 Mksw          :mks! ${path_vimsessions}/<args>.vim
-        :command -nargs=1 Mksl          :source ${path_vimsessions}/<args>.vim
+        :command -nargs=1 Mksw          :mks! ${nmb_vimsessions}/<args>.vim
+        :command -nargs=1 Mksl          :source ${nmb_vimsessions}/<args>.vim
 
     " Colorschemes quick change
         nnoremap <silent><leader>cs     :colorscheme slate<CR>
