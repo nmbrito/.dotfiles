@@ -24,6 +24,7 @@ functionSystemPrintMessage()
                             "${messageLongWarn}" "${messageExecRoot}" "${messageLongWarn}" \
                             ""
         ;;
+
         "privilegeUser")
             case "${2}" in
                 "fonts")                printf '%s\n' "Fonts" ;;
@@ -39,6 +40,7 @@ functionSystemPrintMessage()
             printf '%s\n'   "${messageLongDash}" \
                             ""
         ;;
+
         "printsleep")
             printf '%s\n'   ""
             sleep 3s
@@ -662,6 +664,62 @@ functionSystemDefineHost()
     fi
 }
 
+functionGenericInstallCommands()
+{
+    case "${1}" in
+        "OhMyPosh")
+            curl -s https://ohmyposh.dev/install.sh | bash -s -- -d ${HOME}/.local/bin
+            ;;
+
+        *)  ;;
+    esac
+
+    case "${2}" in
+        "KDELenovo")
+            su -c "$packageInstallCommand \
+                $packages_Terminal \
+                $packages_Dev \
+                $packages_KDEBasics \
+                $packages_KDEPersonal \
+                $packages_x230 \
+                ";
+            ;;
+           
+        "KDEDefault")
+            su -c "$packageInstallCommand \
+                $packages_Terminal \
+                $packages_KDEBasics \
+                ";
+            ;;
+
+        "TerminalDefault")
+            su -c "$packageInstallCommand \
+                $packages_Terminal \
+                $packages_Dev \
+                ";
+            ;;
+
+        "HyprlandDefault")
+            su -c "${packageInstallCommand} \
+                ${packages_terminal} \
+                ${packages_dev} \
+                ${packages_hyprland} \
+                ${packages_kde_personal} \
+                ";
+            ;;
+
+        "AppleMobile")
+            "$packageInstallCommand \
+                $packages_Terminal \
+                $packages_iSH \
+                "
+            ;;
+
+        *)  ;;
+    esac
+
+}
+
 functionInstallRepositories() 
 {
     functionSystemPrintMessage privilegeRoot repositories
@@ -676,6 +734,7 @@ functionInstallRepositories()
                 "
                 # Last command is the same as "zypper refresh" but also accepts automatically keys
             ;;
+
         *)
             printf '%s\n' "No repository to add."
             ;;
@@ -688,56 +747,42 @@ functionInstallPackages()
 {
     functionSystemPrintMessage privilegeRoot packages
 
-    # Install Oh-My-Posh
-
     case "${currentHost}" in
         "LENOVO ThinkPad X230 - 23252FG")
-            curl -s https://ohmyposh.dev/install.sh | bash -s -- -d ${HOME}/.local/bin
             case "${XDG_SESSION_DESKTOP}" in
                 "KDE")
-                    su -c "$packageInstallCommand \
-                        $packages_Terminal \
-                        $packages_Dev \
-                        $packages_KDEBasics \
-                        $packages_KDEPersonal \
-                        $packages_x230 \
-                        ";
+                    functionGenericInstalCommands OhMyPosh KDELenovo
                     ;;
-                #"hyprland")
-                    #(su -c "${packageInstallCommand} ${packages_terminal} ${packages_dev} ${packages_hyprland} ${packages_kde_personal}");
-                    #;;
+
+                "hyprland")
+                    functionGenericInstalCommands OhMyPosh HyprlandDefault
+                    ;;
+
                 *)
-                    su -c "$packageInstallCommand \
-                        $packages_Terminal \
-                        $packages_Dev \
-                        ";
+                    functionGenericInstalCommands OhMyPosh TerminalDefault
                     ;;
             esac
             ;;
-        "Windows Subsystem for Linux")
-            curl -s https://ohmyposh.dev/install.sh | bash -s -- -d ${HOME}/.local/bin
-            su -c "$packageInstallCommand \
-                $packages_Terminal \
-                $packages_Dev \
-                ";
 
+        "Windows Subsystem for Linux")
+            functionGenericInstalCommands OhMyPosh TerminalDefault
             if [ "${distroName}" = "opensuse-tumbleweed" ]; then su -c "$packageInstallCommand -t pattern $packages_WSLPattern"; fi
             ;;
+
         "iOS/iPadOS")
-            "$packageInstallCommand $packages_Terminal $packages_iSH"
+            functionGenericInstalCommands AppleMobile
             ;;
+
         "MacBook9,2")
             "$packageInstallCommand --file=${dir_dotroot}/INSTALL/Brewfile"
             ;;
+
         *)
             case "${XDG_SESSION_DESKTOP}" in
                 "KDE")
-                    curl -s https://ohmyposh.dev/install.sh | bash -s -- -d ${HOME}/.local/bin
-                    su -c "$packageInstallCommand \
-                        $packages_Terminal \
-                        $packages_KDEBasics \
-                        ";
+                    functionGenericInstalCommands OhMyPosh KDEDefault
                     ;;
+
                 *) ;;
             esac
     esac
@@ -754,6 +799,7 @@ functionInstallFixes()
         "MacBookPro9,2")
             /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" 
             ;;
+
         *)
             printf '%s\n' "Hardware running smoothly"
             ;;
@@ -766,6 +812,7 @@ functionInstallFixes()
 
             ln -s $(which fdfind) "${HOME}/.local/bin/fd"
             ;;
+
         *)
             printf '%s\n' "Operating system running smoothly"
             ;;
