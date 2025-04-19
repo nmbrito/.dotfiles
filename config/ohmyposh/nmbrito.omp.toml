@@ -103,7 +103,7 @@ final_space = true
       branch_behind_icon = '⇣'
       branch_max_length = 25
       cache_duration = 'none'
-      fetch_status = true
+      fetch_status = false
       fetch_upstream_icon = true
 
 [[blocks]]
