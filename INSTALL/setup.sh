@@ -27,8 +27,8 @@ if [ ! -f "${pathUtilities}"/functions.sh ] && [ ! -f "${pathUtilities}"/package
     exit 0
 else
     . "${pathUtilities}"/functions.sh  # Source file containing functions.
-    functionDefineDistro               # Defines the package manager and software especific to the running distribution.
-    functionDefineHost                 # Define current host
+    functionSystemDefineDistro         # Defines the package manager and software especific to the running distribution.
+    functionSystemDefineHost           # Define current host
     . "${pathUtilities}"/packages.sh   # Sourced after functions.sh
 fi
 
