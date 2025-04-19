@@ -156,7 +156,7 @@ ${binary_zsh} \
 "
 
 list_Dev="\
-${binary_shellsheck} \
+${binary_shellcheck} \
 ${binary_gcc} \
 ${binary_gdb} \
 ${binary_make} \
