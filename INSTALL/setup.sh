@@ -42,7 +42,7 @@ printf '%s\n'   "" \
 
 while :
 do
-    functionBuildMenu
+    functionSystemBuildMenu
     printf '%s' "Option: "
     read -r option_picked
 
