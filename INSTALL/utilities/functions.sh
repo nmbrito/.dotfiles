@@ -189,7 +189,7 @@ functionSystemDefineDistro()
             binary_r_cran_spatial=""
             binary_ripgrep="ripgrep"
             binary_ripgrep_zsh_completion="ripgrep-zsh-completion"
-            binary_shellsheck="ShellCheck"
+            binary_shellcheck="ShellCheck"
             binary_strawberry="strawberry"
             binary_telegram_desktop="telegram-desktop"
             binary_tmux="tmux"
@@ -293,7 +293,7 @@ functionSystemDefineDistro()
             binary_r_cran_spatial="r-cran-spatial"
             binary_ripgrep=""
             binary_ripgrep_zsh_completion=""
-            binary_shellsheck=""
+            binary_shellcheck=""
             binary_strawberry=""
             binary_telegram_desktop=""
             binary_tmux=""
@@ -397,7 +397,7 @@ functionSystemDefineDistro()
             binary_r_cran_spatial=""
             binary_ripgrep=""
             binary_ripgrep_zsh_completion=""
-            binary_shellsheck=""
+            binary_shellcheck=""
             binary_strawberry=""
             binary_telegram_desktop=""
             binary_tmux=""
@@ -501,7 +501,7 @@ functionSystemDefineDistro()
             binary_r_cran_spatial=""
             binary_ripgrep=""
             binary_ripgrep_zsh_completion=""
-            binary_shellsheck=""
+            binary_shellcheck=""
             binary_strawberry=""
             binary_telegram_desktop=""
             binary_tmux=""
@@ -605,7 +605,7 @@ functionSystemDefineDistro()
             binary_r_cran_spatial=""
             binary_ripgrep=""
             binary_ripgrep_zsh_completion=""
-            binary_shellsheck=""
+            binary_shellcheck=""
             binary_strawberry=""
             binary_telegram_desktop=""
             binary_tmux=""
@@ -677,41 +677,41 @@ functionGenericInstallCommands()
     case "${2}" in
         "KDELenovo")
             su -c "$packageInstallCommand \
-                $packages_Terminal \
-                $packages_Dev \
-                $packages_KDEBasics \
-                $packages_KDEPersonal \
-                $packages_x230 \
+                $list_Terminal \
+                $list_Dev \
+                $list_KDEBasics \
+                $list_KDEPersonal \
+                $list_x230 \
                 ";
             ;;
            
         "KDEDefault")
             su -c "$packageInstallCommand \
-                $packages_Terminal \
-                $packages_KDEBasics \
+                $list_Terminal \
+                $list_KDEBasics \
                 ";
             ;;
 
         "TerminalDefault")
             su -c "$packageInstallCommand \
-                $packages_Terminal \
-                $packages_Dev \
+                $list_Terminal \
+                $list_Dev \
                 ";
             ;;
 
         "HyprlandDefault")
             su -c "${packageInstallCommand} \
-                ${packages_terminal} \
-                ${packages_dev} \
-                ${packages_hyprland} \
-                ${packages_kde_personal} \
+                ${list_Terminal} \
+                ${list_Dev} \
+                ${list_Hyprland} \
+                ${list_KDEPersonal} \
                 ";
             ;;
 
         "AppleMobile")
             "$packageInstallCommand \
-                $packages_Terminal \
-                $packages_iSH \
+                $list_Terminal \
+                $list_iSH \
                 "
             ;;
 
@@ -766,7 +766,7 @@ functionInstallPackages()
 
         "Windows Subsystem for Linux")
             functionGenericInstalCommands OhMyPosh TerminalDefault
-            if [ "${distroName}" = "opensuse-tumbleweed" ]; then su -c "$packageInstallCommand -t pattern $packages_WSLPattern"; fi
+            if [ "${distroName}" = "opensuse-tumbleweed" ]; then su -c "$packageInstallCommand -t pattern $list_WSLPattern"; fi
             ;;
 
         "iOS/iPadOS")
