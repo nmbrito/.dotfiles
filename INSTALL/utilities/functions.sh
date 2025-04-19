@@ -728,8 +728,9 @@ functionInstallRepositories()
         "opensuse-tumbleweed")
             su -c "
                 rpm --import https://packages.microsoft.com/keys/microsoft.asc ;
+                rpm --import https://rpm.librewolf.net/pubkey.gpg ;
                 zypper ar https://packages.microsoft.com/yumrepos/vscode vscode ;
-                zypper ar https://rpm.librewolf.net/librewolf-repo.repo ;
+                zypper ar -ef https://rpm.librewolf.net librewolf
                 zypper --gpg-auto-import-keys ref ;
                 "
                 # Last command is the same as "zypper refresh" but also accepts automatically keys
@@ -751,26 +752,26 @@ functionInstallPackages()
         "LENOVO ThinkPad X230 - 23252FG")
             case "${XDG_SESSION_DESKTOP}" in
                 "KDE")
-                    functionGenericInstalCommands OhMyPosh KDELenovo
+                    functionGenericInstallCommands OhMyPosh KDELenovo
                     ;;
 
                 "hyprland")
-                    functionGenericInstalCommands OhMyPosh HyprlandDefault
+                    functionGenericInstallCommands OhMyPosh HyprlandDefault
                     ;;
 
                 *)
-                    functionGenericInstalCommands OhMyPosh TerminalDefault
+                    functionGenericInstallCommands OhMyPosh TerminalDefault
                     ;;
             esac
             ;;
 
         "Windows Subsystem for Linux")
-            functionGenericInstalCommands OhMyPosh TerminalDefault
+            functionGenericInstallCommands OhMyPosh TerminalDefault
             if [ "${distroName}" = "opensuse-tumbleweed" ]; then su -c "$packageInstallCommand -t pattern $list_WSLPattern"; fi
             ;;
 
         "iOS/iPadOS")
-            functionGenericInstalCommands AppleMobile
+            functionGenericInstallCommands AppleMobile
             ;;
 
         "MacBook9,2")
@@ -780,7 +781,7 @@ functionInstallPackages()
         *)
             case "${XDG_SESSION_DESKTOP}" in
                 "KDE")
-                    functionGenericInstalCommands OhMyPosh KDEDefault
+                    functionGenericInstallCommands OhMyPosh KDEDefault
                     ;;
 
                 *) ;;
