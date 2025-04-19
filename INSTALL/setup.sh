@@ -44,7 +44,7 @@ while :
 do
     functionSystemBuildMenu
     printf '%s' "Option: "
-    read -r option_picked
+    read -r optionPicked
 
     printf '%s\n' ""
 
