@@ -885,39 +885,6 @@ functionInstallSymlinks()
     functionSystemPrintMessage printsleep
 }
 
-functionRestoreKDE()
-{
-    functionSystemPrintMessage privilegeUser restoreKDE
-
-    [ -d "${HOME}/.local/share/aurorae" ]                  && rm -rf "${HOME}/.local/share/aurorae"
-    [ -d "${HOME}/.local/share/color-schemes" ]            && rm -rf "${HOME}/.local/share/color-schemes"
-    [ -d "${HOME}/.local/share/icons" ]                    && rm -rf "${HOME}/.local/share/icons"
-    [ -d "${HOME}/.local/share/plasma/desktoptheme" ]      && rm -rf "${HOME}/.local/share/plasma/desktoptheme"
-    [ -d "${HOME}/.local/share/plasma/look-and-feel" ]     && rm -rf "${HOME}/.local/share/plasma/look-and-feel"
-    [ -d "${HOME}/.local/share/wallpapers" ]               && rm -rf "${HOME}/.local/share/wallpapers"
-    [ -d "${HOME}/.icons" ]                                && rm -rf "${HOME}/.icons"
-
-    cp -rv "${pathDotRoot}/kde_backup/share/aurorae"                "${HOME}/.local/share/aurorae"
-    cp -rv "${pathDotRoot}/kde_backup/share/color-schemes"          "${HOME}/.local/share/color-schemes"
-    cp -rv "${pathDotRoot}/kde_backup/share/icons"                  "${HOME}/.local/share/icons"
-    cp -rv "${pathDotRoot}/kde_backup/share/plasma/desktoptheme"    "${HOME}/.local/share/plasma/desktoptheme"
-    cp -rv "${pathDotRoot}/kde_backup/share/plasma/look-and-feel"   "${HOME}/.local/share/plasma/look-and-feel"
-    cp -rv "${pathDotRoot}/kde_backup/share/wallpapers"             "${HOME}/.local/share/wallpapers"
-    cp -rv "${pathDotRoot}/kde_backup/.icons"                       "${HOME}/.icons"
-
-    functionSystemPrintMessage printsleep
-}
-
-functionRestoreMacOS()
-{
-    [ -d "${HOME}/Library/Application Support/TG Pro" ]                           && rm -rf "${HOME}/Library/Application Support/TG Pro"
-    
-    cp -rv "${pathDotRoot}/.config/tgpro/Application Support/TG Pro"                       "${HOME}/Library/Application Support/TG Pro"
-    cp -rv "${pathDotRoot}/.config/tgpro/Preferences/com.tunabellysoftware.tgpro.plist"    "${HOME}/Library/Preferences/com.tunabellysoftware.tgpro.plist"
-
-    #TODO: iterm2 config
-}
-
 functionConfigGitGlobals() 
 {
     functionSystemPrintMessage privilegeUser gitConfig
@@ -1031,6 +998,39 @@ functionRebuildGitSubmodules()
     cd "${previous_pwd}"
 
     functionSystemPrintMessage printsleep
+}
+
+functionRestoreKDE()
+{
+    functionSystemPrintMessage privilegeUser restoreKDE
+
+    [ -d "${HOME}/.local/share/aurorae" ]                  && rm -rf "${HOME}/.local/share/aurorae"
+    [ -d "${HOME}/.local/share/color-schemes" ]            && rm -rf "${HOME}/.local/share/color-schemes"
+    [ -d "${HOME}/.local/share/icons" ]                    && rm -rf "${HOME}/.local/share/icons"
+    [ -d "${HOME}/.local/share/plasma/desktoptheme" ]      && rm -rf "${HOME}/.local/share/plasma/desktoptheme"
+    [ -d "${HOME}/.local/share/plasma/look-and-feel" ]     && rm -rf "${HOME}/.local/share/plasma/look-and-feel"
+    [ -d "${HOME}/.local/share/wallpapers" ]               && rm -rf "${HOME}/.local/share/wallpapers"
+    [ -d "${HOME}/.icons" ]                                && rm -rf "${HOME}/.icons"
+
+    cp -rv "${pathDotRoot}/kde_backup/share/aurorae"                "${HOME}/.local/share/aurorae"
+    cp -rv "${pathDotRoot}/kde_backup/share/color-schemes"          "${HOME}/.local/share/color-schemes"
+    cp -rv "${pathDotRoot}/kde_backup/share/icons"                  "${HOME}/.local/share/icons"
+    cp -rv "${pathDotRoot}/kde_backup/share/plasma/desktoptheme"    "${HOME}/.local/share/plasma/desktoptheme"
+    cp -rv "${pathDotRoot}/kde_backup/share/plasma/look-and-feel"   "${HOME}/.local/share/plasma/look-and-feel"
+    cp -rv "${pathDotRoot}/kde_backup/share/wallpapers"             "${HOME}/.local/share/wallpapers"
+    cp -rv "${pathDotRoot}/kde_backup/.icons"                       "${HOME}/.icons"
+
+    functionSystemPrintMessage printsleep
+}
+
+functionRestoreMacOS()
+{
+    [ -d "${HOME}/Library/Application Support/TG Pro" ]                           && rm -rf "${HOME}/Library/Application Support/TG Pro"
+    
+    cp -rv "${pathDotRoot}/.config/tgpro/Application Support/TG Pro"                       "${HOME}/Library/Application Support/TG Pro"
+    cp -rv "${pathDotRoot}/.config/tgpro/Preferences/com.tunabellysoftware.tgpro.plist"    "${HOME}/Library/Preferences/com.tunabellysoftware.tgpro.plist"
+
+    #TODO: iterm2 config
 }
 
 functionVMTemplateCleanUp()
