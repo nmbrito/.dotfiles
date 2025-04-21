@@ -102,6 +102,15 @@ functionSystemInfoMenu()
 
 functionSystemDefineDistro() 
 {
+    # Flatpak universal
+    flatpakManager="flatpak"
+    flatpakUpdate="flatpak update"
+    flatpakInstallCommand="flatpak install -y"
+
+    flat_signaldesktop="org.signal.Signal"
+    flat_remotedesktop="net.devolutions.RDM"
+    flat_obsidianmd="md.obsidian.Obsidian"
+
     # Some distribuitions have different package names and software paths.
     case "${ID}" in
         "opensuse-tumbleweed")
@@ -663,9 +672,7 @@ functionGenericInstallCommands()
 {
     case "${1}" in
         "OhMyPosh")
-            curl -s https://ohmyposh.dev/install.sh | bash -s -- -d ${HOME}/.local/bin
-            ;;
-
+            curl -s https://ohmyposh.dev/install.sh | bash -s -- -d ${HOME}/.local/bin ;;
         *)  ;;
     esac
 
@@ -678,6 +685,10 @@ functionGenericInstallCommands()
                 $list_KDEPersonal \
                 $list_x230 \
                 ";
+
+            su -c "$flatpakInstallCommand \
+                $list_Flatpak \
+                "
             ;;
            
         "KDEDefault")
