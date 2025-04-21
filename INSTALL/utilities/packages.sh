@@ -189,7 +189,6 @@ ${binary_krita} \
 ${binary_kvantum_manager} \
 ${binary_qbittorrent} \
 ${binary_strawberry} \
-${binary_telegram_desktop} \
 ${binary_virt_manager} \
 ${binary_vlc} \
 "
