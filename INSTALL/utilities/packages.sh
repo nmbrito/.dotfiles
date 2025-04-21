@@ -221,3 +221,9 @@ ${binary_openssh} \
 ${binary_vifm_colors} \
 ${binary_zsh} \
 "
+
+list_Flatpak="\
+${flat_signaldesktop} \
+${flat_remotedesktop} \
+${flat_obsidianmd} \
+"
