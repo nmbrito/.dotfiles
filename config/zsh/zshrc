@@ -39,7 +39,8 @@ fi
     autoload -U compinit && compinit
 
 # Source alias
-    [ -f "${nmb_zshconf}/alias/zsh_alias.zsh" ] && . "${nmb_zshconf}/alias/zsh_alias.zsh"
+    [ -f "${nmb_zshconf}/alias/zsh_alias.zsh" ]         && . "${nmb_zshconf}/alias/zsh_alias.zsh"
+    [ -f "${nmb_zshconf}/alias/zsh_alias_flatpak.zsh" ] && . "${nmb_zshconf}/alias/zsh_alias_flatpak.zsh"
 
     case ${ID} in
         "opensuse-tumbleweed")
