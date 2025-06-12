@@ -178,7 +178,7 @@ list_KDEPersonal="\
 ${binary_blender} \
 ${binary_code} \
 ${binary_discord} \
-${binary_ffmpeg_6} \
+${binary_ffmpeg} \
 ${binary_gimp} \
 ${binary_godot} \
 ${binary_inkscape} \
