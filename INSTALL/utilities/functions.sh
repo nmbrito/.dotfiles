@@ -810,7 +810,7 @@ functionInstallFixes()
 
         "opensuse-tumbleweed")
             su -c "$packageInstallCommand broadcom-wl"
-
+            ;;
         *)
             printf '%s\n' "Hardware running smoothly"
             ;;
