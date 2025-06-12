@@ -736,7 +736,8 @@ functionInstallRepositories()
                 rpm --import https://packages.microsoft.com/keys/microsoft.asc ;
                 rpm --import https://rpm.librewolf.net/pubkey.gpg ;
                 zypper ar https://packages.microsoft.com/yumrepos/vscode vscode ;
-                zypper ar -ef https://rpm.librewolf.net librewolf
+                zypper ar -ef https://rpm.librewolf.net librewolf ;
+                zypper addrepo https://download.opensuse.org/repositories/home:Sauerland:hardware/openSUSE_Tumbleweed/home:Sauerland:hardware.repo ;
                 zypper --gpg-auto-import-keys ref ;
                 "
                 # Last command is the same as "zypper refresh" but also accepts automatically keys
@@ -806,6 +807,9 @@ functionInstallFixes()
         "MacBookPro9,2")
             /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" 
             ;;
+
+        "opensuse-tumbleweed")
+            su -c "$packageInstallCommand broadcom-wl"
 
         *)
             printf '%s\n' "Hardware running smoothly"
