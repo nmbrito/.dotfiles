@@ -691,6 +691,19 @@ functionGenericInstallCommands()
                 "
             ;;
            
+        "KDEMacbook")
+            su -c "$packageInstallCommand \
+                $list_Terminal \
+                $list_Dev \
+                $list_KDEBasics \
+                $list_KDEPersonal \
+                ";
+
+            su -c "$flatpakInstallCommand \
+                $list_Flatpak \
+                "
+            ;;
+           
         "KDEDefault")
             su -c "$packageInstallCommand \
                 $list_Terminal \
@@ -781,6 +794,22 @@ functionInstallPackages()
             functionGenericInstallCommands AppleMobile
             ;;
 
+        "Apple Inc. 1.0 - MacBookPro9,2")
+            case "${XDG_SESSION_DESKTOP}" in
+                "KDE")
+                    functionGenericInstallCommands OhMyPosh KDEMacbook
+                    ;;
+
+                "hyprland")
+                    functionGenericInstallCommands OhMyPosh HyprlandDefault
+                    ;;
+
+                *)
+                    functionGenericInstallCommands OhMyPosh TerminalDefault
+                    ;;
+            esac
+            ;;
+
         "MacBook9,2")
             "$packageInstallCommand --file=${dir_dotroot}/INSTALL/Brewfile"
             ;;
@@ -808,7 +837,7 @@ functionInstallFixes()
             /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" 
             ;;
 
-        "opensuse-tumbleweed")
+        "Apple Inc. 1.0 - MacBookPro9,2")
             su -c "$packageInstallCommand broadcom-wl"
             ;;
         *)
