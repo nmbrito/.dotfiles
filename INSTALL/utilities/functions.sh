@@ -110,6 +110,7 @@ functionSystemDefineDistro()
     flat_signaldesktop="org.signal.Signal"
     flat_remotedesktop="net.devolutions.RDM"
     flat_obsidianmd="md.obsidian.Obsidian"
+    flat_puddletag="net.puddletag.puddletag"
 
     # Some distribuitions have different package names and software paths.
     case "${ID}" in
@@ -183,6 +184,7 @@ functionSystemDefineDistro()
             binary_NetworkManager_fortisslvpn="NetworkManager-fortisslvpn"
             binary_openfortivpn="openfortivpn"
             binary_openssh=""
+            binary_oxygentheme="oxygen6"
             binary_plasma6_nm_fortisslvpn="plasma6-nm-fortisslvpn"
             binary_protobuf_compiler=""
             binary_qbittorrent="qbittorrent"
@@ -286,6 +288,7 @@ functionSystemDefineDistro()
             binary_NetworkManager_fortisslvpn=""
             binary_openfortivpn=""
             binary_openssh=""
+            binary_oxygentheme=""
             binary_plasma6_nm_fortisslvpn=""
             binary_protobuf_compiler="protobuf-compiler"
             binary_qbittorrent=""
@@ -389,6 +392,7 @@ functionSystemDefineDistro()
             binary_NetworkManager_fortisslvpn=""
             binary_openfortivpn=""
             binary_openssh=""
+            binary_oxygentheme=""
             binary_plasma6_nm_fortisslvpn=""
             binary_protobuf_compiler=""
             binary_qbittorrent=""
@@ -492,6 +496,7 @@ functionSystemDefineDistro()
             binary_NetworkManager_fortisslvpn=""
             binary_openfortivpn=""
             binary_openssh=""
+            binary_oxygentheme=""
             binary_plasma6_nm_fortisslvpn=""
             binary_protobuf_compiler=""
             binary_qbittorrent=""
@@ -595,6 +600,7 @@ functionSystemDefineDistro()
             binary_NetworkManager_fortisslvpn=""
             binary_openfortivpn=""
             binary_openssh="openssh"
+            binary_oxygentheme=""
             binary_plasma6_nm_fortisslvpn=""
             binary_protobuf_compiler=""
             binary_qbittorrent=""
