@@ -187,6 +187,7 @@ ${binary_kicad} \
 ${binary_kid3} \
 ${binary_krita} \
 ${binary_kvantum_manager} \
+${binary_oxygentheme} \
 ${binary_qbittorrent} \
 ${binary_strawberry} \
 ${binary_virt_manager} \
@@ -226,4 +227,5 @@ list_Flatpak="\
 ${flat_signaldesktop} \
 ${flat_remotedesktop} \
 ${flat_obsidianmd} \
+${flat_puddletag} \
 "
