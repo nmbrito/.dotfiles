@@ -210,6 +210,12 @@ ${binary_openfortivpn} \
 ${binary_plasma_nm6_fortisslvpn} \
 "
 
+list_maclinux="\
+${binary_NetworkManager_fortisslvpn} \
+${binary_openfortivpn} \
+${binary_plasma_nm6_fortisslvpn} \
+"
+
 list_iSH="\
 ${binary_build_base} \
 ${binary_gcc} \
