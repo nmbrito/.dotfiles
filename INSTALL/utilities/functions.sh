@@ -703,6 +703,7 @@ functionGenericInstallCommands()
                 $list_Dev \
                 $list_KDEBasics \
                 $list_KDEPersonal \
+                $list_maclinux \
                 ";
 
             su -c "$flatpakInstallCommand \
