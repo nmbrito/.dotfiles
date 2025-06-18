@@ -710,6 +710,19 @@ functionGenericInstallCommands()
                 $list_Flatpak \
                 "
             ;;
+
+        "KDEPersonalWKS")
+            su -c "$packageInstallCommand \
+                $list_Terminal \
+                $list_Dev \
+                $list_KDEBasics \
+                $list_KDEPersonal \
+                ";
+
+            su -c "$flatpakInstallCommand \
+                $list_Flatpak \
+                "
+            ;;
            
         "KDEDefault")
             su -c "$packageInstallCommand \
@@ -820,7 +833,7 @@ functionInstallPackages()
         "pc-i440fx-9.2 - Standard PC (i440FX + PIIX, 1996)")
             case "${XDG_SESSION_DESKTOP}" in
                 "KDE")
-                    functionGenericInstallCommands OhMyPosh KDEMacbook
+                    functionGenericInstallCommands OhMyPosh KDEPersonalWKS
                     ;;
 
                 "hyprland")
