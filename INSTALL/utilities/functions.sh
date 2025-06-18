@@ -817,6 +817,22 @@ functionInstallPackages()
             esac
             ;;
 
+        "pc-i440fx-9.2 - Standard PC (i440FX + PIIX, 1996)")
+            case "${XDG_SESSION_DESKTOP}" in
+                "KDE")
+                    functionGenericInstallCommands OhMyPosh KDEMacbook
+                    ;;
+
+                "hyprland")
+                    functionGenericInstallCommands OhMyPosh HyprlandDefault
+                    ;;
+
+                *)
+                    functionGenericInstallCommands OhMyPosh TerminalDefault
+                    ;;
+            esac
+            ;;
+
         "MacBook9,2")
             "$packageInstallCommand --file=${dir_dotroot}/INSTALL/Brewfile"
             ;;
