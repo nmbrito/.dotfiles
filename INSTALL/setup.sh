@@ -14,7 +14,7 @@ pathSysDevDMI="/sys/devices/virtual/dmi"
 pathiSH="/proc/ish"
 pathSWVers="/usr/bin/software_vers"
 
-catSysDevBoardVendor=$(cat /sys/devices/virtual/dmi/id/board_vendor)
+catSysDevBoardVendor=$(cat /sys/devices/virtual/dmi/id/board_vendor) 2>&1
 catSysDevProdVendor=$(cat /sys/devices/virtual/dmi/id/product_version)
 catSysDevProdName=$(cat /sys/devices/virtual/dmi/id/product_name)
 
@@ -56,7 +56,6 @@ printf '%s\n' ""                  \
               "Starting process"  \
               "${messageLongDash}"\
               ""                  \
-              "Current distro: "${ID}""
 
 while :
 do
