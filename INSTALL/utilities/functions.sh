@@ -40,7 +40,7 @@ functionSystemPrintMessage()
 
 functionSystemBuildMenu()
 {
-    printf '%s\n' "                                                             " \
+    printf '%s'   "                                                             " \
                   "-------------------------------------------------------------" \
                   " Select an option:                                           " \
                   "-------------------------------------------------------------" \
