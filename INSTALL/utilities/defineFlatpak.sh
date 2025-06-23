@@ -2,8 +2,8 @@
 
 flatpakManager="flatpak"
 flatpakUpdate="flatpak update"
-flatpakInstallCommand="flatpak install"
-flatpakInstallCommandAuto="flatpak install -y"
+flatpakInstall="flatpak install"
+flatpakInstallAuto="flatpak install -y"
 
 $flat_signaldesktop="org.signal.Signal"
 $flat_remotedesktop="net.devolutions.RDM"
