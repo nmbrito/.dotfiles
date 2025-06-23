@@ -41,7 +41,6 @@ if [ ! -f ${pathUtilities}/functions.sh ]                 && \
     [ ! -f ${pathUtilities}/defineFlatpak.sh ]            && \
     [ ! -f ${pathUtilities}/defineMacOS.sh ]              && \
     [ ! -f ${pathUtilities}/defineOpenSUSETumbleweed.sh ] && \
-    [ ! -f ${pathUtilities}/packagesBrewfile ]            && \
     [ ! -f ${pathUtilities}/packagesLists.sh ];           then
     printf '%s\n' "Missing components. Aborting."
     exit 0
@@ -50,7 +49,6 @@ else
     functionSystemDefineDistro          # Defines the package manager and software especific to the running distribution.
     functionSystemDefineHost            # Define current host
     . ${pathUtilities}/packagesLists.sh # Sourced after functions.sh
-    . ${pathUtilities}/packagesBrewfile # Sourced after functions.sh
 fi
 
 # Main
