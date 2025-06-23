@@ -41,7 +41,7 @@ if [ ! -f ${pathUtilities}/functions.sh ]                 && \
     [ ! -f ${pathUtilities}/defineFlatpak.sh ]            && \
     [ ! -f ${pathUtilities}/defineMacOS.sh ]              && \
     [ ! -f ${pathUtilities}/defineOpenSUSETumbleweed.sh ] && \
-    [ ! -f ${pathUtilities}/packagesBrewfile.sh ]         && \
+    [ ! -f ${pathUtilities}/packagesBrewfile ]            && \
     [ ! -f ${pathUtilities}/packagesLists.sh ];           then
     printf '%s\n' "Missing components. Aborting."
     exit 0
