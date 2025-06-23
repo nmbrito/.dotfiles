@@ -46,11 +46,11 @@ if [ ! -f ${pathUtilities}/functions.sh ]                 && \
     printf '%s\n' "Missing components. Aborting."
     exit 0
 else
-    . ${pathUtilities}/functions.sh        # Source file containing functions.
-    functionSystemDefineDistro             # Defines the package manager and software especific to the running distribution.
-    functionSystemDefineHost               # Define current host
-    . ${pathUtilities}/packagesLists.sh    # Sourced after functions.sh
-    . ${pathUtilities}/packagesBrewfile.sh # Sourced after functions.sh
+    . ${pathUtilities}/functions.sh     # Source file containing functions.
+    functionSystemDefineDistro          # Defines the package manager and software especific to the running distribution.
+    functionSystemDefineHost            # Define current host
+    . ${pathUtilities}/packagesLists.sh # Sourced after functions.sh
+    . ${pathUtilities}/packagesBrewfile # Sourced after functions.sh
 fi
 
 # Main
