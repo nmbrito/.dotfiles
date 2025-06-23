@@ -40,40 +40,40 @@ functionSystemPrintMessage()
 
 functionSystemBuildMenu()
 {
-    printf '%s\n' "                                                             "\
-                  "-------------------------------------------------------------"\
-                  " Select an option:                                           "\
-                  "-------------------------------------------------------------"\
-                  "  (1) Run all                 |  (6)  Symlinks               "\
-                  "  (2) Repositories            |  (7)  Configure git globals  "\
-                  "  (3) Packages                |  (8)  Sync git submodules    "\
-                  "  (4) Fixes                   |  (9)  Change to zsh shell    "\
-                  "  (5) Fonts                   |  (10) Restore KDE Theme      "\
-                  "                                                             "\
-                  "  (r) rebuild git submodules                                 "\
-                  "-------------------------------------------------------------"\
-                  " Information:                                                "\
-                  "-------------------------------------------------------------"\
-                  "  Host: $currentHost                                         "\
-                  "                                                             "\
-                  "  Distribution: "$ID"                                        "\
-                  "  Package Manager: "$packageManager"                         "\
-                  "  Package Install Command: "$packageInstall"                 "\
-                  "                                                             "\
-                  "  Current shell: "$SHELL"                                    "\
-                  "                                                             "\
-                  "  Pwd: $(pwd)                                                "\
-                  "                                                             "\
-                  "  Directories:                                               "\
-                  "      Repository / .dotfiles: "$pathDotRoot"                 "\
-                  "      Cache: "$pathCache"                                    "\
-                  "      Script: "$pathCache"                                   "\
-                  "      Cache: "$pathCache"                                    "\
-                  "-------------------------------------------------------------"\
-                  "  ( ) exit / cancel                                          "\
-                  "-------------------------------------------------------------"\
-                  "  $0                                                         "\
-                  "-------------------------------------------------------------"\
+    printf '%s\n' "                                                             " \
+                  "-------------------------------------------------------------" \
+                  " Select an option:                                           " \
+                  "-------------------------------------------------------------" \
+                  "  (1) Run all                 |  (6)  Symlinks               " \
+                  "  (2) Repositories            |  (7)  Configure git globals  " \
+                  "  (3) Packages                |  (8)  Sync git submodules    " \
+                  "  (4) Fixes                   |  (9)  Change to zsh shell    " \
+                  "  (5) Fonts                   |  (10) Restore KDE Theme      " \
+                  "                                                             " \
+                  "  (r) rebuild git submodules                                 " \
+                  "-------------------------------------------------------------" \
+                  " Information:                                                " \
+                  "-------------------------------------------------------------" \
+                  "  Host: $currentHost                                         " \
+                  "                                                             " \
+                  "  Distribution: "$ID"                                        " \
+                  "  Package Manager: "$packageManager"                         " \
+                  "  Package Install Command: "$packageInstall"                 " \
+                  "                                                             " \
+                  "  Current shell: "$SHELL"                                    " \
+                  "                                                             " \
+                  "  Pwd: $(pwd)                                                " \
+                  "                                                             " \
+                  "  Directories:                                               " \
+                  "      Repository / .dotfiles: "$pathDotRoot"                 " \
+                  "      Cache: "$pathCache"                                    " \
+                  "      Script: "$pathCache"                                   " \
+                  "      Cache: "$pathCache"                                    " \
+                  "-------------------------------------------------------------" \
+                  "  ( ) exit / cancel                                          " \
+                  "-------------------------------------------------------------" \
+                  "  $0                                                         " \
+                  "-------------------------------------------------------------"
 }
 
 functionSystemDefineDistro() 
