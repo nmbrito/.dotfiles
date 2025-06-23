@@ -82,10 +82,16 @@ List_of_RestoreMacOS="\
     "
 
 # Packages
+
 List_of_x230="\
     ${binary_fprintd}     \
     ${binary_fprintd_pam} \
     ${binary_libfprint}   \
+    "
+
+List_of_MacbookProMid2012="\
+    ${binary_mbpfan}      \
+    ${binary_broadcom_wl} \
     "
 
 List_of_Hyprland="\
@@ -156,6 +162,7 @@ List_of_Terminal="\
     ${binary_lazygit}                \
     ${binary_man_pages}              \
     ${binary_mc}                     \
+    ${binary_ohmyposh}               \
     ${binary_ripgrep}                \
     ${binary_ripgrep_zsh_completion} \
     ${binary_shellcheck}             \
