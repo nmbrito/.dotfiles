@@ -122,7 +122,7 @@ functionImplementRepositories()
 {
     functionSystemPrintMessage privilegeRoot implementRepositories
 
-    if [ ${1} != "None" ]
+    if [ ${1} != "None" ]; then
         for eachGPGKeys    in ${List_of_GPGKeys}     ; do ${repoImport} ${eachGPGKeys}; done
         for eachRepository in ${List_of_Repositories}; do ${repoAdd} ${eachRepository}; done
 
