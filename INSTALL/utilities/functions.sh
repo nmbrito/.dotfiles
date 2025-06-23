@@ -337,46 +337,45 @@ functionRestoreMacOS()
     functionSystemPrintMessage printSleep
 }
 
-functionPrepareVirtualMachine()
-{
-    functionSystemPrintMessage privilegeRoot prepareVirtualMachine
-
-    case "${distroName}" in
-        "debian")
-            printf '%s\n' "Reconfiguring SSH Keys"
-            (su -c "
-                rm -fv /etc/ssh/ssh_host_*
-                dpkg-reconfigure openssh-server
-                systemctl restart ssh
-            ")
-
-            printf '%s\n' "Cleaning packages"
-            (su -c "
-                ${packageManager} autoclean
-                ${packageManager} clean
-                ${packageManager} autoremove
-            ")
-
-            printf '%s\n' "Configuring Journalctl"
-            (su -c "
-                sed -i 's@#SystemMaxUse=@SystemMaxUse=1G@g' /etc/systemd/journald.conf
-                sed -i 's@#SystemMaxFileSize=@SystemMaxFileSize=50M@g' /etc/systemd/journald.conf
-
-                journalctl --vacuum-time=2d
-                journalctl --vacuum-size=100M
-                systemctl restart systemd-journald
-            ")
-
-            printf '%s\n' "Clearing temporary folder"
-            (su -c "
-                rm -rf /tmp/.
-            ")
-            ;;
-        *)
-            printf '%s\n' "Distro not implemented yet"
-            ;;
-    esac
-
-    functionSystemPrintMessage printSleep
-}
-
+#functionPrepareVirtualMachine()
+#{
+#    functionSystemPrintMessage privilegeRoot prepareVirtualMachine
+#
+#    case "${distroName}" in
+#        "debian")
+#            printf '%s\n' "Reconfiguring SSH Keys"
+#            (su -c "
+#                rm -fv /etc/ssh/ssh_host_*
+#                dpkg-reconfigure openssh-server
+#                systemctl restart ssh
+#            ")
+#
+#            printf '%s\n' "Cleaning packages"
+#            (su -c "
+#                ${packageManager} autoclean
+#                ${packageManager} clean
+#                ${packageManager} autoremove
+#            ")
+#
+#            printf '%s\n' "Configuring Journalctl"
+#            (su -c "
+#                sed -i 's@#SystemMaxUse=@SystemMaxUse=1G@g' /etc/systemd/journald.conf
+#                sed -i 's@#SystemMaxFileSize=@SystemMaxFileSize=50M@g' /etc/systemd/journald.conf
+#
+#                journalctl --vacuum-time=2d
+#                journalctl --vacuum-size=100M
+#                systemctl restart systemd-journald
+#            ")
+#
+#            printf '%s\n' "Clearing temporary folder"
+#            (su -c "
+#                rm -rf /tmp/.
+#            ")
+#            ;;
+#        *)
+#            printf '%s\n' "Distro not implemented yet"
+#            ;;
+#    esac
+#
+#    functionSystemPrintMessage printSleep
+#}
