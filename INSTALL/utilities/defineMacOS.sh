@@ -5,9 +5,9 @@ distroName="macOS"
 
 packageManager="brew"
 
-packageInstallCommand="brew bundle install"
-packageInstallCommandAuto="brew bundle install"
-packageInstallCommandPattern=""
+packageInstall="brew bundle install"
+packageInstallAuto="brew bundle install"
+packageInstallPattern=""
 
 systemUpdate="brew update"
 systemUpgrade="brew upgrade"
