@@ -2,15 +2,26 @@
 eval "$(/usr/local/bin/brew shellenv 2>/dev/null)" 
 
 # Get OS ID
-if   [ -L /etc/os-release                ]; then . /etc/os-release;
-elif [ $(command -v sw_vers) 2>/dev/null ]; then ID="$(sw_vers -productName)"; fi
+if [ -L /etc/os-release ]; then
+    . /etc/os-release
+elif [ $(command -v sw_vers) 2>/dev/null ]; then
+    ID="$(sw_vers -productName)"
+fi
 
-if [ -n "${WT_SESSION}" ]; then wslsession=1; else wslsession=0; fi
+if [ -n "${WT_SESSION}" ]; then
+    export wsl_session=1
+else
+    export wsl_session=0
+fi
 
 # TMUX
-if [ $wslsession ]; then export TMUX_TMPDIR='/tmp'; fi
-#if [ -z "$TMUX"  ]; then (tmux new -s BASE); fi
-if [ -z "$TMUX"  ]; then (tmux attach -t BASE) || (tmux new -s BASE); fi
+if [ $wsl_session ]; then
+    export TMUX_TMPDIR='/tmp'
+fi
+if [ -z "$TMUX"  ]; then
+    (tmux attach -t BASE) || (tmux new -s BASE)
+    #(tmux new -s BASE)
+fi
 
 # Terminal 256 color mode
 export TERM="xterm-256color"
