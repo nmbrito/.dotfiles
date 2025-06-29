@@ -104,6 +104,7 @@ List_of_KDEPersonal="\
     ${binary_blender}                 \
     ${binary_code}                    \
     ${binary_discord}                 \
+    ${binary_exfat}                   \
     ${binary_ffmpeg}                  \
     ${binary_gimp}                    \
     ${binary_godot}                   \
