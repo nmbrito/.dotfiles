@@ -1,107 +1,153 @@
 #!/bin/sh
 
-functionSystemPrintMessage()
+function_SystemPrintMessage()
 {
-    case "${1}" in
-        "privilegeRoot")
-            case "${2}" in
-                "implementRepositories") printf '%s\n' "Repositories"  ;;
-                "rollFixes")             printf '%s\n' "Computer Fixes";;
-                "installPackages")       printf '%s\n' "Packages"      ;;
+    privilege_Type="${1}"
+    show_Message="${2}"
+
+    case "${privilege_Type}" in
+        "privilege_Root")
+            case "${show_Message}" in
+                "roll_Repositories")
+                    printf '%s\n' "Repositories"
+                    ;;
+                "roll_Fixes")
+                    printf '%s\n' "Computer Fixes"
+                    ;;
+                "roll_Packages")
+                    printf '%s\n' "Packages"
+                    ;;
             esac
 
-            printf '%s\n' "${messageLongDash}"                                      \
-                          ""                                                        \
-                          "${messageLongWarn} ${messageExecRoot} ${messageLongWarn}"\
-                          ""
+            printf '%s\n' \
+                "${message_LongDash}" \
+                ""                    \
+                "${message_LongWarn}" \
+                "${message_ExecRoot}" \
+                "${message_LongWarn}" \
+                ""
         ;;
-        "privilegeUser")
-            case "${2}" in
-                "getFonts")              printf '%s\n' "Fonts"                    ;;
-                "performSymlinks")       printf '%s\n' "Symlinking"               ;;
-                "configureGitConfig")    printf '%s\n' "Git globals configuration";;
-                "syncGitSubmodules")     printf '%s\n' "Syncing git submodules"   ;;
-                "rollZSHShell")          printf '%s\n' "Changing shell to ZSH"    ;;
-                "rebuildGitSubmodules")  printf '%s\n' "Rebuilding git submodules";;
-                "restoreKDE")            printf '%s\n' "Restoring KDE settings"   ;;
-                "restoreMacOS")          printf '%s\n' "Restoring macOS settings" ;;
-                "prepareVirtualMachine") printf '%s\n' "Preparing Virtual Machine";;
+        "privilege_User")
+            case "${show_Message}" in
+                "roll_Fonts")
+                    printf '%s\n' "Fonts"
+                    ;;
+                "roll_Symlinks")
+                    printf '%s\n' "Symlinking"
+                    ;;
+                "roll_ZSHShell")
+                    printf '%s\n' "Changing shell to ZSH"
+                    ;;
+                "configure_GitGlobals")
+                    printf '%s\n' "Git globals configuration"
+                    ;;
+                "sync_GitSubmodules")
+                    printf '%s\n' "Syncing git submodules"
+                    ;;
+                "rebuild_GitSubmodules")
+                    printf '%s\n' "Rebuilding git submodules"
+                    ;;
+                "restore_ExtraConfigs")
+                    printf '%s\n' "Restoring KDE settings"
+                    ;;
+                "prepare_VirtualMachine")
+                    printf '%s\n' "Preparing Virtual Machine"
+                    ;;
             esac
 
-            printf '%s\n' "${messageLongDash}"\
-                          ""
+            printf '%s\n' \
+                "${message_LongDash}" \
+                "                  "
         ;;
-        "printSleep")
+        "print_Sleep")
             printf '%s\n' ""
             sleep 3s
         ;;
     esac
 }
-
-functionSystemBuildMenu()
+function_SystemBuildMenu()
 {
-    printf '%s'   "                                                             " \
-                  "-------------------------------------------------------------" \
-                  " Select an option:                                           " \
-                  "-------------------------------------------------------------" \
-                  "  (1) Run all                 |  (6)  Symlinks               " \
-                  "  (2) Repositories            |  (7)  Configure git globals  " \
-                  "  (3) Packages                |  (8)  Sync git submodules    " \
-                  "  (4) Fixes                   |  (9)  Change to zsh shell    " \
-                  "  (5) Fonts                   |  (10) Restore KDE Theme      " \
-                  "                                                             " \
-                  "  (r) rebuild git submodules                                 " \
-                  "-------------------------------------------------------------" \
-                  " Information:                                                " \
-                  "-------------------------------------------------------------" \
-                  "  Host: $currentHost                                         " \
-                  "                                                             " \
-                  "  Distribution: "$ID"                                        " \
-                  "  Package Manager: "$packageManager"                         " \
-                  "  Package Install Command: "$packageInstall"                 " \
-                  "                                                             " \
-                  "  Current shell: "$SHELL"                                    " \
-                  "                                                             " \
-                  "  Pwd: $(pwd)                                                " \
-                  "                                                             " \
-                  "  Directories:                                               " \
-                  "      Repository / .dotfiles: "$pathDotRoot"                 " \
-                  "      Cache: "$pathCache"                                    " \
-                  "      Script: "$pathCache"                                   " \
-                  "      Cache: "$pathCache"                                    " \
-                  "-------------------------------------------------------------" \
-                  "  ( ) exit / cancel                                          " \
-                  "-------------------------------------------------------------"
+    printf '%s' "${c_ClearScreen}"
+    printf '%s\n' \
+        "${c_Bold} Select an option:                                   " \
+        " ------------------------------------------------- ${c_Normal}" \
+        "  (1) Run all                                                 " \
+        "  (2) Repositories           | (7) Change to ZSH Shell        " \
+        "  (3) Fixes                  | (8) Sync Git Submodules        " \
+        "  (4) Packages               | (9) Configure Git Globals      " \
+        "  (5) Fonts                  | (10) Restore Extra Configs     " \
+        "  (6) Symlinks               |                                " \
+        "                                                              " \
+        "  (r) Rebuild Git Submodules                                  " \
+        "                                                              " \
+        "${c_Bold} Information:                                        " \
+        " ------------------------------------------------- ${c_Normal}" \
+        "  Host: $currentHost                                          " \
+        "                                                              " \
+        "  Distribution: $ID                                           " \
+        "  Package Manager: $packageManager                            " \
+        "  Package Install Command: $packageInstall                    " \
+        "                                                              " \
+        "  Current shell: $SHELL                                       " \
+        "                                                              " \
+        "  Current Working Directory: $(pwd)                           " \
+        "                                                              " \
+        "  Directories:                                                " \
+        "      Repository: $pathDotRoot                                " \
+        "      Cache:      $pathCache                                  " \
+        "      Script:     $pathScript                                 " \
+        "      Utilities:  $pathUtilities                              " \
+        "${c_Bold} ------------------------------------------------    " \
+        "  ( ) exit / cancel                                           " \
+        " ----------------------------------------------${c_Normal}    " \
+        "                                                              "
 }
-
-functionSystemDefineDistro() 
+function_SystemDefineDistro() 
 {
     # Flatpak universal
     . ${pathUtilities}/defineFlatpak.sh
 
     # Distribuitions have different package managers
     case "${ID}" in
-        "almalinux")           . ${pathUtilities}/defineAlmaLinux.sh         ;;
-        "alpine")              . ${pathUtilities}/defineAlpine.sh            ;;
-        "archlinux")           . ${pathUtilities}/defineArchLinux.sh         ;;
-        "debian")              . ${pathUtilities}/defineDebian.sh            ;;
-        "macOS")               . ${pathUtilities}/defineMacOS.sh             ;;
-        "opensuse-tumbleweed") . ${pathUtilities}/defineOpenSUSETumbleweed.sh;;
+        "almalinux")
+            . ${pathUtilities}/defineAlmaLinux.sh
+            ;;
+        "alpine")
+            . ${pathUtilities}/defineAlpine.sh
+            ;;
+        "archlinux")
+            . ${pathUtilities}/defineArchLinux.sh
+            ;;
+        "debian")
+            . ${pathUtilities}/defineDebian.sh
+            ;;
+        "macOS")
+            . ${pathUtilities}/defineMacOS.sh
+            ;;
+        "opensuse-tumbleweed")
+            . ${pathUtilities}/defineOpenSUSETumbleweed.sh
+            ;;
         *)
-            printf '%s\n' "This script doesn't support distribuition: "${ID}""\
+            printf '%s\n' "This script doesn't support distribuition: $ID" \
                           "Exiting."
-
             exit 0
-        ;;
+            ;;
     esac
 }
-
-functionSystemDefineHost()
+function_SystemDefineHost()
 {
-    if   [ -d ${pathSysDevDMI} ]; then currentHost="${catSysDevBoardVendor} ${catSysDevProdVendor} - ${catSysDevProdName}"; # Physical machine
-    elif [ -d ${pathSWVers} ]   ; then currentHost="$(sysctl hw.model)"                                                   ; # Apple macOS devices
-    elif [ -d ${pathiSH} ]      ; then currentHost="iOS/iPadOS"                                                           ; # iSH.app on iOS and iPadOS
-    elif [ ${wslSession} ]      ; then currentHost="Windows Subsystem for Linux"                                          ; # WSL1 and WSL2 sessions
+    if [ -d ${path_SysDevDMI} ]; then
+        # Physical machine
+        currentHost="${catSysDevBoardVendor} ${catSysDevProdVendor} - ${catSysDevProdName}"
+    elif [ -d ${path_SWVers} ]; then
+        # Apple macOS devices
+        currentHost="$(sysctl hw.model)"
+    elif [ -d ${path_iSH} ]; then
+        # iSH.app on iOS and iPadOS
+        currentHost="iOS/iPadOS"
+    elif [ ${wsl_Session} ]; then
+        # WSL1 and WSL2 sessions
+        currentHost="Windows Subsystem for Linux"
     else
         currentHost="None"
     fi
@@ -115,76 +161,89 @@ functionSystemDefineHost()
     #   iPad Pro M2                - iOS/iPadOS
     #   Windows Terminal WSL2      - Windows Subsystem for Linux
 }
-
-functionImplementRepositories()
+function_RollRepositories()
 {
-    functionSystemPrintMessage privilegeRoot implementRepositories
+    function_SystemPrintMessage privilege_Root roll_Repositories
 
-    if [ ${1} != "None" ]; then
-        for eachGPGKeys    in ${List_of_GPGKeys}     ; do ${repoImport} ${eachGPGKeys}; done
-        for eachRepository in ${List_of_Repositories}; do ${repoAdd} ${eachRepository}; done
+    # TODO: Elevate privilege
+    for eachGPGKeys in ${List_of_GPGKeys}; do
+        su -c ${repoImport} ${eachGPGKeys}
+    done
+    for eachRepository in ${List_of_Repositories}; do
+        su -c ${repoAdd} ${eachRepository}
+    done
 
-        ${repoRefresh}
-        ${repoAutoGPGKeys}
-    else
-        printf '%s\n' "No repository to add."
-    fi
+    ${repoRefresh}
+    ${repoAutoGPGKeys}
 
-    functionSystemPrintMessage printSleep
+    function_SystemPrintMessage print_Sleep
 }
-
-functionRollFixes() 
+function_RollFixes() 
 {
-    functionSystemPrintMessage privilegeRoot rollFixes
+    function_SystemPrintMessage privilege_Root roll_Fixes
 
+    # TODO: Elevate privilege
     # Hardware layer
     case "${currentHost}" in
-        "LENOVO ThinkPad X230 - 23252FG") su -c "$packageInstallAuto ${List_of_x230}"                                                    ;;
-        "Apple Inc. 1.0 - MacBookPro9,2") su -c "$packageInstallAuto ${List_of_MacbookProMid2012}"                                       ;;
-        "MacBookPro9,2")                  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)";;
-        *) 
-            printf '%s\n' "Hardware running smoothly"
-        ;;
+        "LENOVO ThinkPad X230 - 23252FG")
+            $packageInstallAuto ${List_of_x230}
+            ;;
+        "Apple Inc. 1.0 - MacBookPro9,2")
+            $packageInstallAuto ${List_of_MacbookProMid2012}
+            systemctl enable mbpfan.service
+            systemctl daemon-restart
+            systemctl enable mbpfan.service
+            ;;
+        "MacBookPro9,2")
+            /bin/bash -c $(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)
+            ;;
     esac
 
     # Operating system layer
     case "${distroName}" in
-        "Debian") ln -s $(which fdfind) "${HOME}/.local/bin/fd";;
-        *)
-            printf '%s\n' "Operating system running smoothly"
-        ;;
+        "Debian")
+            ln -s $(which fdfind) "${HOME}/.local/bin/fd"
+            ;;
     esac
 
-    functionSystemPrintMessage printSleep
+    function_SystemPrintMessage print_Sleep
 }
-
-functionInstallPackages()
+function_RollPackages()
 {
-    functionSystemPrintMessage privilegeRoot installPackages
+    function_SystemPrintMessage privilege_Root roll_Packages
 
 	case "${currentHost}" in
 		"LENOVO ThinkPad X230 - 23252FG" | "Apple Inc. 1.0 - MacBookPro9,2" | "pc-i440fx-9.2 - Standard PC (i440FX + PIIX, 1996)")
 			case "${XDG_SESSION_DESKTOP}" in
                 "KDE")
-                    su -c "$packageInstallAuto $List_of_KDEBasics     \
-                                               $List_of_KDEPersonal   \
-                                               $List_of_KDEFortiClient\
-                                               $List_of_Terminal      \
-                                               $List_of_Developer"
+                    su -c "$packageInstallAuto  \
+                        $List_of_KDEBasics      \
+                        $List_of_KDEPersonal    \
+                        $List_of_KDEFortiClient \
+                        $List_of_Terminal       \
+                        $List_of_Developer"
 
-                    su -c "$flatpakInstall     $List_of_Flatpaks"
+                    su -c "$flatpakInstall $List_of_Flatpaks"
                     ;;
-                *)  ;;
+                *)
+                    ;;
             esac
-        ;;
-        "Windows Subsystem for Linux")
-            su -c "$packageInstallAuto    $List_of_Terminal \
-                                          $List_of_Developer"
-
-            if [ $packageInstallPattern != "" ]; then su -c $packageInstallPattern $List_of_WSLPattern; fi
             ;;
-		"iOS/iPadOS") $packageInstall $List_of_iSH;;
-		"MacBook9,2") $packageInstall --file=${pathUtilities}/packagesBrewfile;;
+        "Windows Subsystem for Linux")
+            su -c "$packageInstallAuto \
+                $List_of_Terminal      \
+                $List_of_Developer"
+
+            if [ $packageInstallPattern != "" ]; then
+                su -c $packageInstallPattern $List_of_WSLPattern
+            fi
+            ;;
+		"iOS/iPadOS")
+            $packageInstall $List_of_iSH
+            ;;
+		"MacBook9,2")
+            $packageInstall --file=${pathUtilities}/packagesBrewfile
+            ;;
 		*)
 			#case "${XDG_SESSION_DESKTOP}" in
             #    "KDE") ;;
@@ -196,15 +255,19 @@ functionInstallPackages()
     # XDG_SESSION_DESKTOP
     #   KDE Gnome Hyprland XFCE
 
-    functionSystemPrintMessage printSleep
+    function_SystemPrintMessage print_Sleep
 }
-
-functionGetFonts()
+function_RollFonts()
 {
-    functionSystemPrintMessage privilegeUser getFonts
+    function_SystemPrintMessage privilege_User roll_Fonts
 
-    if [ ! -d ${HOME}/.fonts ]; then mkdir -p ${HOME}/.fonts; fi
-    if [ ! -d $pathCache ]    ; then mkdir -p $pathCache    ; fi
+    if [ ! -d ${HOME}/.fonts ]; then
+        mkdir -p ${HOME}/.fonts
+    fi
+
+    if [ ! -d $pathCache ]; then
+        mkdir -p $pathCache
+    fi
 
     if [ $(curl -is $urlNerdFonts | head -n 1) = "HTTP/2 404" ]; then
         for eachFont in $(ls ${pathDotRoot}/INSTALL/fonts/*.tar.xz); do
@@ -222,121 +285,140 @@ functionGetFonts()
     rm ${HOME}/.fonts/README*
     rm ${HOME}/.fonts/OFL*
 
-    functionSystemPrintMessage printSleep
+    function_SystemPrintMessage print_Sleep
 }
-
-functionPerformSymlinks()
+function_RollSymlinks()
 {
-    functionSystemPrintMessage privilegeUser performSymlinks
+    function_SystemPrintMessage privilege_User roll_Symlinks
 
-    [ ! -d ${HOME}/.config/ ] && mkdir ${HOME}/.config/
+    if [ ! -d ${HOME}/.config/ ]; then
+        mkdir ${HOME}/.config/
+    fi
 
-    for eachSymlinkDir in $List_of_SymlinksDirRem; do [ -d $eachSymlinkDir ] && rm -rf $eachSymlinkDir; done
-    for eachSymlink    in $List_of_Symlinks      ; do ln -vsf $eachSymlink                            ; done
+    for eachSymlinkDir in $List_of_SymlinksDirRem; do
+        if [ -d $eachSymlinkDir ]; then
+            rm -rf $eachSymlinkDir
+        fi
+    done
 
-    functionSystemPrintMessage printsleep
+    for eachSymlink in $List_of_Symlinks; do
+        ln -vsf $eachSymlink
+    done
+
+    function_SystemPrintMessage print_Sleep
 }
-
-functionConfigureGitGlobals()
+function_RollZSHShell() 
 {
-    functionSystemPrintMessage privilegeUser configureGitConfig
-
-    printf '%s'   "user.email: "
-    read -r git_user_email
-    printf '%s\n' ""
-    git config --global user.email $git_user_email
-
-    printf '%s\n' ""
-
-    printf '%s'   "user.name: "
-    read -r git_user_name
-    printf '%s\n' ""
-    git config --global user.name $git_user_name
-
-    functionSystemPrintMessage printSleep
-}
-
-functionSyncGitSubmodules()
-{
-    functionSystemPrintMessage privilegeUser syncGitSubmodules
-
-    # A repository with submodules already added must be initiated.
-    (cd $pathDotRoot && git submodule update --init --recursive) && printf '%s\n' "" "Submodules updated" ""
-
-    functionSystemPrintMessage printsleep
-}
-
-functionRollZSHShell() 
-{
-    functionSystemPrintMessage privilegeUser rollZSHShell
+    function_SystemPrintMessage privilege_User roll_ZSHShell
 
     printf '%s\n' "Current shell: $SHELL"
 
     if [ $SHELL != "$zshBinPath" ]; then
         if [ ! -f $zshSharePath ]; then
-            if [ $currentHost = "iOS/iPadOS" ]; then sed -i 's/ash/zsh/g' /etc/passwd && printf '%s\n' "Replaced ash with zsh."
+            if [ $currentHost = "iOS/iPadOS" ]; then
+                sed -i 's/ash/zsh/g' /etc/passwd && printf '%s\n' "Replaced ash with zsh."
             else
-                chsh -s $(which zsh) && printf '%s\n' "Shell changed to ZSH." || printf '%s\n' "ERROR: Shell not changed."
+                chsh -s $(which zsh)                             \
+                    && printf '%s\n' "Shell changed to ZSH."     \
+                    || printf '%s\n' "ERROR: Shell not changed."
             fi
         else
             printf '%s\n' "ZSH missing. Want to install? [y/n]: "
-            read -r optionZSHChange
-            if [ $optionZSHChange = "y" ]; then
-                (su -c "$packageInstallAuto zsh")
-                functionRollZSHShell
+            read -r option_ZSHChange
+            if [ $option_ZSHChange = "y" ]; then
+                su -c "$packageInstallAuto ${binary_zsh}"
+                function_RollZSHShell
             fi
         fi
     else
         printf '%s\n' "ZSH already running."
     fi
 
-    functionSystemPrintMessage printSleep
+    function_SystemPrintMessage print_Sleep
 }
-
-functionRebuildGitSubmodules() 
+function_ConfigureGitGlobals()
 {
-    functionSystemPrintMessage privilegeUser rebuildGitSubmodules
+    function_SystemPrintMessage privilege_User configure_GitGlobals
+
+    printf '%s' "user.email: "
+    read -r git_user_email
+    printf '%s\n' ""
+    git config --global user.email $git_user_email
+
+    printf '%s\n' ""
+
+    printf '%s' "user.name: "
+    read -r git_user_name
+    printf '%s\n' ""
+    git config --global user.name $git_user_name
+
+    function_SystemPrintMessage print_Sleep
+}
+function_SyncGitSubmodules()
+{
+    function_SystemPrintMessage privilege_User sync_GitSubmodules
+
+    # A repository with submodules already added must be initiated.
+    cd $pathDotRoot                                \
+        && git submodule update --init --recursive \
+        && printf '%s\n' ""                        \
+                         "Submodules updated"      \
+                         ""
+
+    function_SystemPrintMessage print_Sleep
+}
+function_RebuildGitSubmodules() 
+{
+    function_SystemPrintMessage privilege_User rebuild_GitSubmodules
 
     previousWorkingDir="$(pwd)"
 
     # NOTE: submodule path is relative to root repository.
-    cd $pathDotRoot && for eachGitSubmodule in $List_of_Submodules; do git submodule add $eachGitSubmodule; done
+    cd $pathDotRoot \
+        && for eachGitSubmodule in $List_of_Submodules; do
+            git submodule add $eachGitSubmodule
+           done
 
     cd $previousWorkingDir
 
-    functionSystemPrintMessage printSleep
+    function_SystemPrintMessage print_Sleep
 }
-
-functionRestoreKDEThemes()
+function_RestoreExtraConfigs()
 {
-    functionSystemPrintMessage privilegeUser restoreKDE
+    function_SystemPrintMessage privilege_User restore_ExtraConfigs
 
-    for eachKDEConfig in ${List_of_RestoreKDE}; do
-        [ -d ${pathKDEThemes}/${eachKDEConfig} ]      && rm -rf ${pathKDEThemes}/${eachKDEConfig}
-        cp -rv ${pathDotRoot}/kde_backup/share/${eachKDEConfig} ${pathKDEThemes}/${eachKDEConfig}
-    done
+	case "${currentHost}" in
+		"LENOVO ThinkPad X230 - 23252FG" | "Apple Inc. 1.0 - MacBookPro9,2" | "pc-i440fx-9.2 - Standard PC (i440FX + PIIX, 1996)")
+			case "${XDG_SESSION_DESKTOP}" in
+                "KDE")
+                    for eachKDEConfig in ${List_of_RestoreKDE}; do
+                        if [ -d ${pathKDEThemes}/${eachKDEConfig} ]; then
+                            rm -rf ${pathKDEThemes}/${eachKDEConfig}
+                        fi
+                        cp -rv ${pathDotRoot}/kde_backup/share/${eachKDEConfig} ${pathKDEThemes}/${eachKDEConfig}
+                    done
 
-    # Restore kglobalshortcutsrc from each host
+                    if [ -d "${HOME}/.icons" ]; then
+                        rm -rf ${HOME}/.icons
+                    fi
+                    cp -rv ${pathDotRoot}/kde_backup/.icons ${HOME}/.icons
+                    ;;
+            esac
+		"MacBook9,2")
+            for eachMacOSConfig in $List_of_RestoreMacOS; do
+                if [ -d ${pathMacOSAppSupport}/${eachMacOSConfig} ]; then
+                    rm -rf ${pathMacOSAppSupport}/${eachMacOSConfig}
+                fi
+            done
+            
+            cp -rv ${pathDotRoot}/.config/tgpro/Preferences/com.tunabellysoftware.tgpro.plist ${pathMacOSPreference}/com.tunabellysoftware.tgpro.plist
+            ;;
+    esac
 
-    [ -d "${HOME}/.icons" ]                 && rm -rf ${HOME}/.icons
-    cp -rv ${pathDotRoot}/kde_backup/.icons           ${HOME}/.icons
-
-    functionSystemPrintMessage printSleep
+    function_SystemPrintMessage print_Sleep
 }
-
-functionRestoreMacOS()
+function_PrepareVirtualMachine()
 {
-    functionSystemPrintMessage privilegeUser restoreMacOS
-
-    for eachMacOSConfig in $List_of_RestoreMacOS; do [ -d ${pathMacOSAppSupport}/${eachMacOSConfig} ] && rm -rf "${pathMacOSAppSupport}/${eachMacOSConfig}"; done
-    
-    cp -rv ${pathDotRoot}/.config/tgpro/Preferences/com.tunabellysoftware.tgpro.plist ${pathMacOSPreference}/com.tunabellysoftware.tgpro.plist
-
-    functionSystemPrintMessage printSleep
-}
-
-#functionPrepareVirtualMachine()
-#{
 #    functionSystemPrintMessage privilegeRoot prepareVirtualMachine
 #
 #    case "${distroName}" in
@@ -376,4 +458,4 @@ functionRestoreMacOS()
 #    esac
 #
 #    functionSystemPrintMessage printSleep
-#}
+}
