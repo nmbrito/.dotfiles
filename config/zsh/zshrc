@@ -53,7 +53,7 @@ fi
             fi
             ;;
         "macOS")
-            if [ -f "${nmb_zshconf}/alias/zsh_alias_macos.zsh" ]
+            if [ -f "${nmb_zshconf}/alias/zsh_alias_macos.zsh" ]; then
                 . "${nmb_zshconf}/alias/zsh_alias_macos.zsh"
             fi
             ;;
