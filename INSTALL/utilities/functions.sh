@@ -459,3 +459,13 @@ function_PrepareVirtualMachine()
 #
 #    functionSystemPrintMessage printSleep
 }
+functionSetHostname()
+{
+    old_Hostname=$(hostname)
+
+    printf '%s' "New hostname: "
+    read -r new_Hostname
+
+    hostnamectl set-hostname ${new_Hostname}
+    sed -i "s/$old_Hostname/${new_hostname}/g" /etc/hosts
+}
