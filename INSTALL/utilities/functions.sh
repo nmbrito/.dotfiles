@@ -149,7 +149,7 @@ function_SystemDefineHost()
 {
     if [ -d ${path_SysDevDMI} ]; then
         # Physical machine
-        currentHost="${catSysDevBoardVendor} ${catSysDevProdVendor} - ${catSysDevProdName}"
+        currentHost="${cat_SysDevBoardVendor} ${cat_SysDevProdVendor} - ${cat_SysDevProdName}"
     elif [ -d ${path_SWVers} ]; then
         # Apple macOS devices
         currentHost="$(sysctl hw.model)"
