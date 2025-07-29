@@ -1,30 +1,24 @@
 #!/bin/sh
-# ShellCheck disable=SC2034 # Allow unused variables
 
-if [ ! -f ${pathUtilities}/functions.sh ]                    \
-    && [ ! -f ${pathUtilities}/variables.sh ]                \
-    && [ ! -f ${pathUtilities}/defineAlmaLinux.sh ]          \
-    && [ ! -f ${pathUtilities}/defineAlpine.sh ]             \
-    && [ ! -f ${pathUtilities}/defineArchLinux.sh ]          \
-    && [ ! -f ${pathUtilities}/defineDebian.sh ]             \
-    && [ ! -f ${pathUtilities}/defineFlatpak.sh ]            \
-    && [ ! -f ${pathUtilities}/defineMacOS.sh ]              \
-    && [ ! -f ${pathUtilities}/defineOpenSUSETumbleweed.sh ] \
-    && [ ! -f ${pathUtilities}/packagesLists.sh ]; then
-    printf '%s\n' "Missing components. Aborting."
+path_Utilities=$(CDPATH= cd -- "$(dirname -- "$0")" && cd utilities && pwd) # Directory containing all utilities
+
+if [ ! -f ${path_Utilities}/functions.sh ] \
+    && if [ ! -f ${path_Utilities}/variables.sh ]; then
+    printf '%s\n' "File: functions.sh missing. Aborting!"
     exit 0
 else
-    . ${pathUtilities}/variables.sh     # Source file containing functions.
-    . ${pathUtilities}/functions.sh     # Source file containing functions.
-    functionSystemDefineDistro          # Defines the package manager and software especific to the running distribution.
-    functionSystemDefineHost            # Define current host
-    . ${pathUtilities}/packagesLists.sh # Sourced after functions.sh
+    . ${pathUtilities}/variables.sh
+    . ${pathUtilities}/functions.sh
+    function_SystemAuditFile check_Files
+    function_SystemDefineDistro
+    function_SystemDefineHost
+    . ${pathUtilities}/packages_Lists.sh
 fi
 
 # Main
 printf '%s\n' ""                   \
               "Starting process"   \
-              "${messageLongDash}"
+              "${message_LongDash}"
 
 while : ; do
     functionSystemBuildMenu
@@ -35,9 +29,9 @@ while : ; do
 
     case "${option_Selected}" in
         1) 
-            function_RollRepositories
-            function_RollFixes
-            function_RollPackages
+            su -c (function_RollRepositories)
+            su -c (function_RollFixes)
+            su -c (function_RollPackages)
             function_RollFonts
             function_RollSymlinks
             function_RollZSHShell
