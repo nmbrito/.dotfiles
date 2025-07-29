@@ -181,10 +181,11 @@ function_RollRepositories()
     stty -echo
     read -r sudo_Password
     stty echo 
+    printf '%s' ""
 
     local IFS=$'\n'
     for eachGPGKeys in ${List_of_GPGKeys}; do
-        printf '%s' "${sudo_Password}" | sudo -S "${repoImport} ${eachGPGKeys}" ;
+        printf '%s' "$sudo_Password" | sudo -S "$repoImport $eachGPGKeys" ;
         #su -c "${repoImport} ${eachGPGKeys}" ;
     done
     for eachRepository in ${List_of_Repositories}; do
