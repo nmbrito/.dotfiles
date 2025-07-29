@@ -178,10 +178,10 @@ function_RollRepositories()
 
     # TODO: Elevate privilege
     for eachGPGKeys in ${List_of_GPGKeys}; do
-        su -c "${repoImport} ${eachGPGKeys}";
+        su -c "${repoImport} ${eachGPGKeys}" ;
     done
     for eachRepository in ${List_of_Repositories}; do
-        su -c "${repoAdd} ${eachRepository}";
+        su -c "${repoAdd} ${eachRepository}" ;
     done
 
     "${repoRefresh}"
