@@ -29,9 +29,9 @@ while : ; do
 
     case "${option_Selected}" in
         1) 
-            su -c (function_RollRepositories)
-            su -c (function_RollFixes)
-            su -c (function_RollPackages)
+            su -c function_RollRepositories
+            su -c function_RollFixes
+            su -c function_RollPackages
             function_RollFonts
             function_RollSymlinks
             function_RollZSHShell
