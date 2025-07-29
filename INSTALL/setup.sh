@@ -2,8 +2,8 @@
 
 path_Utilities=$(CDPATH= cd -- "$(dirname -- "$0")" && cd utilities && pwd) # Directory containing all utilities
 
-if [ ! -f ${path_Utilities}/functions.sh ] \
-    && if [ ! -f ${path_Utilities}/variables.sh ]; then
+if [ ! -f ${path_Utilities}/functions.sh ] && \
+    if [ ! -f ${path_Utilities}/variables.sh ]; then
     printf '%s\n' "File: functions.sh missing. Aborting!"
     exit 0
 else
@@ -41,13 +41,13 @@ while : ; do
             function_RebuilGitSubmodules
             ;;
         2)
-            function_RollRepositories
+            su -c function_RollRepositories
             ;;
         3)
-            function_RollFixes
+            su -c function_RollFixes
             ;;
         4)
-            function_RollPackages
+            su -c function_RollPackages
             ;;
         5)
             function_RollFonts
