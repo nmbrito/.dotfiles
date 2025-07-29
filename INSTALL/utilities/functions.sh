@@ -177,11 +177,19 @@ function_RollRepositories()
     function_SystemPrintMessage privilege_Root roll_Repositories
 
     # TODO: Elevate privilege
+    printf '%s' "Input sudo password: "
+    stty -echo
+    read -r sudo_Password
+    stty echo 
+
+    local IFS=$'\n'
     for eachGPGKeys in ${List_of_GPGKeys}; do
-        su -c "${repoImport} ${eachGPGKeys}" ;
+        printf '%s' "${sudo_Password}" | sudo -S "${repoImport} ${eachGPGKeys}" ;
+        #su -c "${repoImport} ${eachGPGKeys}" ;
     done
     for eachRepository in ${List_of_Repositories}; do
-        su -c "${repoAdd} ${eachRepository}" ;
+        printf '%s' "${sudo_Password}" | sudo -S "${repoAdd} ${eachRepository}" ;
+        #su -c "${repoAdd} ${eachRepository}" ;
     done
 
     "${repoRefresh}"
