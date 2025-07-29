@@ -2,17 +2,17 @@
 
 path_Utilities=$(CDPATH= cd -- "$(dirname -- "$0")" && cd utilities && pwd) # Directory containing all utilities
 
-if [ ! -f ${path_Utilities}/functions.sh ] && \
-    if [ ! -f ${path_Utilities}/variables.sh ]; then
+if [ ! -f "${path_Utilities}"/functions.sh ] \
+    && [ ! -f "${path_Utilities}"/variables.sh ]; then
     printf '%s\n' "File: functions.sh missing. Aborting!"
     exit 0
 else
-    . ${pathUtilities}/variables.sh
-    . ${pathUtilities}/functions.sh
-    function_SystemAuditFile check_Files
+    . "${path_Utilities}"/variables.sh
+    . "${path_Utilities}"/functions.sh
+    function_SystemAuditFile $check_Files
     function_SystemDefineDistro
     function_SystemDefineHost
-    . ${pathUtilities}/packages_Lists.sh
+    . "${path_Utilities}"/packages_Lists.sh
 fi
 
 # Main
@@ -21,7 +21,7 @@ printf '%s\n' ""                   \
               "${message_LongDash}"
 
 while : ; do
-    functionSystemBuildMenu
+    function_SystemBuildMenu
     printf '%s' "Option: "
     read -r option_Selected
 
