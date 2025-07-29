@@ -26,7 +26,7 @@ repoAutoGPGKeys="zypper --gpg-auto-import-keys ref"
 gpgkey_microsoft="https://packages.microsoft.com/keys/microsoft.asc"
 gpgkey_librewolf="https://rpm.librewolf.net/pubkey.gpg"
 
-repository_vscode="https://packages.microsoft.com/yumrepos/vscode vscode"
+repository_vscode='https://packages.microsoft.com/yumrepos/vscode vscode'
 repository_librewolf="https://rpm.librewolf.net librewolf"
 repository_broadcom_wl="https://download.opensuse.org/repositories/home:Sauerland:hardware/openSUSE_Tumbleweed/home:Sauerland:hardware.repo"
 
