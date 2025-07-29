@@ -1,7 +1,22 @@
 #!/bin/sh
 
+check_Files="\
+    define_AlmaLinux.sh   \
+    define_Alpine.sh      \
+    define_ArchLinux.sh   \
+    define_Debian.sh      \
+    define_OpenSUSE_TW.sh \
+    define_macOS.sh       \
+    packages_Lists        \
+    packages_Brewfile     \
+    "
+
+check_FilesServers="\
+    packages_Servers.sh   \
+    "
+
 path_Script=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)                    # Run script from any directory
-path_Utilities=$(CDPATH= cd -- "$(dirname -- "$0")" && cd utilities && pwd) # Directory containing all utilities
+#path_Utilities=$(CDPATH= cd -- "$(dirname -- "$0")" && cd utilities && pwd) # Directory containing all utilities
 path_DotRoot=$(git rev-parse --show-toplevel)                               # Define .dotfiles directory
 path_Cache="${HOME}/.cache"                                                 # Define .cache directory
 path_KDEThemes="${HOME}/.local/share"
