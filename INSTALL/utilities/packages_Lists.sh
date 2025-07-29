@@ -20,12 +20,6 @@ List_of_GPGKeys="\
     ${gpgkey_librewolf} \
     "
 
-List_of_Repositories="\
-    ${repository_vscode}      \
-    ${repository_librewolf}   \
-    ${repository_broadcom_wl} \
-    "
-
 # GIT Submodules
 List_of_GitSubmodules="\
      https://github.com/romkatv/powerlevel10k              config/zsh/plugins/powerlevel10k                    \
