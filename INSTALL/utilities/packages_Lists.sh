@@ -16,14 +16,14 @@ List_of_Fonts="\
 
 # Repositories
 List_of_GPGKeys="\
-    ${gpgkey_microsoft} \
+    ${gpgkey_microsoft} 
     ${gpgkey_librewolf} \
     "
 
 List_of_Repositories="\
     ${repository_vscode}
     ${repository_librewolf}
-    ${repository_broadcom_wl}
+    ${repository_broadcom_wl} \
     "
 # GIT Submodules
 List_of_GitSubmodules="\
