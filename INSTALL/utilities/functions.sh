@@ -80,63 +80,63 @@ function_SystemBuildMenu()
 {
     printf '%s' "${c_ClearScreen}"
     printf '%s\n' \
-        "${c_Bold} Select an option:                                   " \
-        " ------------------------------------------------- ${c_Normal}" \
-        "  (1) Run all                                                 " \
-        "  (2) Repositories           | (7) Change to ZSH Shell        " \
-        "  (3) Fixes                  | (8) Sync Git Submodules        " \
-        "  (4) Packages               | (9) Configure Git Globals      " \
-        "  (5) Fonts                  | (10) Restore Extra Configs     " \
-        "  (6) Symlinks               |                                " \
-        "                                                              " \
-        "  (r) Rebuild Git Submodules                                  " \
-        "                                                              " \
-        "${c_Bold} Information:                                        " \
-        " ------------------------------------------------- ${c_Normal}" \
-        "  Host: $currentHost                                          " \
-        "                                                              " \
-        "  Distribution: $ID                                           " \
-        "  Package Manager: $packageManager                            " \
-        "  Package Install Command: $packageInstall                    " \
-        "                                                              " \
-        "  Current shell: $SHELL                                       " \
-        "                                                              " \
-        "  Current Working Directory: $(pwd)                           " \
-        "                                                              " \
-        "  Directories:                                                " \
-        "      Repository: $pathDotRoot                                " \
-        "      Cache:      $pathCache                                  " \
-        "      Script:     $pathScript                                 " \
-        "      Utilities:  $pathUtilities                              " \
-        "${c_Bold} ------------------------------------------------    " \
-        "  ( ) exit / cancel                                           " \
-        " ----------------------------------------------${c_Normal}    " \
-        "                                                              "
+        "${c_Bold} Select an option:                                           " \
+        " --------------------------------------------------------- ${c_Normal}" \
+        "  (1) Run all                                                         " \
+        "  (2) Repositories           | (7) Change to ZSH Shell                " \
+        "  (3) Fixes                  | (8) Sync Git Submodules                " \
+        "  (4) Packages               | (9) Configure Git Globals              " \
+        "  (5) Fonts                  | (10) Restore Extra Configs             " \
+        "  (6) Symlinks               |                                        " \
+        "                                                                      " \
+        "  (r) Rebuild Git Submodules                                          " \
+        "                                                                      " \
+        "${c_Bold} Information:                                                " \
+        " --------------------------------------------------------- ${c_Normal}" \
+        "  Host: $currentHost                                                  " \
+        "                                                                      " \
+        "  Distribution: $ID                                                   " \
+        "  Package Manager: $packageManager                                    " \
+        "  Package Install Command: $packageInstall                            " \
+        "                                                                      " \
+        "  Current shell: $SHELL                                               " \
+        "                                                                      " \
+        "  Current Working Directory: $(pwd)                                   " \
+        "                                                                      " \
+        "  Directories:                                                        " \
+        "      Repository: $path_DotRoot                                       " \
+        "      Cache:      $path_Cache                                         " \
+        "      Script:     $path_Script                                        " \
+        "      Utilities:  $path_Utilities                                     " \
+        "${c_Bold} ---------------------------------------------------------   " \
+        "  ( ) exit / cancel                                                   " \
+        " ---------------------------------------------------------${c_Normal} " \
+        "                                                                      "
 }
 function_SystemDefineDistro() 
 {
     # Flatpak universal
-    . ${pathUtilities}/define_Flatpak.sh
+    . ${path_Utilities}/define_Flatpak.sh
 
     # Distribuitions have different package managers
     case "${ID}" in
         "almalinux")
-            . ${pathUtilities}/define_AlmaLinux.sh
+            . ${path_Utilities}/define_AlmaLinux.sh
             ;;
         "alpine")
-            . ${pathUtilities}/define_Alpine.sh
+            . ${path_Utilities}/define_Alpine.sh
             ;;
         "archlinux")
-            . ${pathUtilities}/define_ArchLinux.sh
+            . ${path_Utilities}/define_ArchLinux.sh
             ;;
         "debian")
-            . ${pathUtilities}/define_Debian.sh
+            . ${path_Utilities}/define_Debian.sh
             ;;
         "macOS")
-            . ${pathUtilities}/define_macOS.sh
+            . ${path_Utilities}/define_macOS.sh
             ;;
         "opensuse-tumbleweed")
-            . ${pathUtilities}/define_OpenSUSE_TW.sh
+            . ${path_Utilities}/define_OpenSUSE_TW.sh
             ;;
         *)
             printf '%s\n' "This script doesn't support distribuition: $ID" \
@@ -415,6 +415,7 @@ function_RestoreExtraConfigs()
                     cp -rv ${pathDotRoot}/kde_backup/.icons ${HOME}/.icons
                     ;;
             esac
+            ;;
 		"MacBook9,2")
             for eachMacOSConfig in $List_of_RestoreMacOS; do
                 if [ -d ${pathMacOSAppSupport}/${eachMacOSConfig} ]; then
@@ -428,8 +429,8 @@ function_RestoreExtraConfigs()
 
     function_SystemPrintMessage print_Sleep
 }
-function_PrepareVirtualMachine()
-{
+#function_PrepareVirtualMachine()
+#{
 #    functionSystemPrintMessage privilegeRoot prepareVirtualMachine
 #
 #    case "${distroName}" in
@@ -469,7 +470,7 @@ function_PrepareVirtualMachine()
 #    esac
 #
 #    functionSystemPrintMessage printSleep
-}
+#}
 function_SetHostname()
 {
     old_Hostname=$(hostname)
