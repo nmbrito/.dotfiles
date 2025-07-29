@@ -181,11 +181,11 @@ function_RollRepositories()
         su -c "${repoImport} ${eachGPGKeys}"
     done
     for eachRepository in ${List_of_Repositories}; do
-        su -c ${repoAdd} ${eachRepository}
+        su -c "${repoAdd} ${eachRepository}"
     done
 
-    ${repoRefresh}
-    ${repoAutoGPGKeys}
+    "${repoRefresh}"
+    "${repoAutoGPGKeys}"
 
     function_SystemPrintMessage print_Sleep
 }
@@ -197,10 +197,10 @@ function_RollFixes()
     # Hardware layer
     case "${currentHost}" in
         "LENOVO ThinkPad X230 - 23252FG")
-            $packageInstallAuto ${List_of_x230}
+            "$packageInstallAuto ${List_of_x230}"
             ;;
         "Apple Inc. 1.0 - MacBookPro9,2")
-            $packageInstallAuto ${List_of_MacbookProMid2012}
+            "$packageInstallAuto ${List_of_MacbookProMid2012}"
             systemctl enable mbpfan.service
             systemctl daemon-restart
             systemctl enable mbpfan.service
@@ -245,15 +245,15 @@ function_RollPackages()
                 $List_of_Terminal      \
                 $List_of_Developer"
 
-            if [ $packageInstallPattern != "" ]; then
-                su -c $packageInstallPattern $List_of_WSLPattern
+            if [ "$packageInstallPattern" != "" ]; then
+                su -c "$packageInstallPattern $List_of_WSLPattern"
             fi
             ;;
 		"iOS/iPadOS")
-            $packageInstall $List_of_iSH
+            "$packageInstall $List_of_iSH"
             ;;
 		"MacBook9,2")
-            $packageInstall --file=${pathUtilities}/packages_Brewfile
+            "$packageInstall --file=${pathUtilities}/packages_Brewfile"
             ;;
 		*)
 			#case "${XDG_SESSION_DESKTOP}" in
