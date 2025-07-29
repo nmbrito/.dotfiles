@@ -29,9 +29,9 @@ while : ; do
 
     case "${option_Selected}" in
         1) 
-            su -c function_RollRepositories
-            su -c function_RollFixes
-            su -c function_RollPackages
+            function_RollRepositories
+            function_RollFixes
+            function_RollPackages
             function_RollFonts
             function_RollSymlinks
             function_RollZSHShell
@@ -41,13 +41,13 @@ while : ; do
             function_RebuilGitSubmodules
             ;;
         2)
-            su -c function_RollRepositories
+            function_RollRepositories
             ;;
         3)
-            su -c function_RollFixes
+            function_RollFixes
             ;;
         4)
-            su -c function_RollPackages
+            function_RollPackages
             ;;
         5)
             function_RollFonts
