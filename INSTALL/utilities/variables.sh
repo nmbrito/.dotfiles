@@ -29,9 +29,9 @@ path_SysDevDMI="/sys/devices/virtual/dmi"
 path_iSH="/proc/ish"
 path_SWVers="/usr/bin/software_vers"
 
-cat_SysDevBoardVendor=$(cat /sys/devices/virtual/dmi/id/board_vendor 2>&1)
-cat_SysDevProdVendor=$(cat /sys/devices/virtual/dmi/id/product_version 2>&1)
-cat_SysDevProdName=$(cat /sys/devices/virtual/dmi/id/product_name 2>&1)
+cat_SysDevBoardVendor=$(cat /sys/devices/virtual/dmi/id/board_vendor) 2>&1
+cat_SysDevProdVendor=$(cat /sys/devices/virtual/dmi/id/product_version) 2>&1
+cat_SysDevProdName=$(cat /sys/devices/virtual/dmi/id/product_name) 2>&1
 
 running_DesktopEnvironment="${XDG_SESSION_DESKTOP}"
 
