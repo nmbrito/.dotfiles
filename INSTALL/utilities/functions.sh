@@ -1,5 +1,16 @@
 #!/bin/sh
 
+function_SystemAuditFile()
+{
+    check_Entry=${1}
+
+    for each_Entry in ${check_Entry}; do
+        if [ ! -f ${path_Utilities}/${each_Entry} ]; then
+            printf '%s\n' "${each_Entry} file missing. Aborting."
+            exit 0
+        fi
+    done
+}
 function_SystemPrintMessage()
 {
     privilege_Type="${1}"
@@ -105,27 +116,27 @@ function_SystemBuildMenu()
 function_SystemDefineDistro() 
 {
     # Flatpak universal
-    . ${pathUtilities}/defineFlatpak.sh
+    . ${pathUtilities}/define_Flatpak.sh
 
     # Distribuitions have different package managers
     case "${ID}" in
         "almalinux")
-            . ${pathUtilities}/defineAlmaLinux.sh
+            . ${pathUtilities}/define_AlmaLinux.sh
             ;;
         "alpine")
-            . ${pathUtilities}/defineAlpine.sh
+            . ${pathUtilities}/define_Alpine.sh
             ;;
         "archlinux")
-            . ${pathUtilities}/defineArchLinux.sh
+            . ${pathUtilities}/define_ArchLinux.sh
             ;;
         "debian")
-            . ${pathUtilities}/defineDebian.sh
+            . ${pathUtilities}/define_Debian.sh
             ;;
         "macOS")
-            . ${pathUtilities}/defineMacOS.sh
+            . ${pathUtilities}/define_macOS.sh
             ;;
         "opensuse-tumbleweed")
-            . ${pathUtilities}/defineOpenSUSETumbleweed.sh
+            . ${pathUtilities}/define_OpenSUSE_TW.sh
             ;;
         *)
             printf '%s\n' "This script doesn't support distribuition: $ID" \
@@ -242,7 +253,7 @@ function_RollPackages()
             $packageInstall $List_of_iSH
             ;;
 		"MacBook9,2")
-            $packageInstall --file=${pathUtilities}/packagesBrewfile
+            $packageInstall --file=${pathUtilities}/packages_Brewfile
             ;;
 		*)
 			#case "${XDG_SESSION_DESKTOP}" in
@@ -459,7 +470,7 @@ function_PrepareVirtualMachine()
 #
 #    functionSystemPrintMessage printSleep
 }
-functionSetHostname()
+function_SetHostname()
 {
     old_Hostname=$(hostname)
 
@@ -468,4 +479,9 @@ functionSetHostname()
 
     hostnamectl set-hostname ${new_Hostname}
     sed -i "s/$old_Hostname/${new_hostname}/g" /etc/hosts
+}
+function_SetRootPassword()
+{
+    printf '%s' "Please set root password: "
+    passwd root
 }
