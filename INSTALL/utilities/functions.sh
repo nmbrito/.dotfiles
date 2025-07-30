@@ -235,8 +235,6 @@ function_RollPackages()
 {
     function_SystemPrintMessage privilege_Root roll_Packages
 
-    function_SystemAskForSudoPassword
-
     #local IFS=$'\n'
 	case "${currentHost}" in
 		"LENOVO ThinkPad X230 - 23252FG" | "Apple Inc. 1.0 - MacBookPro9,2" | " pc-i440fx-9.2 - Standard PC (i440FX + PIIX, 1996)")
@@ -248,6 +246,8 @@ function_RollPackages()
                         $List_of_KDEFortiClient \
                         $List_of_Terminal       \
                         $List_of_Developer"
+
+                    ${binary_ohmyposh}
 
                     su -c "$flatpakInstall $List_of_Flatpaks"
                     ;;
@@ -399,6 +399,7 @@ function_RebuildGitSubmodules()
 
     previousWorkingDir="$(pwd)"
 
+    local IFS=$'\n'
     # NOTE: submodule path is relative to root repository.
     cd $pathDotRoot \
         && for eachGitSubmodule in $List_of_Submodules; do
@@ -419,15 +420,19 @@ function_RestoreExtraConfigs()
                 "KDE")
                     for eachKDEConfig in ${List_of_RestoreKDE}; do
                         if [ -d ${pathKDEThemes}/${eachKDEConfig} ]; then
-                            rm -rf ${pathKDEThemes}/${eachKDEConfig}
+                            echo "${pathKDEThemes}/${eachKDEConfig}"
+                            #rm -rf ${pathKDEThemes}/${eachKDEConfig}
                         fi
-                        cp -rv ${pathDotRoot}/kde_backup/share/${eachKDEConfig} ${pathKDEThemes}/${eachKDEConfig}
+                        echo "${pathDotRoot}/kde_backup/share/${eachKDEConfig} ${pathKDEThemes}/${eachKDEConfig}"
+                        #cp -rv ${pathDotRoot}/kde_backup/share/${eachKDEConfig} ${pathKDEThemes}/${eachKDEConfig}
                     done
 
                     if [ -d "${HOME}/.icons" ]; then
-                        rm -rf ${HOME}/.icons
+                        echo "${HOME}/.icons"
+                        #rm -rf ${HOME}/.icons
                     fi
-                    cp -rv ${pathDotRoot}/kde_backup/.icons ${HOME}/.icons
+                    echo "${pathDotRoot}/kde_backup/.icons ${HOME}/.icons"
+                    #cp -rv ${pathDotRoot}/kde_backup/.icons ${HOME}/.icons
                     ;;
             esac
             ;;
