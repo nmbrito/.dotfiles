@@ -249,7 +249,6 @@ function_RollPackages()
 
                     ${binary_ohmyposh}
 
-
                     function_SystemAskForSudoPassword
                     printf '%s\n' "$sudo_Password" | sudo -S ${SHELL} -c "$flatpakInstallAuto $List_of_Flatpaks"
                     ;;
@@ -329,10 +328,15 @@ function_RollSymlinks()
         fi
     done
 
-    local IFS=$'\n'
-    for eachSymlink in $List_of_Symlinks; do
-        ln -vsf $eachSymlink
-    done
+    ln -vsf "${path_DotRoot}/config/zsh/zshrc"    "${HOME}/.zshrc"
+    ln -vsf "${path_DotRoot}/config/zsh/zprofile" "${HOME}/.zprofile"
+    ln -vsf "${path_DotRoot}/config/vim/vimrc"    "${HOME}/.vimrc"
+    ln -vsf "${path_DotRoot}/config/vim"          "${HOME}/.vim"
+    ln -vsf "${path_DotRoot}/config/vifm"         "${HOME}/.config/vifm"
+    ln -vsf "${path_DotRoot}/config/fastfetch"    "${HOME}/.config/fastfetch"
+    ln -vsf "${path_DotRoot}/config/tmux"         "${HOME}/.config/tmux"
+    ln -vsf "${path_DotRoot}/config/fd"           "${HOME}/.config/fd"
+    ln -vsf "${path_DotRoot}/config/mc"           "${HOME}/.config/mc"
 
     function_SystemPrintMessage print_Sleep
 }
