@@ -415,15 +415,15 @@ function_RestoreExtraConfigs()
     function_SystemPrintMessage privilege_User restore_ExtraConfigs
 
 	case "${currentHost}" in
-		"LENOVO ThinkPad X230 - 23252FG" | "Apple Inc. 1.0 - MacBookPro9,2" | "pc-i440fx-9.2 - Standard PC (i440FX + PIIX, 1996)")
+		"LENOVO ThinkPad X230 - 23252FG" | "Apple Inc. 1.0 - MacBookPro9,2" | " pc-i440fx-9.2 - Standard PC (i440FX + PIIX, 1996)")
 			case "${XDG_SESSION_DESKTOP}" in
                 "KDE")
                     for eachKDEConfig in ${List_of_RestoreKDE}; do
-                        if [ -d ${pathKDEThemes}/${eachKDEConfig} ]; then
-                            echo "${pathKDEThemes}/${eachKDEConfig}"
+                        if [ -d ${path_KDEThemes}/${eachKDEConfig} ]; then
+                            echo "${path_KDEThemes}/${eachKDEConfig}"
                             #rm -rf ${pathKDEThemes}/${eachKDEConfig}
                         fi
-                        echo "${pathDotRoot}/kde_backup/share/${eachKDEConfig} ${pathKDEThemes}/${eachKDEConfig}"
+                        echo "${path_DotRoot}/kde_backup/share/${eachKDEConfig} ${path_KDEThemes}/${eachKDEConfig}"
                         #cp -rv ${pathDotRoot}/kde_backup/share/${eachKDEConfig} ${pathKDEThemes}/${eachKDEConfig}
                     done
 
@@ -431,19 +431,19 @@ function_RestoreExtraConfigs()
                         echo "${HOME}/.icons"
                         #rm -rf ${HOME}/.icons
                     fi
-                    echo "${pathDotRoot}/kde_backup/.icons ${HOME}/.icons"
+                    echo "${path_DotRoot}/kde_backup/.icons ${HOME}/.icons"
                     #cp -rv ${pathDotRoot}/kde_backup/.icons ${HOME}/.icons
                     ;;
             esac
             ;;
 		"MacBook9,2")
             for eachMacOSConfig in $List_of_RestoreMacOS; do
-                if [ -d ${pathMacOSAppSupport}/${eachMacOSConfig} ]; then
-                    rm -rf ${pathMacOSAppSupport}/${eachMacOSConfig}
+                if [ -d ${path_MacOSAppSupport}/${eachMacOSConfig} ]; then
+                    rm -rf ${path_MacOSAppSupport}/${eachMacOSConfig}
                 fi
             done
             
-            cp -rv ${pathDotRoot}/.config/tgpro/Preferences/com.tunabellysoftware.tgpro.plist ${pathMacOSPreference}/com.tunabellysoftware.tgpro.plist
+            cp -rv ${path_DotRoot}/.config/tgpro/Preferences/com.tunabellysoftware.tgpro.plist ${path_MacOSPreference}/com.tunabellysoftware.tgpro.plist
             ;;
     esac
 
