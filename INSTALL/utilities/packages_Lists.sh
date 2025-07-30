@@ -160,7 +160,6 @@ ${binary_htop}                   \
 ${binary_lazygit}                \
 ${binary_man_pages}              \
 ${binary_mc}                     \
-${binary_ohmyposh}               \
 ${binary_ripgrep}                \
 ${binary_ripgrep_zsh_completion} \
 ${binary_shellcheck}             \
