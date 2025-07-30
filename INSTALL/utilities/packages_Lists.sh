@@ -61,12 +61,12 @@ ${pathDotRoot}/config/mc           ${HOME}/.config/mc"
 
 # Restore
 List_of_RestoreKDE="\
-aurorae              \
-color-schemes        \
-icons                \
-plasma/desktoptheme  \
+aurorae \
+color-schemes \
+icons \
+plasma/desktoptheme \
 plasma/look-and-feel \
-wallpapers           \
+wallpapers \
 "
 
 List_of_RestoreMacOS="\
