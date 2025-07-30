@@ -2,7 +2,7 @@
 
 function_SystemAuditFile()
 {
-    check_Entry=${1}
+    check_Entry="${1}"
 
     for each_Entry in ${check_Entry}; do
         if [ ! -f ${path_Utilities}/${each_Entry} ]; then
@@ -78,7 +78,7 @@ function_SystemPrintMessage()
 }
 function_SystemBuildMenu()
 {
-    printf '%s' "${c_ClearScreen}"
+    #printf '%s' "${c_ClearScreen}"
     printf '%s\n' \
         "${c_Bold} Select an option:                                           " \
         " --------------------------------------------------------- ${c_Normal}" \
@@ -172,50 +172,53 @@ function_SystemDefineHost()
     #   iPad Pro M2                - iOS/iPadOS
     #   Windows Terminal WSL2      - Windows Subsystem for Linux
 }
-function_RollRepositories()
+function_SystemAskForSudoPassword()
 {
-    function_SystemPrintMessage privilege_Root roll_Repositories
-
-    # TODO: Elevate privilege
     printf '%s' "Input sudo password: "
     stty -echo
     read -r sudo_Password
     stty echo 
-    printf '%s' ""
+    printf '%s\n' ""
+}
+function_RollRepositories()
+{
+    function_SystemPrintMessage privilege_Root roll_Repositories
+
+    function_SystemAskForSudoPassword
 
     local IFS=$'\n'
     for eachGPGKeys in ${List_of_GPGKeys}; do
-        printf '%s' "$sudo_Password" | sudo -S "$repoImport $eachGPGKeys" ;
-        #su -c "${repoImport} ${eachGPGKeys}" ;
+        printf '%s\n' "$sudo_Password" | sudo -S ${SHELL} -c "$repoImport $eachGPGKeys" 
     done
     for eachRepository in ${List_of_Repositories}; do
-        printf '%s' "${sudo_Password}" | sudo -S "${repoAdd} ${eachRepository}" ;
-        #su -c "${repoAdd} ${eachRepository}" ;
+        printf '%s\n' "${sudo_Password}" | sudo -S ${SHELL} -c "$repoAdd $eachRepository" 
     done
 
-    "${repoRefresh}"
-    "${repoAutoGPGKeys}"
-
+    printf '%s\n' "${sudo_Password}" | sudo -S ${SHELL} -c "$repoAutoGPGKeys"
+    
     function_SystemPrintMessage print_Sleep
 }
 function_RollFixes() 
 {
     function_SystemPrintMessage privilege_Root roll_Fixes
 
-    # TODO: Elevate privilege
+    function_SystemAskForSudoPassword
+
+    local IFS=$'\n'
     # Hardware layer
     case "${currentHost}" in
         "LENOVO ThinkPad X230 - 23252FG")
-            "$packageInstallAuto ${List_of_x230}"
+            printf '%s\n' "$sudo_Password" | sudo -S ${SHELL} -c "$packageInstallAuto ${List_of_x230}"
             ;;
         "Apple Inc. 1.0 - MacBookPro9,2")
-            "$packageInstallAuto ${List_of_MacbookProMid2012}"
-            systemctl enable mbpfan.service
-            systemctl daemon-restart
-            systemctl enable mbpfan.service
+            printf '%s\n' "$sudo_Password" | sudo -S ${SHELL} -c "$packageInstallAuto ${List_of_MacbookProMid2012}"
+
+            for eachCommand in ${List_of_MacbookProMid2012_Commands}; do
+                printf '%s\n' "$sudo_Password" | sudo -S ${SHELL} -c "$eachCommand" 
+            done
             ;;
         "MacBookPro9,2")
-            /bin/bash -c $(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)
+            printf '%s\n' "${sudo_Password}" | sudo -S ${SHELL} -c /bin/bash -c $(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)
             ;;
     esac
 
@@ -232,16 +235,26 @@ function_RollPackages()
 {
     function_SystemPrintMessage privilege_Root roll_Packages
 
+    function_SystemAskForSudoPassword
+
+    local IFS=$'\n'
 	case "${currentHost}" in
 		"LENOVO ThinkPad X230 - 23252FG" | "Apple Inc. 1.0 - MacBookPro9,2" | "pc-i440fx-9.2 - Standard PC (i440FX + PIIX, 1996)")
 			case "${XDG_SESSION_DESKTOP}" in
                 "KDE")
-                    su -c "$packageInstallAuto  \
-                        $List_of_KDEBasics      \
-                        $List_of_KDEPersonal    \
-                        $List_of_KDEFortiClient \
-                        $List_of_Terminal       \
-                        $List_of_Developer"
+                    printf '%s\n' "$sudo_Password" | sudo -S ${SHELL} -c "$packageInstallAuto  \
+                                                                            $List_of_KDEBasics      \
+                                                                            $List_of_KDEPersonal    \
+                                                                            $List_of_KDEFortiClient \
+                                                                            $List_of_Terminal       \
+                                                                            $List_of_Developer"
+
+                    #su -c "$packageInstallAuto  \
+                    #    $List_of_KDEBasics      \
+                    #    $List_of_KDEPersonal    \
+                    #    $List_of_KDEFortiClient \
+                    #    $List_of_Terminal       \
+                    #    $List_of_Developer"
 
                     su -c "$flatpakInstall $List_of_Flatpaks"
                     ;;
@@ -438,8 +451,9 @@ function_RestoreExtraConfigs()
 
     function_SystemPrintMessage print_Sleep
 }
-#function_PrepareVirtualMachine()
-#{
+function_PrepareVirtualMachine()
+{
+    printf '%s\n' "Work in Progress"
 #    functionSystemPrintMessage privilegeRoot prepareVirtualMachine
 #
 #    case "${distroName}" in
@@ -479,7 +493,7 @@ function_RestoreExtraConfigs()
 #    esac
 #
 #    functionSystemPrintMessage printSleep
-#}
+}
 function_SetHostname()
 {
     old_Hostname=$(hostname)
