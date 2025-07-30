@@ -251,7 +251,7 @@ function_RollPackages()
 
 
                     function_SystemAskForSudoPassword
-                    printf '%s\n' "$sudo_Password" | sudo -S ${SHELL} -c "$flatpakInstall $List_of_Flatpaks"
+                    printf '%s\n' "$sudo_Password" | sudo -S ${SHELL} -c "$flatpakInstallAuto $List_of_Flatpaks"
                     ;;
                 *)
                     ;;
@@ -343,8 +343,8 @@ function_RollZSHShell()
     printf '%s\n' "Current shell: $SHELL"
 
     if [ $SHELL != "$path_ZSHBin" ]; then
-        if [ ! -f $path_ZSHShare ]; then
-            if [ $currentHost = "iOS/iPadOS" ]; then
+        if [ ! -f "$path_ZSHShare" ]; then
+            if [ "$currentHost" = "iOS/iPadOS" ]; then
                 sed -i 's/ash/zsh/g' /etc/passwd && printf '%s\n' "Replaced ash with zsh."
             else
                 chsh -s $(which zsh)                             \
@@ -354,7 +354,7 @@ function_RollZSHShell()
         else
             printf '%s\n' "ZSH missing. Want to install? [y/n]: "
             read -r option_ZSHChange
-            if [ $option_ZSHChange = "y" ]; then
+            if [ "$option_ZSHChange" = "y" ]; then
                 su -c "$packageInstallAuto ${binary_zsh}"
                 function_RollZSHShell
             fi
