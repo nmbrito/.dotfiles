@@ -249,7 +249,9 @@ function_RollPackages()
 
                     ${binary_ohmyposh}
 
-                    su -c "$flatpakInstall $List_of_Flatpaks"
+
+                    function_SystemAskForSudoPassword
+                    printf '%s\n' "$sudo_Password" | sudo -S ${SHELL} -c "$flatpakInstall $List_of_Flatpaks"
                     ;;
                 *)
                     ;;
