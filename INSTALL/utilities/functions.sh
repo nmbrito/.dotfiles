@@ -329,6 +329,7 @@ function_RollSymlinks()
         fi
     done
 
+    local IFS=$'\n'
     for eachSymlink in $List_of_Symlinks; do
         ln -vsf $eachSymlink
     done
@@ -416,7 +417,6 @@ function_RestoreExtraConfigs()
 {
     function_SystemPrintMessage privilege_User restore_ExtraConfigs
 
-    #local IFS=$'\n'
 
 	case "${currentHost}" in
 		"LENOVO ThinkPad X230 - 23252FG" | "LENOVO ThinkPad L14 Gen 2 - 20X1000UPG" | "Apple Inc. 1.0 - MacBookPro9,2" | " pc-i440fx-9.2 - Standard PC (i440FX + PIIX, 1996)")
