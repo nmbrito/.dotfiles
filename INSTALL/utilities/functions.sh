@@ -427,15 +427,15 @@ function_RestoreExtraConfigs()
                 "KDE")
                     for eachKDEConfig in ${List_of_RestoreKDE}; do
                         if [ -d ${path_KDEThemes}/${eachKDEConfig} ]; then
-                            rm -rfv ${pathKDEThemes}/${eachKDEConfig}
+                            rm -rfv ${path_KDEThemes}/${eachKDEConfig}
                         fi
-                        cp -rv ${pathDotRoot}/kde_backup/share/${eachKDEConfig} ${pathKDEThemes}/${eachKDEConfig}
+                        cp -rv ${path_DotRoot}/kde_backup/share/${eachKDEConfig} ${path_KDEThemes}/${eachKDEConfig}
                     done
 
                     if [ -d "${HOME}/.icons" ]; then
                         rm -rfv ${HOME}/.icons
                     fi
-                    cp -rv ${pathDotRoot}/kde_backup/.icons ${HOME}/.icons
+                    cp -rv ${path_DotRoot}/kde_backup/.icons ${HOME}/.icons
                     ;;
             esac
             ;;
