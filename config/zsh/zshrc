@@ -59,7 +59,7 @@ fi
             ;;
     esac
 
-    if [ ${wsl_Session} ]; then
+    if [ ${wsl_session} ]; then
         if [ -f ${nmb_zshconf}/alias/zsh_alias_wsl.zsh ]; then
             . ${nmb_zshconf}/alias/zsh_alias_wsl.zsh
         fi
