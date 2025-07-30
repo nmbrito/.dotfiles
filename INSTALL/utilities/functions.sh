@@ -78,7 +78,7 @@ function_SystemPrintMessage()
 }
 function_SystemBuildMenu()
 {
-    #printf '%s' "${c_ClearScreen}"
+    printf '%s' "${c_ClearScreen}"
     printf '%s\n' \
         "${c_Bold} Select an option:                                           " \
         " --------------------------------------------------------- ${c_Normal}" \
@@ -291,19 +291,19 @@ function_RollFonts()
         mkdir -p ${HOME}/.fonts
     fi
 
-    if [ ! -d $pathCache ]; then
-        mkdir -p $pathCache
+    if [ ! -d $path_Cache ]; then
+        mkdir -p $path_Cache
     fi
 
-    if [ $(curl -is $urlNerdFonts | head -n 1) = "HTTP/2 404" ]; then
-        for eachFont in $(ls ${pathDotRoot}/INSTALL/fonts/*.tar.xz); do
-            tar -xvf ${pathDotRoot}/INSTALL/fonts/${eachFont} --directory ${HOME}/.fonts
+    if [ $(curl -is $url_NerdFonts | head -n 1) = "HTTP/2 404" ]; then
+        for eachFont in $(ls ${path_DotRoot}/INSTALL/fonts/*.tar.xz); do
+            tar -xvf ${path_DotRoot}/INSTALL/fonts/${eachFont} --directory ${HOME}/.fonts
         done
     else
         for eachFont in $List_of_Fonts; do
-            curl -L $(curl -s $urlNerdFonts | grep browser_download_url | cut -d '"' -f 4 | grep ${eachFont}) --output ${pathCache}/${eachFont}
-            tar -xvf ${pathCache}/${eachFont} --directory ${HOME}/.fonts
-            rm ${pathCache}/${eachFont}
+            curl -L $(curl -s $url_NerdFonts | grep browser_download_url | cut -d '"' -f 4 | grep ${eachFont}) --output ${path_Cache}/${eachFont}
+            tar -xvf ${path_Cache}/${eachFont} --directory ${HOME}/.fonts
+            rm ${path_Cache}/${eachFont}
         done
     fi
 
@@ -339,8 +339,8 @@ function_RollZSHShell()
 
     printf '%s\n' "Current shell: $SHELL"
 
-    if [ $SHELL != "$zshBinPath" ]; then
-        if [ ! -f $zshSharePath ]; then
+    if [ $SHELL != "$path_ZSHBin" ]; then
+        if [ ! -f $path_ZSHShare ]; then
             if [ $currentHost = "iOS/iPadOS" ]; then
                 sed -i 's/ash/zsh/g' /etc/passwd && printf '%s\n' "Replaced ash with zsh."
             else
@@ -385,7 +385,7 @@ function_SyncGitSubmodules()
     function_SystemPrintMessage privilege_User sync_GitSubmodules
 
     # A repository with submodules already added must be initiated.
-    cd $pathDotRoot                                \
+    cd $path_DotRoot                               \
         && git submodule update --init --recursive \
         && printf '%s\n' ""                        \
                          "Submodules updated"      \
@@ -397,16 +397,16 @@ function_RebuildGitSubmodules()
 {
     function_SystemPrintMessage privilege_User rebuild_GitSubmodules
 
-    previousWorkingDir="$(pwd)"
+    previous_WorkingDir="$(pwd)"
 
     local IFS=$'\n'
     # NOTE: submodule path is relative to root repository.
-    cd $pathDotRoot \
+    cd $path_DotRoot \
         && for eachGitSubmodule in $List_of_Submodules; do
             git submodule add $eachGitSubmodule
            done
 
-    cd $previousWorkingDir
+    cd $previous_WorkingDir
 
     function_SystemPrintMessage print_Sleep
 }
