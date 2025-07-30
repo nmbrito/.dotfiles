@@ -65,7 +65,7 @@ while : ; do
             function_ConfigureGitGlobals
             ;;
         10)
-            function_RestoreExtraconfigs
+            function_RestoreExtraConfigs
             ;;
         r)
             function_RebuilGitSubmodules
