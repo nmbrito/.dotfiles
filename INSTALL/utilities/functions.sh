@@ -237,7 +237,7 @@ function_RollPackages()
 
     #local IFS=$'\n'
 	case "${currentHost}" in
-		"LENOVO ThinkPad X230 - 23252FG" | "Apple Inc. 1.0 - MacBookPro9,2" | " pc-i440fx-9.2 - Standard PC (i440FX + PIIX, 1996)")
+		"LENOVO ThinkPad X230 - 23252FG" | "LENOVO ThinkPad L14 Gen 2 - 20X1000UPG" | "Apple Inc. 1.0 - MacBookPro9,2" | " pc-i440fx-9.2 - Standard PC (i440FX + PIIX, 1996)")
 			case "${XDG_SESSION_DESKTOP}" in
                 "KDE")
                     su -c "$packageInstallAuto  \
@@ -417,7 +417,7 @@ function_RestoreExtraConfigs()
     #local IFS=$'\n'
 
 	case "${currentHost}" in
-		"LENOVO ThinkPad X230 - 23252FG" | "Apple Inc. 1.0 - MacBookPro9,2" | " pc-i440fx-9.2 - Standard PC (i440FX + PIIX, 1996)")
+		"LENOVO ThinkPad X230 - 23252FG" | "LENOVO ThinkPad L14 Gen 2 - 20X1000UPG" | "Apple Inc. 1.0 - MacBookPro9,2" | " pc-i440fx-9.2 - Standard PC (i440FX + PIIX, 1996)")
 			case "${XDG_SESSION_DESKTOP}" in
                 "KDE")
                     for eachKDEConfig in ${List_of_RestoreKDE}; do
