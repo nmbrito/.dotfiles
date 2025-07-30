@@ -48,17 +48,6 @@ ${HOME}/.config/tmux \
 ${HOME}/.config/mc \
 ${HOME}/.config/fd \
 "
-
-List_of_Symlinks='"${path_DotRoot}/config/zsh/zprofile" "${HOME}/.zprofile"
-"${path_DotRoot}/config/zsh/zshrc"    "${HOME}/.zshrc"
-"${path_DotRoot}/config/vim/vimrc"    "${HOME}/.vimrc"
-"${path_DotRoot}/config/vim"          "${HOME}/.vim"
-"${path_DotRoot}/config/vifm"         "${HOME}/.config/vifm"
-"${path_DotRoot}/config/fastfetch"    "${HOME}/.config/fastfetch"
-"${path_DotRoot}/config/tmux"         "${HOME}/.config/tmux"
-"${path_DotRoot}/config/fd"           "${HOME}/.config/fd"
-"${path_DotRoot}/config/mc"           "${HOME}/.config/mc"' 
-
 # Restore
 List_of_RestoreKDE="\
 aurorae \
