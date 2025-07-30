@@ -40,7 +40,7 @@ url_OhMyPosh="https://ohmyposh.dev/install.sh"
 
 message_LongWarn="###########################################"
 message_LongDash="----------------------"
-message_ExecRoot="${cBlink}${cBold}${fgRed}# The following commands will run as ROOT #${cNormal}"
+message_ExecRoot="${c_Blink}${c_Bold}${fg_Red}# The following commands will run as ROOT #${c_Normal}"
 
 fg_Black=$(tput setaf 0)
 fg_Red=$(tput setaf 1)
