@@ -239,22 +239,15 @@ function_RollPackages()
 
     #local IFS=$'\n'
 	case "${currentHost}" in
-		"LENOVO ThinkPad X230 - 23252FG" | "Apple Inc. 1.0 - MacBookPro9,2" | "pc-i440fx-9.2 - Standard PC (i440FX + PIIX, 1996)")
+		"LENOVO ThinkPad X230 - 23252FG" | "Apple Inc. 1.0 - MacBookPro9,2" | " pc-i440fx-9.2 - Standard PC (i440FX + PIIX, 1996)")
 			case "${XDG_SESSION_DESKTOP}" in
                 "KDE")
-                    printf '%s\n' "$sudo_Password" | sudo -S ${SHELL} -c "$packageInstallAuto  \
-                                                                            $List_of_KDEBasics      \
-                                                                            $List_of_KDEPersonal    \
-                                                                            $List_of_KDEFortiClient \
-                                                                            $List_of_Terminal       \
-                                                                            $List_of_Developer"
-
-                    #su -c "$packageInstallAuto  \
-                    #    $List_of_KDEBasics      \
-                    #    $List_of_KDEPersonal    \
-                    #    $List_of_KDEFortiClient \
-                    #    $List_of_Terminal       \
-                    #    $List_of_Developer"
+                    su -c "$packageInstallAuto  \
+                        $List_of_KDEBasics      \
+                        $List_of_KDEPersonal    \
+                        $List_of_KDEFortiClient \
+                        $List_of_Terminal       \
+                        $List_of_Developer"
 
                     su -c "$flatpakInstall $List_of_Flatpaks"
                     ;;
