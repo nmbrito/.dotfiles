@@ -421,26 +421,21 @@ function_RestoreExtraConfigs()
 {
     function_SystemPrintMessage privilege_User restore_ExtraConfigs
 
-
 	case "${currentHost}" in
 		"LENOVO ThinkPad X230 - 23252FG" | "LENOVO ThinkPad L14 Gen 2 - 20X1000UPG" | "Apple Inc. 1.0 - MacBookPro9,2" | " pc-i440fx-9.2 - Standard PC (i440FX + PIIX, 1996)")
 			case "${XDG_SESSION_DESKTOP}" in
                 "KDE")
                     for eachKDEConfig in ${List_of_RestoreKDE}; do
                         if [ -d ${path_KDEThemes}/${eachKDEConfig} ]; then
-                            echo "${path_KDEThemes}/${eachKDEConfig}"
-                            #rm -rfv ${pathKDEThemes}/${eachKDEConfig}
+                            rm -rfv ${pathKDEThemes}/${eachKDEConfig}
                         fi
-                        echo "${path_DotRoot}/kde_backup/share/${eachKDEConfig} ${path_KDEThemes}/${eachKDEConfig}"
-                        #cp -rv ${pathDotRoot}/kde_backup/share/${eachKDEConfig} ${pathKDEThemes}/${eachKDEConfig}
+                        cp -rv ${pathDotRoot}/kde_backup/share/${eachKDEConfig} ${pathKDEThemes}/${eachKDEConfig}
                     done
 
                     if [ -d "${HOME}/.icons" ]; then
-                        echo "${HOME}/.icons"
-                        #rm -rfv ${HOME}/.icons
+                        rm -rfv ${HOME}/.icons
                     fi
-                    echo "${path_DotRoot}/kde_backup/.icons ${HOME}/.icons"
-                    #cp -rv ${pathDotRoot}/kde_backup/.icons ${HOME}/.icons
+                    cp -rv ${pathDotRoot}/kde_backup/.icons ${HOME}/.icons
                     ;;
             esac
             ;;
