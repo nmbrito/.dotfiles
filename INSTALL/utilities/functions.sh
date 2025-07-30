@@ -423,7 +423,7 @@ function_RestoreExtraConfigs()
                     for eachKDEConfig in ${List_of_RestoreKDE}; do
                         if [ -d ${path_KDEThemes}/${eachKDEConfig} ]; then
                             echo "${path_KDEThemes}/${eachKDEConfig}"
-                            #rm -rf ${pathKDEThemes}/${eachKDEConfig}
+                            #rm -rfv ${pathKDEThemes}/${eachKDEConfig}
                         fi
                         echo "${path_DotRoot}/kde_backup/share/${eachKDEConfig} ${path_KDEThemes}/${eachKDEConfig}"
                         #cp -rv ${pathDotRoot}/kde_backup/share/${eachKDEConfig} ${pathKDEThemes}/${eachKDEConfig}
@@ -431,7 +431,7 @@ function_RestoreExtraConfigs()
 
                     if [ -d "${HOME}/.icons" ]; then
                         echo "${HOME}/.icons"
-                        #rm -rf ${HOME}/.icons
+                        #rm -rfv ${HOME}/.icons
                     fi
                     echo "${path_DotRoot}/kde_backup/.icons ${HOME}/.icons"
                     #cp -rv ${pathDotRoot}/kde_backup/.icons ${HOME}/.icons
@@ -441,7 +441,7 @@ function_RestoreExtraConfigs()
 		"MacBook9,2")
             for eachMacOSConfig in $List_of_RestoreMacOS; do
                 if [ -d ${path_MacOSAppSupport}/${eachMacOSConfig} ]; then
-                    rm -rf ${path_MacOSAppSupport}/${eachMacOSConfig}
+                    rm -rfv ${path_MacOSAppSupport}/${eachMacOSConfig}
                 fi
             done
             
