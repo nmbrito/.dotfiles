@@ -184,13 +184,13 @@ function_RollRepositories()
 
     local IFS=$'\n'
     for eachGPGKeys in "${List_of_GPGKeys}"; do
-        printf '%s\n' "$sudo_Password" | sudo -S ${SHELL} -c "$repoImport $eachGPGKeys" 
+        printf '%s\n' "$sudo_Password" | sudo -S ${SHELL} -c "$repo_Import $eachGPGKeys" 
     done
     for eachRepository in ${List_of_Repositories}; do
-        printf '%s\n' "${sudo_Password}" | sudo -S ${SHELL} -c "$repoAdd $eachRepository" 
+        printf '%s\n' "${sudo_Password}" | sudo -S ${SHELL} -c "$repo_Add $eachRepository" 
     done
 
-    printf '%s\n' "${sudo_Password}" | sudo -S ${SHELL} -c "$repoAutoGPGKeys"
+    printf '%s\n' "${sudo_Password}" | sudo -S ${SHELL} -c "$repo_AutoGPGKeys"
     
     function_SystemPrintMessage print_Sleep
 }
