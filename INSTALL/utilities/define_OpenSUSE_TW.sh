@@ -17,10 +17,10 @@ system_CleanAuto=""
 system_Remove="" 
 system_RemoveAuto="" 
 
-repoAdd="${package_Manager} ar"
-repoRefresh="${package_Manager} ref"
-repoImport="rpm --import"
-repoAutoGPGKeys="zypper --gpg-auto-import-keys ref"
+repo_Add="${package_Manager} ar"
+repo_Refresh="${package_Manager} ref"
+repo_Import="rpm --import"
+repo_AutoGPGKeys="zypper --gpg-auto-import-keys ref"
 
 # Repositories
 gpgkey_microsoft="https://packages.microsoft.com/keys/microsoft.asc"
