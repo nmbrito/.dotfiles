@@ -1,0 +1,12 @@
+[Desktop Entry]
+DefaultProfile=nmbrito.profile
+
+[General]
+ConfigVersion=1
+
+[MainWindow]
+MenuBar=Enabled
+ToolBarsMovable=Enabled
+
+[UiSettings]
+ColorScheme=
