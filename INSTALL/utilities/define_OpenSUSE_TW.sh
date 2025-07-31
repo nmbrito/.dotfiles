@@ -1,24 +1,24 @@
 #!/bin/sh
 
 # Commands
-distroName="openSUSE Tumbleweed"
+distro_Name="openSUSE Tumbleweed"
 
-packageManager="zypper"
+package_Manager="zypper"
 
-packageInstall="${packageManager} install"
-packageInstallAuto="${packageManager} install -y"
-packageInstallPattern="${packageManager} -t pattern"
+package_Install="${package_Manager} install"
+package_InstallAuto="${package_Manager} install -y"
+package_InstallPattern="${package_Manager} -t pattern"
 
-systemUpdate="${packageManager} up"
-systemUpgrade="${packageManager} dup"
-systemUpgradeAuto="${packageManager} dup -y"
-systemClean="" 
-systemCleanAuto="" 
-systemRemove="" 
-systemRemoveAuto="" 
+system_Update="${package_Manager} up"
+system_Upgrade="${package_Manager} dup"
+system_UpgradeAuto="${package_Manager} dup -y"
+system_Clean="" 
+system_CleanAuto="" 
+system_Remove="" 
+system_RemoveAuto="" 
 
-repoAdd="${packageManager} ar"
-repoRefresh="${packageManager} ref"
+repoAdd="${package_Manager} ar"
+repoRefresh="${package_Manager} ref"
 repoImport="rpm --import"
 repoAutoGPGKeys="zypper --gpg-auto-import-keys ref"
 
