@@ -21,7 +21,7 @@ printf '%s\n' ""                   \
               "${message_LongDash}"
 
 while : ; do
-    printf '%s\n' "${c_Bold}${fg_Red}This script will run certain sections with elevated privilegesi${c_Normal}"
+    printf '%s\n' "${c_Bold}${fg_Red}This script will run certain sections with elevated privileges${c_Normal}"
     function_SystemAskForSudoPassword
     function_SystemBuildMenu
     printf '%s' "Option: "
