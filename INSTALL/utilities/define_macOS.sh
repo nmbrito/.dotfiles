@@ -17,10 +17,10 @@ system_CleanAuto=""
 system_Remove="" 
 system_RemoveAuto="" 
 
-repoAdd=""
-repoRefresh=""
-repoImport=""
-repoAutoGPGKeys=""
+repo_Add=""
+repo_Refresh=""
+repo_Import=""
+repo_AutoGPGKeys=""
 
 # Repositories
 
