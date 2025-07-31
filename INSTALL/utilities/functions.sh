@@ -324,19 +324,19 @@ function_RollSymlinks()
     if [ -d "${HOME}/.vim" ]; then
         rm -rf "${HOME}/.vim"
     fi
-    if [ -d "${HOME}/.vifm" ]; then
+    if [ -d "${HOME}/.config/.vifm" ]; then
         rm -rf "${HOME}/.config/vifm"
     fi
-    if [ -d "${HOME}/.fastfetch" ]; then
+    if [ -d "${HOME}/.config/.fastfetch" ]; then
         rm -rf "${HOME}/.config/fastfetch"
     fi
-    if [ -d "${HOME}/.tmux" ]; then
+    if [ -d "${HOME}/.config/.tmux" ]; then
         rm -rf "${HOME}/.config/tmux"
     fi
-    if [ -d "${HOME}/.fd" ]; then
+    if [ -d "${HOME}/.config/.fd" ]; then
         rm -rf "${HOME}/.config/fd"
     fi
-    if [ -d "${HOME}/.mc" ]; then
+    if [ -d "${HOME}/.config/.mc" ]; then
         rm -rf "${HOME}/.config/mc"
     fi
 
