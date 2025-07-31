@@ -4,7 +4,7 @@ function_SystemAuditFile()
 {
     check_Entry="${1}"
 
-    for each_Entry in "${check_Entry}"; do
+    for each_Entry in ${check_Entry}; do
         if [ ! -f "${path_Utilities}/${each_Entry}" ]; then
             printf '%s\n' "${each_Entry} file missing. Aborting."
             exit 0
@@ -163,7 +163,8 @@ function_SystemDefineHost()
 
     # Known Hosts
     #   Thinkpad x230              - LENOVO ThinkPad X230 - 23252FG
-    #   Proxmox Virtual Machine    - pc-i440fx-9.2 - Standard PC (i440FX + PIIX, 1996)
+    #   Thinkpad L14 G2            - LENOVO ThinkPad L14 Gen 2 - 20X1000UPG
+    #   Proxmox Virtual Machine    -  pc-i440fx-9.2 - Standard PC (i440FX + PIIX, 1996)
     #   Macbook Pro Mid 2012 Linux - Apple Inc. 1.0 - MacBookPro9,2
     #   Macbook Pro Mid 2012 MacOS - MacBook9,2
     #   iPhone 13                  - iOS/iPadOS
@@ -182,12 +183,12 @@ function_RollRepositories()
 {
     function_SystemPrintMessage privilege_Root roll_Repositories
 
-    for eachGPGKeys in "${List_of_GPGKeys}"; do
+    for eachGPGKeys in ${List_of_GPGKeys}; do
         printf '%s\n' "$sudo_Password" | sudo -S ${SHELL} -c "$repo_Import $eachGPGKeys" 
     done
     local IFS=$'\n'
     for eachRepository in ${List_of_Repositories}; do
-        printf '%s\n' "${sudo_Password}" | sudo -S ${SHELL} -c "$repo_Add $eachRepository" 
+        printf '%s\n' ${sudo_Password} | sudo -S ${SHELL} -c "$repo_Add $eachRepository" 
     done
 
     printf '%s\n' "${sudo_Password}" | sudo -S ${SHELL} -c "$repo_AutoGPGKeys"
@@ -205,11 +206,9 @@ function_RollFixes()
             ;;
         "Apple Inc. 1.0 - MacBookPro9,2")
             printf '%s\n' "$sudo_Password" | sudo -S ${SHELL} -c "$package_InstallAuto ${List_of_MacbookProMid2012}"
-
-            local IFS=$'\n'
-            for eachCommand in ${List_of_MacbookProMid2012_Commands}; do
-                printf '%s\n' "$sudo_Password" | sudo -S ${SHELL} -c "$eachCommand" 
-            done
+            printf '%s\n' "$sudo_Password" | sudo -S ${SHELL} -c "systemctl enable mbpfan.service"
+            printf '%s\n' "$sudo_Password" | sudo -S ${SHELL} -c "systemctl daemon-restart"
+            printf '%s\n' "$sudo_Password" | sudo -S ${SHELL} -c "systemctl enable mbpfan.service"
             ;;
         "MacBookPro9,2")
             printf '%s\n' "${sudo_Password}" | sudo -S ${SHELL} -c /bin/bash -c "curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh"
@@ -297,11 +296,11 @@ function_RollFonts()
     fi
 
     if [ "$(curl -is $url_NerdFonts | head -n 1)" = "HTTP/2 404" ]; then
-        for eachFont in "$(ls ${path_DotRoot}/INSTALL/fonts/*.tar.xz)"; do
+        for eachFont in $(ls ${path_DotRoot}/INSTALL/fonts/*.tar.xz); do
             tar -xvf "${path_DotRoot}/INSTALL/fonts/${eachFont}" --directory "${HOME}/.fonts"
         done
     else
-        for eachFont in "$List_of_Fonts"; do
+        for eachFont in $List_of_Fonts; do
             curl -L "$(curl -s $url_NerdFonts | grep browser_download_url | cut -d '"' -f 4 | grep ${eachFont}) --output ${path_Cache}/${eachFont}"
             tar -xvf "${path_Cache}/${eachFont}" --directory "${HOME}/.fonts"
             rm "${path_Cache}/${eachFont}"
@@ -322,11 +321,33 @@ function_RollSymlinks()
         mkdir "${HOME}/.config/"
     fi
 
-    for eachSymlinkDir in "$List_of_SymlinksDirRem"; do
-        if [ -d "$eachSymlinkDir" ]; then
-            rm -rf "$eachSymlinkDir"
-        fi
-    done
+    if [ -d "${HOME}/.zshrc" ]; then
+        rm -rf "${HOME}/.zshrc"
+    fi
+    if [ -d "${HOME}/.zprofile" ]; then
+        rm -rf "${HOME}/.zprofile"
+    fi
+    if [ -d "${HOME}/.vimrc" ]; then
+        rm -rf "${HOME}/.vimrc"
+    fi
+    if [ -d "${HOME}/.vim" ]; then
+        rm -rf "${HOME}/.vim"
+    fi
+    if [ -d "${HOME}/.vifm" ]; then
+        rm -rf "${HOME}/.config/vifm"
+    fi
+    if [ -d "${HOME}/.fastfetch" ]; then
+        rm -rf "${HOME}/.config/fastfetch"
+    fi
+    if [ -d "${HOME}/.tmux" ]; then
+        rm -rf "${HOME}/.config/tmux"
+    fi
+    if [ -d "${HOME}/.fd" ]; then
+        rm -rf "${HOME}/.config/fd"
+    fi
+    if [ -d "${HOME}/.mc" ]; then
+        rm -rf "${HOME}/.config/mc"
+    fi
 
     ln -vsf "${path_DotRoot}/config/zsh/zshrc"    "${HOME}/.zshrc"
     ln -vsf "${path_DotRoot}/config/zsh/zprofile" "${HOME}/.zprofile"
