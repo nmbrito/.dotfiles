@@ -1,21 +1,21 @@
 #!/bin/sh
 
 # Commands
-distroName="Debian"
+distro_Name="Debian"
 
-packageManager="apt"
+package_Manager="apt"
 
-packageInstall="${packageManager} install"
-packageInstallAuto="${packageManager} -y install"
-packageInstallPattern=""
+package_Install="${package_Manager} install"
+package_InstallAuto="${package_Manager} -y install"
+package_InstallPattern=""
 
-systemUpdate="${packageManager} update"
-systemUpgrade="${packageManager} upgrade"
-systemUpgradeAuto="${packageManager} -y upgrade"
-systemClean="${packageManager} clean" 
-systemCleanAuto="${packageManager} autoclean" 
-systemRemove="${packageManager} remove" 
-systemRemoveAuto="${packageManager} autoremove" 
+system_Update="${package_Manager} update"
+system_Upgrade="${package_Manager} upgrade"
+system_UpgradeAuto="${package_Manager} -y upgrade"
+system_Clean="${package_Manager} clean" 
+system_CleanAuto="${package_Manager} autoclean" 
+system_Remove="${package_Manager} remove" 
+system_RemoveAuto="${package_Manager} autoremove" 
 
 repoAdd=""
 repoRefresh=""
