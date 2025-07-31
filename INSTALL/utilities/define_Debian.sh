@@ -17,10 +17,10 @@ system_CleanAuto="${package_Manager} autoclean"
 system_Remove="${package_Manager} remove" 
 system_RemoveAuto="${package_Manager} autoremove" 
 
-repoAdd=""
-repoRefresh=""
-repoImport=""
-repoAutoGPGKeys=""
+repo_Add=""
+repo_Refresh=""
+repo_Import=""
+repo_AutoGPGKeys=""
 
 # Repositories
 
