@@ -302,7 +302,7 @@ function_RollFonts()
         done
     else
         for eachFont in "$List_of_Fonts"; do
-            curl -L "$(curl -s $url_NerdFonts | grep browser_download_url | cut -d '"' -f 4 | grep ${eachFont})" --output "${path_Cache}/${eachFont}"
+            curl -L "$(curl -s $url_NerdFonts | grep browser_download_url | cut -d '"' -f 4 | grep ${eachFont}) --output ${path_Cache}/${eachFont}"
             tar -xvf "${path_Cache}/${eachFont}" --directory "${HOME}/.fonts"
             rm "${path_Cache}/${eachFont}"
         done
