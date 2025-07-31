@@ -4,8 +4,8 @@ function_SystemAuditFile()
 {
     check_Entry="${1}"
 
-    for each_Entry in ${check_Entry}; do
-        if [ ! -f ${path_Utilities}/${each_Entry} ]; then
+    for each_Entry in "${check_Entry}"; do
+        if [ ! -f "${path_Utilities}/${each_Entry}" ]; then
             printf '%s\n' "${each_Entry} file missing. Aborting."
             exit 0
         fi
@@ -66,9 +66,8 @@ function_SystemPrintMessage()
                     ;;
             esac
 
-            printf '%s\n' \
-                "${message_LongDash}" \
-                "                  "
+            printf '%s\n' "${message_LongDash}" \
+                          ""
         ;;
         "print_Sleep")
             printf '%s\n' ""
@@ -93,11 +92,11 @@ function_SystemBuildMenu()
         "                                                                      " \
         "${c_Bold} Information:                                                " \
         " --------------------------------------------------------- ${c_Normal}" \
-        "  Host: $currentHost                                                  " \
+        "  Host: $current_Host                                                 " \
         "                                                                      " \
         "  Distribution: $ID                                                   " \
-        "  Package Manager: $packageManager                                    " \
-        "  Package Install Command: $packageInstall                            " \
+        "  Package Manager: $package_Manager                                    " \
+        "  Package Install Command: $package_Install                            " \
         "                                                                      " \
         "  Current shell: $SHELL                                               " \
         "                                                                      " \
@@ -111,56 +110,55 @@ function_SystemBuildMenu()
         "${c_Bold} ---------------------------------------------------------   " \
         "  ( ) exit / cancel                                                   " \
         " ---------------------------------------------------------${c_Normal} " \
-        "                                                                      "
+        ""
 }
 function_SystemDefineDistro() 
 {
     # Flatpak universal
-    . ${path_Utilities}/define_Flatpak.sh
+    . "${path_Utilities}/define_Flatpak.sh"
 
     # Distribuitions have different package managers
     case "${ID}" in
         "almalinux")
-            . ${path_Utilities}/define_AlmaLinux.sh
+            . "${path_Utilities}/define_AlmaLinux.sh"
             ;;
         "alpine")
-            . ${path_Utilities}/define_Alpine.sh
+            . "${path_Utilities}/define_Alpine.sh"
             ;;
         "archlinux")
-            . ${path_Utilities}/define_ArchLinux.sh
+            . "${path_Utilities}/define_ArchLinux.sh"
             ;;
         "debian")
-            . ${path_Utilities}/define_Debian.sh
+            . "${path_Utilities}/define_Debian.sh"
             ;;
         "macOS")
-            . ${path_Utilities}/define_macOS.sh
+            . "${path_Utilities}/define_macOS.sh"
             ;;
         "opensuse-tumbleweed")
-            . ${path_Utilities}/define_OpenSUSE_TW.sh
+            . "${path_Utilities}/define_OpenSUSE_TW.sh"
             ;;
         *)
-            printf '%s\n' "This script doesn't support distribuition: $ID" \
-                          "Exiting."
+            printf '%s\n' "This script doesn't support distribuition: $ID"
             exit 0
             ;;
     esac
 }
 function_SystemDefineHost()
 {
-    if [ -d ${path_SysDevDMI} ]; then
+    if [ -d "${path_SysDevDMI}" ]; then
         # Physical machine
-        currentHost="${cat_SysDevBoardVendor} ${cat_SysDevProdVendor} - ${cat_SysDevProdName}"
-    elif [ -d ${path_SWVers} ]; then
+        current_Host="${cat_SysDevBoardVendor} ${cat_SysDevProdVendor} - ${cat_SysDevProdName}"
+    elif [ -d "${path_SWVers}" ]; then
         # Apple macOS devices
-        currentHost="$(sysctl hw.model)"
-    elif [ -d ${path_iSH} ]; then
+        current_Host="$(sysctl hw.model)"
+    elif [ -d "${path_iSH}" ]; then
         # iSH.app on iOS and iPadOS
-        currentHost="iOS/iPadOS"
-    elif [ ${wsl_Session} ]; then
+        current_Host="iOS/iPadOS"
+    elif [ "${wsl_Session}" ]; then
         # WSL1 and WSL2 sessions
-        currentHost="Windows Subsystem for Linux"
+        current_Host="Windows Subsystem for Linux"
     else
-        currentHost="None"
+        current_Host="None"
     fi
 
     # Known Hosts
@@ -174,7 +172,7 @@ function_SystemDefineHost()
 }
 function_SystemAskForSudoPassword()
 {
-    printf '%s' "Input sudo password: "
+    printf '%s' "Please input sudo password: "
     stty -echo
     read -r sudo_Password
     stty echo 
@@ -184,10 +182,8 @@ function_RollRepositories()
 {
     function_SystemPrintMessage privilege_Root roll_Repositories
 
-    function_SystemAskForSudoPassword
-
     local IFS=$'\n'
-    for eachGPGKeys in ${List_of_GPGKeys}; do
+    for eachGPGKeys in "${List_of_GPGKeys}"; do
         printf '%s\n' "$sudo_Password" | sudo -S ${SHELL} -c "$repoImport $eachGPGKeys" 
     done
     for eachRepository in ${List_of_Repositories}; do
@@ -202,28 +198,26 @@ function_RollFixes()
 {
     function_SystemPrintMessage privilege_Root roll_Fixes
 
-    function_SystemAskForSudoPassword
-
-    local IFS=$'\n'
     # Hardware layer
-    case "${currentHost}" in
+    case "${current_Host}" in
         "LENOVO ThinkPad X230 - 23252FG")
-            printf '%s\n' "$sudo_Password" | sudo -S ${SHELL} -c "$packageInstallAuto ${List_of_x230}"
+            printf '%s\n' "$sudo_Password" | sudo -S ${SHELL} -c "$package_InstallAuto ${List_of_x230}"
             ;;
         "Apple Inc. 1.0 - MacBookPro9,2")
-            printf '%s\n' "$sudo_Password" | sudo -S ${SHELL} -c "$packageInstallAuto ${List_of_MacbookProMid2012}"
+            printf '%s\n' "$sudo_Password" | sudo -S ${SHELL} -c "$package_InstallAuto ${List_of_MacbookProMid2012}"
 
+            local IFS=$'\n'
             for eachCommand in ${List_of_MacbookProMid2012_Commands}; do
                 printf '%s\n' "$sudo_Password" | sudo -S ${SHELL} -c "$eachCommand" 
             done
             ;;
         "MacBookPro9,2")
-            printf '%s\n' "${sudo_Password}" | sudo -S ${SHELL} -c /bin/bash -c $(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)
+            printf '%s\n' "${sudo_Password}" | sudo -S ${SHELL} -c /bin/bash -c "curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh"
             ;;
     esac
 
     # Operating system layer
-    case "${distroName}" in
+    case "${distro_Name}" in
         "Debian")
             ln -s $(which fdfind) "${HOME}/.local/bin/fd"
             ;;
@@ -235,17 +229,23 @@ function_RollPackages()
 {
     function_SystemPrintMessage privilege_Root roll_Packages
 
-    #local IFS=$'\n'
-	case "${currentHost}" in
+	case "${current_Host}" in
 		"LENOVO ThinkPad X230 - 23252FG" | "LENOVO ThinkPad L14 Gen 2 - 20X1000UPG" | "Apple Inc. 1.0 - MacBookPro9,2" | " pc-i440fx-9.2 - Standard PC (i440FX + PIIX, 1996)")
 			case "${XDG_SESSION_DESKTOP}" in
                 "KDE")
-                    su -c "$packageInstallAuto  \
-                        $List_of_KDEBasics      \
-                        $List_of_KDEPersonal    \
-                        $List_of_KDEFortiClient \
-                        $List_of_Terminal       \
-                        $List_of_Developer"
+                    printf '%s\n' "$sudo_Password" | sudo -S ${SHELL} -c "$package_InstallAuto  \
+                                                                        $List_of_KDEBasics \
+                                                                        $List_of_KDEPersonal \
+                                                                        $List_of_KDEFortiClient \
+                                                                        $List_of_Terminal \
+                                                                        $List_of_Developer"
+
+                    #su -c "$package_InstallAuto  \
+                    #    $List_of_KDEBasics      \
+                    #    $List_of_KDEPersonal    \
+                    #    $List_of_KDEFortiClient \
+                    #    $List_of_Terminal       \
+                    #    $List_of_Developer"
 
                     ${binary_ohmyposh}
 
@@ -257,19 +257,19 @@ function_RollPackages()
             esac
             ;;
         "Windows Subsystem for Linux")
-            su -c "$packageInstallAuto \
+            su -c "$package_InstallAuto \
                 $List_of_Terminal      \
                 $List_of_Developer"
 
-            if [ "$packageInstallPattern" != "" ]; then
-                su -c "$packageInstallPattern $List_of_WSLPattern"
+            if [ "$package_InstallPattern" != "" ]; then
+                su -c "$package_InstallPattern $List_of_WSLPattern"
             fi
             ;;
 		"iOS/iPadOS")
-            "$packageInstall $List_of_iSH"
+            "$package_Install $List_of_iSH"
             ;;
 		"MacBook9,2")
-            "$packageInstall --file=${pathUtilities}/packages_Brewfile"
+            "$package_Install --file=${pathUtilities}/packages_Brewfile"
             ;;
 		*)
 			#case "${XDG_SESSION_DESKTOP}" in
@@ -288,29 +288,29 @@ function_RollFonts()
 {
     function_SystemPrintMessage privilege_User roll_Fonts
 
-    if [ ! -d ${HOME}/.fonts ]; then
-        mkdir -p ${HOME}/.fonts
+    if [ ! -d "${HOME}/.fonts" ]; then
+        mkdir -p "${HOME}/.fonts"
     fi
 
-    if [ ! -d $path_Cache ]; then
-        mkdir -p $path_Cache
+    if [ ! -d "$path_Cache" ]; then
+        mkdir -p "$path_Cache"
     fi
 
-    if [ $(curl -is $url_NerdFonts | head -n 1) = "HTTP/2 404" ]; then
-        for eachFont in $(ls ${path_DotRoot}/INSTALL/fonts/*.tar.xz); do
-            tar -xvf ${path_DotRoot}/INSTALL/fonts/${eachFont} --directory ${HOME}/.fonts
+    if [ "$(curl -is $url_NerdFonts | head -n 1)" = "HTTP/2 404" ]; then
+        for eachFont in "$(ls ${path_DotRoot}/INSTALL/fonts/*.tar.xz)"; do
+            tar -xvf "${path_DotRoot}/INSTALL/fonts/${eachFont}" --directory "${HOME}/.fonts"
         done
     else
-        for eachFont in $List_of_Fonts; do
-            curl -L $(curl -s $url_NerdFonts | grep browser_download_url | cut -d '"' -f 4 | grep ${eachFont}) --output ${path_Cache}/${eachFont}
-            tar -xvf ${path_Cache}/${eachFont} --directory ${HOME}/.fonts
-            rm ${path_Cache}/${eachFont}
+        for eachFont in "$List_of_Fonts"; do
+            curl -L "$(curl -s $url_NerdFonts | grep browser_download_url | cut -d '"' -f 4 | grep ${eachFont})" --output "${path_Cache}/${eachFont}"
+            tar -xvf "${path_Cache}/${eachFont}" --directory "${HOME}/.fonts"
+            rm "${path_Cache}/${eachFont}"
         done
     fi
 
-    rm ${HOME}/.fonts/LICENSE*
-    rm ${HOME}/.fonts/README*
-    rm ${HOME}/.fonts/OFL*
+    rm "${HOME}"/.fonts/LICENSE*
+    rm "${HOME}"/.fonts/README*
+    rm "${HOME}"/.fonts/OFL*
 
     function_SystemPrintMessage print_Sleep
 }
@@ -318,13 +318,13 @@ function_RollSymlinks()
 {
     function_SystemPrintMessage privilege_User roll_Symlinks
 
-    if [ ! -d ${HOME}/.config/ ]; then
-        mkdir ${HOME}/.config/
+    if [ ! -d "${HOME}/.config/" ]; then
+        mkdir "${HOME}/.config/"
     fi
 
-    for eachSymlinkDir in $List_of_SymlinksDirRem; do
-        if [ -d $eachSymlinkDir ]; then
-            rm -rf $eachSymlinkDir
+    for eachSymlinkDir in "$List_of_SymlinksDirRem"; do
+        if [ -d "$eachSymlinkDir" ]; then
+            rm -rf "$eachSymlinkDir"
         fi
     done
 
@@ -346,20 +346,20 @@ function_RollZSHShell()
 
     printf '%s\n' "Current shell: $SHELL"
 
-    if [ $SHELL != "$path_ZSHBin" ]; then
+    if [ "${SHELL}" != "$path_ZSHBin" ]; then
         if [ ! -f "$path_ZSHShare" ]; then
-            if [ "$currentHost" = "iOS/iPadOS" ]; then
+            if [ "$current_Host" = "iOS/iPadOS" ]; then
                 sed -i 's/ash/zsh/g' /etc/passwd && printf '%s\n' "Replaced ash with zsh."
             else
-                chsh -s $(which zsh)                             \
-                    && printf '%s\n' "Shell changed to ZSH."     \
+                chsh -s $(which zsh) \
+                    && printf '%s\n' "Shell changed to ZSH." \
                     || printf '%s\n' "ERROR: Shell not changed."
             fi
         else
             printf '%s\n' "ZSH missing. Want to install? [y/n]: "
             read -r option_ZSHChange
             if [ "$option_ZSHChange" = "y" ]; then
-                su -c "$packageInstallAuto ${binary_zsh}"
+                su -c "$package_InstallAuto ${binary_zsh}"
                 function_RollZSHShell
             fi
         fi
@@ -421,32 +421,18 @@ function_RestoreExtraConfigs()
 {
     function_SystemPrintMessage privilege_User restore_ExtraConfigs
 
-	case "${currentHost}" in
+	case "${current_Host}" in
 		"LENOVO ThinkPad X230 - 23252FG" | "LENOVO ThinkPad L14 Gen 2 - 20X1000UPG" | "Apple Inc. 1.0 - MacBookPro9,2" | " pc-i440fx-9.2 - Standard PC (i440FX + PIIX, 1996)")
 			case "${XDG_SESSION_DESKTOP}" in
                 "KDE")
-                    for eachKDEConfig in ${List_of_RestoreKDE}; do
-                        if [ -d ${path_KDEThemes}/${eachKDEConfig} ]; then
-                            rm -rfv ${path_KDEThemes}/${eachKDEConfig}
-                        fi
-                        cp -rv ${path_DotRoot}/kde_backup/share/${eachKDEConfig} ${path_KDEThemes}/${eachKDEConfig}
-                    done
-
-                    if [ -d "${HOME}/.icons" ]; then
-                        rm -rfv ${HOME}/.icons
-                    fi
-                    cp -rv ${path_DotRoot}/kde_backup/.icons ${HOME}/.icons
+                    #TODO: Install global theme in terminal
+                    cp -rv "${path_DotRoot}/config/kde_plasma/home_config/." "${path_KDEConfig}/"
+                    cp -rv "${path_DotRoot}/config/kde_plasma/local_share/." "${path_KDEThemes}/"
                     ;;
             esac
             ;;
 		"MacBook9,2")
-            for eachMacOSConfig in $List_of_RestoreMacOS; do
-                if [ -d ${path_MacOSAppSupport}/${eachMacOSConfig} ]; then
-                    rm -rfv ${path_MacOSAppSupport}/${eachMacOSConfig}
-                fi
-            done
-            
-            cp -rv ${path_DotRoot}/.config/tgpro/Preferences/com.tunabellysoftware.tgpro.plist ${path_MacOSPreference}/com.tunabellysoftware.tgpro.plist
+            cp -rv "${path_DotRoot}/.config/tgpro/Preferences/com.tunabellysoftware.tgpro.plist" "${path_MacOSPreference}/com.tunabellysoftware.tgpro.plist"
             ;;
     esac
 
@@ -457,7 +443,7 @@ function_PrepareVirtualMachine()
     printf '%s\n' "Work in Progress"
 #    functionSystemPrintMessage privilegeRoot prepareVirtualMachine
 #
-#    case "${distroName}" in
+#    case "${distro_Name}" in
 #        "debian")
 #            printf '%s\n' "Reconfiguring SSH Keys"
 #            (su -c "
@@ -468,9 +454,9 @@ function_PrepareVirtualMachine()
 #
 #            printf '%s\n' "Cleaning packages"
 #            (su -c "
-#                ${packageManager} autoclean
-#                ${packageManager} clean
-#                ${packageManager} autoremove
+#                ${package_Manager} autoclean
+#                ${package_Manager} clean
+#                ${package_Manager} autoremove
 #            ")
 #
 #            printf '%s\n' "Configuring Journalctl"
