@@ -1,14 +1,14 @@
 #!/bin/sh
 
 check_Files="\
-    define_AlmaLinux.sh   \
-    define_Alpine.sh      \
-    define_ArchLinux.sh   \
-    define_Debian.sh      \
+    define_AlmaLinux.sh \
+    define_Alpine.sh \
+    define_ArchLinux.sh \
+    define_Debian.sh \
     define_OpenSUSE_TW.sh \
-    define_macOS.sh       \
-    packages_Lists        \
-    packages_Brewfile     \
+    define_macOS.sh \
+    packages_Lists \
+    packages_Brewfile \
     "
 
 check_FilesServers="\
