@@ -48,19 +48,6 @@ ${HOME}/.config/tmux \
 ${HOME}/.config/mc \
 ${HOME}/.config/fd \
 "
-# Restore
-List_of_RestoreKDE="\
-aurorae \
-color-schemes \
-icons \
-plasma/desktoptheme \
-plasma/look-and-feel \
-wallpapers \
-"
-
-List_of_RestoreMacOS="\
-TG Pro \
-"
 
 # Commands
 List_of_MacbookProMid2012_Commands="systemctl enable mbpfan.service
