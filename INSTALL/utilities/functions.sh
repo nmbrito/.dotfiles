@@ -232,8 +232,8 @@ function_RollPackages()
 		"LENOVO ThinkPad X230 - 23252FG" | "LENOVO ThinkPad L14 Gen 2 - 20X1000UPG" | "Apple Inc. 1.0 - MacBookPro9,2" | " pc-i440fx-9.2 - Standard PC (i440FX + PIIX, 1996)")
 			case "${XDG_SESSION_DESKTOP}" in
                 "KDE")
-                    printf '%s\n' "$sudo_Password" | \ (
-                        sudo -S ${SHELL} -c "$package_InstallAuto  \
+                    printf '%s\n' "$sudo_Password" | \
+                        (sudo -S ${SHELL} -c "$package_InstallAuto  \
                                             $List_of_KDEBasics \
                                             $List_of_KDEPersonal \
                                             $List_of_KDEFortiClient \
