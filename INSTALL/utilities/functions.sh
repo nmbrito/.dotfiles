@@ -286,7 +286,7 @@ function_RollFonts()
         mkdir -p "$path_Cache"
     fi
 
-    if [ $(curl -is $url_NerdFonts | head -n 1) = "HTTP/2 404" ]; then
+    if [ "$(curl -is $url_NerdFonts | head -n 1)" = "HTTP/2 404" ]; then
         for eachFont in $(ls ${path_DotRoot}/INSTALL/fonts/*.tar.xz); do
             tar -xvf "${path_DotRoot}/INSTALL/fonts/${eachFont}" --directory "${HOME}/.fonts"
         done
