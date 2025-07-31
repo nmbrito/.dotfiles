@@ -1,21 +1,21 @@
 #!/bin/sh
 
 # Commands
-distroName="ArchLinux"
+distro_Name="ArchLinux"
 
-packageManager="pacman"
+package_Manager="pacman"
 
-packageInstall="pacman -S"
-packageInstallAuto="pacman -S"
-packageInstallPattern=""
+package_Install="pacman -S"
+package_InstallAuto="pacman -S"
+package_InstallPattern=""
 
-systemUpdate="pacman -Sy"
-systemUpgrade="pacman -Syu"
-systemUpgradeAuto="pacman -Syu"
-systemClean="" 
-systemCleanAuto="" 
-systemRemove="" 
-systemRemoveAuto="" 
+system_Update="pacman -Sy"
+system_Upgrade="pacman -Syu"
+system_UpgradeAuto="pacman -Syu"
+system_Clean="" 
+system_CleanAuto="" 
+system_Remove="" 
+system_RemoveAuto="" 
 
 repoAdd=""
 repoRefresh=""
