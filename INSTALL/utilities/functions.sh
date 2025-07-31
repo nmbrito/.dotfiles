@@ -343,6 +343,7 @@ function_RollSymlinks()
     ln -vsf "${path_DotRoot}/config/zsh/zshrc"    "${HOME}/.zshrc"
     ln -vsf "${path_DotRoot}/config/zsh/zprofile" "${HOME}/.zprofile"
     ln -vsf "${path_DotRoot}/config/vim/vimrc"    "${HOME}/.vimrc"
+
     ln -vsf "${path_DotRoot}/config/vim"          "${HOME}/.vim"
     ln -vsf "${path_DotRoot}/config/vifm"         "${HOME}/.config/vifm"
     ln -vsf "${path_DotRoot}/config/fastfetch"    "${HOME}/.config/fastfetch"
