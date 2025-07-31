@@ -240,7 +240,7 @@ function_RollPackages()
                                                                         $List_of_Developer"
                     printf '%s\n' "$sudo_Password" | sudo -S ${SHELL} -c "$flatpakInstallAuto $List_of_Flatpaks"
 
-                    ${SHELL} -c ${binary_ohmyposh}
+                    echo $(${SHELL} -c ${binary_ohmyposh})
                     ;;
                 *)
                     ;;
