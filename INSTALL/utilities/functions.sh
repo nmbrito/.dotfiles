@@ -286,13 +286,13 @@ function_RollFonts()
         mkdir -p "$path_Cache"
     fi
 
-    if [ "$(curl -is $url_NerdFonts | head -n 1)" = "HTTP/2 404" ]; then
+    if [ $(curl -is $url_NerdFonts | head -n 1) = "HTTP/2 404" ]; then
         for eachFont in $(ls ${path_DotRoot}/INSTALL/fonts/*.tar.xz); do
             tar -xvf "${path_DotRoot}/INSTALL/fonts/${eachFont}" --directory "${HOME}/.fonts"
         done
     else
         for eachFont in $List_of_Fonts; do
-            curl -L "$(curl -s $url_NerdFonts | grep browser_download_url | cut -d '"' -f 4 | grep ${eachFont}) --output ${path_Cache}/${eachFont}"
+            curl -L $(curl -s $url_NerdFonts | grep browser_download_url | cut -d '"' -f 4 | grep ${eachFont}) --output ${path_Cache}/${eachFont}
             tar -xvf "${path_Cache}/${eachFont}" --directory "${HOME}/.fonts"
             rm "${path_Cache}/${eachFont}"
         done
