@@ -240,10 +240,7 @@ function_RollPackages()
                                                                         $List_of_KDEFortiClient \
                                                                         $List_of_Terminal \
                                                                         $List_of_Developer"
-                    sleep 3s
-                    printf '%s\n' "$sudo_Password" | sudo -S ${SHELL} -c "$flatpakInstallAuto $List_of_Flatpaks"
-
-                    echo $(${SHELL} -c ${binary_ohmyposh})
+                    printf '%s\n' "$sudo_Password" | sudo -S ${SHELL} -c "$flatpak_InstallAuto $List_of_Flatpaks"
                     ;;
                 *)
                     ;;
