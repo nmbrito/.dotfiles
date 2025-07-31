@@ -20,9 +20,10 @@ printf '%s\n' ""                   \
               "Starting process"   \
               "${message_LongDash}"
 
+printf '%s\n' "${c_Bold}${fg_Red}This script will run certain sections with elevated privileges${c_Normal}"
+function_SystemAskForSudoPassword
+
 while : ; do
-    printf '%s\n' "${c_Bold}${fg_Red}This script will run certain sections with elevated privileges${c_Normal}"
-    function_SystemAskForSudoPassword
     function_SystemBuildMenu
     printf '%s' "Option: "
     read -r option_Selected
