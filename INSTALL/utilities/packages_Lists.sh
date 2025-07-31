@@ -71,7 +71,6 @@ ${binary_kdenlive} \
 ${binary_kicad} \
 ${binary_kid3} \
 ${binary_krita} \
-${binary_kvantum_manager} \
 ${binary_onedrive} \
 ${binary_onedrive_completion_zsh} \
 ${binary_oxygentheme} \
@@ -80,6 +79,7 @@ ${binary_strawberry} \
 ${binary_virt_manager} \
 ${binary_vlc} \
 "
+#${binary_kvantum_manager} \
 
 List_of_KDEBasics="\
 ${binary_keepassxc} \
