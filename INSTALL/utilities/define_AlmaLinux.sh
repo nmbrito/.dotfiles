@@ -1,21 +1,21 @@
 #!/bin/sh
 
 # Commands
-distroName="Alma Linux"
+distro_Name="Alma Linux"
 
-packageManager="dnf"
+package_Manager="dnf"
 
-packageInstall="dnf install"
-packageInstallAuto="dnf install -y"
-packageInstallPattern=""
+package_Install="dnf install"
+package_InstallAuto="dnf install -y"
+package_InstallPattern=""
 
-systemUpdate="dnf update"
-systemUpgrade="dnf upgrade"
-systemUpgradeAuto="dnf upgrade -y"
-systemClean="" 
-systemCleanAuto="" 
-systemRemove="" 
-systemRemoveAuto="" 
+system_Update="dnf update"
+system_Upgrade="dnf upgrade"
+system_UpgradeAuto="dnf upgrade -y"
+system_Clean="" 
+system_CleanAuto="" 
+system_Remove="" 
+system_RemoveAuto="" 
 
 repoAdd=""
 repoRefresh=""
