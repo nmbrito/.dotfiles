@@ -19,6 +19,7 @@ path_Script=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)                    # Ru
 #path_Utilities=$(CDPATH= cd -- "$(dirname -- "$0")" && cd utilities && pwd) # Directory containing all utilities
 path_DotRoot=$(git rev-parse --show-toplevel)                               # Define .dotfiles directory
 path_Cache="${HOME}/.cache"                                                 # Define .cache directory
+path_KDEConfig="${HOME}/.config"
 path_KDEThemes="${HOME}/.local/share"
 path_MacOSAppSupport="${HOME}/Library/Application Support"
 path_MacOSLibPreference="${HOME}/Library/Preferences"
