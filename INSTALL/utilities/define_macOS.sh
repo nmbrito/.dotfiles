@@ -1,21 +1,21 @@
 #!/bin/sh
 
 # Commands
-distroName="macOS"
+distro_Name="macOS"
 
-packageManager="brew"
+package_Manager="brew"
 
-packageInstall="brew bundle install"
-packageInstallAuto="brew bundle install"
-packageInstallPattern=""
+package_Install="brew bundle install"
+package_InstallAuto="brew bundle install"
+package_InstallPattern=""
 
-systemUpdate="brew update"
-systemUpgrade="brew upgrade"
-systemUpgradeAuto="brew upgrade"
-systemClean="" 
-systemCleanAuto="" 
-systemRemove="" 
-systemRemoveAuto="" 
+system_Update="brew update"
+system_Upgrade="brew upgrade"
+system_UpgradeAuto="brew upgrade"
+system_Clean="" 
+system_CleanAuto="" 
+system_Remove="" 
+system_RemoveAuto="" 
 
 repoAdd=""
 repoRefresh=""
