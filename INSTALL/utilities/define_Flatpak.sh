@@ -1,9 +1,9 @@
 #!/bin/sh
 
-flatpakManager="flatpak"
-flatpakUpdate="flatpak update"
-flatpakInstall="flatpak install"
-flatpakInstallAuto="flatpak install -y"
+flatpak_Manager="flatpak"
+flatpak_Update="flatpak update"
+flatpak_Install="flatpak install"
+flatpak_InstallAuto="flatpak install -y"
 
 flat_signaldesktop="org.signal.Signal"
 flat_remotedesktop="net.devolutions.RDM"
