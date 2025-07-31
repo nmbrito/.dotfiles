@@ -315,19 +315,19 @@ function_RollSymlinks()
     if [ -d "${HOME}/.vim" ]; then
         rm -rf "${HOME}/.vim"
     fi
-    if [ -d "${HOME}/.config/.vifm" ] || [ -L "${HOME}/.config/.vifm" ]; then
+    if [ -d "${HOME}/.config/vifm" ] || [ -L "${HOME}/.config/vifm" ]; then
         rm -rf "${HOME}/.config/vifm"
     fi
-    if [ -d "${HOME}/.config/.fastfetch" ] || [ -L "${HOME}/.config/.fastfetch" ]; then
+    if [ -d "${HOME}/.config/fastfetch" ] || [ -L "${HOME}/.config/fastfetch" ]; then
         rm -rf "${HOME}/.config/fastfetch"
     fi
-    if [ -d "${HOME}/.config/.tmux" ] || [ -L "${HOME}/.config/.tmux" ]; then
+    if [ -d "${HOME}/.config/tmux" ] || [ -L "${HOME}/.config/tmux" ]; then
         rm -rf "${HOME}/.config/tmux"
     fi
-    if [ -d "${HOME}/.config/.fd" ] || [ -L "${HOME}/.config/.fd" ]; then
+    if [ -d "${HOME}/.config/fd" ] || [ -L "${HOME}/.config/fd" ]; then
         rm -rf "${HOME}/.config/fd"
     fi
-    if [ -d "${HOME}/.config/.mc" ] || [ -L "${HOME}/.config/.mc" ]; then
+    if [ -d "${HOME}/.config/mc" ] || [ -L "${HOME}/.config/mc" ]; then
         rm -rf "${HOME}/.config/mc"
     fi
 
