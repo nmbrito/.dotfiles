@@ -228,6 +228,8 @@ function_RollPackages()
 {
     function_SystemPrintMessage privilege_Root roll_Packages
 
+    curl -s $url_OhMyPosh | bash -s -- -d ${HOME}/.local/bin
+
 	case "${current_Host}" in
 		"LENOVO ThinkPad X230 - 23252FG" | "LENOVO ThinkPad L14 Gen 2 - 20X1000UPG" | "Apple Inc. 1.0 - MacBookPro9,2" | " pc-i440fx-9.2 - Standard PC (i440FX + PIIX, 1996)")
 			case "${XDG_SESSION_DESKTOP}" in
