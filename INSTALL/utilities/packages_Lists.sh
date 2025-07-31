@@ -39,21 +39,6 @@ https://github.com/tpope/vim-surround                 config/vim/pack/plugins/st
 https://github.com/vim-airline/vim-airline            config/vim/pack/plugins/start/vim-airline
 https://github.com/vim-airline/vim-airline-themes     config/vim/pack/plugins/start/vim-airline-themes"
 
-# Symlinks
-List_of_SymlinksDirRem="\
-${HOME}/.vim \
-${HOME}/.config/vifm \
-${HOME}/.config/fastfetch \
-${HOME}/.config/tmux \
-${HOME}/.config/mc \
-${HOME}/.config/fd \
-"
-
-# Commands
-List_of_MacbookProMid2012_Commands="systemctl enable mbpfan.service
-systemctl daemon-restart
-systemctl enable mbpfan.service"
-
 # Packages
 
 List_of_x230="\
