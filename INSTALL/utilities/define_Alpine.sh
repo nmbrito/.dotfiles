@@ -1,21 +1,21 @@
 #!/bin/sh
 
 # Commands
-distroName="alpine"
+distro_Name="alpine"
 
-packageManager="apk"
+package_Manager="apk"
 
-packageInstall="apk add"
-packageInstallAuto="apk add -y"
-packageInstallPattern=""
+package_Install="apk add"
+package_InstallAuto="apk add -y"
+package_InstallPattern=""
 
-systemUpdate=""
-systemUpgrade=""
-systemUpgradeAuto=""
-systemClean="" 
-systemCleanAuto="" 
-systemRemove="" 
-systemRemoveAuto="" 
+system_Update=""
+system_Upgrade=""
+system_UpgradeAuto=""
+system_Clean="" 
+system_CleanAuto="" 
+system_Remove="" 
+system_RemoveAuto="" 
 
 repoAdd=""
 repoRefresh=""
