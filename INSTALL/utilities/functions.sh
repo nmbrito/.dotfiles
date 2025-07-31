@@ -182,10 +182,10 @@ function_RollRepositories()
 {
     function_SystemPrintMessage privilege_Root roll_Repositories
 
-    local IFS=$'\n'
     for eachGPGKeys in "${List_of_GPGKeys}"; do
         printf '%s\n' "$sudo_Password" | sudo -S ${SHELL} -c "$repo_Import $eachGPGKeys" 
     done
+    local IFS=$'\n'
     for eachRepository in ${List_of_Repositories}; do
         printf '%s\n' "${sudo_Password}" | sudo -S ${SHELL} -c "$repo_Add $eachRepository" 
     done
