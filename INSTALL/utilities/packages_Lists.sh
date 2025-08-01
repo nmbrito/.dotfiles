@@ -110,6 +110,7 @@ List_of_Terminal="\
 ${binary_bat} \
 ${binary_btop} \
 ${binary_curl} \
+${binary_distrobox} \
 ${binary_eza} \
 ${binary_fastfetch} \
 ${binary_fd} \
@@ -121,6 +122,7 @@ ${binary_htop} \
 ${binary_lazygit} \
 ${binary_man_pages} \
 ${binary_mc} \
+${binary_podman} \
 ${binary_ripgrep} \
 ${binary_ripgrep_zsh_completion} \
 ${binary_shellcheck} \
