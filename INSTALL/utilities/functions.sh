@@ -249,12 +249,12 @@ function_RollPackages()
             esac
             ;;
         "Windows Subsystem for Linux")
-            su -c "$package_InstallAuto \
-                $List_of_Terminal      \
-                $List_of_Developer"
+            printf '%s\n' "$sudo_Password" | sudo -S ${SHELL} -c "$package_InstallAuto \
+                                                                $List_of_Terminal \
+                                                                $List_of_Developer"
 
             if [ "$package_InstallPattern" != "" ]; then
-                su -c "$package_InstallPattern $List_of_WSLPattern"
+                printf '%s\n' "$sudo_Password" | sudo -S ${SHELL} -c "$package_InstallPattern $List_of_WSLPattern"
             fi
             ;;
 		"iOS/iPadOS")
