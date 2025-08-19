@@ -147,16 +147,18 @@ function_SystemDefineDistro()
 }
 function_SystemDefineHost()
 {
-    if [ -d "${path_SysDevDMI}" ]; then
-        # Physical machine
-        current_Host="${cat_SysDevBoardVendor} ${cat_SysDevProdVendor} - ${cat_SysDevProdName}"
-    elif [ -d "${path_SWVers}" ]; then
+    if [ -d "$path_SysDevDMI" ]; then
+        # Physical or Virtual machine
+        current_Host="$(cat /sys/devices/virtual/dmi/id/board_vendor) \
+            $(cat /sys/devices/virtual/dmi/id/product_version) - \
+            $(cat /sys/devices/virtual/dmi/id/product_name)"
+    elif [ -d "$path_SWVers" ]; then
         # Apple macOS devices
         current_Host="$(sysctl hw.model)"
-    elif [ -d "${path_iSH}" ]; then
+    elif [ -d "$path_iSH" ]; then
         # iSH.app on iOS and iPadOS
         current_Host="iOS/iPadOS"
-    elif [ "${wsl_Session}" ]; then
+    elif [ "$wsl_Session" ]; then
         # WSL1 and WSL2 sessions
         current_Host="Windows Subsystem for Linux"
     else
