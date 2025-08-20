@@ -59,7 +59,7 @@ if [ -L /etc/os-release ]; then
 elif [ $(command -v sw_vers) 2>/dev/null ]; then
     ID="$(sw_vers -productName)"
 fi
-if [ -n ${WT_SESSION} ]; then 
+if [ -n "${WT_SESSION}" ]; then 
     wsl_Session=1
 else
     wsl_Session=0
