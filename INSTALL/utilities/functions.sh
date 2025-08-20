@@ -158,7 +158,7 @@ function_SystemDefineHost()
     elif [ -d "$path_iSH" ]; then
         # iSH.app on iOS and iPadOS
         current_Host="iOS/iPadOS"
-    elif [ $wsl_Session  ]; then
+    elif [ $wsl_Session ]; then
         # WSL1 and WSL2 sessions
         current_Host="Windows Subsystem for Linux"
     else
