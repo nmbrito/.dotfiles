@@ -28,7 +28,7 @@ path_ZSHBin="/usr/bin/zsh"
 
 path_SysDevDMI="/sys/devices/virtual/dmi"
 path_iSH="/proc/ish"
-path_SWVers="/usr/bin/software_vers"
+path_SWVers="/usr/bin/sw_vers"
 
 running_DesktopEnvironment="${XDG_SESSION_DESKTOP}"
 
