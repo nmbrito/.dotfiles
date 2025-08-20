@@ -154,11 +154,11 @@ function_SystemDefineHost()
             $(cat /sys/devices/virtual/dmi/id/product_name)"
     elif [ -d "$path_SWVers" ]; then
         # Apple macOS devices
-        current_Host="$(sysctl hw.model)"
+        current_Host="$(sysctl -n hw.model)"
     elif [ -d "$path_iSH" ]; then
         # iSH.app on iOS and iPadOS
         current_Host="iOS/iPadOS"
-    elif [ -n $wsl_Session ]; then
+    elif [ -z "${wsl_Session}" ]; then
         # WSL1 and WSL2 sessions
         current_Host="Windows Subsystem for Linux"
     else
