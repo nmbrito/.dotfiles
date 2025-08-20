@@ -19,6 +19,7 @@ fi
 printf '%s\n' ""                   \
               "Starting process"   \
               "${message_LongDash}"
+echo $wsl_Session
 
 printf '%s\n' "${c_Bold}${fg_Red}This script will run certain sections with elevated privileges${c_Normal}"
 function_SystemAskForSudoPassword
