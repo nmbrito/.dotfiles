@@ -152,7 +152,7 @@ function_SystemDefineHost()
         current_Host="$(cat /sys/devices/virtual/dmi/id/board_vendor) \
             $(cat /sys/devices/virtual/dmi/id/product_version) - \
             $(cat /sys/devices/virtual/dmi/id/product_name)"
-    elif [ -d "$path_SWVers" ]; then
+    elif [ -n "$path_SWVers" ]; then
         # Apple macOS devices
         current_Host="$(sysctl -n hw.model)"
     elif [ -d "$path_iSH" ]; then
