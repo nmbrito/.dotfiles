@@ -7,7 +7,7 @@ package_Manager="zypper"
 
 package_Install="${package_Manager} install"
 package_InstallAuto="${package_Manager} install -y"
-package_InstallPattern="${package_Manager} install -t pattern"
+package_InstallPattern="${package_Manager} install -y -t pattern"
 
 system_Update="${package_Manager} up"
 system_Upgrade="${package_Manager} dup"
