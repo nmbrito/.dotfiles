@@ -363,7 +363,7 @@ function_RollZSHShell()
             if [ "$current_Host" = "iOS/iPadOS" ]; then
                 sed -i 's/ash/zsh/g' /etc/passwd && printf '%s\n' "Replaced ash with zsh."
             else
-                chsh -s $(which zsh) \
+                chsh -s "$(which zsh)" \
                     && printf '%s\n' "Shell changed to ZSH." \
                     || printf '%s\n' "ERROR: Shell not changed."
             fi
