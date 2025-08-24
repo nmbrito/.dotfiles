@@ -133,6 +133,7 @@ ${binary_vim} \
 ${binary_vim_data} \
 ${binary_vim_fzf} \
 ${binary_zsh} \
+${binary_which} \
 "
 
 List_of_ServerCLI="\
