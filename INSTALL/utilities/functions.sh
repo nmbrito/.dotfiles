@@ -150,8 +150,8 @@ function_SystemDefineHost()
     if [ -d "$path_SysDevDMI" ]; then
         # Physical or Virtual machine
         current_Host="$(cat /sys/devices/virtual/dmi/id/board_vendor) \
-            $(cat /sys/devices/virtual/dmi/id/product_version) - \
-            $(cat /sys/devices/virtual/dmi/id/product_name)"
+$(cat /sys/devices/virtual/dmi/id/product_version) - \
+$(cat /sys/devices/virtual/dmi/id/product_name)"
     elif [ command -v "$command_SWVers" >/dev/null 2>&1 ]; then
         # Apple macOS devices
         current_Host="$(sysctl -n hw.model)"
