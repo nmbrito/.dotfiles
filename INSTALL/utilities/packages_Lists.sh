@@ -15,12 +15,12 @@ Monoid.tar.xz \
 "
 
 # Repositories
-List_of_GPGKeys="${gpgkey_microsoft} 
-${gpgkey_librewolf}"
+#List_of_GPGKeys="${gpgkey_microsoft} 
+#${gpgkey_librewolf}"
 
-List_of_Repositories="${repository_vscode}
-${repository_librewolf}
-${repository_broadcom_wl}"
+#List_of_Repositories="${repository_vscode}
+#${repository_librewolf}
+#${repository_broadcom_wl}"
 
 # GIT Submodules
 List_of_GitSubmodules="https://github.com/romkatv/powerlevel10k              config/zsh/plugins/powerlevel10k
@@ -60,26 +60,26 @@ ${binary_kitty} \
 
 List_of_KDEPersonal="\
 ${binary_blender} \
-${binary_code} \
 ${binary_discord} \
 ${binary_exfat} \
-${binary_ffmpeg} \
 ${binary_gimp} \
 ${binary_godot} \
 ${binary_inkscape} \
-${binary_kdenlive} \
 ${binary_kicad} \
 ${binary_kid3} \
 ${binary_krita} \
-${binary_onedrive} \
-${binary_onedrive_completion_zsh} \
-${binary_oxygentheme} \
-${binary_qbittorrent} \
-${binary_strawberry} \
+${binary_kvantum_manager} \
 ${binary_virt_manager} \
 ${binary_vlc} \
 "
-#${binary_kvantum_manager} \
+#${binary_code} \
+#${binary_ffmpeg} \
+#${binary_strawberry} \
+#${binary_onedrive} \
+#${binary_onedrive_completion_zsh} \
+#${binary_oxygentheme} \
+#${binary_qbittorrent} \
+#${binary_kdenlive} \
 
 List_of_KDEBasics="\
 ${binary_keepassxc} \
@@ -110,6 +110,7 @@ List_of_Terminal="\
 ${binary_bat} \
 ${binary_btop} \
 ${binary_curl} \
+${binary_podman} \
 ${binary_distrobox} \
 ${binary_eza} \
 ${binary_fastfetch} \
@@ -122,18 +123,19 @@ ${binary_htop} \
 ${binary_lazygit} \
 ${binary_man_pages} \
 ${binary_mc} \
-${binary_podman} \
+${binary_rclone} \
+${binary_rclone_zsh_completion} \
 ${binary_ripgrep} \
 ${binary_ripgrep_zsh_completion} \
 ${binary_shellcheck} \
 ${binary_tmux} \
-${binary_vifm} \
-${binary_vifm_colors} \
 ${binary_vim} \
 ${binary_vim_data} \
 ${binary_vim_fzf} \
 ${binary_zsh} \
 "
+#${binary_vifm} \
+#${binary_vifm_colors} \
 
 List_of_ServerCLI="\
 ${binary_curl} \
@@ -176,5 +178,6 @@ ${flat_signaldesktop} \
 ${flat_remotedesktop} \
 ${flat_obsidianmd} \
 ${flat_puddletag} \
+${flat_waterfox} \
 "
 
