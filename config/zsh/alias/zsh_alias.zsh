@@ -54,4 +54,36 @@ function gitquickcom()
     done
     git push
 }
+function backup_plasma()
+{
+    $date_today=$(date +%F)
+    $plasma_listconfig="kdeglobals \
+    konsolerc \
+    ksmserverrc \
+    ksplashrc \
+    ktimezonedrc \
+    kwinrc \
+    plasma-localerc \
+    plasma-org.kde.plasma.desktop-appletsrc \
+    plasmaparc \
+    plasmarc \
+    plasmashellrc \
+    powerdevilrc \
+    "
+    $plasma_listshare="konsole/ \
+    kwin/effects/ \
+    plasma/look-and-feel/ \
+    plasma/plasmoids/ \
+    plasma/wallpapers/ \
+    "
 
+    mkdir -p ${nmb_dotrepo}/config/kde_plasma/backup_${date_today}/home_config/
+    mkdir -p ${nmb_dotrepo}/config/kde_plasma/backup_${date_today}/local_share/
+
+    for eachFile in $plasma_listconfig; do
+        cp -rv "${HOME}/.config/$eachFile" "${nmb_dotrepo}/config/kde_plasma/backup_${date_today}/home_config/"
+    done
+    for eachFolder in $plasma_listshare; do
+        cp -rv "${HOME}/.local/share/${eachFolder}" "${nmb_dotrepo}/config/kde_plasma/backup_${date_today}/local_share/"
+    done
+}
