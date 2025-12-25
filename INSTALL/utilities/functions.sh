@@ -241,9 +241,9 @@ function_RollPackages()
                     printf '%s\n' "$sudo_Password" | sudo -S ${SHELL} -c "$package_InstallAuto  \
                                                                         $List_of_KDEBasics \
                                                                         $List_of_KDEPersonal \
-                                                                        $List_of_KDEFortiClient \
                                                                         $List_of_Terminal \
                                                                         $List_of_Developer"
+                                                                        #$List_of_KDEFortiClient \
                     printf '%s\n' "$sudo_Password" | sudo -S ${SHELL} -c "$flatpak_InstallAuto $List_of_Flatpaks"
                     ;;
                 *)
