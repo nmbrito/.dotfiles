@@ -1,0 +1,20 @@
+[Unit]
+Description=RClone Mount OneDrive
+#AssertPathIsDirectory=/home/nmbrito/OneDrive-Pessoal
+Wants=network-online.target
+After=network-online.target
+#StartLimitIntervalSec=400
+#StartLimitBurst=3
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/rclone mount --vfs-cache-mode writes 1DrivePessoal: /home/nmbrito/OneDrive-Pessoal
+ExecStop=/bin/fusermount -u /home/nmbrito/OneDrive-Pessoal
+User=nmbrito
+Group=nmbrito
+Restart=on-failure
+#RestartSec=10
+
+[Install]
+WantedBy=default.target
+
