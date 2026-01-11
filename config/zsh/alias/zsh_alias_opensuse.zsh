@@ -8,3 +8,4 @@ alias zyprem="sudo zypper rm"                       # Remove packages
 alias zypremu="sudo zypper rm --clean-deps"         # Remove package and cleans unneeded dependencies
 alias zypinfo="zypper info"                         # Package information
 alias zypfindupa="sudo zypper pa --unneeded"        # Find unneed packages
+alias zypdeeprm="zypper packages --unneeded | awk -F'|' 'NR==0 || NR==1 || NR==2 || NR==3 || NR==4 {next} {print $3}' | grep -v Name | sudo xargs zypper -n remove --clean-deps"
