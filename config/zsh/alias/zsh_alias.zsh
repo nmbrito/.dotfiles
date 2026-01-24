@@ -19,6 +19,8 @@ alias .....="cd ../../../.."                                                    
 alias susebox="distrobox enter susebox"                                                         # Enter susebox container
 alias debianbox="distrobox enter debianbox"                                                     # Enter debianbox container
 
+alias eject1drive="fusermount -u ${HOME}/OneDrive-Pessoal"
+
 alias ompup="oh-my-posh upgrade"                                                                # Upgrade ohmyposh
 
 alias gitsubup="git submodule update --remote"                                                  # Updates submodules
