@@ -1,0 +1,31 @@
+[Desktop Entry]
+Actions=new-window;PrivateBrowsing;ProfileManager
+Comment=A lightweight, firefox fork, free and open source web browser built for the modern web
+Encoding=UTF-8
+Exec=/opt/waterfox/waterfox-bin %u
+GenericName=
+Icon=/opt/waterfox/browser/chrome/icons/default/default256.png
+MimeType=text/html;text/xml;application/xhtml+xml;application/vnd.mozilla.xul+xml;text/mml;application/x-xpinstall;x-scheme-handler/http;x-scheme-handler/https;
+Name=Waterfox
+NoDisplay=false
+Path=
+PrefersNonDefaultGPU=false
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+TryExec=/opt/waterfox/waterfox-bin
+Type=Application
+X-KDE-SubstituteUID=false
+X-KDE-Username=
+
+[Desktop Action PrivateBrowsing]
+Exec=/opt/waterfox/waterfox-bin --private-window %u
+Name=New Private Browsing Window
+
+[Desktop Action ProfileManager]
+Exec=/opt/waterfox/waterfox-bin --ProfileManager
+Name=Profile Manager
+
+[Desktop Action new-window]
+Exec=/opt/waterfox/waterfox-bin --new-window %u
+Name=New Window
