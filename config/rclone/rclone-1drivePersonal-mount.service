@@ -15,6 +15,9 @@ ExecStart=/usr/bin/rclone mount 1DrivePessoal: /home/nmbrito/OneDrive-Pessoal \
 
 ExecStop=/bin/fusermount -u /home/nmbrito/OneDrive-Pessoal
 
+User=nmbrito
+Group=nmbrito
+
 Restart=on-failure
 RestartSec=10
 
