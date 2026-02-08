@@ -14,13 +14,4 @@ alias brewup="brew update && brew upgrade"                             # Updates
 #alias b="brew uninstall --cask"                                        # Uninstall gui package
 
 # Function alias
-function burn2usb()
-{
-    hdiutil convert ${1}.iso -format UDRW -o ${1}.dmg
-    diskutil list
-    printf '%s' "Number of the USB Flash Drive: "
-    read -r usbdrivenumber
-    diskutil unmountDisk /dev/disk${usbdrivenumber}
-    sudo dd if=${1}.dmg bs=1M of=/dev/rdisk${usbdrivenumber}
-}
-
+alias burn2usb="sh ${nmb_zshconfig}/alias/zsh_function_macosBurn2USB.sh $1"
