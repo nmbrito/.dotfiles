@@ -3,6 +3,7 @@
 # Variables ================================================================== #
 path_Script=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)                    # Run script from any directory
 path_Functions=$(CDPATH= cd -- "$(dirname -- "$0")" && cd Functions && pwd) # Directory containing all utilities
+path_DistroDefines=$(CDPATH= cd -- "$(dirname -- "$0")" && cd DistroDefines && pwd) # Directory containing all utilities
 path_DotRoot=$(git rev-parse --show-toplevel)                               # Define .dotfiles directory
 path_Cache="${HOME}/.cache"                                                 # Define .cache directory
 path_KDEConfig="${HOME}/.config"
@@ -43,7 +44,7 @@ done
 
 # ===== Start ===== #
 function_PrintMessage start_Setup
-function_SystemAskForSudoPassword
+function_RequestSudo
 
 while : ; do
     function_PrintMessage build_Menu
