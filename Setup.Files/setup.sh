@@ -3,14 +3,19 @@
 # Variables ================================================================== #
 path_Script=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)                    # Run script from any directory
 path_Functions=$(CDPATH= cd -- "$(dirname -- "$0")" && cd Functions && pwd) # Directory containing all utilities
+
 path_DotRoot=$(git rev-parse --show-toplevel)                               # Define .dotfiles directory
 path_Cache="${HOME}/.cache"                                                 # Define .cache directory
+
 path_KDEConfig="${HOME}/.config"
 path_KDEThemes="${HOME}/.local/share"
+
 path_MacOSAppSupport="${HOME}/Library/Application Support"
 path_MacOSLibPreference="${HOME}/Library/Preferences"
+
 path_ZSHShare="/usr/share/zsh"
 path_ZSHBin="/usr/bin/zsh"
+
 path_SysDevDMI="/sys/devices/virtual/dmi"
 path_iSH="/proc/ish"
 
@@ -20,30 +25,31 @@ running_DesktopEnvironment="${XDG_SESSION_DESKTOP}"
 url_NerdFonts="https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest"
 url_OhMyPosh="https://ohmyposh.dev/install.sh"
 
-if [ -L /etc/os-release ]; then
-    . /etc/os-release
-elif [ $(command -v sw_vers) 2>/dev/null ]; then
-    ID="$(sw_vers -productName)"
-fi
-if [ -n "${WT_SESSION}" ]; then
-    wsl_Session=1
-else
-    wsl_Session=0
-fi
+# List of required files ===================================================== #
+required_Files="\
+    AddRepositories.sh
+    CreateSymlinks.sh
+    DetectDistro.sh
+    DetectHost.sh
+    PrintMessage.sh
+    RequestSudo.sh
+    "
 
 # Verify if all files exist ================================================== #
-for each_Function in $(ls ${path_Functions}); do
-    if [ ! -f "${path_Utilities}/${each_Function}" ]; then
-        printf '%s\n' "${each_Function} file missing. Aborting."
-        exit 0
-    else
-        . ${path_Functions}/${each_Function}
-    fi
-done
+#for each_Function in $(ls ${path_Functions}); do
+#    if [ ! -f "${path_Functions}/${each_Function}" ]; then
+#        printf '%s\n' "${each_Function} file missing. Aborting."
+#        exit 0
+#    else
+#        . ${path_Functions}/${each_Function}
+#    fi
+#done
 
 # ===== Start ===== #
+function_DetectOS
+function_DetectHost
 function_PrintMessage start_Setup
-function_SystemAskForSudoPassword
+function_RequestSudo
 
 while : ; do
     function_PrintMessage build_Menu
