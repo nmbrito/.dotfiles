@@ -12,6 +12,8 @@ Hasklig.tar.xz \
 Lilex.tar.xz \
 JetBrainsMono.tar.xz \
 Monoid.tar.xz \
+Noto.tar.xz \
+Meslo.tar.xz \
 "
 
 # Repositories
