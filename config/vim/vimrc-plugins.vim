@@ -15,7 +15,8 @@
     "let g:airline#extensions#tabline#left_alt_sep='|'
 
 " FZF-Vim
-    let g:fzf_layout={ 'window': { 'width': 1.0, 'height': 0.6, 'relative': v:true, 'yoffset': 1.0 } }    " - Popup window (anchored to the bottom of the current window)
+    " let g:fzf_layout={ 'window': { 'width': 1.0, 'height': 0.6, 'relative': v:true, 'yoffset': 1.0 } }    " - Popup window (anchored to the bottom of the current window)
+    let g:fzf_layout={ 'window': { 'width': 1.0, 'height': 0.6, 'relative': v:false, 'yoffset': 1.0 } }    " - Popup window (anchored to the bottom of the current window)
 
     " FZF_DEFAULT_OPTS in .zshrc has --layout=reverse. Since in vim the prompt is at the bottom, I prefer the default layout
     command! -bang -nargs=? -complete=dir Files
