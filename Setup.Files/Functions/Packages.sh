@@ -13,6 +13,8 @@ Monoid.tar.xz \
 # Packages =================================================================== #
 
 List_KDEPlasma="\
+${package_kdenlive} \
+${package_qbittorrent} \
 ${package_blender} \
 ${package_discord} \
 ${package_exfat} \
@@ -23,11 +25,14 @@ ${package_keepassxc} \
 ${package_kicad} \
 ${package_kid3} \
 ${package_krita} \
-${package_kvantum_manager} \
 ${package_myspell_pt_PT} \
+${package_oxygentheme} \
 ${package_virt_manager} \
 ${package_vlc} \
 "
+#${package_kvantum_manager} \
+#${binary_ffmpeg} \
+#${binary_strawberry} \
 
 List_of_x230="\
 ${package_fprintd} \
@@ -45,15 +50,6 @@ ${package_hyprland} \
 ${package_hyprland_devel} \
 ${package_kitty} \
 "
-
-#${binary_code} \
-#${binary_ffmpeg} \
-#${binary_strawberry} \
-#${binary_onedrive} \
-#${binary_onedrive_completion_zsh} \
-#${binary_oxygentheme} \
-#${binary_qbittorrent} \
-#${binary_kdenlive} \
 
 List_of_KDEFortiClient="\
 ${binary_networkmanager_fortisslvpn} \
@@ -147,5 +143,5 @@ ${flat_signaldesktop} \
 ${flat_remotedesktop} \
 ${flat_obsidianmd} \
 ${flat_puddletag} \
-${flat_waterfox} \
 "
+#${flat_waterfox} \
